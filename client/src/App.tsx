@@ -4,7 +4,7 @@ import { observer, Provider } from "mobx-react";
 import { Context } from "./lib/App/Context";
 import { Store } from "./lib/App/Store";
 import { ProgressBar } from "./components/UI/ProgressBar";
-import { HomePage } from "./components/Page/HomePage";
+// import { HomePage } from "./components/Page/HomePage";
 
 @observer
 export class App extends React.Component<{}, {}> {
@@ -29,8 +29,11 @@ export class App extends React.Component<{}, {}> {
 
     return (
       <Provider store={this.store}>
-        <HomePage store={this.store} />
+      <div></div>
+        {/* <HomePage store={this.store} /> */}
       </Provider>
     );
   }
 }
+
+console.log("app running")
