@@ -1,9 +1,13 @@
 import * as React from "react";
 import { observable } from "mobx";
 import { observer, Provider } from "mobx-react";
+
+import styled from "styled-components";
+
+import { Navbar } from "./components/nav";
 import { Context } from "./lib/App/Context";
 import { Store } from "./lib/App/Store";
-import { ProgressBar } from "./components/UI/ProgressBar";
+// import { ProgressBar } from "./components/UI/ProgressBar";
 // import { HomePage } from "./components/Page/HomePage";
 
 @observer
@@ -20,7 +24,8 @@ export class App extends React.Component<{}, {}> {
 
   render() {
     if (this.loading) {
-      return <ProgressBar />;
+      return null
+      // <ProgressBar />;
     }
 
     if (!this.store) {
@@ -29,11 +34,17 @@ export class App extends React.Component<{}, {}> {
 
     return (
       <Provider store={this.store}>
-      <div></div>
+        <Container>
+          <Navbar />
+        </Container>
         {/* <HomePage store={this.store} /> */}
       </Provider>
     );
   }
 }
 
-console.log("app running")
+const Container = styled.div`
+  textalign: "center";
+`;
+
+console.log("app running");

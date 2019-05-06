@@ -8,6 +8,7 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "@rmwc": "3.0.10",
     "@uirouter/react": "0.8.2",
     "material-components-web": "0.40.1",
     "mobx": "4.2.1",
@@ -15,7 +16,7 @@
     "normalize.css": "8.0.1",
     "react": "16.3.2",
     "react-dom": "16.3.2",
-    "rmwc": "3.0.10",
+    "rmwc": "^5.5.1",
     "styled-components": "3.3.3"
   },
   "devDependencies": {
