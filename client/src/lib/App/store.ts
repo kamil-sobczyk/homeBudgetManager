@@ -27,7 +27,8 @@ const server = localhost;
 //   [key: string]: any
 // }
 
-class Store {
+
+export class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: object[] = [];
@@ -84,5 +85,4 @@ class Store {
   addCost = (cost: object) => this.costs.push(cost);
 }
 
-const store = new Store();
-export { store };
+// const store = new Store();

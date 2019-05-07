@@ -27,8 +27,8 @@ export const reorder = (
 };
 
 export const move = (
-  source: DnDItem[],
-  destination: DnDItem[],
+  source: Item[],
+  destination: Item[],
   droppableSource: any,
   droppableDestination: any,
 ) => {
