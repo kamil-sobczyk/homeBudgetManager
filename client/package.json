@@ -15,11 +15,11 @@
     "normalize.css": "8.0.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "rmwc": "^5.5.1",
+    "rmwc": "5.5.1",
     "styled-components": "3.3.3"
   },
   "devDependencies": {
-    "@rmwc/types": "^5.5.1",
+    "@rmwc/types": "5.5.1",
     "@types/react": "16.8.11",
     "@types/react-dom": "16.8.4",
     "babel-eslint": "9.0.0",
