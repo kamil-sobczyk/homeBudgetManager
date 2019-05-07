@@ -4,6 +4,8 @@
 
 
 export interface Item {
-  name: string,
-  checked: boolean
+  name: string;
+  checked: boolean;
+  id: string;
+  info: string;
 }

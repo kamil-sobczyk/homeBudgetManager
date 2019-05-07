@@ -65,8 +65,8 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
     return (
       <>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          {/* {store.showItems ? <Items /> : false}
-          <Selected /> */}
+           {this.props.store.showItems ? <Items /> : false}
+          <Selected {...this.props} /> 
         </DragDropContext>
       </>
     );

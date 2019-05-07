@@ -1,90 +1,121 @@
 import * as React from "react";
 import * as styled from "styled-components";
-import { Store } from '../../lib/App/store'
+import { Store } from "../../lib/App/store";
+
+import { Item } from "../../lib/interfaces";
 
 import { Button } from "@rmwc/button";
-import {Typography} from "@rmwc/typography";
+import { Typography } from "@rmwc/typography";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  ListItem,
+  ListItemText,
+  ListItemPrimaryText,
+  ListItemSecondaryText,
+  ListDivider
+} from "@rmwc/list";
+import { IconButton } from "@rmwc/icon-button";
+import { Icon } from "@rmwc/icon";
 
-import { Droppable } from "react-beautiful-dnd";
+import { Checkbox } from "@rmwc/checkbox";
 
 import { FinishDialog } from "../dialogs/finishDialog";
-import { DraggableSelected } from "./draggableSelected";
 
 interface SelectedProps {
-    store: Store;
+  store: Store;
 }
 
 export class Selected extends React.Component<SelectedProps, {}> {
-    render(){
-        return null
-    }
-//   state = {
-//     openFinish: false
-//   };
+  state = {
+    openFinish: false
+  };
 
-//   componentDidMount = () => {
-//     // getSelectedFromServer(this.props.getSelected);
-//   };
+  componentDidMount = () => {
+    // getSelectedFromServer(this.props.getSelected);
+  };
 
-//   handleToggle = (index: number) => () => {
-//     const { selected, getSelected } = store;
+  handleToggle = (index: number) => () => {
+    const { selected, getSelected } = this.props.store;
 
-//     selected[index].checked
-//       ? (selected[index].checked = false)
-//       : (selected[index].checked = true);
-//     // getSelected(selected);
-//     // changeSelectedOnServer(selected);
-//   };
+    selected[index].checked
+      ? (selected[index].checked = false)
+      : (selected[index].checked = true);
+    // getSelected(selected);
+    // changeSelectedOnServer(selected);
+  };
 
-//   handleFinishShopping = () => {
-//     this.setState({
-//       openFinish: this.state.openFinish ? false : true
-//     });
-//   };
-//   render() {
-//     const {
-//       classes,
-//       handleToggleShowEditDialog,
-//       selected,
-//       display
-//     } = this.props;
-//     const { openFinish } = this.state;
+  handleFinishShopping = () => {
+    this.setState({
+      openFinish: this.state.openFinish ? false : true
+    });
+  };
+  render() {
+    const { toggleShowEditDialog, selected, showEditDialog } = this.props.store;
+    const { openFinish } = this.state;
 
-//     return (
-//       <>
-//         <Droppable droppableId="droppable2">
-//           {provided => (
-//             <div
-//               ref={provided.innerRef}
-//               className={display ? classes.listSmall : classes.listBig}
-//             >
-//               <Typography use="subtitle1" gutterBottom>
-//                 Items to buy
-//               </Typography>
-//               {selected.map((item, index) =>
-//                 DraggableSelected(
-//                   item,
-//                   index,
-//                   selected,
-//                   classes,
-//                   handleToggleShowEditDialog,
-//                   this.handleToggle,
-//                   classes.checkbox
-//                 )
-//               )}
-//               {provided.placeholder}
-//               <Button color="primary" onClick={this.handleFinishShopping}>
-//                 Finish shopping
-//               </Button>
-//             </div>
-//           )}
-//         </Droppable>
-//         <FinishDialog
-//           openFinish={openFinish}
-//           handleOpenFinish={this.handleFinishShopping.bind(this)}
-//           selected={selected}
-//         />
-//       </>
-//     );
-//   }
+    return (
+      <>
+        <Droppable droppableId="droppable2">
+          {provided => (
+            <div
+              ref={provided.innerRef}
+              //   className={showEditDialog ? classes.listSmall : classes.listBig}
+            >
+              <Typography use="subtitle1">Items to buy</Typography>
+              {selected.map((item, index) => {
+                <Draggable key={index} draggableId={item.id} index={index}>
+                  {provided => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <ListItem key={index} onClick={this.handleToggle(index)}>
+                        <Checkbox
+                          //   className={checkbox}
+                          checked={
+                            selected[index] ? selected[index].checked : false
+                          }
+                          //   tabIndex={-1}
+                          //   value={"checked"}
+                          //   disableRipple
+                        />
+                        <ListItemText>
+                          <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
+                          <ListItemSecondaryText>
+                            {item.info}
+                          </ListItemSecondaryText>
+                        </ListItemText>
+                        <IconButton
+                          aria-label="Edit item"
+                          onClick={toggleShowEditDialog({
+                            list: "selected",
+                            index: index
+                          })}
+                        >
+                          <Icon icon="edit" />
+                        </IconButton>
+                      </ListItem>
+                      <ListDivider />
+                    </div>
+                  )}
+                </Draggable>;
+              })}
+              {provided.placeholder}
+              <Button color="primary" onClick={this.handleFinishShopping}>
+                Finish shopping
+              </Button>
+
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+        {/* <FinishDialog
+          openFinish={openFinish}
+          handleOpenFinish={this.handleFinishShopping}
+          selected={selected}
+       />*/}
+      </>
+    );
+  }
 }

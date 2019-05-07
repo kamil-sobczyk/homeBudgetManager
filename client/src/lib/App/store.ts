@@ -10,11 +10,22 @@ const privateList = "http://35.224.13.129/";
 const publicDemo = "http://35.184.211.161/";
 const server = localhost;
 
+interface EditItem {
+  list: string;
+  index: number;
+  newItem: Item;
+}
+
+interface ToggleEditItem {
+  list: string;
+  index: number;
+}
+
 export class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: object[] = [];
-  @observable activeItem: object = {
+  @observable activeItem: any = {
     list: "items",
     index: 0
   };
@@ -28,9 +39,10 @@ export class Store {
     (this.showAddDialog = !this.showAddDialog);
   toggleShowDeleteDialog = (): boolean =>
     (this.showDeleteDialog = !this.showDeleteDialog);
-  toggleShowEditDialog = (list: string, index: number): void => {
+  toggleShowEditDialog = (data: ToggleEditItem): any => {
     this.showEditDialog = !this.showEditDialog;
-    this.activeItem = { list, index };
+    this.activeItem.list =  data.list;
+    this.activeItem.index =  data.index;
   };
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
@@ -38,8 +50,8 @@ export class Store {
     (this.items = this.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     ));
-  editItem = (list: string, index: number, newItem: Item) =>
-    ((this as any)[list][index] = newItem);
+  editItem = (data: EditItem) =>
+    ((this as any)[data.list][data.index] = data.newItem);
   getItems = (): void => {
     fetch(server + "store/items", {
       mode: "cors",
