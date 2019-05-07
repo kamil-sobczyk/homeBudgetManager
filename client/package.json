@@ -21,7 +21,7 @@
   "devDependencies": {
     "@rmwc/types": "^5.5.1",
     "@types/react": "16.8.11",
-    "@types/react-dom": "16.8.11",
+    "@types/react-dom": "16.8.4",
     "babel-eslint": "9.0.0",
     "babel-loader": "7.1.5",
     "clean-webpack-plugin": "0.1.19",
