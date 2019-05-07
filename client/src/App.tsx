@@ -8,7 +8,7 @@ import { Navbar } from "./components/nav";
 import { ListBox } from "./components//listBox";
 import { Context } from "./lib/App/Context";
 import { Store } from "./lib/App/Store";
-// import { ProgressBar } from "./components/UI/ProgressBar";
+import { ProgressBar } from "./components/UI/ProgressBar";
 // import { HomePage } from "./components/Page/HomePage";
 
 @observer
@@ -25,8 +25,7 @@ export class App extends React.Component<{}, {}> {
 
   render() {
     if (this.loading) {
-      return null;
-      // <ProgressBar />;
+      return <ProgressBar />;
     }
 
     if (!this.store) {
