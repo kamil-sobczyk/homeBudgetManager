@@ -4,5 +4,6 @@
 
 
 export interface Item {
-  name: string
+  name: string,
+  checked: boolean
 }

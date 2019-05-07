@@ -1,33 +1,49 @@
 import { Item } from "./../lib/interfaces";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+} from "react-beautiful-dnd";
 
-// const reorder = (list: string, startIndex: number, endIndex: number) => {
-//   const result = Array.from(list);
-//   const [removed] = result.splice(startIndex, 1);
-//   result.splice(endIndex, 0, removed);
+interface DnDItem {
+  id: string;
+  content: string;
+}
+interface IAppState {
+  items: Item[];
+  selected: Item[];
+}
 
-//   return result;
-// };
+export const reorder = (
+  list: any,
+  startIndex: number,
+  endIndex: number
+) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
 
-// const move = (source: string, destination: string, droppableSource: string, droppableDestination: string) => {
-//   const sourceClone = Array.from(source);
-//   const destClone = Array.from(destination);
-//   const [removed] = sourceClone.splice(droppableSource.index, 1);
+  return result;
+};
 
-//   destClone.splice(droppableDestination.index, 0, removed);
+export const move = (
+  source: DnDItem[],
+  destination: DnDItem[],
+  droppableSource: any,
+  droppableDestination: any,
+) => {
+  const sourceClone = Array.from(source);
+  const destClone = Array.from(destination);
+  const [removed] = sourceClone.splice(droppableSource.index, 1);
 
-//   const result = {};
-//   result[droppableSource.droppableId] = sourceClone;
-//   result[droppableDestination.droppableId] = destClone;
+  destClone.splice(droppableDestination.index, 0, removed);
 
-//   return result;
-// };
+  const result = {};
+  (result as any)[droppableSource.droppableId] = sourceClone;
+  (result as any)[droppableDestination.droppableId] = destClone;
 
-// interface Item {
-// name: string;
-// }
+  return result;
+};
 
-const sortItemsByName = (items: Item[]): Item[] =>
+export const sortItemsByName = (items: Item[]): Item[] =>
   items.sort((a: Item, b: Item): number => a.name.localeCompare(b.name));
-
-export { sortItemsByName };
-// reorder, move,

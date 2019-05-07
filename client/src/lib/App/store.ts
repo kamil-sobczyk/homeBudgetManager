@@ -65,7 +65,7 @@ class Store {
       .then(response => response.json())
       .then(items => (this.items = items));
   };
-  getSelected = (): void => {
+  getSelected = (items: string[]) => {
     fetch(server + "store/selected", {
       mode: "cors",
       method: "GET"
