@@ -1,7 +1,8 @@
 import * as React from "react";
-
 import * as styled from "styled-components";
 import { Store } from "../lib/App/store";
+import { observer } from "mobx-react";
+
 import { ViewButton } from "./listsViewButton";
 import { ListsContainer } from "./listsContainer";
 import { AddDialog } from "./dialogs/addDialog";
@@ -13,6 +14,7 @@ interface ListBoxProps {
     store: Store;
 }
 
+@observer
 export class ListBox extends React.Component<ListBoxProps, {}> {
   render() {
     return (

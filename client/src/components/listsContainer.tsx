@@ -2,6 +2,7 @@ import * as React from "react";
 import * as styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Item } from "./../lib/interfaces";
+import { observer } from "mobx-react";
 
 import { Items } from "./lists/items";
 import { Selected } from "./lists/selected";
@@ -13,6 +14,7 @@ interface ListsContainerProps {
     store: Store;
 }
 
+@observer
 export class ListsContainer extends React.Component<ListsContainerProps, {}> {
   id2List = {
     droppable: "items",

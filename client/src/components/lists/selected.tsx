@@ -2,6 +2,9 @@ import * as React from "react";
 import * as styled from "styled-components";
 import { Store } from "../../lib/App/store";
 
+import { observer } from "mobx-react";
+
+
 import { Item } from "../../lib/interfaces";
 
 import { Button } from "@rmwc/button";
@@ -25,6 +28,7 @@ interface SelectedProps {
   store: Store;
 }
 
+@observer
 export class Selected extends React.Component<SelectedProps, {}> {
 
   componentDidMount = () => {
@@ -44,6 +48,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
   render() {
     const { toggleShowEditDialog, selected, showEditDialog, toggleShowFinishDialog } = this.props.store;
 
+    // console.log(JSON.parse(selected));
+
     return (
       <>
         <Droppable droppableId="droppable2">
@@ -53,7 +59,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               //   className={showEditDialog ? classes.listSmall : classes.listBig}
             >
               <Typography use="subtitle1">Items to buy</Typography>
-              {selected.map((item, index) => {
+              {Array.from(selected).map((item: any, index: number) => {
                 <Draggable key={index} draggableId={item.id} index={index}>
                   {provided => (
                     <div
@@ -92,6 +98,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                   )}
                 </Draggable>;
               })}
+              {selected.map((e, i) => <p key = {e.id}>{e.name} " " {e.info}</p>)}     ////////////////////////
               {provided.placeholder}
               <Button color="primary" onClick={toggleShowFinishDialog}>
                 Finish shopping
