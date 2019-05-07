@@ -26,9 +26,6 @@ interface SelectedProps {
 }
 
 export class Selected extends React.Component<SelectedProps, {}> {
-  state = {
-    openFinish: false
-  };
 
   componentDidMount = () => {
     // getSelectedFromServer(this.props.getSelected);
@@ -44,14 +41,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
     // changeSelectedOnServer(selected);
   };
 
-  handleFinishShopping = () => {
-    this.setState({
-      openFinish: this.state.openFinish ? false : true
-    });
-  };
   render() {
-    const { toggleShowEditDialog, selected, showEditDialog } = this.props.store;
-    const { openFinish } = this.state;
+    const { toggleShowEditDialog, selected, showEditDialog, toggleShowFinishDialog } = this.props.store;
 
     return (
       <>
@@ -102,7 +93,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                 </Draggable>;
               })}
               {provided.placeholder}
-              <Button color="primary" onClick={this.handleFinishShopping}>
+              <Button color="primary" onClick={toggleShowFinishDialog}>
                 Finish shopping
               </Button>
 
@@ -110,11 +101,9 @@ export class Selected extends React.Component<SelectedProps, {}> {
             </div>
           )}
         </Droppable>
-        {/* <FinishDialog
-          openFinish={openFinish}
-          handleOpenFinish={this.handleFinishShopping}
-          selected={selected}
-       />*/}
+         <FinishDialog 
+         store={this.props.store} 
+       />
       </>
     );
   }
