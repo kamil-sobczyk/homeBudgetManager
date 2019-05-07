@@ -11,4 +11,4 @@ export class EditDialog extends React.Component <{}, {}> {
             null
         )
     }
-}
+};
