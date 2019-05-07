@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
-import { store } from "../../lib/App/store";
+import { Store } from "../../lib/App/store";
 // import { PageWrapper } from "./PageWrapper";
 // import { Sample } from "../Sample/Sample";
 

@@ -4,9 +4,13 @@ import * as styled from "styled-components";
 
 import { Button } from "@rmwc/button";
 
-import { store } from "../lib/App/store";
+import { Store } from "../lib/App/store";
 
-export class ViewButton extends React.Component<{}, {}> {
+interface ViewButtonProps {
+    store: Store;
+}
+
+export class ViewButton extends React.Component<ViewButtonProps, {}> {
   state = {
     text: "ADD NEW ITEMS TO LIST"
   };
@@ -18,7 +22,7 @@ export class ViewButton extends React.Component<{}, {}> {
           ? "SHOW ITEMS TO BUY ONLY"
           : "ADD NEW ITEMS TO LIST"
     });
-    store.toggleShowItems();
+    this.props.store.toggleShowItems();
   };
 
   render() {

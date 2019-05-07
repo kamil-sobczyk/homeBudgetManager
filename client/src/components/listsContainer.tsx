@@ -7,19 +7,28 @@ import { Items } from "./lists/items";
 import { Selected } from "./lists/selected";
 import { reorder, move, sortItemsByName } from "../functions/reorderFunctions";
 
-import { store } from "../lib/App/store";
+import { Store } from "../lib/App/store";
 
-export class ListsContainer extends React.Component<{}, {}> {
+interface ListsContainerProps {
+    store: Store;
+}
+
+export class ListsContainer extends React.Component<ListsContainerProps, {}> {
   id2List = {
     droppable: "items",
     droppable2: "selected"
   };
 
-  getList = (id: string) => (store as any)[(this.id2List as any)[id]];
+  getList = (id: string) => {
+      if (id === "items") {
+       return this.props.store.items;
+      }
+    return this.props.store.selected;
+  };
 
   onDragEnd = (result: any) => {
     const { source, destination } = result;
-    const { getItems, getSelected } = store;
+    const { getItems, getSelected } = this.props.store;
 
     if (!destination) {
       return;
@@ -31,7 +40,7 @@ export class ListsContainer extends React.Component<{}, {}> {
         source.index,
         destination.index
       );
-      if (JSON.stringify(store.items).indexOf(JSON.stringify((items as any)[0])) < 0) {
+      if (JSON.stringify(this.props.store.items).indexOf(JSON.stringify((items as any)[0])) < 0) {
         // getSelected(items);
         //   changeSelectedOnServer(items);
       }
@@ -56,8 +65,8 @@ export class ListsContainer extends React.Component<{}, {}> {
     return (
       <>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          {store.showItems ? <Items /> : false}
-          <Selected />
+          {/* {store.showItems ? <Items /> : false}
+          <Selected /> */}
         </DragDropContext>
       </>
     );
