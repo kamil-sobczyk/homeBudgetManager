@@ -22,8 +22,64 @@ interface ToggleEditItem {
 }
 
 export class Store {
-  @observable items: Item[] = [];
-  @observable selected: Item[] = [];
+  @observable items: Item[] = [
+    {
+      name: "Bread",
+      info: "Buy in Lidl",
+      id: "sdfsdfsadfsdfdsf",
+      checked: false
+    },
+    {
+      name: "Cola",
+      info: "",
+      id: "gfvfsddwed",
+      checked: false
+    },
+    {
+      name: "Milk",
+      info: "Buy in Tesco",
+      id: "324rijdsojfddsaoid",
+      checked: false
+    },
+    {
+      name: "Beer",
+      info: "",
+      id: "fdswefi343fdsdf",
+      checked: false
+    },
+    {
+      name: "Beef",
+      info: "1kg",
+      id: "frefp43ifjdsfs",
+      checked: false
+    }
+  ];
+  @observable selected: Item[] = [
+    {
+      name: "Ham",
+      info: "In slices",
+      id: "43rpijdskjfna",
+      checked: false
+    },
+    {
+      name: "Rice",
+      info: "",
+      id: "e3rijfisdnc.kas3",
+      checked: false
+    },
+    {
+      name: "Potatoes",
+      info: "Buy in Tesco",
+      id: "43ifpjsdljnfew33",
+      checked: false
+    },
+    {
+      name: "Aples",
+      info: "3kg",
+      id: "ekflkdsdsaljd",
+      checked: false
+    }
+  ];
   @observable costs: object[] = [];
   @observable activeItem: any = {
     list: "items",
@@ -33,6 +89,7 @@ export class Store {
   @observable showEditDialog: boolean = false;
   @observable showDeleteDialog: boolean = false;
   @observable showItems: boolean = false;
+  @observable showFinish: boolean = false;
 
   toggleShowItems = (): boolean => (this.showItems = !this.showItems);
   toggleShowAddDialog = (): boolean =>
@@ -41,8 +98,8 @@ export class Store {
     (this.showDeleteDialog = !this.showDeleteDialog);
   toggleShowEditDialog = (data: ToggleEditItem): any => {
     this.showEditDialog = !this.showEditDialog;
-    this.activeItem.list =  data.list;
-    this.activeItem.index =  data.index;
+    this.activeItem.list = data.list;
+    this.activeItem.index = data.index;
   };
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
@@ -76,5 +133,6 @@ export class Store {
       .then(response => response.json())
       .then(costs => (this.costs = costs));
   };
+  toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
   addCost = (cost: object) => this.costs.push(cost);
 }
