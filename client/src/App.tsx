@@ -5,6 +5,7 @@ import { observer, Provider } from "mobx-react";
 import styled from "styled-components";
 
 import { Navbar } from "./components/nav";
+import { ListBox } from "./components//listBox";
 import { Context } from "./lib/App/Context";
 import { Store } from "./lib/App/Store";
 // import { ProgressBar } from "./components/UI/ProgressBar";
@@ -24,7 +25,7 @@ export class App extends React.Component<{}, {}> {
 
   render() {
     if (this.loading) {
-      return null
+      return null;
       // <ProgressBar />;
     }
 
@@ -33,9 +34,10 @@ export class App extends React.Component<{}, {}> {
     }
 
     return (
-      <Provider store={this.store}>
+      <Provider>
         <Container>
           <Navbar />
+          <ListBox/>
         </Container>
         {/* <HomePage store={this.store} /> */}
       </Provider>

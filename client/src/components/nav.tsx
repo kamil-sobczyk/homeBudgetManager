@@ -28,7 +28,25 @@ export class Navbar extends React.Component<{}, {}> {
         console.log("btn pushed");
     }*/
     render(){
-        return (<Button type={'primary'}>test</Button>)
+    return (<>
+    {/* <Button></Button> */}
+    <p>Navbar</p>
+  {/* <SimpleTopAppBar
+    title="test"
+    navigationIcon={{ onClick: () => console.log('Navigate') }}
+    actionItems={[
+      {
+        icon: 'file_download',
+        onClick: () => console.log('Do Something')
+      },
+      { icon: 'print', onClick: () => console.log('Do Something') },
+      { icon: 'bookmark', onClick: () => console.log('Do Something') }
+    ]}
+  />
+  <TopAppBarFixedAdjust />
+
+  <div style={{ height: '100rem', padding: '1rem' }}>Scroll Me</div> */}
+</>)
     }
 
 } 
