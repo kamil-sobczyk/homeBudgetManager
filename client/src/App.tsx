@@ -7,19 +7,15 @@ import styled from "styled-components";
 import { Navbar } from "./components/nav";
 import { ListBox } from "./components//listBox";
 import { Context } from "./lib/App/Context";
-import { Store } from "./lib/App/Store";
+import { store } from "./lib/App/store";
 import { ProgressBar } from "./components/UI/ProgressBar";
 // import { HomePage } from "./components/Page/HomePage";
 
 @observer
 export class App extends React.Component<{}, {}> {
   @observable loading: boolean = true;
-  store?: Store;
 
-  async componentDidMount() {
-    const context = new Context();
-    await context.init();
-    this.store = new Store(context);
+  componentDidMount() {
     this.loading = false;
   }
 
@@ -28,7 +24,7 @@ export class App extends React.Component<{}, {}> {
       return <ProgressBar />;
     }
 
-    if (!this.store) {
+    if (!store) {
       return <div>App initialization error!</div>;
     }
 

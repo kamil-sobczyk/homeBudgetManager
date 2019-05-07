@@ -1,4 +1,4 @@
-// export interface Store {
+// export interface store {
 //      [key:string]: any;
 // }
 

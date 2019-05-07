@@ -1,21 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
-import { Store } from "../../lib/App/Store";
+import { store } from "../../lib/App/store";
 // import { PageWrapper } from "./PageWrapper";
 // import { Sample } from "../Sample/Sample";
 
-interface HomePageProps {
-  store: Store;
-}
 
 @observer
-export class HomePage extends React.Component<HomePageProps, {}> {
+export class HomePage extends React.Component<any, {}> {
   render() {
-    const { store } = this.props;
-    const { appData } = store.context;
 
-    return (<></>
+
+    return (<>null</>
       // <PageWrapper>
       //   <Container>
       //     <h1>ts-tester</h1>

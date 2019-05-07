@@ -10,7 +10,7 @@ const privateList = "http://35.224.13.129/";
 const publicDemo = "http://35.184.211.161/";
 const server = localhost;
 
-// export interface Store {
+// export interface store {
 //   items: object[];
 //   selected: object[];
 //   costs: object[];
@@ -27,13 +27,7 @@ const server = localhost;
 //   [key: string]: any
 // }
 
-export class Store {
-  public readonly context: Context;
-
-  constructor(context: Context) {
-    this.context = context;
-  }
-
+class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: object[] = [];
@@ -89,3 +83,6 @@ export class Store {
   };
   addCost = (cost: object) => this.costs.push(cost);
 }
+
+const store = new Store();
+export { store };

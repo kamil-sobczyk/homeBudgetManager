@@ -2,8 +2,6 @@ import * as React from "react";
 
 import * as styled from "styled-components";
 
-import { Button } from "@rmwc/button";
-
 import { SimpleTopAppBar } from "@rmwc/top-app-bar";
 import { TopAppBarFixedAdjust } from "@rmwc/top-app-bar";
 
