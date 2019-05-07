@@ -10,24 +10,6 @@ const privateList = "http://35.224.13.129/";
 const publicDemo = "http://35.184.211.161/";
 const server = localhost;
 
-// export interface store {
-//   items: object[];
-//   selected: object[];
-//   costs: object[];
-//   activeItem: object;
-//   showAddDialog: boolean;
-//   showEditDialog: boolean;
-//   showDeleteDialog: boolean;
-//   showItems: boolean;
-// }
-
-//type objects in array
-
-// interface S {
-//   [key: string]: any
-// }
-
-
 export class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
@@ -84,5 +66,3 @@ export class Store {
   };
   addCost = (cost: object) => this.costs.push(cost);
 }
-
-// const store = new Store();
