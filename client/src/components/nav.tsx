@@ -23,26 +23,12 @@ const styles = {
   }
 };
 
-export class Navbar extends React.Component {
+export class Navbar extends React.Component<{}, {}> {
+    /*onClick = ():void => {
+        console.log("btn pushed");
+    }*/
     render(){
-    return (<>
-    <Button>"aaa"</Button>
-  {/* <SimpleTopAppBar
-    title="test"
-    navigationIcon={{ onClick: () => console.log('Navigate') }}
-    actionItems={[
-      {
-        icon: 'file_download',
-        onClick: () => console.log('Do Something')
-      },
-      { icon: 'print', onClick: () => console.log('Do Something') },
-      { icon: 'bookmark', onClick: () => console.log('Do Something') }
-    ]}
-  />
-  <TopAppBarFixedAdjust />
-
-  <div style={{ height: '100rem', padding: '1rem' }}>Scroll Me</div> */}
-</>)
+        return (<Button type={'primary'}>test</Button>)
     }
 
 } 
