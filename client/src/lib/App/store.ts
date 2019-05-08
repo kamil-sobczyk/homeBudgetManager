@@ -21,6 +21,11 @@ interface ToggleEditItem {
   index: number;
 }
 
+interface activeItem {
+  list: string;
+  index: number
+}
+
 export class Store {
   @observable items: Item[] = [
     {
@@ -80,8 +85,8 @@ export class Store {
       checked: false
     }
   ];
-  @observable costs: object[] = [];
-  @observable activeItem: any = {
+  @observable costs: object[] = [];    ////
+  @observable activeItem: activeItem = {
     list: "items",
     index: 0
   };
@@ -96,18 +101,18 @@ export class Store {
     (this.showAddDialog = !this.showAddDialog);
   toggleShowDeleteDialog = (): boolean =>
     (this.showDeleteDialog = !this.showDeleteDialog);
-  toggleShowEditDialog = (data: ToggleEditItem): any => {
+  toggleShowEditDialog = (data: ToggleEditItem): void => {
     this.showEditDialog = !this.showEditDialog;
     this.activeItem.list = data.list;
     this.activeItem.index = data.index;
   };
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
-  deleteItem = (index: number) =>
+  deleteItem = (index: number): Item[] =>
     (this.items = this.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     ));
-  editItem = (data: EditItem) =>
+  editItem = (data: EditItem):Item =>
     ((this as any)[data.list][data.index] = data.newItem);
   getItems = (): void => {
     fetch(server + "store/items", {
@@ -117,7 +122,7 @@ export class Store {
       .then(response => response.json())
       .then(items => (this.items = items));
   };
-  getSelected = (items: string[]) => {
+  getSelected = (items: string[]): void => {
     fetch(server + "store/selected", {
       mode: "cors",
       method: "GET"
@@ -139,5 +144,5 @@ export class Store {
   // changeSelectedOnServer(selected);
   }
   toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
-  addCost = (cost: object) => this.costs.push(cost);
+  addCost = (cost: object): number => this.costs.push(cost);   ////////////////////////////////
 }
