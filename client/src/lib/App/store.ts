@@ -20,6 +20,12 @@ export interface ActiveItem {
   index: number;
 }
 
+export interface Cost {
+  count: number;
+  chosenItems: string[];
+  date: string;
+}
+
 export class Store {
   @observable items: Item[] = [
     {
@@ -79,7 +85,7 @@ export class Store {
       checked: false
     }
   ];
-  @observable costs: object[] = []; ////
+  @observable costs: Cost[] = []; ////
   @observable activeItem: ActiveItem = {
     list: "items",
     index: 0
@@ -188,5 +194,5 @@ export class Store {
     }
   };
   toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
-  addCost = (cost: object): number => this.costs.push(cost); ////////////////////////////////
+  addCost = (cost: Cost): number => this.costs.push(cost); ////////////////////////////////
 }
