@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Store } from "../../lib/App/store";
+import { StoreProps } from "../listBox";
 
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
@@ -16,11 +16,7 @@ import { Icon } from "@rmwc/icon";
 
 import { Checkbox } from "@rmwc/checkbox";
 
-interface ItemsProps {
-  store: Store;
-}
-
-export class Items extends React.Component<ItemsProps, {}> {
+export class Items extends React.Component<StoreProps, {}> {
   render() {
     const {
       toggleShowEditDialog,
@@ -68,7 +64,7 @@ export class Items extends React.Component<ItemsProps, {}> {
                           <Icon icon="edit" />
                         </IconButton>
                       </StyledItem>
-                      <ListDivider/>
+                      <ListDivider />
                     </div>
                     {providedDraggable2.placeholder}
                   </div>
@@ -84,5 +80,5 @@ export class Items extends React.Component<ItemsProps, {}> {
 }
 
 export const StyledItem = styled(ListItem)`
-height: 80px;
-`
+  height: 80px;
+`;

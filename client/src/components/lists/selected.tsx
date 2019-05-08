@@ -1,32 +1,27 @@
-import * as React from "react";
-import styled from "styled-components";
-import { Store } from "../../lib/App/store";
+import * as React from 'react';
+import { StoreProps } from "../listBox";
 
-import { observer } from "mobx-react";
+import { observer } from 'mobx-react';
 
-import { Item } from "../../lib/interfaces";
+import { Item } from '../../lib/interfaces';
 
-import { StyledItem } from "./items";
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import { StyledItem } from './items';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import {
   ListItemText,
   ListItemPrimaryText,
   ListItemSecondaryText,
   ListDivider
-} from "@rmwc/list";
-import { IconButton } from "@rmwc/icon-button";
-import { Icon } from "@rmwc/icon";
+} from '@rmwc/list';
+import { IconButton } from '@rmwc/icon-button';
+import { Icon } from '@rmwc/icon';
 
-import { Checkbox } from "@rmwc/checkbox";
+import { Checkbox } from '@rmwc/checkbox';
 
-import { FinishDialog } from "../dialogs/finishDialog";
-
-interface SelectedProps {
-  store: Store;
-}
+import { FinishDialog } from '../dialogs/finishDialog';
 
 @observer
-export class Selected extends React.Component<SelectedProps, {}> {
+export class Selected extends React.Component<StoreProps, {}> {
   componentDidMount = () => {
     // getSelectedFromServer(this.props.getSelected);
   };
@@ -40,13 +35,13 @@ export class Selected extends React.Component<SelectedProps, {}> {
       toggleCheckItems
     } = this.props.store;
 
-    const list = "selected";
+    const list = 'selected';
 
     // console.log(JSON.parse(selected));
 
     return (
       <>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId='droppable'>
           {provided => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {selected.map((item, index) => (
@@ -60,11 +55,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                       >
                         <StyledItem
                           key={index}
-                          onClick={toggleCheckItems.bind(
-                            this,
-                            "selected",
-                            index
-                          )}
+                          onClick={() => toggleCheckItems('selected', index)}
                         >
                           <Checkbox
                             //   className={checkbox}
@@ -72,7 +63,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                               selected[index] ? selected[index].checked : false
                             }
                             tabIndex={-1}
-                            value={"checked"}
+                            value={'checked'}
                             //   disableRipple
                           />
                           <ListItemText>
@@ -84,14 +75,14 @@ export class Selected extends React.Component<SelectedProps, {}> {
                             </ListItemSecondaryText>
                           </ListItemText>
                           <IconButton
-                            aria-label="Edit item"
+                            aria-label='Edit item'
                             onClick={toggleShowEditDialog.bind(
                               this,
-                              "selected",
+                              'selected',
                               index
                             )}
                           >
-                            <Icon icon="edit" />
+                            <Icon icon='edit' />
                           </IconButton>
                         </StyledItem>
                         <ListDivider />

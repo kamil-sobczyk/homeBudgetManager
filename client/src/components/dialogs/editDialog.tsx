@@ -1,17 +1,12 @@
 import * as React from "react";
 
-import * as styled from "styled-components";
-
 import { Button } from "@rmwc/button";
 import { Dialog, DialogActions, DialogTitle } from "@rmwc/dialog";
 import { TextField } from "@rmwc/textfield";
 
-import { Store, ActiveItem } from "../../lib/App/store";
+import { ActiveItem } from "../../lib/App/store";
+import { StoreProps } from "../listBox";
 import { Item } from "../../lib/interfaces";
-
-interface EditDialogProps {
-  store: Store;
-}
 
 const initialState: Item = {
   name: "",
@@ -20,7 +15,7 @@ const initialState: Item = {
   checked: false
 };
 
-export class EditDialog extends React.Component<EditDialogProps, Item> {
+export class EditDialog extends React.Component<StoreProps, Item> {
   state = initialState;
 
   handleCloseEdit = (activeItem: ActiveItem): void => {

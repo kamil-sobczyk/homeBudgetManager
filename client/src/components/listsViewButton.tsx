@@ -1,16 +1,10 @@
 import * as React from "react";
 
-import * as styled from "styled-components";
-
 import { Button } from "@rmwc/button";
 
-import { Store } from "../lib/App/store";
+import { StoreProps } from "./listBox";
 
-interface ViewButtonProps {
-    store: Store;
-}
-
-export class ViewButton extends React.Component<ViewButtonProps, {}> {
+export class ViewButton extends React.Component<StoreProps, {}> {
   state = {
     text: "ADD NEW ITEMS TO LIST"
   };

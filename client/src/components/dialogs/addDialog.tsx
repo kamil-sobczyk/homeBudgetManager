@@ -1,16 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 
-import * as styled from "styled-components";
+import { Item } from '../../lib/interfaces';
 
-import { Item } from "../../lib/interfaces";
+import { FailDialog } from './failDialog';
 
-import { FailDialog } from "./failDialog";
+import { StoreProps } from '../listBox';
 
-import { Store } from "../../lib/App/store";
-
-import { Button } from "@rmwc/button";
-import { Dialog, DialogActions, DialogTitle } from "@rmwc/dialog";
-import { TextField } from "@rmwc/textfield";
+import { Button } from '@rmwc/button';
+import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
+import { TextField } from '@rmwc/textfield';
 
 // const resetAddFields = () => {
 //   const nameInput = document.getElementById("outlined-required");
@@ -25,20 +23,16 @@ import { TextField } from "@rmwc/textfield";
 //   } else infoInput.value = null;
 // };
 
-interface AddDialogProps {
-  store: Store;
-}
-
 interface AddDialogState {
   item: Item;
   openFail: boolean;
 }
 
-export class AddDialog extends React.Component<AddDialogProps, AddDialogState> {
+export class AddDialog extends React.Component<StoreProps, AddDialogState> {
   state = {
     item: {
-      name: "",
-      info: "",
+      name: '',
+      info: '',
       id: String(Date.now()),
       checked: false
     },
@@ -56,8 +50,8 @@ export class AddDialog extends React.Component<AddDialogProps, AddDialogState> {
       //   addNewItemOnServer(item);
       this.setState({
         item: {
-          name: "",
-          info: "",
+          name: '',
+          info: '',
           id: String(Date.now()),
           checked: false
         }
@@ -67,7 +61,7 @@ export class AddDialog extends React.Component<AddDialogProps, AddDialogState> {
     };
     const { name } = this.state.item;
 
-    allNames.indexOf(name) < 0 && name !== ""
+    allNames.indexOf(name) < 0 && name !== ''
       ? finishAdding()
       : this.setState({ openFail: true });
   };
@@ -80,7 +74,7 @@ export class AddDialog extends React.Component<AddDialogProps, AddDialogState> {
     const target = event.target as HTMLInputElement;
     //////////////////
     const { item } = this.state;
-    if (target.name === "info") {
+    if (target.name === 'info') {
       this.setState({
         item: {
           info: target.value,
@@ -110,34 +104,35 @@ export class AddDialog extends React.Component<AddDialogProps, AddDialogState> {
       >
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
-          id="outlined-required"
-          label="New item"
-          name="name"
+          id='outlined-required'
+          label='New item'
+          name='name'
           defaultValue={this.state.item.name}
           //   margin="normal"
           //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <TextField
-          id="outlined"
-          label="Additional info"
-          name="info"
+          id='outlined'
+          label='Additional info'
+          name='info'
           defaultValue={this.state.item.info}
           //   margin="normal"
           //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <DialogActions>
-          <Button color="primary" onClick={toggleShowAddDialog}>
+          <Button color='primary' onClick={toggleShowAddDialog}>
             Cancel
           </Button>
-          <Button color="primary" onClick={this.handleAddItem}>
+          <Button color='primary' onClick={this.handleAddItem}>
             Add
           </Button>
         </DialogActions>
         <FailDialog
-        //   open={this.state.openFail}
-        //   onClose={()=>this.toggleOpenFailDialog}
+          {...this.props}
+          //   open={this.state.openFail}
+          //   onClose={()=>this.toggleOpenFailDialog}
         />
       </Dialog>
     );

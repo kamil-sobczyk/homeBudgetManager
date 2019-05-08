@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as styled from "styled-components";
+
 import { Button } from "@rmwc/button";
 
 import { TextField } from "@rmwc/textfield";
@@ -12,13 +12,9 @@ import {
 
 import { Item } from "../../lib/interfaces";
 
-import { Store } from "../../lib/App/store";
+import { StoreProps } from "../listBox";
 
 import { sortItemsByName } from "../../functions/reorderFunctions";
-
-interface FinishDialogProps {
-  store: Store;
-}
 
 interface FinishDialogState {
   count: number;
@@ -27,7 +23,7 @@ interface FinishDialogState {
 }
 
 export class FinishDialog extends React.Component<
-  FinishDialogProps,
+  StoreProps,
   FinishDialogState
 > {
   state = {

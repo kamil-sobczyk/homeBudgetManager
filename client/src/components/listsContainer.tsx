@@ -11,14 +11,10 @@ import { reorder, move, sortItemsByName } from "../functions/reorderFunctions";
 
 import { Button } from "@rmwc/button";
 
-import { Store } from "../lib/App/store";
-
-interface ListsContainerProps {
-  store: Store;
-}
+import { StoreProps } from "./listBox";
 
 @observer
-export class ListsContainer extends React.Component<ListsContainerProps, {}> {
+export class ListsContainer extends React.Component<StoreProps, {}> {
   id2List = {
     droppable: "items",
     droppable2: "selected"
@@ -38,7 +34,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
         </StyledButtonsContainer>
         <StyledListContainer>
           <DragDropContext onDragEnd={onDragEnd}>
-            {showItems ? <Items {...this.props} /> : false}
+            {showItems && <Items {...this.props} />}
             <Selected {...this.props} />
           </DragDropContext>
         </StyledListContainer>

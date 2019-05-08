@@ -10,12 +10,12 @@ import { EditDialog } from "./dialogs/editDialog";
 import { DeleteDialog } from "./dialogs/deleteDialog";
 import { ShoppingDialog } from "./dialogs/shoppingDialog";
 
-interface ListBoxProps {
+export interface StoreProps {
   store: Store;
 }
 
 @observer
-export class ListBox extends React.Component<ListBoxProps, {}> {
+export class ListBox extends React.Component<StoreProps, {}> {
   render() {
     return (
       <>

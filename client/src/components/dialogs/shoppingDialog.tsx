@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import * as styled from "styled-components";
-
 import { Button } from "@rmwc/button";
 import {
   Dialog,
@@ -9,16 +7,11 @@ import {
   DialogTitle,
   DialogContent
 } from "@rmwc/dialog";
-import { TextField } from "@rmwc/textfield";
 
-import { Store } from "../../lib/App/store";
+import { StoreProps } from "../listBox";
 import { TableContainer } from "../shoppingTable/tableContainer";
 
-interface ShoppingDialogProps {
-  store: Store;
-}
-
-export class ShoppingDialog extends React.Component<ShoppingDialogProps, {}> {
+export class ShoppingDialog extends React.Component<StoreProps, {}> {
   render() {
     const { toggleShowShoppingDialog, showShoppingDialog } = this.props.store;
     return (

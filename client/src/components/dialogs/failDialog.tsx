@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import * as styled from "styled-components";
 
-import { Store } from "../../lib/App/store";
+import { StoreProps } from "../listBox";
 
-export class FailDialog extends React.Component<{}, {}> {
+export class FailDialog extends React.Component<StoreProps, {}> {
   render() {
     return null;
     //           <Dialog

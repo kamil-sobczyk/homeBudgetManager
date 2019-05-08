@@ -17,30 +17,6 @@ export class Menu extends React.Component<{}, {}> {
 // import EditIcon from "@material-ui/icons/Edit";
 // import MoreIcon from "@material-ui/icons/MoreVert";
 
-// const styles = theme => ({
-//   delete: {
-//     color: theme.palette.primary.main,
-//     display: "block",
-//     "&:hover": {
-//       color: "red"
-//     }
-//   },
-//   edit: {
-//     display: "block",
-//     "&:hover": {
-//       color: theme.palette.primary.main
-//     }
-//   },
-//   fab: {
-//     margin: theme.spacing.unit * 2
-//   },
-//   absolute: {
-//     position: "absolute",
-//     bottom: theme.spacing.unit * 2,
-//     right: theme.spacing.unit * 3
-//   }
-// });
-
 // class MoreMenu extends Component {
 //   state = {
 //     anchorEl: null

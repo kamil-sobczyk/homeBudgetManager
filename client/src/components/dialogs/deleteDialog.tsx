@@ -1,8 +1,6 @@
 import * as React from "react";
 
-import * as styled from "styled-components";
-
-import { Store, ActiveItem } from "../../lib/App/store";
+import { StoreProps } from "../listBox";
 
 import { Button } from "@rmwc/button";
 import {
@@ -11,13 +9,10 @@ import {
   DialogTitle,
   DialogContent
 } from "@rmwc/dialog";
-import { TextField } from "@rmwc/textfield";
 
-interface DeleteDialogProps {
-  store: Store;
-}
 
-export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
+
+export class DeleteDialog extends React.Component<StoreProps, {}> {
   render() {
     const {
       showDeleteDialog,

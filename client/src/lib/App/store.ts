@@ -32,7 +32,7 @@ export class Store {
       name: "Bread",
       info: "Buy in Lidl",
       id: "sdfsdfsadfsdfdsf",
-      checked: false
+      checked: true
     },
     {
       name: "Cola",
@@ -50,7 +50,7 @@ export class Store {
       name: "Beer",
       info: "",
       id: "fdswefi343fdsdf",
-      checked: false
+      checked: true
     },
     {
       name: "Beef",
@@ -70,7 +70,7 @@ export class Store {
       name: "Rice",
       info: "",
       id: "e3rijfisdnc.kas3",
-      checked: false
+      checked: true
     },
     {
       name: "Potatoes",
@@ -82,7 +82,7 @@ export class Store {
       name: "Aples",
       info: "3kg",
       id: "ekflkdsdsaljd",
-      checked: false
+      checked: true
     }
   ];
   @observable costs: Cost[] = []; ////
@@ -146,7 +146,10 @@ export class Store {
       .then(costs => (this.costs = costs));
   };
   toggleCheckItems = (list: string, index: number): void => {
-    (this as any)[list][index] = !(this as any)[list][index];
+    console.log((this as any)[list][index].checked);
+    (this as any)[list][index].checked = !(this as any)[list][index].checked;
+    console.log((this as any)[list][index].checked);
+    console.log((this as any)[list][index]);
     // getSelected(selected);
     // changeSelectedOnServer(selected);
   };
@@ -171,7 +174,7 @@ export class Store {
         destination.index
       );
       if (
-        JSON.stringify(this.items).indexOf(JSON.stringify((items as any)[0])) <
+        JSON.stringify(this.items).indexOf(JSON.stringify((items)[0])) <
         0
       ) {
         // getSelected(items);
