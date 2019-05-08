@@ -9,7 +9,7 @@ import {DataTable, DataTableContent, DataTableRow, DataTableHeadCell, DataTableB
 
 
 // import Pagination from "./tablePagination";
-// import CostsCard from "./costsCard";
+import {CostsCard} from "./costsCard";
 
 interface TableContainerProps {
     store: Store;
@@ -48,14 +48,14 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
 
-    let sortedCosts;
+    let sortedCosts: Cost[];
     if (costs.length > 0) {
       sortedCosts = costs.sort((b: any, a: any): any => a.date > b.date);           ///////////////////////////////////
     } else
       sortedCosts = [
         {
           count: 0,
-          chosenItems: [null],
+          chosenItems: [""],
           date: "No shopping yet"
         }
       ];
@@ -108,7 +108,7 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
             
           </DataTable>
         
-        {/* <CostsCard sortedCosts={sortedCosts} /> */} 
+        <CostsCard sortedCosts={sortedCosts} /> 
     </>
     );
   }

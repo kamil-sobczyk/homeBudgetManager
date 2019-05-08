@@ -7,7 +7,6 @@ import { observer } from "mobx-react";
 import { Item } from "../../lib/interfaces";
 
 import { Button } from "@rmwc/button";
-import { Typography } from "@rmwc/typography";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import {
   ListItem,
