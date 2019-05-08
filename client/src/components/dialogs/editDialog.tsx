@@ -104,7 +104,7 @@ export class EditDialog extends React.Component<EditDialogProps, Item> {
         <DialogActions>
           <Button
             color="primary"
-            onClick={() =>toggleShowEditDialog(list, index)}       //////////////////////////////////////////
+            onClick={() => toggleShowEditDialog(list, index)} //////////////////////////////////////////
           >
             Cancel
           </Button>

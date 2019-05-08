@@ -2,12 +2,11 @@ import * as React from "react";
 
 import * as styled from "styled-components";
 
-import { Store } from '../../lib/App/store';
+import { Store } from "../../lib/App/store";
 
-export class FailDialog extends React.Component <{}, {}> {
-    render(){
-        return(
-            null
+export class FailDialog extends React.Component<{}, {}> {
+  render() {
+    return null;
     //           <Dialog
     //   open={open}
     //   aria-labelledby="alert-dialog-title"
@@ -29,6 +28,5 @@ export class FailDialog extends React.Component <{}, {}> {
     //     </Button>
     //   </DialogActions>
     // </Dialog>
-        )
-    }
+  }
 }

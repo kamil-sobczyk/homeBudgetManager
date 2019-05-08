@@ -11,7 +11,7 @@ import { DeleteDialog } from "./dialogs/deleteDialog";
 import { ShoppingDialog } from "./dialogs/shoppingDialog";
 
 interface ListBoxProps {
-    store: Store;
+  store: Store;
 }
 
 @observer
@@ -19,12 +19,12 @@ export class ListBox extends React.Component<ListBoxProps, {}> {
   render() {
     return (
       <>
-        <ViewButton {...this.props}/>
-        <ListsContainer {...this.props}/>
-        <AddDialog {...this.props}/>
+        <ViewButton {...this.props} />
+        <ListsContainer {...this.props} />
+        <AddDialog {...this.props} />
         <EditDialog {...this.props} />
-        <DeleteDialog {...this.props}/>
-        <ShoppingDialog {...this.props}/>
+        <DeleteDialog {...this.props} />
+        <ShoppingDialog {...this.props} />
       </>
     );
   }

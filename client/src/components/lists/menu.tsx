@@ -2,10 +2,10 @@ import * as React from "react";
 
 import * as styled from "styled-components";
 
-export class Menu extends React.Component <{},{}> {
-    render(){
-        return(null)
-    }
+export class Menu extends React.Component<{}, {}> {
+  render() {
+    return null;
+  }
 }
 
 // import { withStyles } from "@rmwc/styles";

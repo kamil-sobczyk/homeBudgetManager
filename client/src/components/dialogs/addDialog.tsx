@@ -8,7 +8,6 @@ import { FailDialog } from "./failDialog";
 
 import { Store } from "../../lib/App/store";
 
-
 import { Button } from "@rmwc/button";
 import { Dialog, DialogActions, DialogTitle } from "@rmwc/dialog";
 import { TextField } from "@rmwc/textfield";

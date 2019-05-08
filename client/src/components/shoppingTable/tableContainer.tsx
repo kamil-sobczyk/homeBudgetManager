@@ -4,25 +4,33 @@ import * as styled from "styled-components";
 
 import { Store, Cost } from "../../lib/App/store";
 
-import {DataTable, DataTableContent, DataTableRow, DataTableHeadCell, DataTableBody, DataTableCell} from '@rmwc/data-table'
-
-
+import {
+  DataTable,
+  DataTableContent,
+  DataTableRow,
+  DataTableHeadCell,
+  DataTableBody,
+  DataTableCell
+} from "@rmwc/data-table";
 
 // import Pagination from "./tablePagination";
-import {CostsCard} from "./costsCard";
+import { CostsCard } from "./costsCard";
 
 interface TableContainerProps {
-    store: Store;
+  store: Store;
 }
 
 interface TableContainerState {
-    page: number;
-    rowsPerPage: number;
-    costs: Cost[];
+  page: number;
+  rowsPerPage: number;
+  costs: Cost[];
 }
 
 // @observer
-export class TableContainer extends React.Component<TableContainerProps, TableContainerState> {
+export class TableContainer extends React.Component<
+  TableContainerProps,
+  TableContainerState
+> {
   state = {
     page: 0,
     rowsPerPage: 5,
@@ -33,7 +41,10 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
     // getCostsFromServer(this.props.getCosts);
   };
 
-  handleChangePage = (event: React.FormEvent<EventTarget>, page: number): void => {
+  handleChangePage = (
+    event: React.FormEvent<EventTarget>,
+    page: number
+  ): void => {
     this.setState({ page });
   };
 
@@ -43,14 +54,14 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
   };
 
   render() {
-      const { costs } = this.props.store;
+    const { costs } = this.props.store;
     const { rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
 
     let sortedCosts: Cost[];
     if (costs.length > 0) {
-      sortedCosts = costs.sort((b: any, a: any): any => a.date > b.date);           ///////////////////////////////////
+      sortedCosts = costs.sort((b: any, a: any): any => a.date > b.date); ///////////////////////////////////
     } else
       sortedCosts = [
         {
@@ -61,10 +72,10 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
       ];
 
     return (
-<>
-          <DataTable >
-            <DataTableBody>
-               {/*               {sortedCosts
+      <>
+        <DataTable>
+          <DataTableBody>
+            {/*               {sortedCosts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
                 //   <Tooltip
@@ -80,15 +91,15 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
                       <TableCell align="right">{row.count + "zł"}</TableCell>
                     </DataTableRow>
                   </Tooltip>
-                ))} */} 
+                ))} */}
 
-              {emptyRows > 0 && (
-                <DataTableRow style={{ height: 48 * emptyRows }}>
-                  <DataTableCell colSpan={6} />
-                </DataTableRow>
-              )}
-            </DataTableBody>
-             {/* <TableFooter>
+            {emptyRows > 0 && (
+              <DataTableRow style={{ height: 48 * emptyRows }}>
+                <DataTableCell colSpan={6} />
+              </DataTableRow>
+            )}
+          </DataTableBody>
+          {/* <TableFooter>
               <DataTableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25]}
@@ -104,12 +115,11 @@ export class TableContainer extends React.Component<TableContainerProps, TableCo
                 //   ActionsComponent={Pagination}
                 />
               </DataTableRow>
-            </TableFooter> */} 
-            
-          </DataTable>
-        
-        <CostsCard sortedCosts={sortedCosts} /> 
-    </>
+            </TableFooter> */}
+        </DataTable>
+
+        <CostsCard sortedCosts={sortedCosts} />
+      </>
     );
   }
 }

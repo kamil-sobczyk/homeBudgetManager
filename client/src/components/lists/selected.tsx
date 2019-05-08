@@ -61,7 +61,11 @@ export class Selected extends React.Component<SelectedProps, {}> {
                       >
                         <ListItem
                           key={index}
-                          onClick={toggleCheckItems.bind(this,"selected", index)}
+                          onClick={toggleCheckItems.bind(
+                            this,
+                            "selected",
+                            index
+                          )}
                         >
                           <Checkbox
                             //   className={checkbox}
@@ -82,8 +86,11 @@ export class Selected extends React.Component<SelectedProps, {}> {
                           </ListItemText>
                           <IconButton
                             aria-label="Edit item"
-                            onClick={ toggleShowEditDialog.bind(this,"selected", index)
-                            }
+                            onClick={toggleShowEditDialog.bind(
+                              this,
+                              "selected",
+                              index
+                            )}
                           >
                             <Icon icon="edit" />
                           </IconButton>
