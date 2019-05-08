@@ -88,7 +88,7 @@ export class Store {
   @observable showAddDialog: boolean = false;
   @observable showEditDialog: boolean = false;
   @observable showDeleteDialog: boolean = false;
-  @observable showItems: boolean = false;
+  @observable showItems: boolean = true;
   @observable showFinish: boolean = false;
 
   toggleShowItems = (): boolean => (this.showItems = !this.showItems);

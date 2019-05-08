@@ -76,8 +76,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
                           checked={
                             selected[index] ? selected[index].checked : false
                           }
-                          //   tabIndex={-1}
-                          //   value={"checked"}
+                            tabIndex={-1}
+                            value={"checked"}
                           //   disableRipple
                         />
                         <ListItemText>
