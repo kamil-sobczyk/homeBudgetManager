@@ -22,9 +22,9 @@ export class ListBox extends React.Component<ListBoxProps, {}> {
         <ViewButton {...this.props}/>
         <ListsContainer {...this.props}/>
         <AddDialog {...this.props}/>
-        <EditDialog />
-        <DeleteDialog />
-        <ShoppingDialog />
+        <EditDialog {...this.props} />
+        <DeleteDialog {...this.props}/>
+        <ShoppingDialog {...this.props}/>
       </>
     );
   }
