@@ -2,12 +2,57 @@ import * as React from "react";
 
 import * as styled from "styled-components";
 
-import { Store } from '../../lib/App/store';
+import { Store, ActiveItem } from '../../lib/App/store';
 
-export class DeleteDialog extends React.Component <{}, {}> {
-    render(){
-        return(
-            null
-        )
-    }
+import { Button } from "@rmwc/button";
+import { Dialog, DialogActions, DialogTitle, DialogContent } from "@rmwc/dialog";
+import { TextField } from "@rmwc/textfield";
+
+interface DeleteDialogProps {
+    store: Store
+}
+
+export class DeleteDialog extends React.Component <DeleteDialogProps, {}> {
+
+      render() {
+        const {
+          showDeleteDialog,
+          deleteItem,
+          toggleShowDeleteDialog, activeItem,
+          activeItem: {list, index}
+        } = this.props.store;
+    
+        const active = (this.props.store as any)[list][index] ? (this.props.store as any)[list][index].name : "";
+        return (
+          <Dialog
+            open={showDeleteDialog}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+           
+          >
+            <DialogTitle id="alert-dialog-title">
+              "Deleting product"
+            </DialogTitle>
+            <DialogContent id="alert-dialog-description">
+                Are you sure want to delete {active} from your list?
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={toggleShowDeleteDialog.bind(this, "items", 0)}
+                color="primary"
+              >
+                No
+              </Button>
+              <Button
+                onClick={deleteItem.bind(this, index)}
+                color="primary"
+                autoFocus
+              >
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        );
+      }
 }

@@ -102,10 +102,14 @@ export class Store {
   };
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
-  deleteItem = (index: number): Item[] =>
+  deleteItem = (index: number): Item[] =>{
     (this.items = this.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     ));
+    this.toggleShowDeleteDialog();
+    return this.items;
+  }
+    
   editItem = (newItem: Item, list: string, index: number): Item =>
     ((this as any)[list][index] = newItem);
   getItems = (): void => {
