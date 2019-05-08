@@ -87,9 +87,12 @@ export class Store {
   @observable showAddDialog: boolean = false;
   @observable showEditDialog: boolean = false;
   @observable showDeleteDialog: boolean = false;
+  @observable showShoppingDialog: boolean = false;
   @observable showItems: boolean = true;
   @observable showFinish: boolean = false;
 
+  toggleShowShoppingDialog = (): boolean =>
+    (this.showShoppingDialog = !this.showShoppingDialog);
   toggleShowItems = (): boolean => (this.showItems = !this.showItems);
   toggleShowAddDialog = (): boolean =>
     (this.showAddDialog = !this.showAddDialog);
@@ -102,14 +105,14 @@ export class Store {
   };
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
-  deleteItem = (index: number): Item[] =>{
-    (this.items = this.items.filter(
+  deleteItem = (index: number): Item[] => {
+    this.items = this.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
-    ));
+    );
     this.toggleShowDeleteDialog();
     return this.items;
-  }
-    
+  };
+
   editItem = (newItem: Item, list: string, index: number): Item =>
     ((this as any)[list][index] = newItem);
   getItems = (): void => {
