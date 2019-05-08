@@ -1,4 +1,3 @@
-import { Context } from "./Context";
 import { observable } from "mobx";
 
 import { Item } from "../../lib/interfaces";
