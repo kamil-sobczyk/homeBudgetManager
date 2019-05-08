@@ -2,7 +2,13 @@ import { observable } from "mobx";
 
 import { Item } from "../../lib/interfaces";
 
-import { sortItemsByName } from "../../functions/reorderFunctions";
+import {
+  sortItemsByName,
+  reorder,
+  move
+} from "../../functions/reorderFunctions";
+
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 const localhost = "http://0.0.0.0:8080/";
 const privateList = "http://35.224.13.129/";
@@ -22,7 +28,7 @@ interface ToggleEditItem {
 
 interface activeItem {
   list: string;
-  index: number
+  index: number;
 }
 
 export class Store {
@@ -84,7 +90,7 @@ export class Store {
       checked: false
     }
   ];
-  @observable costs: object[] = [];    ////
+  @observable costs: object[] = []; ////
   @observable activeItem: activeItem = {
     list: "items",
     index: 0
@@ -111,7 +117,7 @@ export class Store {
     (this.items = this.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     ));
-  editItem = (data: EditItem):Item =>
+  editItem = (data: EditItem): Item =>
     ((this as any)[data.list][data.index] = data.newItem);
   getItems = (): void => {
     fetch(server + "store/items", {
@@ -139,9 +145,52 @@ export class Store {
   };
   toggleCheckItems = (list: string, index: number): void => {
     (this as any)[list][index] = !(this as any)[list][index];
-  // getSelected(selected);
-  // changeSelectedOnServer(selected);
-  }
+    // getSelected(selected);
+    // changeSelectedOnServer(selected);
+  };
+  getDndList = (id: string) => {
+    if (id === "items") {
+      return this.items;
+    }
+    return this.selected;
+  };
+  onDragEnd = (result: DropResult): void => {
+    const { source, destination } = result;
+    const { getItems, getSelected } = this;
+
+    if (!destination) {
+      return;
+    }
+
+    if (source.droppableId === destination.droppableId) {
+      const items = reorder(
+        this.getDndList(source.droppableId),
+        source.index,
+        destination.index
+      );
+      if (
+        JSON.stringify(this.items).indexOf(JSON.stringify((items as any)[0])) <
+        0
+      ) {
+        // getSelected(items);
+        //   changeSelectedOnServer(items);
+      }
+    } else {
+      const result: any = move(
+        this.getDndList(source.droppableId),
+        this.getDndList(destination.droppableId),
+        source,
+        destination
+      );
+      result.droppable.forEach((item: Item) => (item.checked = false));
+
+      // getItems(sortItemsByName(result.droppable));
+      // getSelected(result.droppable2);
+
+      // changeItemsOnServer(result.droppable);
+      // changeSelectedOnServer(result.droppable2);
+    }
+  };
   toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
-  addCost = (cost: object): number => this.costs.push(cost);   ////////////////////////////////
+  addCost = (cost: object): number => this.costs.push(cost); ////////////////////////////////
 }

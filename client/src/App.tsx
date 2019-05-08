@@ -9,7 +9,6 @@ import { Navbar } from "./components/nav";
 import { ListBox } from "./components//listBox";
 import { Store } from "./lib/App/store";
 import { ProgressBar } from "./components/UI/ProgressBar";
-// import { HomePage } from "./components/Page/HomePage";
 
 @observer
 export class App extends React.Component<{}, {}> {
@@ -36,14 +35,13 @@ export class App extends React.Component<{}, {}> {
           <Navbar />
           <ListBox store={this.store} />
         </Container>
-        {/* <HomePage store={this.store} /> */}
       </Provider>
     );
   }
 }
 
 const Container = styled.div`
-  textalign: "center";
+  text-align: "center";
 `;
 
 console.log("app running");
