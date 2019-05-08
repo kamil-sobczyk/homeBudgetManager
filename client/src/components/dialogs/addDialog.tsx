@@ -1,14 +1,19 @@
 import * as React from 'react';
 
-import { Item } from '../../lib/interfaces';
-
-import { FailDialog } from './failDialog';
-
+import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
+
+import { Item } from '../../lib/interfaces';
+
+import { FailDialog } from './failDialog';
+
+
+
+
 
 // const resetAddFields = () => {
 //   const nameInput = document.getElementById("outlined-required");
@@ -28,6 +33,7 @@ interface AddDialogState {
   openFail: boolean;
 }
 
+@observer
 export class AddDialog extends React.Component<StoreProps, AddDialogState> {
   state = {
     item: {

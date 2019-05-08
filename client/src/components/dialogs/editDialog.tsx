@@ -1,20 +1,22 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Button } from "@rmwc/button";
-import { Dialog, DialogActions, DialogTitle } from "@rmwc/dialog";
-import { TextField } from "@rmwc/textfield";
+import { observer } from 'mobx-react';
+import { StoreProps } from '../listBox';
+import { Item } from '../../lib/interfaces';
+import { ActiveItem } from '../../lib/App/store';
 
-import { ActiveItem } from "../../lib/App/store";
-import { StoreProps } from "../listBox";
-import { Item } from "../../lib/interfaces";
+import { Button } from '@rmwc/button';
+import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
+import { TextField } from '@rmwc/textfield';
 
 const initialState: Item = {
-  name: "",
-  info: "",
+  name: '',
+  info: '',
   id: String(Date.now()),
   checked: false
 };
 
+@observer
 export class EditDialog extends React.Component<StoreProps, Item> {
   state = initialState;
 
@@ -23,7 +25,7 @@ export class EditDialog extends React.Component<StoreProps, Item> {
     const { list, index } = activeItem;
 
     const newItem = this.state;
-    if (newItem.name === "") {
+    if (newItem.name === '') {
       newItem.name = (this.props.store as any)[list][index].name;
     } else {
       newItem.name = this.state.name;
@@ -67,8 +69,8 @@ export class EditDialog extends React.Component<StoreProps, Item> {
       defaultName = (this.props.store as any)[list][index].name;
       defaultInfo = (this.props.store as any)[list][index].info;
     } else {
-      defaultName = " ";
-      defaultName = " ";
+      defaultName = ' ';
+      defaultName = ' ';
     }
 
     // const defaultName = !(this.props.store as any)[list][index] ? " " : (this.props.store as any)[list][index].name;
@@ -81,16 +83,16 @@ export class EditDialog extends React.Component<StoreProps, Item> {
       >
         <DialogTitle>Edit product</DialogTitle>
         <TextField
-          id="outlined-required"
-          label="Type new name"
+          id='outlined-required'
+          label='Type new name'
           defaultValue={defaultName}
           //   margin="normal"
           //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <TextField
-          id="outlined"
-          label="Type new additional info"
+          id='outlined'
+          label='Type new additional info'
           defaultValue={defaultInfo}
           //   margin="normal"
           //   variant="outlined"
@@ -98,13 +100,13 @@ export class EditDialog extends React.Component<StoreProps, Item> {
         />
         <DialogActions>
           <Button
-            color="primary"
+            color='primary'
             onClick={() => toggleShowEditDialog(list, index)} //////////////////////////////////////////
           >
             Cancel
           </Button>
           <Button
-            color="primary"
+            color='primary'
             onClick={this.handleCloseEdit.bind(this, activeItem)}
           >
             Confirm

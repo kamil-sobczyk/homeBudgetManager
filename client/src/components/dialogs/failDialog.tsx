@@ -1,31 +1,38 @@
-import * as React from "react";
+import * as React from 'react';
 
+import { observer } from 'mobx-react';
+import { StoreProps } from '../listBox';
 
-import { StoreProps } from "../listBox";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@rmwc/dialog';
+import { Button } from '@rmwc/button';
 
+@observer
 export class FailDialog extends React.Component<StoreProps, {}> {
   render() {
-    return null;
-    //           <Dialog
-    //   open={open}
-    //   aria-labelledby="alert-dialog-title"
-    //   aria-describedby="alert-dialog-description"
-    //   TransitionComponent={Transition}
-    //   keepMounted
-    // >
-    //   <DialogTitle id="alert-dialog-title">
-    //     {"Unable to add new product to the list!"}
-    //   </DialogTitle>
-    //   <DialogContent>
-    //     <DialogContentText id="alert-dialog-description">
-    //       This product is on your list already.
-    //     </DialogContentText>
-    //   </DialogContent>
-    //   <DialogActions>
-    //     <Button onClick={onClose} color="primary" autoFocus>
-    //       OK
-    //     </Button>
-    //   </DialogActions>
-    // </Dialog>
+    const { showFailDialog, toggleShowFailDialog } = this.props.store;
+    return (
+      <Dialog
+        open={showFailDialog}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>
+          "Unable to add new product to the list!"
+        </DialogTitle>
+        <DialogContent id='alert-dialog-description'>
+          This product is on your list already.
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={toggleShowFailDialog} color='primary' autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
   }
 }

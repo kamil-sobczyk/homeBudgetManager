@@ -1,11 +1,10 @@
-import * as React from "react";
+import * as React from 'react';
 
-import styled from "styled-components";
+import { observer } from 'mobx-react';
+import { Cost } from '../../lib/App/store';
 
-import { Cost } from "../../lib/App/store";
-
-import { Card, CardAction } from "@rmwc/card";
-import { Typography } from "@rmwc/typography";
+import { Card, CardAction } from '@rmwc/card';
+import { Typography } from '@rmwc/typography';
 
 const countMothOutgoings = (costs: Cost[]) => {
   let sumOfCost: number = 0;
@@ -20,14 +19,15 @@ interface CostsCardProps {
   sortedCosts: Cost[];
 }
 
+@observer
 export class CostsCard extends React.Component<CostsCardProps, {}> {
   render() {
     return (
       <Card>
         <CardAction>
-          <Typography use="subtitle1">This month you spent:</Typography>
-          <Typography use="subtitle2">
-            {countMothOutgoings(this.props.sortedCosts) + " zł"}
+          <Typography use='subtitle1'>This month you spent:</Typography>
+          <Typography use='subtitle2'>
+            {countMothOutgoings(this.props.sortedCosts) + ' zł'}
           </Typography>
         </CardAction>
       </Card>

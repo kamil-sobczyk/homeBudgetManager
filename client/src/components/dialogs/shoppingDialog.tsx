@@ -1,16 +1,17 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Button } from "@rmwc/button";
+import { observer } from 'mobx-react';
+import { StoreProps } from '../listBox';
+
 import {
   Dialog,
   DialogActions,
   DialogTitle,
   DialogContent
-} from "@rmwc/dialog";
+} from '@rmwc/dialog';
+import { Button } from '@rmwc/button';
 
-import { StoreProps } from "../listBox";
-import { TableContainer } from "../shoppingTable/tableContainer";
-
+@observer
 export class ShoppingDialog extends React.Component<StoreProps, {}> {
   render() {
     const { toggleShowShoppingDialog, showShoppingDialog } = this.props.store;
@@ -19,14 +20,14 @@ export class ShoppingDialog extends React.Component<StoreProps, {}> {
         <Dialog
           open={showShoppingDialog}
           //   onClose={showShoppingDialog}
-          aria-label="shopping-you-made"
+          aria-label='shopping-you-made'
         >
           <DialogTitle>Shopping you made</DialogTitle>
           <DialogContent>
             {/*   <TableContainer {...this.props} />*/}
           </DialogContent>
           <DialogActions>
-            <Button onClick={toggleShowShoppingDialog} color="primary">
+            <Button onClick={toggleShowShoppingDialog} color='primary'>
               Close
             </Button>
           </DialogActions>

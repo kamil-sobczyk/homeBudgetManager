@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { StoreProps } from "../listBox";
 
 import { observer } from 'mobx-react';
+import { StoreProps } from '../listBox';
 
-import { Item } from '../../lib/interfaces';
-
-import { StyledItem } from './items';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+
 import {
   ListItemText,
   ListItemPrimaryText,
@@ -15,10 +13,10 @@ import {
 } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 import { Icon } from '@rmwc/icon';
-
 import { Checkbox } from '@rmwc/checkbox';
 
 import { FinishDialog } from '../dialogs/finishDialog';
+import { StyledItem } from './items';
 
 @observer
 export class Selected extends React.Component<StoreProps, {}> {

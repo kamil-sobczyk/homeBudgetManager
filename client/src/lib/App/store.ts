@@ -1,18 +1,18 @@
-import { observable } from "mobx";
+import { observable } from 'mobx';
 
-import { Item } from "../../lib/interfaces";
+import { Item } from '../../lib/interfaces';
 
 import {
   sortItemsByName,
   reorder,
   move
-} from "../../functions/reorderFunctions";
+} from '../../functions/reorderFunctions';
 
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-const localhost = "http://0.0.0.0:8080/";
-const privateList = "http://35.224.13.129/";
-const publicDemo = "http://35.184.211.161/";
+const localhost = 'http://0.0.0.0:8080/';
+const privateList = 'http://35.224.13.129/';
+const publicDemo = 'http://35.184.211.161/';
 const server = localhost;
 
 export interface ActiveItem {
@@ -29,65 +29,65 @@ export interface Cost {
 export class Store {
   @observable items: Item[] = [
     {
-      name: "Bread",
-      info: "Buy in Lidl",
-      id: "sdfsdfsadfsdfdsf",
+      name: 'Bread',
+      info: 'Buy in Lidl',
+      id: 'sdfsdfsadfsdfdsf',
       checked: true
     },
     {
-      name: "Cola",
-      info: "",
-      id: "gfvfsddwed",
+      name: 'Cola',
+      info: '',
+      id: 'gfvfsddwed',
       checked: false
     },
     {
-      name: "Milk",
-      info: "Buy in Tesco",
-      id: "324rijdsojfddsaoid",
+      name: 'Milk',
+      info: 'Buy in Tesco',
+      id: '324rijdsojfddsaoid',
       checked: false
     },
     {
-      name: "Beer",
-      info: "",
-      id: "fdswefi343fdsdf",
+      name: 'Beer',
+      info: '',
+      id: 'fdswefi343fdsdf',
       checked: true
     },
     {
-      name: "Beef",
-      info: "1kg",
-      id: "frefp43ifjdsfs",
+      name: 'Beef',
+      info: '1kg',
+      id: 'frefp43ifjdsfs',
       checked: false
     }
   ];
   @observable selected: Item[] = [
     {
-      name: "Ham",
-      info: "In slices",
-      id: "43rpijdskjfna",
+      name: 'Ham',
+      info: 'In slices',
+      id: '43rpijdskjfna',
       checked: false
     },
     {
-      name: "Rice",
-      info: "",
-      id: "e3rijfisdnc.kas3",
+      name: 'Rice',
+      info: '',
+      id: 'e3rijfisdnc.kas3',
       checked: true
     },
     {
-      name: "Potatoes",
-      info: "Buy in Tesco",
-      id: "43ifpjsdljnfew33",
+      name: 'Potatoes',
+      info: 'Buy in Tesco',
+      id: '43ifpjsdljnfew33',
       checked: false
     },
     {
-      name: "Aples",
-      info: "3kg",
-      id: "ekflkdsdsaljd",
+      name: 'Aples',
+      info: '3kg',
+      id: 'ekflkdsdsaljd',
       checked: true
     }
   ];
   @observable costs: Cost[] = []; ////
   @observable activeItem: ActiveItem = {
-    list: "items",
+    list: 'items',
     index: 0
   };
   @observable showAddDialog: boolean = false;
@@ -96,6 +96,7 @@ export class Store {
   @observable showShoppingDialog: boolean = false;
   @observable showItems: boolean = true;
   @observable showFinish: boolean = false;
+  @observable showFailDialog: boolean = false;
 
   toggleShowShoppingDialog = (): boolean =>
     (this.showShoppingDialog = !this.showShoppingDialog);
@@ -109,6 +110,8 @@ export class Store {
     this.activeItem.list = list;
     this.activeItem.index = index;
   };
+  toggleShowFailDialog = (): boolean =>
+    (this.showFailDialog = !this.showFailDialog);
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
   deleteItem = (index: number): Item[] => {
@@ -122,25 +125,25 @@ export class Store {
   editItem = (newItem: Item, list: string, index: number): Item =>
     ((this as any)[list][index] = newItem);
   getItems = (): void => {
-    fetch(server + "store/items", {
-      mode: "cors",
-      method: "GET"
+    fetch(server + 'store/items', {
+      mode: 'cors',
+      method: 'GET'
     })
       .then(response => response.json())
       .then(items => (this.items = items));
   };
   getSelected = (items: string[]): void => {
-    fetch(server + "store/selected", {
-      mode: "cors",
-      method: "GET"
+    fetch(server + 'store/selected', {
+      mode: 'cors',
+      method: 'GET'
     })
       .then(response => response.json())
       .then(selected => (this.selected = selected));
   };
   getCosts = (): void => {
-    fetch(server + "store/costs", {
-      mode: "cors",
-      method: "GET"
+    fetch(server + 'store/costs', {
+      mode: 'cors',
+      method: 'GET'
     })
       .then(response => response.json())
       .then(costs => (this.costs = costs));
@@ -154,7 +157,7 @@ export class Store {
     // changeSelectedOnServer(selected);
   };
   getDndList = (id: string) => {
-    if (id === "items") {
+    if (id === 'items') {
       return this.items;
     }
     return this.selected;
@@ -173,10 +176,7 @@ export class Store {
         source.index,
         destination.index
       );
-      if (
-        JSON.stringify(this.items).indexOf(JSON.stringify((items)[0])) <
-        0
-      ) {
+      if (JSON.stringify(this.items).indexOf(JSON.stringify(items[0])) < 0) {
         // getSelected(items);
         //   changeSelectedOnServer(items);
       }

@@ -1,40 +1,40 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Button } from "@rmwc/button";
+import { observer } from 'mobx-react';
+import { StoreProps } from '../listBox';
+import { Item } from '../../lib/interfaces';
 
-import { TextField } from "@rmwc/textfield";
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle
-} from "@rmwc/dialog";
+} from '@rmwc/dialog';
+import { TextField } from '@rmwc/textfield';
+import { Button } from '@rmwc/button';
 
-import { Item } from "../../lib/interfaces";
-
-import { StoreProps } from "../listBox";
-
-import { sortItemsByName } from "../../functions/reorderFunctions";
+import { sortItemsByName } from '../../functions/reorderFunctions';
 
 interface FinishDialogState {
+  chosenItems: Item[];
   count: number;
   date: string;
-  chosenItems: Item[];
 }
 
+@observer
 export class FinishDialog extends React.Component<
   StoreProps,
   FinishDialogState
 > {
   state = {
+    chosenItems: [],
     count: 0,
     date: String(
-      new Date().toLocaleDateString("pl-PL", {
-        hour: "2-digit",
-        minute: "2-digit"
+      new Date().toLocaleDateString('pl-PL', {
+        hour: '2-digit',
+        minute: '2-digit'
       })
-    ),
-    chosenItems: []
+    )
   };
 
   componentDidMount = (): void => {
@@ -50,11 +50,11 @@ export class FinishDialog extends React.Component<
 
   handleFinish = (): void => {
     const {
-      selected,
-      items,
-      getSelected,
+      getCosts,
       getItems,
-      getCosts
+      getSelected,
+      items,
+      selected
     } = this.props.store;
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
@@ -86,25 +86,25 @@ export class FinishDialog extends React.Component<
 
     return (
       <Dialog
-        open={showFinish}
+        aria-describedby='alert-dialog-description'
         // onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        aria-labelledby='alert-dialog-title'
+        open={showFinish}
         // TransitionComponent={Transition}
         // keepMounted
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Finishing shopping"}
+        <DialogTitle id='alert-dialog-title'>
+          {'Finishing shopping'}
         </DialogTitle>
         <DialogContent>
           Checked items will be moved to items list. <br /> Type how much you
           spent for shopping.
           <TextField
-            id="outlined-adornment-number"
-            label="Amount"
+            id='outlined-adornment-number'
+            label='Amount'
             // defaultValue={0}
             onChange={this.handleChangeCounter}
-            type="number"
+            type='number'
             // InputProps={{
             //   inputProps: { min: 0 },
             //   endAdornment: <InputAdornment position="end">PLN</InputAdornment>
@@ -114,10 +114,10 @@ export class FinishDialog extends React.Component<
           />
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={toggleShowFinishDialog}>
+          <Button color='primary' onClick={toggleShowFinishDialog}>
             Cancel
           </Button>
-          <Button color="primary" autoFocus onClick={this.handleFinish}>
+          <Button autoFocus color='primary' onClick={this.handleFinish}>
             Confirm
           </Button>
         </DialogActions>

@@ -1,20 +1,17 @@
-import * as React from "react";
+import * as React from 'react';
 
-import * as styled from "styled-components";
-
-import { Store, Cost } from "../../lib/App/store";
+import { observer } from 'mobx-react';
+import { Store, Cost } from '../../lib/App/store';
 
 import {
   DataTable,
-  DataTableContent,
   DataTableRow,
-  DataTableHeadCell,
   DataTableBody,
   DataTableCell
-} from "@rmwc/data-table";
+} from '@rmwc/data-table';
 
 // import Pagination from "./tablePagination";
-import { CostsCard } from "./costsCard";
+import { CostsCard } from './costsCard';
 
 interface TableContainerProps {
   store: Store;
@@ -26,7 +23,7 @@ interface TableContainerState {
   costs: Cost[];
 }
 
-// @observer
+@observer
 export class TableContainer extends React.Component<
   TableContainerProps,
   TableContainerState
@@ -66,8 +63,8 @@ export class TableContainer extends React.Component<
       sortedCosts = [
         {
           count: 0,
-          chosenItems: [""],
-          date: "No shopping yet"
+          chosenItems: [''],
+          date: 'No shopping yet'
         }
       ];
 

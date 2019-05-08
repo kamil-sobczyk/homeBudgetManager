@@ -1,8 +1,11 @@
-import * as React from "react";
-import styled from "styled-components";
-import { StoreProps } from "../listBox";
+import * as React from 'react';
 
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import { observer } from 'mobx-react';
+import { StoreProps } from '../listBox';
+
+import styled from 'styled-components';
+
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import {
   ListItem,
@@ -10,12 +13,12 @@ import {
   ListItemPrimaryText,
   ListItemSecondaryText,
   ListDivider
-} from "@rmwc/list";
-import { IconButton } from "@rmwc/icon-button";
-import { Icon } from "@rmwc/icon";
+} from '@rmwc/list';
+import { IconButton } from '@rmwc/icon-button';
+import { Icon } from '@rmwc/icon';
+import { Checkbox } from '@rmwc/checkbox';
 
-import { Checkbox } from "@rmwc/checkbox";
-
+@observer
 export class Items extends React.Component<StoreProps, {}> {
   render() {
     const {
@@ -26,7 +29,7 @@ export class Items extends React.Component<StoreProps, {}> {
       toggleCheckItems
     } = this.props.store;
     return (
-      <Droppable droppableId="droppable2">
+      <Droppable droppableId='droppable2'>
         {providedDroppable2 => (
           <div ref={providedDroppable2.innerRef}>
             {items.map((item, index) => (
@@ -40,13 +43,13 @@ export class Items extends React.Component<StoreProps, {}> {
                     >
                       <StyledItem
                         key={index}
-                        onClick={toggleCheckItems.bind(this, "items", index)}
+                        onClick={toggleCheckItems.bind(this, 'items', index)}
                       >
                         <Checkbox
                           //   className={checkbox}
                           checked={items[index] ? items[index].checked : false}
                           tabIndex={-1}
-                          value={"checked"}
+                          value={'checked'}
                           //   disableRipple
                         />
                         <ListItemText>
@@ -56,12 +59,12 @@ export class Items extends React.Component<StoreProps, {}> {
                           </ListItemSecondaryText>
                         </ListItemText>
                         <IconButton
-                          aria-label="Edit item"
+                          aria-label='Edit item'
                           onClick={
-                            toggleShowEditDialog.bind(this, "selected", index) ///////////////////////////
+                            toggleShowEditDialog.bind(this, 'selected', index) ///////////////////////////
                           }
                         >
-                          <Icon icon="edit" />
+                          <Icon icon='edit' />
                         </IconButton>
                       </StyledItem>
                       <ListDivider />
