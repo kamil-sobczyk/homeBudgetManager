@@ -1,22 +1,40 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Store } from '../../lib/App/store';
+import { StoreProps } from '../listBox';
 
-import styled from 'styled-components';
-import { StyledItem } from './items';
+import { Draggable } from 'react-beautiful-dnd';
 
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { ProvidedSelectedDraggable } from './providedSelectedDraggable';
 
-import {
-  ListItemText,
-  ListItemPrimaryText,
-  ListItemSecondaryText,
-  ListDivider
-} from '@rmwc/list';
-import { IconButton } from '@rmwc/icon-button';
-import { Icon } from '@rmwc/icon';
+interface ProvidedSelectedProps extends StoreProps {
+  provided: any;
+}
 
-import { Item } from '../../lib/interfaces';
-
-import { Checkbox } from '@rmwc/checkbox';
+@observer
+export class ProvidedSelected extends React.Component<
+  ProvidedSelectedProps,
+  {}
+> {
+  render() {
+    const { selected } = this.props.store;
+    const { provided } = this.props;
+    return (
+      <div ref={provided.innerRef} {...provided.droppableProps}>
+        {selected.map((item, index) => (
+          <Draggable key={item.id} draggableId={item.id} index={index}>
+            {providedDraggable => (
+              <ProvidedSelectedDraggable
+              providedDraggable={providedDraggable}
+                store={this.props.store}
+                item={item}
+                index={index}
+              />
+            )}
+          </Draggable>
+        ))}
+        {provided.placeholder}
+      </div>
+    );
+  }
+}

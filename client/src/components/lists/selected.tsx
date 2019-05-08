@@ -16,7 +16,13 @@ import { Icon } from '@rmwc/icon';
 import { Checkbox } from '@rmwc/checkbox';
 
 import { FinishDialog } from '../dialogs/finishDialog';
+import { ProvidedSelected } from './providedSelected';
 import { StyledItem } from './items';
+
+interface Provided {
+  store: StoreProps;
+  provided: any;
+}
 
 @observer
 export class Selected extends React.Component<StoreProps, {}> {
@@ -40,61 +46,9 @@ export class Selected extends React.Component<StoreProps, {}> {
     return (
       <>
         <Droppable droppableId='droppable'>
-          {provided => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {selected.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {providedDraggable => (
-                    <div>
-                      <div
-                        ref={providedDraggable.innerRef}
-                        {...providedDraggable.draggableProps}
-                        {...providedDraggable.dragHandleProps}
-                      >
-                        <StyledItem
-                          key={index}
-                          onClick={() => toggleCheckItems('selected', index)}
-                        >
-                          <Checkbox
-                            //   className={checkbox}
-                            checked={
-                              selected[index] ? selected[index].checked : false
-                            }
-                            tabIndex={-1}
-                            value={'checked'}
-                            //   disableRipple
-                          />
-                          <ListItemText>
-                            <ListItemPrimaryText>
-                              {item.name}
-                            </ListItemPrimaryText>
-                            <ListItemSecondaryText>
-                              {item.info}
-                            </ListItemSecondaryText>
-                          </ListItemText>
-                          <IconButton
-                            aria-label='Edit item'
-                            onClick={toggleShowEditDialog.bind(
-                              this,
-                              'selected',
-                              index
-                            )}
-                          >
-                            <Icon icon='edit' />
-                          </IconButton>
-                        </StyledItem>
-                        <ListDivider />
-                      </div>
-                      {providedDraggable.placeholder}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
+          {provided => <ProvidedSelected store={this.props.store} provided={provided}/>}
         </Droppable>
-        <FinishDialog store={this.props.store} />
+        <FinishDialog store={this.props.store}  />
       </>
     );
   }

@@ -11,10 +11,6 @@ import { Item } from '../../lib/interfaces';
 
 import { FailDialog } from './failDialog';
 
-
-
-
-
 // const resetAddFields = () => {
 //   const nameInput = document.getElementById("outlined-required");
 //   const infoInput = document.getElementById("outlined");
@@ -37,15 +33,15 @@ interface AddDialogState {
 export class AddDialog extends React.Component<StoreProps, AddDialogState> {
   state = {
     item: {
-      name: '',
-      info: '',
+      checked: false,
       id: String(Date.now()),
-      checked: false
+      info: '',
+      name: ''
     },
     openFail: false
   };
   handleAddItem = () => {
-    const { addItem, toggleShowAddDialog, items, selected } = this.props.store;
+    const { addItem, items, selected, toggleShowAddDialog } = this.props.store;
 
     const allNames = [...selected, ...items].map(({ name }) => name);
 
@@ -56,10 +52,10 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
       //   addNewItemOnServer(item);
       this.setState({
         item: {
-          name: '',
-          info: '',
+          checked: false,
           id: String(Date.now()),
-          checked: false
+          info: '',
+          name: ''
         }
       });
       toggleShowAddDialog();
@@ -83,26 +79,26 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
     if (target.name === 'info') {
       this.setState({
         item: {
-          info: target.value,
+          checked: false,
           id: String(Date.now()),
-          name: item.name,
-          checked: false
+          info: target.value,
+          name: item.name
         }
       });
       return;
     }
     this.setState({
       item: {
-        name: target.value,
-        info: item.info,
+        checked: false,
         id: String(Date.now()),
-        checked: false
+        info: item.info,
+        name: target.value
       }
     });
   };
 
   render() {
-    const { toggleShowAddDialog, showAddDialog } = this.props.store;
+    const { showAddDialog, toggleShowAddDialog } = this.props.store;
     return (
       <Dialog
         open={showAddDialog}
@@ -110,19 +106,19 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
       >
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
+          defaultValue={this.state.item.name}
           id='outlined-required'
           label='New item'
           name='name'
-          defaultValue={this.state.item.name}
           //   margin="normal"
           //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <TextField
+          defaultValue={this.state.item.info}
           id='outlined'
           label='Additional info'
           name='info'
-          defaultValue={this.state.item.info}
           //   margin="normal"
           //   variant="outlined"
           onChange={this.changeNewItem}
