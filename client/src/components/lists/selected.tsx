@@ -1,15 +1,14 @@
 import * as React from "react";
-import * as styled from "styled-components";
+import styled from "styled-components";
 import { Store } from "../../lib/App/store";
 
 import { observer } from "mobx-react";
 
 import { Item } from "../../lib/interfaces";
 
-import { Button } from "@rmwc/button";
+import { StyledItem } from "./items";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import {
-  ListItem,
   ListItemText,
   ListItemPrimaryText,
   ListItemSecondaryText,
@@ -59,7 +58,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                         {...providedDraggable.draggableProps}
                         {...providedDraggable.dragHandleProps}
                       >
-                        <ListItem
+                        <StyledItem
                           key={index}
                           onClick={toggleCheckItems.bind(
                             this,
@@ -94,7 +93,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
                           >
                             <Icon icon="edit" />
                           </IconButton>
-                        </ListItem>
+                        </StyledItem>
+                        <ListDivider />
                       </div>
                       {providedDraggable.placeholder}
                     </div>

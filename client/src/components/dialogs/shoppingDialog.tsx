@@ -23,7 +23,6 @@ export class ShoppingDialog extends React.Component<ShoppingDialogProps, {}> {
     const { toggleShowShoppingDialog, showShoppingDialog } = this.props.store;
     return (
       <>
-       
         <Dialog
           open={showShoppingDialog}
           //   onClose={showShoppingDialog}

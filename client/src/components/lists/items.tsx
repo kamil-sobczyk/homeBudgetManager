@@ -1,7 +1,6 @@
 import * as React from "react";
+import styled from "styled-components";
 import { Store } from "../../lib/App/store";
-
-import * as styled from "styled-components";
 
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
@@ -43,7 +42,7 @@ export class Items extends React.Component<ItemsProps, {}> {
                       {...providedDraggable2.draggableProps}
                       {...providedDraggable2.dragHandleProps}
                     >
-                      <ListItem
+                      <StyledItem
                         key={index}
                         onClick={toggleCheckItems.bind(this, "items", index)}
                       >
@@ -68,7 +67,8 @@ export class Items extends React.Component<ItemsProps, {}> {
                         >
                           <Icon icon="edit" />
                         </IconButton>
-                      </ListItem>
+                      </StyledItem>
+                      <ListDivider/>
                     </div>
                     {providedDraggable2.placeholder}
                   </div>
@@ -82,3 +82,7 @@ export class Items extends React.Component<ItemsProps, {}> {
     );
   }
 }
+
+export const StyledItem = styled(ListItem)`
+height: 80px;
+`

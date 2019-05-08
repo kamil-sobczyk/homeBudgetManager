@@ -19,7 +19,6 @@ export class ListBox extends React.Component<ListBoxProps, {}> {
   render() {
     return (
       <>
-    
         <ListsContainer {...this.props} />
         <AddDialog {...this.props} />
         <EditDialog {...this.props} />
