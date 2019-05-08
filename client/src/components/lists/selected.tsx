@@ -4,7 +4,6 @@ import { Store } from "../../lib/App/store";
 
 import { observer } from "mobx-react";
 
-
 import { Item } from "../../lib/interfaces";
 
 import { Button } from "@rmwc/button";
@@ -30,13 +29,15 @@ interface SelectedProps {
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
-
   componentDidMount = () => {
+
     // getSelectedFromServer(this.props.getSelected);
   };
 
-  handleToggle = (index: number) => () => {
+  handleToggle = ( index: number) => () => {
     const { selected, getSelected } = this.props.store;
+    
+ 
 
     selected[index].checked
       ? (selected[index].checked = false)
@@ -46,27 +47,29 @@ export class Selected extends React.Component<SelectedProps, {}> {
   };
 
   render() {
-    const { toggleShowEditDialog, selected, showEditDialog, toggleShowFinishDialog } = this.props.store;
+    const {
+      toggleShowEditDialog,
+      selected,
+      showEditDialog,
+      toggleShowFinishDialog
+    } = this.props.store;
 
     // console.log(JSON.parse(selected));
 
     return (
       <>
-        <Droppable droppableId="droppable2">
+        <Droppable droppableId="droppable">
           {provided => (
-            <div
-              ref={provided.innerRef}
-              //   className={showEditDialog ? classes.listSmall : classes.listBig}
-            >
-              <Typography use="subtitle1">Items to buy</Typography>
-              {Array.from(selected).map((item: any, index: number) => {
-                <Draggable key={index} draggableId={item.id} index={index}>
-                  {provided => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                    >
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {selected.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {providedDraggable => (
+                    <div>
+                      <div
+                        ref={providedDraggable.innerRef}
+                        {...providedDraggable.draggableProps}
+                        {...providedDraggable.dragHandleProps}
+                      >
                       <ListItem key={index} onClick={this.handleToggle(index)}>
                         <Checkbox
                           //   className={checkbox}
@@ -85,7 +88,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                         </ListItemText>
                         <IconButton
                           aria-label="Edit item"
-                          onClick={toggleShowEditDialog({
+                          onClick={() =>toggleShowEditDialog({    ///////////////////////////
                             list: "selected",
                             index: index
                           })}
@@ -93,24 +96,21 @@ export class Selected extends React.Component<SelectedProps, {}> {
                           <Icon icon="edit" />
                         </IconButton>
                       </ListItem>
-                      <ListDivider />
+                       
+                      </div>
+                      {providedDraggable.placeholder}
                     </div>
                   )}
-                </Draggable>;
-              })}
-              {selected.map((e, i) => <p key = {e.id}>{e.name} " " {e.info}</p>)}     ////////////////////////
-              {provided.placeholder}
-              <Button color="primary" onClick={toggleShowFinishDialog}>
-                Finish shopping
-              </Button>
-
+                </Draggable>
+              ))}
               {provided.placeholder}
             </div>
           )}
         </Droppable>
-         <FinishDialog 
-         store={this.props.store} 
-       />
+        <Button color="primary" onClick={toggleShowFinishDialog}>
+          Finish shopping
+        </Button>
+        <FinishDialog store={this.props.store} />
       </>
     );
   }

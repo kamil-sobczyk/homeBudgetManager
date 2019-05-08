@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as styled from "styled-components";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { Item } from "./../lib/interfaces";
 import { observer } from "mobx-react";
 
@@ -28,7 +28,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
     return this.props.store.selected;
   };
 
-  onDragEnd = (result: any) => {
+  onDragEnd = (result: DropResult): void => {
     const { source, destination } = result;
     const { getItems, getSelected } = this.props.store;
 
@@ -53,7 +53,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
         source,
         destination
       );
-      result.droppable.forEach((item: any) => (item.checked = false));
+      result.droppable.forEach((item: Item) => (item.checked = false));
 
       // getItems(sortItemsByName(result.droppable));
       // getSelected(result.droppable2);
