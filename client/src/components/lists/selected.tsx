@@ -105,9 +105,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
             </div>
           )}
         </Droppable>
-        <Button color="primary" onClick={toggleShowFinishDialog}>
-          Finish shopping
-        </Button>
         <FinishDialog store={this.props.store} />
       </>
     );
