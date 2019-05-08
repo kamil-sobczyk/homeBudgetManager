@@ -30,7 +30,6 @@ interface SelectedProps {
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
   componentDidMount = () => {
-
     // getSelectedFromServer(this.props.getSelected);
   };
 
@@ -61,33 +60,35 @@ export class Selected extends React.Component<SelectedProps, {}> {
                         {...providedDraggable.draggableProps}
                         {...providedDraggable.dragHandleProps}
                       >
-                      <ListItem key={index} onClick={() => toggleCheckItems("selected", index)}>
-                        <Checkbox
-                          //   className={checkbox}
-                          checked={
-                            selected[index] ? selected[index].checked : false
-                          }
+                        <ListItem
+                          key={index}
+                          onClick={toggleCheckItems.bind(this,"selected", index)}
+                        >
+                          <Checkbox
+                            //   className={checkbox}
+                            checked={
+                              selected[index] ? selected[index].checked : false
+                            }
                             tabIndex={-1}
                             value={"checked"}
-                          //   disableRipple
-                        />
-                        <ListItemText>
-                          <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
-                          <ListItemSecondaryText>
-                            {item.info}
-                          </ListItemSecondaryText>
-                        </ListItemText>
-                        <IconButton
-                          aria-label="Edit item"
-                          onClick={() =>toggleShowEditDialog({    ///////////////////////////
-                            list: "selected",
-                            index: index
-                          })}
-                        >
-                          <Icon icon="edit" />
-                        </IconButton>
-                      </ListItem>
-                       
+                            //   disableRipple
+                          />
+                          <ListItemText>
+                            <ListItemPrimaryText>
+                              {item.name}
+                            </ListItemPrimaryText>
+                            <ListItemSecondaryText>
+                              {item.info}
+                            </ListItemSecondaryText>
+                          </ListItemText>
+                          <IconButton
+                            aria-label="Edit item"
+                            onClick={ toggleShowEditDialog.bind(this,"selected", index)
+                            }
+                          >
+                            <Icon icon="edit" />
+                          </IconButton>
+                        </ListItem>
                       </div>
                       {providedDraggable.placeholder}
                     </div>
