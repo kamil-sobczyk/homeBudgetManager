@@ -34,25 +34,16 @@ export class Selected extends React.Component<SelectedProps, {}> {
     // getSelectedFromServer(this.props.getSelected);
   };
 
-  handleToggle = ( index: number) => () => {
-    const { selected, getSelected } = this.props.store;
-    
- 
-
-    selected[index].checked
-      ? (selected[index].checked = false)
-      : (selected[index].checked = true);
-    // getSelected(selected);
-    // changeSelectedOnServer(selected);
-  };
-
   render() {
     const {
       toggleShowEditDialog,
       selected,
       showEditDialog,
-      toggleShowFinishDialog
+      toggleShowFinishDialog,
+      toggleCheckItems
     } = this.props.store;
+
+    const list = "selected";
 
     // console.log(JSON.parse(selected));
 
@@ -70,7 +61,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
                         {...providedDraggable.draggableProps}
                         {...providedDraggable.dragHandleProps}
                       >
-                      <ListItem key={index} onClick={this.handleToggle(index)}>
+                      <ListItem key={index} onClick={() => toggleCheckItems("selected", index)}>
                         <Checkbox
                           //   className={checkbox}
                           checked={

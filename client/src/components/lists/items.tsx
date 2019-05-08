@@ -24,24 +24,13 @@ interface ItemsProps {
 
 export class Items extends React.Component <ItemsProps,{}> {
 
-    handleToggle = ( index: number) => () => {
-        const { items, getItems } = this.props.store;
-        
-     
-    
-        items[index].checked
-          ? (items[index].checked = false)
-          : (items[index].checked = true);
-        // getSelected(selected);
-        // changeSelectedOnServer(selected);
-      };
-
     render(){
         const {
             toggleShowEditDialog,
             items,
             showEditDialog,
-            toggleShowFinishDialog
+            toggleShowFinishDialog,
+            toggleCheckItems
           } = this.props.store;
         return(
             <Droppable droppableId="droppable2">
@@ -61,7 +50,7 @@ export class Items extends React.Component <ItemsProps,{}> {
                           {...providedDraggable2.draggableProps}
                           {...providedDraggable2.dragHandleProps}
                          >
-                         <ListItem key={index} onClick={this.handleToggle(index)}>
+                         <ListItem key={index} onClick={() => toggleCheckItems("items", index)}>   ////
                          <Checkbox
                            //   className={checkbox}
                            checked={

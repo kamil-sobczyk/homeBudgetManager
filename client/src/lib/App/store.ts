@@ -133,6 +133,11 @@ export class Store {
       .then(response => response.json())
       .then(costs => (this.costs = costs));
   };
+  toggleCheckItems = (list: string, index: number): void => {
+    (this as any)[list][index] = !(this as any)[list][index];
+  // getSelected(selected);
+  // changeSelectedOnServer(selected);
+  }
   toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
   addCost = (cost: object) => this.costs.push(cost);
 }

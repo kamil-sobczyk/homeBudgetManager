@@ -65,12 +65,17 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
 
   render() {
     return (
-      <>
+      <div style={{display: "flex", flexDirection: "row"}}>
         <DragDropContext onDragEnd={this.onDragEnd}>
            {this.props.store.showItems ? <Items {...this.props} /> : false}
           <Selected {...this.props} /> 
         </DragDropContext>
-      </>
+      </div>
     );
   }
 }
+
+// const StyledListContainer = styled.div`
+// display: flex;
+// flex-direction: row;
+// `
