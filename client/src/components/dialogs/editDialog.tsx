@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../listBox';
+import { StoreProps } from '../listBox/listBox';
 import { Item } from '../../lib/interfaces';
-import { ActiveItem, ListType } from '../../lib/App/store';
+import { ActiveItem, ListType } from '../../lib/store';
 
 
 import { Button } from '@rmwc/button';

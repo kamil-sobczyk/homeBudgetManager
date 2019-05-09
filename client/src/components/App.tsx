@@ -5,10 +5,10 @@ import { observer, Provider } from "mobx-react";
 
 import styled from "styled-components";
 
-import { Navbar } from "./components/nav";
-import { ListBox } from "./components//listBox";
-import { Store } from "./lib/App/store";
-import { ProgressBar } from "./components/UI/ProgressBar";
+import { Navbar } from "./nav";
+import { ListBox } from "./listBox/listBox";
+import { Store } from "../lib/store";
+import { ProgressBar } from "./progressBar";
 
 @observer
 export class App extends React.Component<{}, {}> {

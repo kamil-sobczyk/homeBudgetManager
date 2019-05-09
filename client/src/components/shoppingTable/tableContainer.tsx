@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Store, Cost } from '../../lib/App/store';
+import { Store, Cost } from '../../lib/store';
 
 import {
   DataTable,
@@ -62,12 +62,12 @@ export class TableContainer extends React.Component<
         console.log("SSOOOORTT COOOST",a.date > b.date)
         return a.date > b.date}); ///////////////////////////////////
     } else
-      // sortedCosts = [
-      //   {
-      //     count: 0,
-      //     chosenItems: [''],
-      //     date: 'No shopping yet'
-      //   }
+      sortedCosts = [
+        {
+          count: 0,
+          chosenItems: [''],
+          date: 'No shopping yet'
+        }
       ];
 
     return (

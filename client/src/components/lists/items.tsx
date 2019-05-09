@@ -3,9 +3,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../listBox';
+import { StoreProps } from '../listBox/listBox';
 
-import { Droppable, DroppableProvidedProps, DroppableProvided } from 'react-beautiful-dnd';
+import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './providedItems';
 

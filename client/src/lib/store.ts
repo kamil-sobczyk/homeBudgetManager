@@ -1,14 +1,14 @@
 import { observable } from 'mobx';
 
-import { Item } from '../../lib/interfaces';
+import { Item } from './interfaces';
 
 import {
   sortItemsByName,
   reorder,
   move
-} from '../../functions/reorderFunctions';
+} from './reorderFunctions';
 
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DropResult } from 'react-beautiful-dnd';
 
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';
@@ -26,72 +26,11 @@ export interface Cost {
   date: string;
 }
 
-interface MoveResult {
-  droppable: Item[];
-  droppable2: Item[];
-}
-
 export type ListType = 'items' | 'selected';
 
 export class Store {
-  @observable items: Item[] = [
-    {
-      name: 'Bread',
-      info: 'Buy in Lidl',
-      id: 'sdfsdfsadfsdfdsf',
-      checked: true
-    },
-    {
-      name: 'Cola',
-      info: '',
-      id: 'gfvfsddwed',
-      checked: false
-    },
-    {
-      name: 'Milk',
-      info: 'Buy in Tesco',
-      id: '324rijdsojfddsaoid',
-      checked: false
-    },
-    {
-      name: 'Beer',
-      info: '',
-      id: 'fdswefi343fdsdf',
-      checked: true
-    },
-    {
-      name: 'Beef',
-      info: '1kg',
-      id: 'frefp43ifjdsfs',
-      checked: false
-    }
-  ];
-  @observable selected: Item[] = [
-    {
-      name: 'Ham',
-      info: 'In slices',
-      id: '43rpijdskjfna',
-      checked: false
-    },
-    {
-      name: 'Rice',
-      info: '',
-      id: 'e3rijfisdnc.kas3',
-      checked: true
-    },
-    {
-      name: 'Potatoes',
-      info: 'Buy in Tesco',
-      id: '43ifpjsdljnfew33',
-      checked: false
-    },
-    {
-      name: 'Aples',
-      info: '3kg',
-      id: 'ekflkdsdsaljd',
-      checked: true
-    }
-  ];
+  @observable items: Item[] = [];
+  @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
   @observable activeItem: ActiveItem = {
     list: 'items',
@@ -139,7 +78,7 @@ export class Store {
       .then(response => response.json())
       .then(items => (this.items = items));
   };
-  getSelected = (items: string[]): void => {
+  getSelected = (): void => {
     fetch(server + 'store/selected', {
       mode: 'cors',
       method: 'GET'
@@ -196,8 +135,6 @@ export class Store {
         source,
         destination
       );
-
-      console.log(result)
       // result.droppable.forEach((item: Item) => (item.checked = false));
 
       this.selected = result.droppable;

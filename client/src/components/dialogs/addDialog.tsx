@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../listBox';
+import { StoreProps } from '../listBox/listBox';
 
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';

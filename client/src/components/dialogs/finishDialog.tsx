@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../listBox';
+import { StoreProps } from '../listBox/listBox';
 import { Item } from '../../lib/interfaces';
 
 import {
@@ -13,7 +13,7 @@ import {
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
-import { sortItemsByName } from '../../functions/reorderFunctions';
+import { sortItemsByName } from '../../lib/reorderFunctions';
 
 interface FinishDialogState {
   chosenNames: string[];

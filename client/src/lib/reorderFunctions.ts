@@ -1,4 +1,4 @@
-import { Item } from './../lib/interfaces';
+import { Item } from './interfaces';
 
 interface DroppablePlace {
   index: number;
