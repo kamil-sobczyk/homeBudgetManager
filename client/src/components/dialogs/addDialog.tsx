@@ -41,7 +41,12 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
     openFail: false
   };
   handleAddItem = () => {
-    const { addItem, items, selected, toggleShowAddDialog } = this.props.store;
+    const {
+      addItem,
+      items,
+      selected,
+      visibilityClient: { toggleShowAddDialog }
+    } = this.props.store;
 
     const allNames = [...selected, ...items].map(({ name }) => name);
 
@@ -98,7 +103,7 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
   };
 
   render() {
-    const { showAddDialog, toggleShowAddDialog } = this.props.store;
+    const { showAddDialog, toggleShowAddDialog } = this.props.store.visibilityClient;
     return (
       <Dialog
         open={showAddDialog}

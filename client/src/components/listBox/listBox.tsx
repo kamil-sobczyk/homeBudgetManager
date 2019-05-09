@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Store } from '../../lib/store';
+import { Store } from '../../lib/mobx/rootStore';
 
 import { ListsContainer } from './listsContainer';
 import { AddDialog } from '../dialogs/addDialog';

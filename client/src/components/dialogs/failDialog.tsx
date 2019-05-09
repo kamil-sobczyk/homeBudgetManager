@@ -14,7 +14,9 @@ import { Button } from '@rmwc/button';
 @observer
 export class FailDialog extends React.Component<StoreProps, {}> {
   render() {
-    const { showFailDialog, toggleShowFailDialog } = this.props.store;
+    const {
+      visibilityClient: { showFailDialog, toggleShowFailDialog }
+    } = this.props.store;
     return (
       <Dialog
         open={showFailDialog}

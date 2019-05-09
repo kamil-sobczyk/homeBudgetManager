@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { Store } from './store';
-import { Item } from './interfaces';
+import { Store } from '../rootStore';
+import { Item } from '../../interfaces';
 
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';

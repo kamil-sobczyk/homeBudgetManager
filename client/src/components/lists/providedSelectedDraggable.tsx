@@ -4,7 +4,6 @@ import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox/listBox';
 import { Item } from '../../lib/interfaces';
 
-
 import { StyledItem } from './providedItemsDraggable';
 
 import {
@@ -34,7 +33,7 @@ export class ProvidedSelectedDraggable extends React.Component<
     const {
       selected,
       toggleCheckItems,
-      toggleShowEditDialog
+      visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
     const { providedDraggable, item, index } = this.props;
     return (
@@ -61,11 +60,10 @@ export class ProvidedSelectedDraggable extends React.Component<
             </ListItemText>
             <IconButton
               aria-label='Edit item'
-              onClick={(e) => {
-                e.stopPropagation()  
+              onClick={e => {
+                e.stopPropagation();
                 toggleShowEditDialog('selected', index);
-
-                }}
+              }}
             >
               <Icon icon='edit' />
             </IconButton>

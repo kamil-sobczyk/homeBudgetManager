@@ -18,14 +18,16 @@ export class ListsContainer extends React.Component<StoreProps, {}> {
   componentDidMount = () => {
     this.props.store.apiClient.getItems();
     this.props.store.apiClient.getSelected();
-
   };
   render() {
     const {
       onDragEnd,
-      showItems,
-      toggleShowFinishDialog,
-      toggleShowShoppingDialog
+
+      visibilityClient: {
+        showItems,
+        toggleShowFinishDialog,
+        toggleShowShoppingDialog
+      }
     } = this.props.store;
     return (
       <>

@@ -1,16 +1,13 @@
 import { observable } from 'mobx';
 
-import { Item } from './interfaces';
+import { Item } from '../interfaces';
 
-import {ApiClient} from './apiClient';
+import { ApiClient } from './stores/apiClient';
 
-import {
-  sortItemsByName,
-  reorder,
-  move
-} from './reorderFunctions';
+import { sortItemsByName, reorder, move } from '../reorderFunctions';
 
 import { DropResult } from 'react-beautiful-dnd';
+import { VisibityClient } from './stores/visibilityClient';
 
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';
@@ -33,9 +30,11 @@ export type ListType = 'items' | 'selected';
 export class Store {
   constructor() {
     this.apiClient = new ApiClient(this);
+    this.visibilityClient = new VisibityClient(this);
   }
 
   apiClient: ApiClient;
+  visibilityClient: VisibityClient;
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
@@ -43,35 +42,13 @@ export class Store {
     list: 'items',
     index: 0
   };
-  @observable showAddDialog: boolean = false;
-  @observable showEditDialog: boolean = false;
-  @observable showDeleteDialog: boolean = false;
-  @observable showShoppingDialog: boolean = false;
-  @observable showItems: boolean = true;
-  @observable showFinish: boolean = false;
-  @observable showFailDialog: boolean = false;
-
-  toggleShowShoppingDialog = (): boolean =>
-    (this.showShoppingDialog = !this.showShoppingDialog);
-  toggleShowItems = (): boolean => (this.showItems = !this.showItems);
-  toggleShowAddDialog = (): boolean =>
-    (this.showAddDialog = !this.showAddDialog);
-  toggleShowDeleteDialog = (): boolean =>
-    (this.showDeleteDialog = !this.showDeleteDialog);
-  toggleShowEditDialog = (list: string, index: number): void => {
-    this.showEditDialog = !this.showEditDialog;
-    this.activeItem.list = list;
-    this.activeItem.index = index;
-  };
-  toggleShowFailDialog = (): boolean =>
-    (this.showFailDialog = !this.showFailDialog);
   addItem = (newItem: Item): Item[] =>
     (this.items = sortItemsByName([...this.items, newItem]));
   deleteItem = (index: number): Item[] => {
     this.items = this.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     );
-    this.toggleShowDeleteDialog();
+    this.visibilityClient.toggleShowDeleteDialog();
     return this.items;
   };
 
@@ -97,7 +74,8 @@ export class Store {
       return this.selected;
     }
   };
-  reorderList = (list: string, reorderedList: Item[]): void => {      ///////////////////////
+  reorderList = (list: string, reorderedList: Item[]): void => {
+    ///////////////////////
     if (list === 'droppable') {
       this.selected = reorderedList;
     } else {
@@ -140,6 +118,5 @@ export class Store {
       // changeSelectedOnServer(result.droppable2);
     }
   };
-  toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
   addCost = (cost: Cost): number => this.costs.push(cost); ////////////////////////////////
 }

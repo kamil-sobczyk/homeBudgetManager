@@ -19,7 +19,7 @@ export class ViewButton extends React.Component<StoreProps, {}> {
           ? 'SHOW ITEMS TO BUY ONLY'
           : 'ADD NEW ITEMS TO LIST'
     });
-    this.props.store.toggleShowItems();
+    this.props.store.visibilityClient.toggleShowItems();
   };
 
   render() {

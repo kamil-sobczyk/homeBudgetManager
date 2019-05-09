@@ -49,10 +49,7 @@ export class FinishDialog extends React.Component<
   };
 
   handleFinish = (): void => {
-    const {
-      items,
-      selected
-    } = this.props.store;
+    const { items, selected } = this.props.store;
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
     const chosenNames: string[] = [];
@@ -79,7 +76,10 @@ export class FinishDialog extends React.Component<
   };
 
   render() {
-    const { showFinish, toggleShowFinishDialog } = this.props.store;
+    const {
+      
+      visibilityClient: {showFinish, toggleShowFinishDialog }
+    } = this.props.store;
 
     return (
       <Dialog

@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 import { Navbar } from "./nav";
 import { ListBox } from "../listBox/listBox";
-import { Store } from "../../lib/store";
+import { Store } from "../../lib/mobx/rootStore";
 import { ProgressBar } from "./progressBar";
 
 @observer

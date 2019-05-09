@@ -3,8 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox/listBox';
 import { Item } from '../../lib/interfaces';
-import { ActiveItem, ListType } from '../../lib/store';
-
+import { ActiveItem, ListType } from '../../lib/mobx/rootStore';
 
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
@@ -22,7 +21,10 @@ export class EditDialog extends React.Component<StoreProps, Item> {
   state = initialState;
 
   handleCloseEdit = (activeItem: ActiveItem): void => {
-    const { editItem, toggleShowEditDialog } = this.props.store;
+    const {
+      editItem,
+      visibilityClient: { toggleShowEditDialog }
+    } = this.props.store;
     const { list, index } = activeItem;
 
     const newItem = this.state;
@@ -57,10 +59,9 @@ export class EditDialog extends React.Component<StoreProps, Item> {
 
   render() {
     const {
-      showEditDialog,
       activeItem,
       activeItem: { list, index },
-      toggleShowEditDialog
+      visibilityClient: { showEditDialog, toggleShowEditDialog }
     } = this.props.store;
 
     let defaultName;
