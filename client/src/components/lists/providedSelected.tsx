@@ -20,12 +20,16 @@ export class ProvidedSelected extends React.Component<
     const { selected } = this.props.store;
     const { provided } = this.props;
     return (
-      <div ref={provided.innerRef} {...provided.droppableProps}>
+      <div
+        ref={provided.innerRef}
+        {...provided.droppableProps}
+        style={{ minHeight: '300px' }}
+      >
         {selected.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable => (
               <ProvidedSelectedDraggable
-              providedDraggable={providedDraggable}
+                providedDraggable={providedDraggable}
                 store={this.props.store}
                 item={item}
                 index={index}

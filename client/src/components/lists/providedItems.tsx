@@ -14,20 +14,20 @@ interface ProvidedItemsProps extends StoreProps {
 @observer
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   render() {
-    const { items, toggleCheckItems, toggleShowEditDialog } = this.props.store;
+    const { items } = this.props.store;
     const { providedDroppable2 } = this.props;
     return (
-      <div ref={providedDroppable2.innerRef}>
+      <div ref={providedDroppable2.innerRef} style={{ minHeight: '300px' }}>
         {items.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
-            {providedDraggable2 => 
+            {providedDraggable2 => (
               <ProvidedItemsDraggable
                 providedDraggable2={providedDraggable2}
                 store={this.props.store}
                 item={item}
                 index={index}
               />
-            }
+            )}
           </Draggable>
         ))}
         {providedDroppable2.placeholder}

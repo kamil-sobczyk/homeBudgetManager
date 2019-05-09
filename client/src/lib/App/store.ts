@@ -39,25 +39,25 @@ export class Store {
       info: '',
       id: 'gfvfsddwed',
       checked: false
+    },
+    {
+      name: 'Milk',
+      info: 'Buy in Tesco',
+      id: '324rijdsojfddsaoid',
+      checked: false
+    },
+    {
+      name: 'Beer',
+      info: '',
+      id: 'fdswefi343fdsdf',
+      checked: true
+    },
+    {
+      name: 'Beef',
+      info: '1kg',
+      id: 'frefp43ifjdsfs',
+      checked: false
     }
-    // {
-    //   name: 'Milk',
-    //   info: 'Buy in Tesco',
-    //   id: '324rijdsojfddsaoid',
-    //   checked: false
-    // },
-    // {
-    //   name: 'Beer',
-    //   info: '',
-    //   id: 'fdswefi343fdsdf',
-    //   checked: true
-    // },
-    // {
-    //   name: 'Beef',
-    //   info: '1kg',
-    //   id: 'frefp43ifjdsfs',
-    //   checked: false
-    // }
   ];
   @observable selected: Item[] = [
     {
@@ -71,19 +71,19 @@ export class Store {
       info: '',
       id: 'e3rijfisdnc.kas3',
       checked: true
+    },
+    {
+      name: 'Potatoes',
+      info: 'Buy in Tesco',
+      id: '43ifpjsdljnfew33',
+      checked: false
+    },
+    {
+      name: 'Aples',
+      info: '3kg',
+      id: 'ekflkdsdsaljd',
+      checked: true
     }
-    // {
-    //   name: 'Potatoes',
-    //   info: 'Buy in Tesco',
-    //   id: '43ifpjsdljnfew33',
-    //   checked: false
-    // },
-    // {
-    //   name: 'Aples',
-    //   info: '3kg',
-    //   id: 'ekflkdsdsaljd',
-    //   checked: true
-    // }
   ];
   @observable costs: Cost[] = []; ////
   @observable activeItem: ActiveItem = {
@@ -193,7 +193,7 @@ export class Store {
       // result.droppable.forEach((item: Item) => (item.checked = false));
 
       this.selected = result.droppable;
-      this.selected = result.droppable2;
+      this.items = result.droppable2;
 
       // this.reorderLists()
 

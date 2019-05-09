@@ -28,8 +28,6 @@ export const move = (
   droppableSource: any,
   droppableDestination: any,
 ) => {
-
-  console.log("src",droppableSource);
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
   const [removed] = sourceClone.splice(droppableSource.index, 1);
@@ -41,7 +39,6 @@ export const move = (
   (result as any)[droppableSource.droppableId] = sourceClone;
   (result as any)[droppableDestination.droppableId] = destClone;
 
-  console.log("move",result);
   return result;
 };
 
