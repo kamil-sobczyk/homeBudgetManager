@@ -77,14 +77,6 @@ export class Store {
 
   editItem = (newItem: Item, list: ListType, index: number): Item =>
     ((this as any)[list][index] = newItem);
-  getSelected = (): void => {
-    fetch(server + 'store/selected', {
-      mode: 'cors',
-      method: 'GET'
-    })
-      .then(response => response.json())
-      .then(selected => (this.selected = selected));
-  };
   getCosts = (): void => {
     fetch(server + 'store/costs', {
       mode: 'cors',

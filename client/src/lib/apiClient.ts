@@ -18,11 +18,10 @@ export class ApiClient {
       .get(server + 'store/items')
       .then(items => (this.store.items = items.data as Item[]));
 
-  // getSelected() {
-  //   axios
-  //     .get(server + 'store/selected')
-  //     .then(selected => (Store.selected = selected));
-  // }
+  getSelected = async () =>
+    axios
+      .get(server + 'store/selected')
+      .then(selected => (this.store.selected = selected.data as Item[]));
 }
 
 // const changeItemsOnServer = body => {

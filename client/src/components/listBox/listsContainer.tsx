@@ -17,8 +17,8 @@ import { Selected } from '../lists/selected';
 export class ListsContainer extends React.Component<StoreProps, {}> {
   componentDidMount = () => {
     this.props.store.apiClient.getItems();
-    // this.props.store.getItems()
-    this.props.store.getSelected();
+    this.props.store.apiClient.getSelected();
+
   };
   render() {
     const {
