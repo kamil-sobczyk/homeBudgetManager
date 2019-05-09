@@ -15,18 +15,6 @@ export class Selected extends React.Component<StoreProps, {}> {
   };
 
   render() {
-    const {
-      toggleShowEditDialog,
-      selected,
-      showEditDialog,
-      toggleShowFinishDialog,
-      toggleCheckItems
-    } = this.props.store;
-
-    const list = 'selected';
-
-    // console.log(JSON.parse(selected));
-
     return (
       <>
         <Droppable droppableId='droppable'>
