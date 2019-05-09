@@ -1,20 +1,15 @@
-import { Item } from "./../lib/interfaces";
+import { Item } from './../lib/interfaces';
 
-interface DnDItem {
-  id: string;
-  content: string;
+interface DroppablePlace {
+  index: number;
+  droppableId: string;
 }
-interface IAppState {
-  items: Item[];
-  selected: Item[];
+interface MoveResult {
+  droppable?: Item[];
+  droppable2?: Item[];
 }
 
-export const reorder = (
-  list: Item[],
-  startIndex: number,
-  endIndex: number
-) => {
-
+export const reorder = (list: Item[], startIndex: number, endIndex: number): Item[] => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -25,9 +20,9 @@ export const reorder = (
 export const move = (
   source: Item[],
   destination: Item[],
-  droppableSource: any,
-  droppableDestination: any,
-) => {
+  droppableSource: DroppablePlace,
+  droppableDestination: DroppablePlace
+): MoveResult => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
   const [removed] = sourceClone.splice(droppableSource.index, 1);
