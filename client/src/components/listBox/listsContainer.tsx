@@ -7,17 +7,18 @@ import styled from 'styled-components';
 
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import { Selected } from '../lists/selected';
-
 import { Button } from '@rmwc/button';
 
 import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items';
+import { Selected } from '../lists/selected';
+
+import { apiClient } from '../../lib/apiClient';
 
 @observer
 export class ListsContainer extends React.Component<StoreProps, {}> {
-  componentDidMount = () => {
-    this.props.store.getItems();
+   componentDidMount = () => {
+     this.props.store.getItems();
     this.props.store.getSelected();
   };
   render() {
