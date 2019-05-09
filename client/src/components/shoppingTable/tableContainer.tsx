@@ -58,14 +58,16 @@ export class TableContainer extends React.Component<
 
     let sortedCosts: Cost[];
     if (costs.length > 0) {
-      sortedCosts = costs.sort((b: any, a: any): any => a.date > b.date); ///////////////////////////////////
+      sortedCosts = costs.sort((b: Cost, a: Cost): any => {
+        console.log("SSOOOORTT COOOST",a.date > b.date)
+        return a.date > b.date}); ///////////////////////////////////
     } else
-      sortedCosts = [
-        {
-          count: 0,
-          chosenItems: [''],
-          date: 'No shopping yet'
-        }
+      // sortedCosts = [
+      //   {
+      //     count: 0,
+      //     chosenItems: [''],
+      //     date: 'No shopping yet'
+      //   }
       ];
 
     return (

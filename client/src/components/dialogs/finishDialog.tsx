@@ -16,7 +16,7 @@ import { Button } from '@rmwc/button';
 import { sortItemsByName } from '../../functions/reorderFunctions';
 
 interface FinishDialogState {
-  chosenItems: Item[];
+  chosenNames: string[];
   count: number;
   date: string;
 }
@@ -27,7 +27,7 @@ export class FinishDialog extends React.Component<
   FinishDialogState
 > {
   state = {
-    chosenItems: [],
+    chosenNames: [],
     count: 0,
     date: String(
       new Date().toLocaleDateString('pl-PL', {
@@ -41,7 +41,7 @@ export class FinishDialog extends React.Component<
     // getItemsFromServer(this.props.getItems);
   };
 
-  handleChangeCounter = (event: React.FormEvent<EventTarget>) => {
+  handleChangeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
     this.setState({
       count: Number(target.value)
@@ -50,15 +50,12 @@ export class FinishDialog extends React.Component<
 
   handleFinish = (): void => {
     const {
-      getCosts,
-      getItems,
-      getSelected,
       items,
       selected
     } = this.props.store;
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
-    const chosenNames: any = [];
+    const chosenNames: string[] = [];
 
     newItems = items;
     selected.forEach((item: Item, index: number) => {
@@ -68,9 +65,9 @@ export class FinishDialog extends React.Component<
       } else newSelected.push(item);
     });
 
-    const item = this.state;
+    const item: FinishDialogState = this.state;
     item.count = Math.round(this.state.count); ////////////////////
-    item.chosenItems = chosenNames;
+    item.chosenNames = chosenNames;
     sortItemsByName(newItems);
 
     // getSelected(newSelected);

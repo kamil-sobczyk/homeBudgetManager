@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, DroppableProvidedProps, DroppableProvided } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './providedItems';
 
@@ -17,12 +17,10 @@ export class Items extends React.Component<StoreProps, {}> {
       <StyledContainer>
         <Droppable droppableId='droppable2'>
           {providedDroppable2 => (
-            <>
-              <ProvidedItems
-                store={this.props.store}
-                providedDroppable2={providedDroppable2}
-              />
-            </>
+            <ProvidedItems
+              store={this.props.store}
+              provided={providedDroppable2}
+            />
           )}
         </Droppable>
       </StyledContainer>

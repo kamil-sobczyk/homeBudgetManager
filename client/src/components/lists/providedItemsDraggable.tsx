@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
+import { Item } from '../../lib/interfaces';
 
 import styled from 'styled-components';
 
@@ -16,10 +17,11 @@ import { IconButton } from '@rmwc/icon-button';
 import { Icon } from '@rmwc/icon';
 
 import { Checkbox } from '@rmwc/checkbox';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 interface ProvidedItemsDraggableProps extends StoreProps {
-  providedDraggable2: any;
-  item: any;
+  providedDraggable2: DraggableProvided;
+  item: Item;
   index: number;
 }
 

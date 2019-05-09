@@ -3,12 +3,12 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvidedDraggableProps, DraggableProvided, DroppableProvided } from 'react-beautiful-dnd';
 
 import { ProvidedSelectedDraggable } from './providedSelectedDraggable';
 
 interface ProvidedSelectedProps extends StoreProps {
-  provided: any;
+  provided: DroppableProvided;
 }
 
 @observer

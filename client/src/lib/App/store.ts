@@ -26,6 +26,13 @@ export interface Cost {
   date: string;
 }
 
+interface MoveResult {
+  droppable: Item[];
+  droppable2: Item[];
+}
+
+export type ListType = 'items' | 'selected';
+
 export class Store {
   @observable items: Item[] = [
     {
@@ -122,7 +129,7 @@ export class Store {
     return this.items;
   };
 
-  editItem = (newItem: Item, list: string, index: number): Item =>
+  editItem = (newItem: Item, list: ListType, index: number): Item =>
     ((this as any)[list][index] = newItem);
   getItems = (): void => {
     fetch(server + 'store/items', {
@@ -160,8 +167,7 @@ export class Store {
       return this.selected;
     }
   };
-  reorderList = (list: string, reorderedList: any): any => {      ///////////////////////
-
+  reorderList = (list: string, reorderedList: Item[]): void => {      ///////////////////////
     if (list === 'droppable') {
       this.selected = reorderedList;
     } else {
@@ -184,12 +190,14 @@ export class Store {
 
       this.reorderList(destination.droppableId, items);
     } else {
-      const result: any = move(
+      const result = move(
         this.getDndList(source.droppableId),
         this.getDndList(destination.droppableId),
         source,
         destination
       );
+
+      console.log(result)
       // result.droppable.forEach((item: Item) => (item.checked = false));
 
       this.selected = result.droppable;

@@ -3,21 +3,22 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 
 import { ProvidedItemsDraggable } from './providedItemsDraggable';
 
 interface ProvidedItemsProps extends StoreProps {
-  providedDroppable2: any;
+  provided: DroppableProvided;
 }
 
 @observer
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   render() {
     const { items } = this.props.store;
-    const { providedDroppable2 } = this.props;
+    const { provided } = this.props;
+
     return (
-      <div ref={providedDroppable2.innerRef} style={{ minHeight: '300px' }}>
+      <div ref={provided.innerRef} style={{ minHeight: '300px' }}>
         {items.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable2 => (
@@ -30,7 +31,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
             )}
           </Draggable>
         ))}
-        {providedDroppable2.placeholder}
+        {provided.placeholder}
       </div>
     );
   }

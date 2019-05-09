@@ -3,7 +3,8 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 import { Item } from '../../lib/interfaces';
-import { ActiveItem } from '../../lib/App/store';
+import { ActiveItem, ListType } from '../../lib/App/store';
+
 
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
@@ -32,7 +33,7 @@ export class EditDialog extends React.Component<StoreProps, Item> {
     }
 
     // editItemOnServer(newState, activeItem);
-    editItem(newItem, list, index);
+    editItem(newItem, list as ListType, index);
     toggleShowEditDialog(list, index);
     this.setState(initialState);
   };

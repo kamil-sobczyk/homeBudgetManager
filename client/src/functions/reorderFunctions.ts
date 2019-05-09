@@ -4,10 +4,6 @@ interface DroppablePlace {
   index: number;
   droppableId: string;
 }
-interface MoveResult {
-  droppable?: Item[];
-  droppable2?: Item[];
-}
 
 export const reorder = (list: Item[], startIndex: number, endIndex: number): Item[] => {
   const result = Array.from(list);
@@ -22,17 +18,17 @@ export const move = (
   destination: Item[],
   droppableSource: DroppablePlace,
   droppableDestination: DroppablePlace
-): MoveResult => {
+) => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
   destClone.splice(droppableDestination.index, 0, removed);
 
-  const result = {};
+  const result: {[key: string]: Item[]} = {};
 
-  (result as any)[droppableSource.droppableId] = sourceClone;
-  (result as any)[droppableDestination.droppableId] = destClone;
+  result[droppableSource.droppableId] = sourceClone;
+  result[droppableDestination.droppableId] = destClone;
 
   return result;
 };
