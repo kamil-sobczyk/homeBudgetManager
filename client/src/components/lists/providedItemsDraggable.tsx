@@ -3,9 +3,10 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 
-import { StyledItem } from './items';
+import styled from 'styled-components';
 
 import {
+    ListItem,
   ListItemText,
   ListItemPrimaryText,
   ListItemSecondaryText,
@@ -74,3 +75,7 @@ export class ProvidedItemsDraggable extends React.Component<
       )
   }
 }
+
+export const StyledItem = styled(ListItem)`
+  height: 80px;
+`;

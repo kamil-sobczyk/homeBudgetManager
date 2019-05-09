@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox';
 
-import { StyledItem } from './items';
+import { StyledItem } from './providedItemsDraggable';
 
 import {
   ListItemText,
