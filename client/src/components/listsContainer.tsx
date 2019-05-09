@@ -1,24 +1,24 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { observer } from "mobx-react";
-import { StoreProps } from "./listBox";
+import { observer } from 'mobx-react';
+import { StoreProps } from './listBox';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from 'react-beautiful-dnd';
 
-import { Selected } from "./lists/selected";
+import { Selected } from './lists/selected';
 
-import { Button } from "@rmwc/button";
+import { Button } from '@rmwc/button';
 
-import { ViewButton } from "./listsViewButton";
-import { Items } from "./lists/items";
+import { ViewButton } from './listsViewButton';
+import { Items } from './lists/items';
 
 @observer
 export class ListsContainer extends React.Component<StoreProps, {}> {
   id2List = {
-    droppable: "items",
-    droppable2: "selected"
+    droppable: 'items',
+    droppable2: 'selected'
   };
 
   render() {
@@ -43,7 +43,7 @@ export class ListsContainer extends React.Component<StoreProps, {}> {
           <Button onClick={toggleShowShoppingDialog}>
             Show previous shoppings
           </Button>
-          <Button color="primary" onClick={toggleShowFinishDialog}>
+          <Button color='primary' onClick={toggleShowFinishDialog}>
             Finish shopping
           </Button>
         </StyledButtonsContainer>

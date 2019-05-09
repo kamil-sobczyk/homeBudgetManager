@@ -39,25 +39,25 @@ export class Store {
       info: '',
       id: 'gfvfsddwed',
       checked: false
-    },
-    {
-      name: 'Milk',
-      info: 'Buy in Tesco',
-      id: '324rijdsojfddsaoid',
-      checked: false
-    },
-    {
-      name: 'Beer',
-      info: '',
-      id: 'fdswefi343fdsdf',
-      checked: true
-    },
-    {
-      name: 'Beef',
-      info: '1kg',
-      id: 'frefp43ifjdsfs',
-      checked: false
     }
+    // {
+    //   name: 'Milk',
+    //   info: 'Buy in Tesco',
+    //   id: '324rijdsojfddsaoid',
+    //   checked: false
+    // },
+    // {
+    //   name: 'Beer',
+    //   info: '',
+    //   id: 'fdswefi343fdsdf',
+    //   checked: true
+    // },
+    // {
+    //   name: 'Beef',
+    //   info: '1kg',
+    //   id: 'frefp43ifjdsfs',
+    //   checked: false
+    // }
   ];
   @observable selected: Item[] = [
     {
@@ -71,19 +71,19 @@ export class Store {
       info: '',
       id: 'e3rijfisdnc.kas3',
       checked: true
-    },
-    {
-      name: 'Potatoes',
-      info: 'Buy in Tesco',
-      id: '43ifpjsdljnfew33',
-      checked: false
-    },
-    {
-      name: 'Aples',
-      info: '3kg',
-      id: 'ekflkdsdsaljd',
-      checked: true
     }
+    // {
+    //   name: 'Potatoes',
+    //   info: 'Buy in Tesco',
+    //   id: '43ifpjsdljnfew33',
+    //   checked: false
+    // },
+    // {
+    //   name: 'Aples',
+    //   info: '3kg',
+    //   id: 'ekflkdsdsaljd',
+    //   checked: true
+    // }
   ];
   @observable costs: Cost[] = []; ////
   @observable activeItem: ActiveItem = {
@@ -149,19 +149,27 @@ export class Store {
       .then(costs => (this.costs = costs));
   };
   toggleCheckItems = (list: string, index: number): void => {
-    (this as any)[list][index].checked = !(this as any)[list][index].checked;    //////// use if
+    (this as any)[list][index].checked = !(this as any)[list][index].checked; //////// use if
     // getSelected(selected);
     // changeSelectedOnServer(selected);
   };
   getDndList = (id: string) => {
-    if (id === 'items') {
+    if (id === 'droppable2') {
       return this.items;
+    } else {
+      return this.selected;
     }
-    return this.selected;
+  };
+  reorderList = (list: string, reorderedList: any): any => {      ///////////////////////
+
+    if (list === 'droppable') {
+      this.selected = reorderedList;
+    } else {
+      this.items = reorderedList;
+    }
   };
   onDragEnd = (result: DropResult): void => {
     const { source, destination } = result;
-    const { getItems, getSelected } = this;
 
     if (!destination) {
       return;
@@ -173,10 +181,8 @@ export class Store {
         source.index,
         destination.index
       );
-      if (JSON.stringify(this.items).indexOf(JSON.stringify(items[0])) < 0) {
-        // getSelected(items);
-        //   changeSelectedOnServer(items);
-      }
+
+      this.reorderList(destination.droppableId, items);
     } else {
       const result: any = move(
         this.getDndList(source.droppableId),
@@ -184,7 +190,12 @@ export class Store {
         source,
         destination
       );
-      result.droppable.forEach((item: Item) => (item.checked = false));
+      // result.droppable.forEach((item: Item) => (item.checked = false));
+
+      this.selected = result.droppable;
+      this.selected = result.droppable2;
+
+      // this.reorderLists()
 
       // getItems(sortItemsByName(result.droppable));
       // getSelected(result.droppable2);
