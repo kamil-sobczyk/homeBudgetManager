@@ -149,10 +149,7 @@ export class Store {
       .then(costs => (this.costs = costs));
   };
   toggleCheckItems = (list: string, index: number): void => {
-    console.log((this as any)[list][index].checked);
-    (this as any)[list][index].checked = !(this as any)[list][index].checked;
-    console.log((this as any)[list][index].checked);
-    console.log((this as any)[list][index]);
+    (this as any)[list][index].checked = !(this as any)[list][index].checked;    //////// use if
     // getSelected(selected);
     // changeSelectedOnServer(selected);
   };
