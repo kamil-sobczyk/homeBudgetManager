@@ -2,6 +2,8 @@ import { observable } from 'mobx';
 
 import { Item } from './interfaces';
 
+import {ApiClient} from './apiClient';
+
 import {
   sortItemsByName,
   reorder,
@@ -29,6 +31,11 @@ export interface Cost {
 export type ListType = 'items' | 'selected';
 
 export class Store {
+  constructor() {
+    this.apiClient = new ApiClient(this);
+  }
+
+  apiClient: ApiClient;
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
@@ -70,14 +77,6 @@ export class Store {
 
   editItem = (newItem: Item, list: ListType, index: number): Item =>
     ((this as any)[list][index] = newItem);
-  getItems = (): void => {
-    fetch(server + 'store/items', {
-      mode: 'cors',
-      method: 'GET'
-    })
-      .then(response => response.json())
-      .then(items => (this.items = items));
-  };
   getSelected = (): void => {
     fetch(server + 'store/selected', {
       mode: 'cors',
