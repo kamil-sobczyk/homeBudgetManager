@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Store } from '../rootStore';
+import { Store, Cost } from '../rootStore';
 import { Item } from '../../interfaces';
 
 const localhost = 'http://0.0.0.0:8080/';
@@ -22,6 +22,12 @@ export class ApiClient {
     axios
       .get(server + 'store/selected')
       .then(selected => (this.store.selected = selected.data as Item[]));
+
+  getCosts = async () =>
+    axios
+      .get(server + 'store/costs')
+      .then(response => response) ///json
+      .then(costs => (this.store.costs = costs as any));    //////////////////////////////////
 }
 
 // const changeItemsOnServer = body => {

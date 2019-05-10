@@ -54,14 +54,6 @@ export class Store {
 
   editItem = (newItem: Item, list: ListType, index: number): Item =>
     ((this as any)[list][index] = newItem);
-  getCosts = (): void => {
-    fetch(server + 'store/costs', {
-      mode: 'cors',
-      method: 'GET'
-    })
-      .then(response => response.json())
-      .then(costs => (this.costs = costs));
-  };
   toggleCheckItems = (list: string, index: number): void => {
     (this as any)[list][index].checked = !(this as any)[list][index].checked; //////// use if
     // getSelected(selected);
