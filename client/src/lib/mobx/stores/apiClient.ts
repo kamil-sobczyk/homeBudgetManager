@@ -27,7 +27,7 @@ export class ApiClient {
     axios
       .get(server + 'store/costs')
       .then(response => response) ///json
-      .then(costs => (this.store.costs = costs as any));    //////////////////////////////////
+      .then(costs => (this.store.costs = costs as any)); //////////////////////////////////
 }
 
 // const changeItemsOnServer = body => {

@@ -1,7 +1,6 @@
 import { Store } from '../rootStore';
 import { observable } from 'mobx';
 
-
 export class VisibityClient {
   store: Store;
   constructor(store: Store) {
@@ -18,8 +17,7 @@ export class VisibityClient {
 
   toggleShowShoppingDialog = (): boolean =>
     (this.showShoppingDialog = !this.showShoppingDialog);
-  toggleShowItems = (): boolean =>
-    (this.showItems = !this.showItems);
+  toggleShowItems = (): boolean => (this.showItems = !this.showItems);
   toggleShowAddDialog = (): boolean =>
     (this.showAddDialog = !this.showAddDialog);
   toggleShowDeleteDialog = (): boolean =>
@@ -31,6 +29,5 @@ export class VisibityClient {
   };
   toggleShowFailDialog = (): boolean =>
     (this.showFailDialog = !this.showFailDialog);
-  toggleShowFinishDialog = (): boolean =>
-    (this.showFinish = !this.showFinish);
+  toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
 }
