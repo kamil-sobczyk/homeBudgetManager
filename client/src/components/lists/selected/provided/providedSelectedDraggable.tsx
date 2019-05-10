@@ -4,7 +4,8 @@ import { observer } from 'mobx-react';
 import { StoreProps } from '../../../../lib/interfaces';
 import { Item } from '../../../../lib/interfaces';
 
-import { StyledItem } from '../../items/provided/providedItemsDraggable';
+
+import { StyledItem, StyledTextContainer } from '../../items/provided/providedItemsDraggable';
 
 import {
   ListItemText,
@@ -13,7 +14,6 @@ import {
   ListDivider
 } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
-import { Icon } from '@rmwc/icon';
 import { Checkbox } from '@rmwc/checkbox';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
@@ -54,19 +54,21 @@ export class ProvidedSelectedDraggable extends React.Component<
               value={'checked'}
               //   disableRipple
             />
+            <StyledTextContainer>
             <ListItemText>
               <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
               <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
             </ListItemText>
             <IconButton
+            icon='edit'
               aria-label='Edit item'
               onClick={e => {
                 e.stopPropagation();
                 toggleShowEditDialog('selected', index);
               }}
             >
-              <Icon icon='edit' />
             </IconButton>
+            </StyledTextContainer>
           </StyledItem>
           <ListDivider />
         </div>

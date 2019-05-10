@@ -55,18 +55,20 @@ export class ProvidedItemsDraggable extends React.Component<
               value={'checked'}
               //   disableRipple
             />
-            <ListItemText>
-              <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
-              <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
-            </ListItemText>
-            <IconButton
-              aria-label='Edit item'
-              onClick={
-                toggleShowEditDialog.bind(this, 'selected', index) ///////////////////////////
-              }
-            >
-              <Icon icon='edit' />
-            </IconButton>
+            <StyledTextContainer>
+              <ListItemText>
+                <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
+                <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
+              </ListItemText>
+              <IconButton
+                aria-label='Edit item'
+                onClick={
+                  toggleShowEditDialog.bind(this, 'selected', index) ///////////////////////////
+                }
+              >
+                <Icon icon='edit' />
+              </IconButton>
+            </StyledTextContainer>
           </StyledItem>
           <ListDivider />
         </div>
@@ -78,4 +80,10 @@ export class ProvidedItemsDraggable extends React.Component<
 
 export const StyledItem = styled(ListItem)`
   height: 80px;
+`;
+
+export const StyledTextContainer = styled.div`
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
 `;
