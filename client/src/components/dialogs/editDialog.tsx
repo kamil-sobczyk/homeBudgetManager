@@ -21,23 +21,30 @@ const initialState: Item = {
 export class EditDialog extends React.Component<StoreProps, Item> {
   state = initialState;
 
-  handleCloseEdit = (activeItem: ActiveItem): void => {
+  confirm = (activeItem: ActiveItem): void => {
     const {
       itemMenagerClient: { editItem },
       visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
     const { list, index } = activeItem;
-
     const newItem = this.state;
-    if (newItem.name === '') {
-      newItem.name = (this.props.store as any)[list][index].name;
-    } else {
-      newItem.name = this.state.name;
-    }
 
-    // editItemOnServer(newState, activeItem);
+    if (list === 'items') {
+      if (newItem.name === '' && newItem.info !== '') {
+        newItem.name = this.props.store.items[index].name;
+      } else if (newItem.name !== '' && newItem.info === '') {
+        newItem.info = this.props.store.items[index].info;
+      } else return;
+    } else if (list === 'selected') {
+      if (newItem.name === '' && newItem.info !== '') {
+        newItem.name = this.props.store.selected[index].name;
+      } else if (newItem.name !== '' && newItem.info === '') {
+        newItem.info = this.props.store.selected[index].info;
+      } else return;
+    } else return;
+
     editItem(newItem, list as ListType, index);
-    toggleShowEditDialog(list, index);
+    toggleShowEditDialog(list as ListType, 0);
     this.setState(initialState);
   };
 
@@ -52,7 +59,7 @@ export class EditDialog extends React.Component<StoreProps, Item> {
         });
       } else {
         this.setState({
-          name: event ? target.value : this.props.store.items[index].info
+          info: event ? target.value : this.props.store.items[index].info
         });
       }
     } else if (list === 'selected' && this.props.store.selected[index]) {
@@ -62,11 +69,12 @@ export class EditDialog extends React.Component<StoreProps, Item> {
         });
       } else {
         this.setState({
-          name: event ? target.value : this.props.store.selected[index].info
+          info: event ? target.value : this.props.store.selected[index].info
         });
       }
     }
   };
+
   render() {
     const {
       itemMenagerClient: {
@@ -90,18 +98,13 @@ export class EditDialog extends React.Component<StoreProps, Item> {
     }
 
     return (
-      <Dialog
-        open={showEditDialog}
-        //   TransitionComponent={Transition}
-      >
+      <Dialog open={showEditDialog}>
         <DialogTitle>Edit product</DialogTitle>
         <TextField
           id='outlined-required'
           label='Type new name'
           defaultValue={defaultName}
           name='name'
-          //   margin="normal"
-          //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <TextField
@@ -109,20 +112,18 @@ export class EditDialog extends React.Component<StoreProps, Item> {
           label='Type new additional info'
           defaultValue={defaultInfo}
           name='info'
-          //   margin="normal"
-          //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <DialogActions>
           <Button
             color='primary'
-            onClick={() => toggleShowEditDialog(list, index)} //////////////////////////////////////////
+            onClick={() => toggleShowEditDialog(list as ListType, index)}
           >
             Cancel
           </Button>
           <Button
             color='primary'
-            onClick={this.handleCloseEdit.bind(this, activeItem)}
+            onClick={(): void => this.confirm(activeItem)}
           >
             Confirm
           </Button>

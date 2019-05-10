@@ -44,11 +44,11 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     const {
       visibilityClient: { toggleShowEditDialog },
       itemMenagerClient: {
-        activeItem: { list, index }
+        activeItem: { index }
       }
     } = this.props.store;
 
-    toggleShowEditDialog(list, index);
+    toggleShowEditDialog("items", index);
     event.stopPropagation();
     this.setOpen(event);
   };
@@ -60,12 +60,12 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   render() {
+    const {
+      setActiveItem,
+      activeItem: { list, index }
+    } = this.props.store.itemMenagerClient;
     return (
-      <MenuSurfaceAnchor
-        onClick={e =>
-          this.props.store.itemMenagerClient.setActiveItem.bind(this, 5)
-        }
-      >
+      <MenuSurfaceAnchor onClick={(): void => setActiveItem(index, "selected")}>
         <Menu
           hoistToBody={true}
           open={this.state.open}

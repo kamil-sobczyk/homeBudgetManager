@@ -28,7 +28,7 @@ export class VisibityClient {
     // this.store.activeItem.list = list;
     if (index) this.store.itemMenagerClient.activeItem.index = index;
   };
-  toggleShowEditDialog = (list: string, index: number): void => {
+  toggleShowEditDialog = (list: ListType, index: number): void => {
     this.showEditDialog = !this.showEditDialog;
     this.store.itemMenagerClient.activeItem.list = list;
     this.store.itemMenagerClient.activeItem.index = index;

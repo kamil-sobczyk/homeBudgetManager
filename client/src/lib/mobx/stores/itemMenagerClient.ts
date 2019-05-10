@@ -23,8 +23,10 @@ export class ItemMenagerClient {
       this.activeItem.index = index;
     } else this.activeItem.index = index;
   };
+
   addItem = (newItem: Item): Item[] =>
     (this.store.items = sortItemsByName([...this.store.items, newItem]));
+
   deleteItem = (index: number): Item[] => {
     this.store.items = this.store.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
@@ -40,6 +42,7 @@ export class ItemMenagerClient {
       this.store.selected[index] = newItem;
     } else return;
   };
+
   toggleCheckItems = (list: ListType, index: number): void => {
     this.setActiveItem(index, list);
     if (list === 'items') {
@@ -47,7 +50,6 @@ export class ItemMenagerClient {
     } else if (list === 'selected') {
       this.store.selected[index].checked = !this.store.selected[index].checked;
     } else return;
-    // getSelected(selected);
     // changeSelectedOnServer(selected);
   };
   addCost = (cost: Cost): number => this.store.costs.push(cost); ////////////////////////////////
