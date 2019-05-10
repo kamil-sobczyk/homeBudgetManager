@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../listBox/listBox';
 import { Item } from '../../lib/interfaces';
-import { ActiveItem } from '../../lib/mobx/rootStore';
+import { ActiveItem } from '../../lib/interfaces';
 import { ListType } from '../../lib/mobx/stores/itemMenagerClient';
 
 import { Button } from '@rmwc/button';

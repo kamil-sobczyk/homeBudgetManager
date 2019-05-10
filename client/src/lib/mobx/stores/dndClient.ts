@@ -1,16 +1,16 @@
-import { Store, Cost } from '../rootStore';
+import { Store } from '../rootStore';
+import { Item } from '../../interfaces';
 
 import { reorder, move } from '../../reorderFunctions';
 
 import { DropResult } from 'react-beautiful-dnd';
-import { Item } from '../../interfaces';
 
 export class DnDClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;
   }
-  getDndList = (id: string) => {
+  getDndList = (id: string): Item[] => {
     if (id === 'droppable2') {
       return this.store.items;
     } else {
@@ -18,7 +18,6 @@ export class DnDClient {
     }
   };
   reorderList = (list: string, reorderedList: Item[]): void => {
-    ///////////////////////
     if (list === 'droppable') {
       this.store.selected = reorderedList;
     } else {

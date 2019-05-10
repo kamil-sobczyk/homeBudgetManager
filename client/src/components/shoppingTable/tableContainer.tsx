@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Store, Cost } from '../../lib/mobx/rootStore';
+import { Store } from '../../lib/mobx/rootStore';
+import { Cost } from '../../lib/interfaces';
+
 
 import {
   DataTable,

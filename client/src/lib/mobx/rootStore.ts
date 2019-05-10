@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-import { Item } from '../interfaces';
+import { Item, ActiveItem, Cost } from '../interfaces';
 
 import { ApiClient } from './stores/apiClient';
 import { VisibityClient } from './stores/visibilityClient';
@@ -11,17 +11,6 @@ const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';
 const publicDemo = 'http://35.184.211.161/';
 const server = localhost;
-
-export interface ActiveItem {
-  list: string;
-  index: number;
-}
-
-export interface Cost {
-  count: number;
-  chosenItems: string[];
-  date: string;
-}
 
 export class Store {
   constructor() {

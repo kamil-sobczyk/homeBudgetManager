@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-import { Store, Cost } from '../rootStore';
+import { Store } from '../rootStore';
+import { Cost } from '../../interfaces';
+
 import { Item } from '../../interfaces';
 
 const localhost = 'http://0.0.0.0:8080/';
@@ -13,17 +15,17 @@ export class ApiClient {
   constructor(store: Store) {
     this.store = store;
   }
-  getItems = async () =>
+  getItems = async (): Promise<Item[]> =>
     await axios
       .get(server + 'store/items')
       .then(items => (this.store.items = items.data as Item[]));
 
-  getSelected = async () =>
+  getSelected = async (): Promise<Item[]> =>
     axios
       .get(server + 'store/selected')
       .then(selected => (this.store.selected = selected.data as Item[]));
 
-  getCosts = async () =>
+  getCosts = async (): Promise<Cost[]> =>
     axios
       .get(server + 'store/costs')
       .then(response => response) ///json

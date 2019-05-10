@@ -1,4 +1,5 @@
-import { Store, Cost } from '../rootStore';
+import { Store } from '../rootStore';
+import { Cost } from '../../interfaces';
 
 import { sortItemsByName } from '../../reorderFunctions';
 
