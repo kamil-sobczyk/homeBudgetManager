@@ -14,9 +14,8 @@ import {
   ListDivider
 } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
-import { Icon } from '@rmwc/icon';
-
 import { Checkbox } from '@rmwc/checkbox';
+
 import { DraggableProvided } from 'react-beautiful-dnd';
 
 interface ProvidedItemsDraggableProps extends StoreProps {
@@ -61,12 +60,12 @@ export class ProvidedItemsDraggable extends React.Component<
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
               <IconButton
+              icon='menu'
                 aria-label='Edit item'
                 onClick={
                   toggleShowEditDialog.bind(this, 'selected', index) ///////////////////////////
                 }
               >
-                <Icon icon='edit' />
               </IconButton>
             </StyledTextContainer>
           </StyledItem>
