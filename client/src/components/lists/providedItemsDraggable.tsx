@@ -33,7 +33,7 @@ export class ProvidedItemsDraggable extends React.Component<
   render() {
     const {
       items,
-      toggleCheckItems,
+      itemMenagerClient: { toggleCheckItems },
       visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
     const { providedDraggable2, item, index } = this.props;

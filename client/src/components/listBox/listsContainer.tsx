@@ -21,8 +21,7 @@ export class ListsContainer extends React.Component<StoreProps, {}> {
   };
   render() {
     const {
-      onDragEnd,
-
+      dndClient: { onDragEnd },
       visibilityClient: {
         showItems,
         toggleShowFinishDialog,

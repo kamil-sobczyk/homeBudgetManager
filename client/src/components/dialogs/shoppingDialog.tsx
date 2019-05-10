@@ -15,8 +15,9 @@ import { Button } from '@rmwc/button';
 export class ShoppingDialog extends React.Component<StoreProps, {}> {
   render() {
     const {
-      visibilityClient: { toggleShowShoppingDialog, showShoppingDialog }
-    } = this.props.store;
+      toggleShowShoppingDialog,
+      showShoppingDialog
+    } = this.props.store.visibilityClient;
     return (
       <>
         <Dialog

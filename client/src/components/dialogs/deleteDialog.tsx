@@ -15,7 +15,7 @@ import { Button } from '@rmwc/button';
 export class DeleteDialog extends React.Component<StoreProps, {}> {
   render() {
     const {
-      deleteItem,
+      itemMenagerClient: { deleteItem },
       visibilityClient: { showDeleteDialog, toggleShowDeleteDialog },
       activeItem: { list, index }
     } = this.props.store;

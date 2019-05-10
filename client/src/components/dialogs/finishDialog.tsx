@@ -77,9 +77,9 @@ export class FinishDialog extends React.Component<
 
   render() {
     const {
-      
-      visibilityClient: {showFinish, toggleShowFinishDialog }
-    } = this.props.store;
+      showFinish,
+      toggleShowFinishDialog
+    } = this.props.store.visibilityClient;
 
     return (
       <Dialog
