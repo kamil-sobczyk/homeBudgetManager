@@ -13,10 +13,13 @@ import {
   ListItemSecondaryText,
   ListDivider
 } from '@rmwc/list';
-import { IconButton } from '@rmwc/icon-button';
 import { Checkbox } from '@rmwc/checkbox';
+import { Ripple } from '@rmwc/ripple';
+import '@material/ripple/dist/mdc.ripple.css';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
+
+import { MoreMenu } from '../moreMenu';
 
 interface ProvidedItemsDraggableProps extends StoreProps {
   providedDraggable2: DraggableProvided;
@@ -33,7 +36,11 @@ export class ProvidedItemsDraggable extends React.Component<
     const {
       items,
       itemMenagerClient: { toggleCheckItems },
-      visibilityClient: { toggleShowEditDialog }
+      visibilityClient: {
+        toggleShowEditDialog,
+        toggleShowMoreMenu,
+        showMoreMenu
+      }
     } = this.props.store;
     const { providedDraggable2, item, index } = this.props;
     return (
@@ -43,32 +50,25 @@ export class ProvidedItemsDraggable extends React.Component<
           {...providedDraggable2.draggableProps}
           {...providedDraggable2.dragHandleProps}
         >
-          <StyledItem
+     
+          <StyledItem 
             key={index}
             onClick={toggleCheckItems.bind(this, 'items', index)}
           >
             <Checkbox
-              //   className={checkbox}
               checked={items[index] ? items[index].checked : false}
               tabIndex={-1}
               value={'checked'}
-              //   disableRipple
             />
             <StyledTextContainer>
               <ListItemText>
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
-              <IconButton
-              icon='menu'
-                aria-label='Edit item'
-                onClick={
-                  toggleShowEditDialog.bind(this, 'selected', index) ///////////////////////////
-                }
-              >
-              </IconButton>
+              <MoreMenu index={index} store={this.props.store} />
             </StyledTextContainer>
           </StyledItem>
+
           <ListDivider />
         </div>
         {providedDraggable2.placeholder}
@@ -78,7 +78,7 @@ export class ProvidedItemsDraggable extends React.Component<
 }
 
 export const StyledItem = styled(ListItem)`
-  height: 80px;
+  min-height: 80px;
 `;
 
 export const StyledTextContainer = styled.div`

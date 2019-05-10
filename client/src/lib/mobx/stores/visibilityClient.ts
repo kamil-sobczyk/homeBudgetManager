@@ -14,6 +14,7 @@ export class VisibityClient {
   @observable showItems: boolean = true;
   @observable showFinish: boolean = false;
   @observable showFailDialog: boolean = false;
+  @observable showMoreMenu: boolean = false;
 
   toggleShowShoppingDialog = (): boolean =>
     (this.showShoppingDialog = !this.showShoppingDialog);
@@ -30,4 +31,5 @@ export class VisibityClient {
   toggleShowFailDialog = (): boolean =>
     (this.showFailDialog = !this.showFailDialog);
   toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
+  toggleShowMoreMenu = (): boolean => (this.showMoreMenu = !this.showMoreMenu);
 }

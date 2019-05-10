@@ -4,6 +4,7 @@ import { Cost } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
+import { observable } from 'mobx';
 
 export type ListType = 'items' | 'selected';
 
@@ -12,6 +13,7 @@ export class ItemMenagerClient {
   constructor(store: Store) {
     this.store = store;
   }
+  @observable itemOverflowHidden = true;
 
   addItem = (newItem: Item): Item[] =>
     (this.store.items = sortItemsByName([...this.store.items, newItem]));
@@ -39,5 +41,7 @@ export class ItemMenagerClient {
     // getSelected(selected);
     // changeSelectedOnServer(selected);
   };
+  changeItemOverflow = (): boolean =>
+    (this.itemOverflowHidden = !this.itemOverflowHidden);
   addCost = (cost: Cost): number => this.store.costs.push(cost); ////////////////////////////////
 }
