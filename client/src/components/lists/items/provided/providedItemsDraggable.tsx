@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
-import { Item } from '../../lib/interfaces';
+import { StoreProps } from '../../../../lib/interfaces';
+import { Item } from '../../../../lib/interfaces';
 
-import { StyledItem } from './providedItemsDraggable';
+import styled from 'styled-components';
 
 import {
+  ListItem,
   ListItemText,
   ListItemPrimaryText,
   ListItemSecondaryText,
@@ -14,42 +15,42 @@ import {
 } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 import { Icon } from '@rmwc/icon';
-import { Checkbox } from '@rmwc/checkbox';
 
+import { Checkbox } from '@rmwc/checkbox';
 import { DraggableProvided } from 'react-beautiful-dnd';
 
-interface ProvidedSelectedDraggableProps extends StoreProps {
-  providedDraggable: DraggableProvided;
+interface ProvidedItemsDraggableProps extends StoreProps {
+  providedDraggable2: DraggableProvided;
   item: Item;
   index: number;
 }
 
 @observer
-export class ProvidedSelectedDraggable extends React.Component<
-  ProvidedSelectedDraggableProps,
+export class ProvidedItemsDraggable extends React.Component<
+  ProvidedItemsDraggableProps,
   {}
 > {
   render() {
     const {
-      selected,
+      items,
       itemMenagerClient: { toggleCheckItems },
       visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
-    const { providedDraggable, item, index } = this.props;
+    const { providedDraggable2, item, index } = this.props;
     return (
-      <div>
+      <>
         <div
-          ref={providedDraggable.innerRef}
-          {...providedDraggable.draggableProps}
-          {...providedDraggable.dragHandleProps}
+          ref={providedDraggable2.innerRef}
+          {...providedDraggable2.draggableProps}
+          {...providedDraggable2.dragHandleProps}
         >
           <StyledItem
             key={index}
-            onClick={() => toggleCheckItems('selected', index)}
+            onClick={toggleCheckItems.bind(this, 'items', index)}
           >
             <Checkbox
               //   className={checkbox}
-              checked={selected[index] ? selected[index].checked : false}
+              checked={items[index] ? items[index].checked : false}
               tabIndex={-1}
               value={'checked'}
               //   disableRipple
@@ -60,18 +61,21 @@ export class ProvidedSelectedDraggable extends React.Component<
             </ListItemText>
             <IconButton
               aria-label='Edit item'
-              onClick={e => {
-                e.stopPropagation();
-                toggleShowEditDialog('selected', index);
-              }}
+              onClick={
+                toggleShowEditDialog.bind(this, 'selected', index) ///////////////////////////
+              }
             >
               <Icon icon='edit' />
             </IconButton>
           </StyledItem>
           <ListDivider />
         </div>
-        {providedDraggable.placeholder}
-      </div>
+        {providedDraggable2.placeholder}
+      </>
     );
   }
 }
+
+export const StyledItem = styled(ListItem)`
+  height: 80px;
+`;

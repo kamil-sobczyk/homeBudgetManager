@@ -3,11 +3,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
+import { StoreProps } from '../../../lib/interfaces';
 
 import { Droppable } from 'react-beautiful-dnd';
 
-import { ProvidedItems } from './providedItems';
+import { ProvidedItems } from './provided/providedItems';
 
 @observer
 export class Items extends React.Component<StoreProps, {}> {

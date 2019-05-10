@@ -23,10 +23,19 @@ export class ItemMenagerClient {
     return this.store.items;
   };
 
-  editItem = (newItem: Item, list: ListType, index: number): Item =>
-    ((this as any)[list][index] = newItem);
+  editItem = (newItem: Item, list: ListType, index: number): void => {
+    if (list === 'items') {
+      this.store.items[index] = newItem;
+    } else if (list === 'selected') {
+      this.store.selected[index] = newItem;
+    } else return;
+  };
   toggleCheckItems = (list: string, index: number): void => {
-    (this as any)[list][index].checked = !(this as any)[list][index].checked; //////// use if
+    if (list === 'items') {
+      this.store.items[index].checked = !this.store.items[index].checked;
+    } else if (list === 'selected') {
+      this.store.selected[index].checked = !this.store.selected[index].checked;
+    } else return;
     // getSelected(selected);
     // changeSelectedOnServer(selected);
   };

@@ -10,8 +10,8 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { Button } from '@rmwc/button';
 
 import { ViewButton } from './listsViewButton';
-import { Items } from '../lists/items';
-import { Selected } from '../lists/selected';
+import { Items } from '../lists/items/items';
+import { Selected } from '../lists/selected/selected';
 
 @observer
 export class ListsContainer extends React.Component<StoreProps, {}> {
