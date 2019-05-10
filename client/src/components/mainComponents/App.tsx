@@ -1,14 +1,13 @@
-import * as React from "react";
-import { observable } from "mobx";
-import { observer, Provider } from "mobx-react";
+import * as React from 'react';
+import { observable } from 'mobx';
+import { observer, Provider } from 'mobx-react';
 
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-import { Navbar } from "./nav";
-import { ListBox } from "../listBox/listBox";
-import { Store } from "../../lib/mobx/rootStore";
-import { ProgressBar } from "./progressBar";
+import { Navbar } from './nav';
+import { ListBox } from '../listBox/listBox';
+import { Store } from '../../lib/mobx/rootStore';
+import { ProgressBar } from './progressBar';
 
 @observer
 export class App extends React.Component<{}, {}> {
@@ -41,8 +40,6 @@ export class App extends React.Component<{}, {}> {
 }
 
 const Container = styled.div`
-  text-align: "center";
+  text-align: 'center';
   height: 100vh;
 `;
-
-console.log("app running");

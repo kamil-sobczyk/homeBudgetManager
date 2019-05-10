@@ -1,6 +1,8 @@
 import { Store } from '../rootStore';
 import { observable } from 'mobx';
 
+import { ListType } from './itemMenagerClient';
+
 export class VisibityClient {
   store: Store;
   constructor(store: Store) {
@@ -21,8 +23,11 @@ export class VisibityClient {
   toggleShowItems = (): boolean => (this.showItems = !this.showItems);
   toggleShowAddDialog = (): boolean =>
     (this.showAddDialog = !this.showAddDialog);
-  toggleShowDeleteDialog = (): boolean =>
-    (this.showDeleteDialog = !this.showDeleteDialog);
+  toggleShowDeleteDialog = (index?: number, list?: ListType): void => {
+    this.showDeleteDialog = !this.showDeleteDialog;
+    // this.store.activeItem.list = list;
+    if (index) this.store.activeItem.index = index;
+  };
   toggleShowEditDialog = (list: string, index: number): void => {
     this.showEditDialog = !this.showEditDialog;
     this.store.activeItem.list = list;

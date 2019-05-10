@@ -20,7 +20,6 @@ export class ItemMenagerClient {
     this.store.items = this.store.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     );
-    this.store.visibilityClient.toggleShowDeleteDialog();
     return this.store.items;
   };
 

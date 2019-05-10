@@ -19,29 +19,31 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     open: false
   };
 
-  // handleClick = event => {
-  //   this.setState({ anchorEl: event.currentTarget });
-  // };
-
-  setOpen = (event: React.MouseEvent<any, MouseEvent>) => {
-    this.setState({open: event.target});
+  setOpen = (event: React.MouseEvent<any, MouseEvent>): void => {
+    this.setState({ open: event.target });
     event.stopPropagation();
   };
 
-  handleClickMore = (action: any) => {
+  handleDeleteClick = (event: React.MouseEvent<any, MouseEvent>): void => {
     const {
-      toggleShowEditDialog,
-      toggleShowDeleteDialog
-    } = this.props.store.visibilityClient;
+      visibilityClient: { toggleShowDeleteDialog },
+      activeItem: { index }
+    } = this.props.store;
 
-    action === 'edit'
-      ? toggleShowEditDialog('items', this.props.index)
-      : toggleShowDeleteDialog(); ////
-    this.handleClose();
+    toggleShowDeleteDialog(index);
+    event.stopPropagation();
+    this.setOpen(event);
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleEditClick = (event: React.MouseEvent<any, MouseEvent>): void => {
+    const {
+      visibilityClient: { toggleShowEditDialog },
+      activeItem: { list, index }
+    } = this.props.store;
+
+    toggleShowEditDialog(list, index);
+    event.stopPropagation();
+    this.setOpen(event);
   };
 
   render() {
@@ -51,13 +53,13 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
           hoistToBody={true}
           open={this.state.open}
           onSelect={evt => console.log(evt.detail.index)}
-          onClose={e => this.setState({ open: false })}
+          onClose={() => this.setState({ open: false })}
         >
-          <MenuItem>
+          <MenuItem onClick={e => this.handleEditClick(e)}>
             <IconButton icon='edit' />
           </MenuItem>
           <ListDivider />
-          <MenuItem>
+          <MenuItem onClick={e => this.handleDeleteClick(e)}>
             <IconButton icon='delete' />
           </MenuItem>
         </Menu>
@@ -69,4 +71,3 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     );
   }
 }
-
