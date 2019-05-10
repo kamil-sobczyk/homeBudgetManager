@@ -14,7 +14,6 @@ interface MoreMenuProps extends StoreProps {
   index: number;
 }
 
-
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   state = {
     open: false
@@ -25,8 +24,8 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   // };
 
   setOpen = (event: React.MouseEvent<any, MouseEvent>) => {
-    this.state.open = !this.state.open;
-    this.props.store.itemMenagerClient.changeItemOverflow();
+    this.setState({open: event.target});
+    event.stopPropagation();
   };
 
   handleClickMore = (action: any) => {
@@ -47,32 +46,27 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
 
   render() {
     return (
-      <StyledMenuSurfaceAnchor>
-        <StyledMenu
-        hoistToBody={true}
+      <MenuSurfaceAnchor>
+        <Menu
+          hoistToBody={true}
           open={this.state.open}
           onSelect={evt => console.log(evt.detail.index)}
           onClose={e => this.setState({ open: false })}
         >
-          <MenuItem>Cookies</MenuItem>
-          <MenuItem>Pizza</MenuItem>
-          {/** MenuItem is just a ListItem, so you can intermingle other List components */}
+          <MenuItem>
+            <IconButton icon='edit' />
+          </MenuItem>
           <ListDivider />
-          <MenuItem>Icecream</MenuItem>
-        </StyledMenu>
+          <MenuItem>
+            <IconButton icon='delete' />
+          </MenuItem>
+        </Menu>
 
         <IconButton icon='menu' onClick={e => this.setOpen(e)}>
           Menu
         </IconButton>
-      </StyledMenuSurfaceAnchor>
+      </MenuSurfaceAnchor>
     );
   }
 }
 
-const StyledMenu = styled(Menu)`
-
-`;
-
-const StyledMenuSurfaceAnchor = styled(MenuSurfaceAnchor)`
-
-`
