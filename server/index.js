@@ -91,7 +91,6 @@ const appRouter = app => {
     res.status(200).json(store.items);
   });
   app.delete("/store/items", (req, res) => {
-    console.log(req.body)
     store.items.splice(req.body.index, 1);
     res.status(200).json(store.items);
   });
