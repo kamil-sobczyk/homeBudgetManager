@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../listBox/listBox';
+import { StoreProps } from '../../lib/interfaces';
 import { Item } from '../../lib/interfaces';
 
 import {

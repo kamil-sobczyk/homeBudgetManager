@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 import { Button } from '@rmwc/button';
 
-import { StoreProps } from './listBox';
+import { StoreProps } from '../../lib/interfaces';
 
 @observer
 export class ViewButton extends React.Component<StoreProps, {}> {
