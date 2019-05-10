@@ -4,10 +4,10 @@ import { Item } from '../interfaces';
 
 import { ApiClient } from './stores/apiClient';
 
-import { sortItemsByName, reorder, move } from '../reorderFunctions';
+import { sortItemsByName } from '../reorderFunctions';
 
-import { DropResult } from 'react-beautiful-dnd';
 import { VisibityClient } from './stores/visibilityClient';
+import { DnDClient } from './stores/dndClient';
 
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';
@@ -31,10 +31,13 @@ export class Store {
   constructor() {
     this.apiClient = new ApiClient(this);
     this.visibilityClient = new VisibityClient(this);
+    this.dndClient = new DnDClient(this);
   }
 
   apiClient: ApiClient;
   visibilityClient: VisibityClient;
+  dndClient: DnDClient;
+
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
@@ -58,57 +61,6 @@ export class Store {
     (this as any)[list][index].checked = !(this as any)[list][index].checked; //////// use if
     // getSelected(selected);
     // changeSelectedOnServer(selected);
-  };
-  getDndList = (id: string) => {
-    if (id === 'droppable2') {
-      return this.items;
-    } else {
-      return this.selected;
-    }
-  };
-  reorderList = (list: string, reorderedList: Item[]): void => {
-    ///////////////////////
-    if (list === 'droppable') {
-      this.selected = reorderedList;
-    } else {
-      this.items = reorderedList;
-    }
-  };
-  onDragEnd = (result: DropResult): void => {
-    const { source, destination } = result;
-
-    if (!destination) {
-      return;
-    }
-
-    if (source.droppableId === destination.droppableId) {
-      const items = reorder(
-        this.getDndList(source.droppableId),
-        source.index,
-        destination.index
-      );
-
-      this.reorderList(destination.droppableId, items);
-    } else {
-      const result = move(
-        this.getDndList(source.droppableId),
-        this.getDndList(destination.droppableId),
-        source,
-        destination
-      );
-      // result.droppable.forEach((item: Item) => (item.checked = false));
-
-      this.selected = result.droppable;
-      this.items = result.droppable2;
-
-      // this.reorderLists()
-
-      // getItems(sortItemsByName(result.droppable));
-      // getSelected(result.droppable2);
-
-      // changeItemsOnServer(result.droppable);
-      // changeSelectedOnServer(result.droppable2);
-    }
   };
   addCost = (cost: Cost): number => this.costs.push(cost); ////////////////////////////////
 }
