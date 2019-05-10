@@ -15,9 +15,11 @@ import { Button } from '@rmwc/button';
 export class DeleteDialog extends React.Component<StoreProps, {}> {
   confirm = (): void => {
     const {
-      itemMenagerClient: { deleteItem },
-      visibilityClient: { toggleShowDeleteDialog },
-      activeItem: { index }
+      itemMenagerClient: {
+        deleteItem,
+        activeItem: { index }
+      },
+      visibilityClient: { toggleShowDeleteDialog }
     } = this.props.store;
 
     deleteItem(index);
@@ -27,7 +29,9 @@ export class DeleteDialog extends React.Component<StoreProps, {}> {
   render() {
     const {
       visibilityClient: { showDeleteDialog, toggleShowDeleteDialog },
-      activeItem: { index }
+      itemMenagerClient: {
+        activeItem: { index }
+      }
     } = this.props.store;
 
     const active = this.props.store.items[index]
@@ -37,7 +41,6 @@ export class DeleteDialog extends React.Component<StoreProps, {}> {
     return (
       <Dialog
         open={showDeleteDialog}
-        // onClose={this.handleClose}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
@@ -46,7 +49,10 @@ export class DeleteDialog extends React.Component<StoreProps, {}> {
           Are you sure want to delete {active} from your list?
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => toggleShowDeleteDialog()} color='primary'>
+          <Button
+            onClick={(): void => toggleShowDeleteDialog()}
+            color='primary'
+          >
             No
           </Button>
           <Button onClick={this.confirm} color='primary' autoFocus>

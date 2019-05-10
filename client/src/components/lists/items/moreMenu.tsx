@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import styled from 'styled-components';
-
 import { StoreProps } from '../../../lib/interfaces';
 
 import { MenuSurfaceAnchor, Menu, MenuItem } from '@rmwc/menu';
@@ -20,14 +18,21 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   setOpen = (event: React.MouseEvent<any, MouseEvent>): void => {
+    const {
+      itemMenagerClient: { setActiveItem }
+    } = this.props.store;
+    const { index } = this.props;
     this.setState({ open: event.target });
+    setActiveItem(index);
     event.stopPropagation();
   };
 
   handleDeleteClick = (event: React.MouseEvent<any, MouseEvent>): void => {
     const {
       visibilityClient: { toggleShowDeleteDialog },
-      activeItem: { index }
+      itemMenagerClient: {
+        activeItem: { index }
+      }
     } = this.props.store;
 
     toggleShowDeleteDialog(index);
@@ -38,7 +43,9 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   handleEditClick = (event: React.MouseEvent<any, MouseEvent>): void => {
     const {
       visibilityClient: { toggleShowEditDialog },
-      activeItem: { list, index }
+      itemMenagerClient: {
+        activeItem: { list, index }
+      }
     } = this.props.store;
 
     toggleShowEditDialog(list, index);
@@ -46,14 +53,24 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     this.setOpen(event);
   };
 
+  handleMoreMenuClick = (event: React.MouseEvent<any, MouseEvent>) => {
+    event.persist();
+    console.log('Dddd');
+    console.log(event);
+  };
+
   render() {
     return (
-      <MenuSurfaceAnchor>
+      <MenuSurfaceAnchor
+        onClick={e =>
+          this.props.store.itemMenagerClient.setActiveItem.bind(this, 5)
+        }
+      >
         <Menu
           hoistToBody={true}
           open={this.state.open}
-          onSelect={evt => console.log(evt.detail.index)}
-          onClose={() => this.setState({ open: false })}
+          onSelect={e => console.log(e.detail.index)}
+          onClose={(): void => this.setState({ open: false })}
         >
           <MenuItem onClick={e => this.handleEditClick(e)}>
             <IconButton icon='edit' />

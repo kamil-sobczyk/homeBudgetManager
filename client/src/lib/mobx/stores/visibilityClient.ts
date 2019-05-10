@@ -26,12 +26,12 @@ export class VisibityClient {
   toggleShowDeleteDialog = (index?: number, list?: ListType): void => {
     this.showDeleteDialog = !this.showDeleteDialog;
     // this.store.activeItem.list = list;
-    if (index) this.store.activeItem.index = index;
+    if (index) this.store.itemMenagerClient.activeItem.index = index;
   };
   toggleShowEditDialog = (list: string, index: number): void => {
     this.showEditDialog = !this.showEditDialog;
-    this.store.activeItem.list = list;
-    this.store.activeItem.index = index;
+    this.store.itemMenagerClient.activeItem.list = list;
+    this.store.itemMenagerClient.activeItem.index = index;
   };
   toggleShowFailDialog = (): boolean =>
     (this.showFailDialog = !this.showFailDialog);

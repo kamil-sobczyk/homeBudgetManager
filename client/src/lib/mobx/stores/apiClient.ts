@@ -30,6 +30,13 @@ export class ApiClient {
       .get(server + 'store/costs')
       .then(response => response) ///json
       .then(costs => (this.store.costs = costs as any)); //////////////////////////////////
+
+  deleteItemsOnServer = async (index: number) => {  ///type
+    axios
+      .delete(server + 'store/items', { data: { index: index } })
+      .then(response => response) ///json
+      .then(state => state);
+  };
 }
 
 // const changeItemsOnServer = body => {

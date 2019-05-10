@@ -28,9 +28,4 @@ export class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
-  @observable activeItem: ActiveItem = {
-    list: 'items',
-    index: 0
-  };
-  
 }

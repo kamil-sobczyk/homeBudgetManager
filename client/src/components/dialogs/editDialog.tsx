@@ -43,25 +43,36 @@ export class EditDialog extends React.Component<StoreProps, Item> {
 
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
-    const { list, index } = this.props.store.activeItem;
+    const { list, index } = this.props.store.itemMenagerClient.activeItem;
 
-    this.setState({
-      name: event ? target.value : (this.props.store as any)[list][index].name
-    });
+    if (list === 'items' && this.props.store.items[index]) {
+      if (target.name === 'name') {
+        this.setState({
+          name: event ? target.value : this.props.store.items[index].name
+        });
+      } else {
+        this.setState({
+          name: event ? target.value : this.props.store.items[index].info
+        });
+      }
+    } else if (list === 'selected' && this.props.store.selected[index]) {
+      if (target.name === 'name') {
+        this.setState({
+          name: event ? target.value : this.props.store.selected[index].name
+        });
+      } else {
+        this.setState({
+          name: event ? target.value : this.props.store.selected[index].info
+        });
+      }
+    }
   };
-
-  changeNewItemInfo = (event: React.FormEvent<EventTarget>): void => {
-    const target = event.target as HTMLInputElement;
-    const { list, index } = this.props.store.activeItem;
-    this.setState({
-      info: event ? target.value : (this.props.store as any)[list][index].info
-    });
-  };
-
   render() {
     const {
-      activeItem,
-      activeItem: { list, index },
+      itemMenagerClient: {
+        activeItem,
+        activeItem: { list, index }
+      },
       visibilityClient: { showEditDialog, toggleShowEditDialog }
     } = this.props.store;
 
@@ -69,15 +80,14 @@ export class EditDialog extends React.Component<StoreProps, Item> {
     let defaultInfo;
 
     if ((this.props.store as any)[list][index]) {
-      defaultName = (this.props.store as any)[list][index].name;
-      defaultInfo = (this.props.store as any)[list][index].info;
-    } else {
-      defaultName = ' ';
-      defaultName = ' ';
+      if (list === 'items') {
+        defaultName = this.props.store.items[index].name;
+        defaultInfo = this.props.store.items[index].info;
+      } else {
+        defaultName = this.props.store.selected[index].name;
+        defaultInfo = this.props.store.selected[index].info;
+      }
     }
-
-    // const defaultName = !(this.props.store as any)[list][index] ? " " : (this.props.store as any)[list][index].name;
-    // const defaultInfo  = !(this.props.store as any)[list][index] ? " " : (this.props.store as any)[list][index].info;
 
     return (
       <Dialog
@@ -89,6 +99,7 @@ export class EditDialog extends React.Component<StoreProps, Item> {
           id='outlined-required'
           label='Type new name'
           defaultValue={defaultName}
+          name='name'
           //   margin="normal"
           //   variant="outlined"
           onChange={this.changeNewItem}
@@ -97,9 +108,10 @@ export class EditDialog extends React.Component<StoreProps, Item> {
           id='outlined'
           label='Type new additional info'
           defaultValue={defaultInfo}
+          name='info'
           //   margin="normal"
           //   variant="outlined"
-          onChange={this.changeNewItemInfo}
+          onChange={this.changeNewItem}
         />
         <DialogActions>
           <Button
