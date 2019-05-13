@@ -62,8 +62,6 @@ export class TableContainer extends React.Component<
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
 
-    console.log('costs:', costs);
-
     let sortedCosts: Cost[];
     if (costs.length > 0) {
       sortedCosts = costs
@@ -80,7 +78,7 @@ export class TableContainer extends React.Component<
 
     return (
       <>
-        <DataTable style={{ border: '1px solid black', minWidth: '500px' }}>
+        <DataTable >
           <StyledDataTableContent>
             <DataTableHead>
               <DataTableRow>

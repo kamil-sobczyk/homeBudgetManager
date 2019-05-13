@@ -57,6 +57,13 @@ export class ApiClient {
       .then(response => response)
       .then(state => state.data as Item[]);
   };
+
+  addCostOnServer = async(cost: Cost) => {
+    axios
+    .post<Cost>(server + 'store/costs', { data: { cost } })
+    .then(response => response)
+    .then(state => state.data as Cost);
+  }
 }
 
 // const addNewItemOnServer = body => {

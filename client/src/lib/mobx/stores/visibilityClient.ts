@@ -2,6 +2,7 @@ import { Store } from '../rootStore';
 import { observable } from 'mobx';
 
 import { ListType } from './itemMenagerClient';
+import { Cost } from '../../interfaces';
 
 export class VisibityClient {
   store: Store;
@@ -37,7 +38,7 @@ export class VisibityClient {
   };
 
   toggleShowEditDialog = (list?: ListType, index?: number): void => {
-    console.log(list, index)
+    console.log(list, index);
     this.store.itemMenagerClient.setActiveItem(list, index);
     this.showEditDialog = !this.showEditDialog;
   };
@@ -45,7 +46,10 @@ export class VisibityClient {
   toggleShowFailDialog = (): boolean =>
     (this.showFailDialog = !this.showFailDialog);
 
-  toggleShowFinishDialog = (): boolean => (this.showFinish = !this.showFinish);
+  toggleShowFinishDialog = (cost?: Cost): void => {
+    this.showFinish = !this.showFinish;
+    if (cost) this.store.itemMenagerClient.addCost(cost);
+  };
 
   toggleShowMoreMenu = (): boolean => (this.showMoreMenu = !this.showMoreMenu);
 }

@@ -58,5 +58,8 @@ export class ItemMenagerClient {
     this.store.apiClient.reorderItemsOnServer(items, selected);
   };
 
-  addCost = (cost: Cost): number => this.store.costs.push(cost); ////////////////////////////////
+  addCost = (cost: Cost): void => {
+    this.store.costs.push(cost);
+    this.store.apiClient.addCostOnServer(cost);
+  }
 }

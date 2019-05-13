@@ -43,7 +43,7 @@ export class ListsContainer extends React.Component<StoreProps, {}> {
           <Button onClick={toggleShowShoppingDialog}>
             Show previous shoppings
           </Button>
-          <Button color='primary' onClick={toggleShowFinishDialog}>
+          <Button color='primary' onClick={() =>toggleShowFinishDialog()}>
             Finish shopping
           </Button>
         </StyledButtonsContainer>

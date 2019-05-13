@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
+import { StoreProps, Cost } from '../../lib/interfaces';
 import { Item } from '../../lib/interfaces';
 
 import {
@@ -15,19 +15,13 @@ import { Button } from '@rmwc/button';
 
 import { sortItemsByName } from '../../lib/reorderFunctions';
 
-interface FinishDialogState {
-  chosenNames: string[];
-  count: number;
-  date: string;
-}
-
 @observer
 export class FinishDialog extends React.Component<
   StoreProps,
-  FinishDialogState
+  Cost
 > {
   state = {
-    chosenNames: [],
+    chosenItems: [],
     count: 0,
     date: String(
       new Date().toLocaleDateString('pl-PL', {
@@ -53,27 +47,27 @@ export class FinishDialog extends React.Component<
       items,
       selected,
       itemMenagerClient: { reorderItems },
-      visibilityClient: {toggleShowFinishDialog}
+      visibilityClient: { toggleShowFinishDialog }
     } = this.props.store;
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
-    const chosenNames: string[] = [];
+    const chosenItems: string[] = [];
 
     newItems = items;
     selected.forEach((item: Item) => {
       if (item.checked) {
         newItems.push(item);
-        chosenNames.push(item.name);
+        chosenItems.push(item.name);
       } else newSelected.push(item);
     });
 
-    const item: FinishDialogState = this.state;
+    const item: Cost = this.state;
     item.count = Math.round(this.state.count); ////////////////////
-    item.chosenNames = chosenNames;
+    item.chosenItems = chosenItems;
     sortItemsByName(newItems);
 
     reorderItems(newItems, newSelected);
-    toggleShowFinishDialog();
+    toggleShowFinishDialog(item);
 
     // getSelected(newSelected);
     // changeSelectedOnServer(newSelected);
@@ -119,7 +113,7 @@ export class FinishDialog extends React.Component<
           />
         </DialogContent>
         <DialogActions>
-          <Button color='primary' onClick={toggleShowFinishDialog}>
+          <Button color='primary' onClick={() => toggleShowFinishDialog()}>
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={this.handleFinish}>
