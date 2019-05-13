@@ -87,7 +87,9 @@ const appRouter = app => {
     res.status(200).send(store.items);
   });
   app.put("/store/items", (req, res) => {
-    store.items = req.body;
+    const { index, newItem } = req.body.data;
+
+    store.items[index] = newItem;
     res.status(200).json(store.items);
   });
   app.delete("/store/items", (req, res) => {
@@ -100,12 +102,9 @@ const appRouter = app => {
     res.status(200).json(store.selected);
   });
   app.put("/store/selected", (req, res) => {
-    const { list, index, newItem } = req.body.data;
-    if (list === "items") {
-      store.items[index] = newItem;
-    } else if (list === "selected") {
-      store.selected[index] = newItem;
-    }
+    const { index, newItem } = req.body.data;
+
+    store.selected[index] = newItem;
     res.status(200).json(store.selected);
   });
 

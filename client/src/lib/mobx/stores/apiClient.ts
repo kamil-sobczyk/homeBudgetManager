@@ -41,7 +41,7 @@ export class ApiClient {
 
   editItemsOnServer = async (list: ListType, index: number, newItem: Item) => {
     axios
-    .put(server + 'store/' + list, { data: { list, index, newItem } })
+    .put(server + 'store/' + list, { data: { index, newItem } })
     .then(response => response) ///json
     .then(state => state);
   }
