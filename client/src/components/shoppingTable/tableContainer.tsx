@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { observer } from 'mobx-react';
 import { Store } from '../../lib/mobx/rootStore';
 import { Cost } from '../../lib/interfaces';
@@ -79,7 +81,7 @@ export class TableContainer extends React.Component<
     return (
       <>
         <DataTable style={{ border: '1px solid black', minWidth: '500px' }}>
-          <DataTableContent>
+          <StyledDataTableContent>
             <DataTableHead>
               <DataTableRow>
                 <DataTableHeadCell>Items</DataTableHeadCell>
@@ -90,16 +92,24 @@ export class TableContainer extends React.Component<
             <DataTableBody>
               {sortedCosts.map((cost: Cost, index: number) => (
                 <DataTableRow key={index}>
-                  <DataTableCell>{cost.chosenItems}</DataTableCell>
-                  <DataTableCell>{cost.date}</DataTableCell>
-                  <DataTableCell alignEnd>{cost.count}</DataTableCell>
+                  <StyledDataTableCell>{cost.chosenItems.join(', ')}</StyledDataTableCell>
+                  <StyledDataTableCell>{cost.date}</StyledDataTableCell>
+                  <StyledDataTableCell alignEnd>{cost.count}</StyledDataTableCell>
                 </DataTableRow>
               ))}
             </DataTableBody>
-          </DataTableContent>
+          </StyledDataTableContent>
         </DataTable>
         <CostsCard sortedCosts={sortedCosts} />
       </>
     );
   }
 }
+
+const StyledDataTableContent = styled(DataTableContent)`
+  width: 100%;
+`;
+
+const StyledDataTableCell = styled(DataTableCell)`
+  text-align: center;
+`;
