@@ -31,11 +31,21 @@ export class ProvidedSelectedDraggable extends React.Component<
   ProvidedSelectedDraggableProps,
   {}
 > {
+  toggleEditItem = (event: React.MouseEvent<any, MouseEvent>): void => {
+    const {
+      itemMenagerClient: { setActiveItem },
+      visibilityClient: { toggleShowEditDialog }
+    } = this.props.store;
+    const { index } = this.props;
+    event.stopPropagation();
+    setActiveItem('selected', index);
+    toggleShowEditDialog('selected', index);
+  };
+
   render() {
     const {
       selected,
-      itemMenagerClient: { toggleCheckItems, setActiveItem },
-      visibilityClient: { toggleShowEditDialog }
+      itemMenagerClient: { toggleCheckItems }
     } = this.props.store;
     const { providedDraggable, item, index } = this.props;
     return (
@@ -64,11 +74,7 @@ export class ProvidedSelectedDraggable extends React.Component<
               <IconButton
                 icon='edit'
                 aria-label='Edit item'
-                onClick={e => {
-                  e.stopPropagation();
-                  setActiveItem('selected', index);
-                  toggleShowEditDialog('selected', index);
-                }}
+                onClick={e => this.toggleEditItem(e)}
               />
             </StyledTextContainer>
           </StyledItem>
