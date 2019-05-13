@@ -12,7 +12,6 @@ import { ProvidedItems } from './provided/providedItems';
 @observer
 export class Items extends React.Component<StoreProps, {}> {
   render() {
-    let a = null;
     return (
       <StyledContainer>
         <Droppable droppableId='droppable2'>

@@ -11,6 +11,10 @@ const privateList = 'http://35.224.13.129/';
 const publicDemo = 'http://35.184.211.161/';
 const server = localhost;
 
+interface ServerData {
+  data: Item;
+}
+
 export class ApiClient {
   store: Store;
   constructor(store: Store) {
@@ -18,77 +22,42 @@ export class ApiClient {
   }
   getItems = async (): Promise<Item[]> =>
     await axios
-      .get(server + 'store/items')
+      .get<Item[]>(server + 'store/items')
       .then(items => (this.store.items = items.data as Item[]));
 
   getSelected = async (): Promise<Item[]> =>
     axios
-      .get(server + 'store/selected')
+      .get<Item[]>(server + 'store/selected')
       .then(selected => (this.store.selected = selected.data as Item[]));
 
   getCosts = async (): Promise<Cost[]> =>
     axios
-      .get(server + 'store/costs')
-      .then(response => response) ///json
-      .then(costs => (this.store.costs = costs as any)); //////////////////////////////////
+      .get<Cost[]>(server + 'store/costs')
+      .then(response => response)
+      .then(costs => (this.store.costs = costs.data as Cost[]));
 
   deleteItemsOnServer = async (index: number) => {
     ///type
     axios
       .delete(server + 'store/items', { data: { index: index } })
-      .then(response => response) ///json
-      .then(state => state);
+      .then(response => response)
+      .then(state => state.data as Item[]);
   };
 
   editItemsOnServer = async (list: ListType, index: number, newItem: Item) => {
     axios
-      .put(server + 'store/' + list, { data: { index, newItem } })
-      .then(response => response) ///json
-      .then(state => state);
+      .put<Item>(server + 'store/' + list, { data: { index, newItem } })
+      .then(response => response)
+      .then(state => state.data as Item);
   };
 
   reorderItemsOnServer = async (items: Item[], selected: Item[]) => {
     axios
-      .put(server + 'store/', { data: { items, selected } })
-      .then(response => response) ///json
-      .then(state => state);
+      .put<Item[]>(server + 'store/', { data: { items, selected } })
+      .then(response => response)
+      .then(state => state.data as Item[]);
   };
 }
-
-// const changeItemsOnServer = body => {
-//   fetch(server + 'store/items', {
-//     method: 'PUT',
-//     headers: {
-//       'Content-type': 'application/json'
-//     },
-//     mode: 'cors',
-//     body: JSON.stringify(body)
-//   })
-//     .then(response => {
-//       return response;
-//     })
-//     .then(items => {
-//       return items.json();
-//     })
-//     .catch(error => console.log('Ooops', error));
-// };
-// const changeSelectedOnServer = body => {
-//   fetch(server + 'store/selected', {
-//     method: 'PUT',
-//     headers: {
-//       'Content-type': 'application/json'
-//     },
-//     mode: 'cors',
-//     body: JSON.stringify(body)
-//   })
-//     .then(response => {
-//       return response;
-//     })
-//     .then(selected => {
-//       return selected.json();
-//     })
-//     .catch(error => console.log('Ooops', error));
-// };
 
 // const addNewItemOnServer = body => {
 //   fetch(server + 'store/items', {
@@ -108,55 +77,6 @@ export class ApiClient {
 //     .catch(error => console.log('Ooops', error));
 // };
 
-// const deleteItemsOnServer = activeItem => {
-//   fetch(server + 'store/items', {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-type': 'application/json'
-//     },
-//     mode: 'cors',
-//     body: JSON.stringify(activeItem)
-//   })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(state => {
-//       return state;
-//     })
-//     .catch(error => console.log('Ooops', error));
-// };
-
-// const editItemOnServer = (newItem, activeItem) => {
-//   fetch(server + 'store', {
-//     method: 'PUT',
-//     headers: {
-//       'Content-type': 'application/json'
-//     },
-//     mode: 'cors',
-//     body: JSON.stringify({ activeItem: activeItem, newItem: newItem })
-//   })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(state => {
-//       return state;
-//     })
-//     .catch(error => console.log('Ooops', error));
-// };
-
-// const getCostsFromServer = dispatch => {
-//   fetch(server + 'store/costs', {
-//     mode: 'cors',
-//     method: 'GET'
-//   })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(costs => {
-//       return dispatch(costs);
-//     });
-// };
-
 // const addCostsOnServer = (dispatch, costs) => {
 //   fetch(server + 'store/costs', {
 //     method: 'POST',
@@ -173,16 +93,4 @@ export class ApiClient {
 //       return dispatch(state);
 //     })
 //     .catch(error => console.log('Ooops', error));
-// };
-
-// export {
-//   getItemsFromServer,
-//   getSelectedFromServer,
-//   changeSelectedOnServer,
-//   changeItemsOnServer,
-//   addNewItemOnServer,
-//   deleteItemsOnServer,
-//   editItemOnServer,
-//   getCostsFromServer,
-//   addCostsOnServer
 // };

@@ -50,17 +50,11 @@ export class DnDClient {
         source,
         destination
       );
-      result.droppable.forEach((item: Item) => (item.checked = false));
 
+      result.droppable.forEach((item: Item) => (item.checked = false));
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);
       reorderItemsOnServer(this.store.items, this.store.selected);
-
-      // getItems(sortItemsByName(result.droppable));
-      // getSelected(result.droppable2);
-
-      // changeItemsOnServer(result.droppable);
-      // changeSelectedOnServer(result.droppable2);
     }
   };
 }
