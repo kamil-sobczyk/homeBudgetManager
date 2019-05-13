@@ -11,10 +11,6 @@ const privateList = 'http://35.224.13.129/';
 const publicDemo = 'http://35.184.211.161/';
 const server = localhost;
 
-interface ServerData {
-  data: Item;
-}
-
 export class ApiClient {
   store: Store;
   constructor(store: Store) {
@@ -79,21 +75,3 @@ export class ApiClient {
       .then(state => state.data as Item);
   };
 }
-
-// const addNewItemOnServer = body => {
-//   fetch(server + 'store/items', {
-//     method: 'POST',
-//     headers: {
-//       'Content-type': 'application/json'
-//     },
-//     mode: 'cors',
-//     body: JSON.stringify(body)
-//   })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(item => {
-//       return item;
-//     })
-//     .catch(error => console.log('Ooops', error));
-// };
