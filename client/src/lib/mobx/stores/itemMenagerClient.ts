@@ -38,6 +38,8 @@ export class ItemMenagerClient {
     } else if (list === 'selected') {
       this.store.selected[index] = newItem;
     } else return;
+
+    this.store.apiClient.editItemsOnServer(list, index, newItem);
   };
 
   toggleCheckItems = (list: ListType, index: number): void => {

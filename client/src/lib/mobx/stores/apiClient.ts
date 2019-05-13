@@ -4,6 +4,7 @@ import { Store } from '../rootStore';
 import { Cost } from '../../interfaces';
 
 import { Item } from '../../interfaces';
+import { ListType } from './itemMenagerClient';
 
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';
@@ -37,6 +38,13 @@ export class ApiClient {
       .then(response => response) ///json
       .then(state => state);
   };
+
+  editItemsOnServer = async (list: ListType, index: number, newItem: Item) => {
+    axios
+    .put(server + 'store/' + list, { data: { list, index, newItem } })
+    .then(response => response) ///json
+    .then(state => state);
+  }
 }
 
 // const changeItemsOnServer = body => {

@@ -37,6 +37,7 @@ export class VisibityClient {
   };
 
   toggleShowEditDialog = (list?: ListType, index?: number): void => {
+    console.log(list, index)
     this.store.itemMenagerClient.setActiveItem(list, index);
     this.showEditDialog = !this.showEditDialog;
   };

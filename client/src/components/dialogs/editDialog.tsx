@@ -90,7 +90,6 @@ export class EditDialog extends React.Component<StoreProps, Item> {
     let defaultInfo;
 
     if ((this.props.store as any)[list][index]) {
-      console.log(list, index);
       if (list === 'items') {
         defaultName = this.props.store.items[index].name;
         defaultInfo = this.props.store.items[index].info;

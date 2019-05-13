@@ -100,7 +100,12 @@ const appRouter = app => {
     res.status(200).json(store.selected);
   });
   app.put("/store/selected", (req, res) => {
-    store.selected = req.body;
+    const { list, index, newItem } = req.body.data;
+    if (list === "items") {
+      store.items[index] = newItem;
+    } else if (list === "selected") {
+      store.selected[index] = newItem;
+    }
     res.status(200).json(store.selected);
   });
 
