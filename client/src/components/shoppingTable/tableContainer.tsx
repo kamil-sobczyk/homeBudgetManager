@@ -73,8 +73,8 @@ export class TableContainer extends React.Component<
       sortedCosts = [
         {
           count: 0,
-          chosenItems: [''],
-          date: 'No shopping yet'
+          chosenItems: [' - - - - - - '],
+          date: ' - - - - - - '
         }
       ];
 

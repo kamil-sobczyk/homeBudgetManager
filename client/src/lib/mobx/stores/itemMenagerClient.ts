@@ -51,5 +51,12 @@ export class ItemMenagerClient {
     } else return;
     // changeSelectedOnServer(selected);
   };
+
+  reorderItems = (items: Item[], selected: Item[]) => {
+    this.store.items = items;
+    this.store.selected = selected;
+    this.store.apiClient.reorderItemsOnServer(items, selected);
+  };
+
   addCost = (cost: Cost): number => this.store.costs.push(cost); ////////////////////////////////
 }

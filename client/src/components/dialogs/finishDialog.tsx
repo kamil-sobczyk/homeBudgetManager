@@ -49,13 +49,18 @@ export class FinishDialog extends React.Component<
   };
 
   handleFinish = (): void => {
-    const { items, selected } = this.props.store;
+    const {
+      items,
+      selected,
+      itemMenagerClient: { reorderItems },
+      visibilityClient: {toggleShowFinishDialog}
+    } = this.props.store;
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
     const chosenNames: string[] = [];
 
     newItems = items;
-    selected.forEach((item: Item, index: number) => {
+    selected.forEach((item: Item) => {
       if (item.checked) {
         newItems.push(item);
         chosenNames.push(item.name);
@@ -66,6 +71,9 @@ export class FinishDialog extends React.Component<
     item.count = Math.round(this.state.count); ////////////////////
     item.chosenNames = chosenNames;
     sortItemsByName(newItems);
+
+    reorderItems(newItems, newSelected);
+    toggleShowFinishDialog();
 
     // getSelected(newSelected);
     // changeSelectedOnServer(newSelected);

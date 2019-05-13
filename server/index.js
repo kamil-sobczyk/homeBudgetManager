@@ -57,13 +57,7 @@ const store = {
       checked: false
     }
   ],
-  costs: [
-    { count: 44, chosenItems: ["a", "b"], date: String(Date.now()) },
-    { count: 4, chosenItems: ["afds", "b"], date: String(Date.now()) },
-    { count: 434, chosenItems: ["a", "ssdb"], date: String(Date.now()) },
-    { count: 441, chosenItems: ["t", "bsd"], date: String(Date.now()) },
-    { count: 444, chosenItems: ["c", "bsd"], date: String(Date.now()) }
-  ]
+  costs: []
 };
 
 const sortItemsByName = () =>
