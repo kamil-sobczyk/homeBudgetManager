@@ -15,8 +15,9 @@ import { Button } from '@rmwc/button';
 export class FailDialog extends React.Component<StoreProps, {}> {
   render() {
     const {
-      visibilityClient: { showFailDialog, toggleShowFailDialog }
-    } = this.props.store;
+      showFailDialog,
+      toggleShowFailDialog
+    } = this.props.store.visibilityClient;
     return (
       <Dialog
         open={showFailDialog}
@@ -24,7 +25,7 @@ export class FailDialog extends React.Component<StoreProps, {}> {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>
-          "Unable to add new product to the list!"
+          Unable to add new product to the list!
         </DialogTitle>
         <DialogContent id='alert-dialog-description'>
           This product is on your list already.
