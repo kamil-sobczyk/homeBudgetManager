@@ -37,9 +37,17 @@ export class FinishDialog extends React.Component<
 
   handleChangeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
+    console.log(typeof target.value)
+    if (parseInt(target.value) >=  0) {
     this.setState({
-      count: Number(target.value)
+      count: parseInt(target.value)
     });
+    } else {
+          this.setState({
+            count: 0
+          });
+    }
+
   };
 
   handleFinish = (): void => {
@@ -68,13 +76,6 @@ export class FinishDialog extends React.Component<
 
     reorderItems(newItems, newSelected);
     toggleShowFinishDialog(item);
-
-    // getSelected(newSelected);
-    // changeSelectedOnServer(newSelected);
-    // getItems(newItems);
-    // changeItemsOnServer(newItems);
-    // addCostsOnServer(getCosts, item);
-    // handleOpenFinish();
   };
 
   render() {
@@ -86,11 +87,9 @@ export class FinishDialog extends React.Component<
     return (
       <Dialog
         aria-describedby='alert-dialog-description'
-        // onClose={this.handleClose}
         aria-labelledby='alert-dialog-title'
         open={showFinish}
-        // TransitionComponent={Transition}
-        // keepMounted
+
       >
         <DialogTitle id='alert-dialog-title'>
           {'Finishing shopping'}
@@ -101,9 +100,10 @@ export class FinishDialog extends React.Component<
           <TextField
             id='outlined-adornment-number'
             label='Amount'
-            // defaultValue={0}
+            defaultValue={String(0)}
             onChange={this.handleChangeCounter}
             type='number'
+     
             // InputProps={{
             //   inputProps: { min: 0 },
             //   endAdornment: <InputAdornment position="end">PLN</InputAdornment>
