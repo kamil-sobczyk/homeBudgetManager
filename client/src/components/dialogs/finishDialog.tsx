@@ -16,10 +16,7 @@ import { Button } from '@rmwc/button';
 import { sortItemsByName } from '../../lib/reorderFunctions';
 
 @observer
-export class FinishDialog extends React.Component<
-  StoreProps,
-  Cost
-> {
+export class FinishDialog extends React.Component<StoreProps, Cost> {
   state = {
     chosenItems: [],
     count: 0,
@@ -31,32 +28,31 @@ export class FinishDialog extends React.Component<
     )
   };
 
-  componentDidMount = (): void => {
-    // getItemsFromServer(this.props.getItems);
-  };
-
   handleChangeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
-    console.log(typeof target.value)
-    if (parseInt(target.value) >=  0) {
-    this.setState({
-      count: parseInt(target.value)
-    });
+    console.log(typeof target.value);
+    if (parseInt(target.value) > 0) {
+      this.setState({
+        count: parseInt(target.value)
+      });
     } else {
-          this.setState({
-            count: 0
-          });
+      target.value = '0';
+      this.setState({
+        count: 0
+      });
     }
-
   };
 
   handleFinish = (): void => {
+    if (this.state.count < 1) return;
+
     const {
       items,
       selected,
       itemMenagerClient: { reorderItems },
       visibilityClient: { toggleShowFinishDialog }
     } = this.props.store;
+
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
     const chosenItems: string[] = [];
@@ -89,7 +85,6 @@ export class FinishDialog extends React.Component<
         aria-describedby='alert-dialog-description'
         aria-labelledby='alert-dialog-title'
         open={showFinish}
-
       >
         <DialogTitle id='alert-dialog-title'>
           {'Finishing shopping'}
@@ -103,7 +98,8 @@ export class FinishDialog extends React.Component<
             defaultValue={String(0)}
             onChange={this.handleChangeCounter}
             type='number'
-     
+            required
+
             // InputProps={{
             //   inputProps: { min: 0 },
             //   endAdornment: <InputAdornment position="end">PLN</InputAdornment>
