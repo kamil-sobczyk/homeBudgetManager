@@ -57,7 +57,13 @@ const store = {
       checked: false
     }
   ],
-  costs: []
+  costs: [
+    { count: 44, chosenItems: ["a", "b"], date: "aaahdfhdaa" },
+    { count: 4, chosenItems: ["afds", "b"], date: "aaaagfddga" },
+    { count: 434, chosenItems: ["a", "ssdb"], date: "aaaaasdsda" },
+    { count: 441, chosenItems: ["t", "bsd"], date: "aaaasdfsa" },
+    { count: 444, chosenItems: ["c", "bsd"], date: "aaaahfcgda" }
+  ]
 };
 
 const sortItemsByName = () =>
@@ -120,9 +126,9 @@ const appRouter = app => {
     store.costs.push(req.body);
     res.status(200).json(store.costs);
   });
-  
+
   app.put("/store", (req, res) => {
-    const {items, selected } = req.body.data;
+    const { items, selected } = req.body.data;
 
     if (items !== store.items) store.items = items;
     if (selected !== store.selected) store.selected = selected;
