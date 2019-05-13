@@ -24,79 +24,58 @@ import { FailDialog } from './failDialog';
 //   } else infoInput.value = null;
 // };
 
-interface AddDialogState {
-  item: Item;
-  openFail: boolean;
-}
-
 @observer
-export class AddDialog extends React.Component<StoreProps, AddDialogState> {
+export class AddDialog extends React.Component<StoreProps, Item> {
   state = {
-    item: {
-      checked: false,
-      id: String(Date.now()),
-      info: '',
-      name: ''
-    },
-    openFail: false
+    checked: false,
+    id: String(Date.now()),
+    info: '',
+    name: ''
   };
   handleAddItem = () => {
     const {
       itemMenagerClient: { addItem },
       items,
       selected,
-      visibilityClient: { toggleShowAddDialog }
+      visibilityClient: { toggleShowAddDialog, toggleShowFailDialog }
     } = this.props.store;
-    const { name } = this.state.item;
+    const { name } = this.state;
 
     const allNames = [...selected, ...items].map(({ name }) => name);
 
     const finishAdding = (): void => {
-      const { item } = this.state;
-
-      addItem(item);
+      addItem(this.state);
       this.setState({
-        item: {
-          checked: false,
-          id: String(Date.now()),
-          info: '',
-          name: ''
-        }
+        checked: false,
+        id: String(Date.now()),
+        info: '',
+        name: ''
       });
       toggleShowAddDialog();
     };
 
     allNames.indexOf(name) < 0 && name !== ''
       ? finishAdding()
-      : this.setState({ openFail: true });
-  };
-
-  toggleOpenFailDialog = (): void => {
-    this.setState({ openFail: !this.state.openFail });
+      : toggleShowFailDialog();
   };
 
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
-    const { item } = this.state;
 
     if (target.name === 'info') {
       this.setState({
-        item: {
-          checked: false,
-          id: String(Date.now()),
-          info: target.value,
-          name: item.name
-        }
+        checked: false,
+        id: String(Date.now()),
+        info: target.value,
+        name: this.state.name
       });
       return;
     }
     this.setState({
-      item: {
         checked: false,
         id: String(Date.now()),
-        info: item.info,
+        info: this.state.info,
         name: target.value
-      }
     });
   };
 
@@ -105,18 +84,19 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
       showAddDialog,
       toggleShowAddDialog
     } = this.props.store.visibilityClient;
+    const {name, info} = this.state;
     return (
       <Dialog open={showAddDialog}>
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
-          defaultValue={this.state.item.name}
+          defaultValue={name}
           id='outlined-required'
           label='New item'
           name='name'
           onChange={this.changeNewItem}
         />
         <TextField
-          defaultValue={this.state.item.info}
+          defaultValue={info}
           id='outlined'
           label='Additional info'
           name='info'
@@ -130,11 +110,7 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
             Add
           </Button>
         </DialogActions>
-        <FailDialog
-          {...this.props}
-          //   open={this.state.openFail}
-          //   onClose={()=>this.toggleOpenFailDialog}
-        />
+        <FailDialog {...this.props} />
       </Dialog>
     );
   }
