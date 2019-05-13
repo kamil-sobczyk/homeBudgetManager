@@ -26,6 +26,7 @@ export class DnDClient {
   };
   onDragEnd = (result: DropResult): void => {
     const { source, destination } = result;
+    const { reorderItemsOnServer } = this.store.apiClient;
 
     if (!destination) {
       return;
@@ -40,6 +41,7 @@ export class DnDClient {
 
       if (source.droppableId !== 'droppable2') {
         this.reorderList(destination.droppableId, items);
+        reorderItemsOnServer(this.store.items, this.store.selected);
       }
     } else {
       const result = move(
@@ -52,6 +54,7 @@ export class DnDClient {
 
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);
+      reorderItemsOnServer(this.store.items, this.store.selected);
 
       // getItems(sortItemsByName(result.droppable));
       // getSelected(result.droppable2);

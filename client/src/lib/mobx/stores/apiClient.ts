@@ -32,7 +32,8 @@ export class ApiClient {
       .then(response => response) ///json
       .then(costs => (this.store.costs = costs as any)); //////////////////////////////////
 
-  deleteItemsOnServer = async (index: number) => {  ///type
+  deleteItemsOnServer = async (index: number) => {
+    ///type
     axios
       .delete(server + 'store/items', { data: { index: index } })
       .then(response => response) ///json
@@ -41,10 +42,17 @@ export class ApiClient {
 
   editItemsOnServer = async (list: ListType, index: number, newItem: Item) => {
     axios
-    .put(server + 'store/' + list, { data: { index, newItem } })
-    .then(response => response) ///json
-    .then(state => state);
-  }
+      .put(server + 'store/' + list, { data: { index, newItem } })
+      .then(response => response) ///json
+      .then(state => state);
+  };
+
+  reorderItemsOnServer = async (items: Item[], selected: Item[]) => {
+    axios
+      .put(server + 'store/', { data: { items, selected } })
+      .then(response => response) ///json
+      .then(state => state);
+  };
 }
 
 // const changeItemsOnServer = body => {

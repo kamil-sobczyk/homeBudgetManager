@@ -81,17 +81,20 @@ const appRouter = app => {
     sortItemsByName();
     res.status(200).send(store.items);
   });
+
   app.post("/store/items", (req, res) => {
     store.items.push(req.body);
     sortItemsByName();
     res.status(200).send(store.items);
   });
+
   app.put("/store/items", (req, res) => {
     const { index, newItem } = req.body.data;
 
     store.items[index] = newItem;
     res.status(200).json(store.items);
   });
+
   app.delete("/store/items", (req, res) => {
     store.items.splice(req.body.index, 1);
     res.status(200).json(store.items);
@@ -101,6 +104,7 @@ const appRouter = app => {
     sortSelectedByCheckedValue();
     res.status(200).json(store.selected);
   });
+
   app.put("/store/selected", (req, res) => {
     const { index, newItem } = req.body.data;
 
@@ -111,14 +115,17 @@ const appRouter = app => {
   app.get("/store/costs", (req, res) => {
     res.status(200).json(store.costs);
   });
+
   app.post("/store/costs", (req, res) => {
     store.costs.push(req.body);
     res.status(200).json(store.costs);
   });
-
+  
   app.put("/store", (req, res) => {
-    const { list, index } = req.body.activeItem;
-    store[list][index] = req.body.newItem;
+    const {items, selected } = req.body.data;
+
+    if (items !== store.items) store.items = items;
+    if (selected !== store.selected) store.selected = selected;
     res.status(200).json(store);
   });
 };
