@@ -13,8 +13,6 @@ import {
   ListItemSecondaryText,
   ListDivider
 } from '@rmwc/list';
-import { Checkbox } from '@rmwc/checkbox';
-import { Ripple } from '@rmwc/ripple';
 import '@material/ripple/dist/mdc.ripple.css';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
@@ -33,10 +31,7 @@ export class ProvidedItemsDraggable extends React.Component<
   {}
 > {
   render() {
-    const {
-      items,
-      itemMenagerClient: { toggleCheckItems }
-    } = this.props.store;
+    const { toggleCheckItems } = this.props.store.itemMenagerClient;
     const { providedDraggable2, item, index } = this.props;
     return (
       <>
@@ -49,11 +44,6 @@ export class ProvidedItemsDraggable extends React.Component<
             key={index}
             onClick={toggleCheckItems.bind(this, 'items', index)}
           >
-            <Checkbox
-              checked={items[index] ? items[index].checked : false}
-              tabIndex={-1}
-              value={'checked'}
-            />
             <StyledTextContainer>
               <ListItemText>
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>

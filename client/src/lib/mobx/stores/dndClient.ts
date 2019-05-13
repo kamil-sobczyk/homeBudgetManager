@@ -46,7 +46,7 @@ export class DnDClient {
         source,
         destination
       );
-      // result.droppable.forEach((item: Item) => (item.checked = false));
+      result.droppable.forEach((item: Item) => (item.checked = false));
 
       this.store.selected = result.droppable;
       this.store.items = result.droppable2;
