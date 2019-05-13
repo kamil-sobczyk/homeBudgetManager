@@ -37,6 +37,8 @@ export class ProvidedSelectedDraggable extends React.Component<
       visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
     const { index } = this.props;
+
+    this.forceUpdate();
     event.stopPropagation();
     setActiveItem('selected', index);
     toggleShowEditDialog('selected', index);
