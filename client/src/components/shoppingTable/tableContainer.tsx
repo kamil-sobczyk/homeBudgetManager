@@ -4,12 +4,14 @@ import { observer } from 'mobx-react';
 import { Store } from '../../lib/mobx/rootStore';
 import { Cost } from '../../lib/interfaces';
 
-
 import {
   DataTable,
   DataTableRow,
   DataTableBody,
-  DataTableCell
+  DataTableCell,
+  DataTableHeadCell,
+  DataTableContent,
+  DataTableHead
 } from '@rmwc/data-table';
 
 // import Pagination from "./tablePagination";
@@ -37,7 +39,7 @@ export class TableContainer extends React.Component<
   };
 
   componentDidMount = (): void => {
-    // getCostsFromServer(this.props.getCosts);
+    this.props.store.apiClient.getCosts();
   };
 
   handleChangePage = (
@@ -58,11 +60,11 @@ export class TableContainer extends React.Component<
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
 
+    console.log('costs:', costs);
+
     let sortedCosts: Cost[];
     if (costs.length > 0) {
-      sortedCosts = costs.sort((b: Cost, a: Cost): any => {
-        console.log("SSOOOORTT COOOST",a.date > b.date)
-        return a.date > b.date}); ///////////////////////////////////
+      sortedCosts = costs.slice().sort((b: Cost, a: Cost): any => a.date > b.date); ///////////////////////////////////
     } else
       sortedCosts = [
         {
@@ -72,34 +74,46 @@ export class TableContainer extends React.Component<
         }
       ];
 
+    if (costs.length > 0) sortedCosts = costs;
+
+    console.log(sortedCosts)
+
     return (
       <>
-        <DataTable>
-          <DataTableBody>
-            {/*               {sortedCosts
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                //   <Tooltip
-                //     disableFocusListener
-                //     title={row.chosenItems.join(", ")}
-                //     placement="right"
-                //     key={index}
-                //   >
-                    <DataTableRow key={index}>
-                      <DataTableCell component="th" scope="row">
-                        {row.date}
-                      </DataTableCell>
-                      <TableCell align="right">{row.count + "zł"}</TableCell>
-                    </DataTableRow>
-                  </Tooltip>
-                ))} */}
-
-            {emptyRows > 0 && (
-              <DataTableRow style={{ height: 48 * emptyRows }}>
-                <DataTableCell colSpan={6} />
+        <DataTable style={{ border: '1px solid black', minWidth: '500px' }}>
+          <DataTableContent>
+            <DataTableHead>
+              <DataTableRow>
+                <DataTableHeadCell>Items</DataTableHeadCell>
+                <DataTableHeadCell alignEnd>Cost</DataTableHeadCell>
               </DataTableRow>
-            )}
-          </DataTableBody>
+            </DataTableHead>
+            <DataTableBody>
+              {sortedCosts.map(cost => {
+                <DataTableRow>
+                  <DataTableCell>{cost.chosenItems}</DataTableCell>
+                  <DataTableCell alignEnd>{cost.count}</DataTableCell>
+                </DataTableRow>;
+              })}
+            </DataTableBody>
+          </DataTableContent>
+        </DataTable>
+        {/* <DataTable>
+          {sortedCosts
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((row, index) => (
+              <DataTableRow key={index}>
+                <DataTableCell>{row.date}</DataTableCell>
+                <DataTableCell>{row.count + 'zł'}</DataTableCell>
+              </DataTableRow>
+            ))}
+
+          {emptyRows > 0 && (
+            <DataTableRow style={{ height: 48 * emptyRows }}>
+              <DataTableCell colSpan={6} />
+            </DataTableRow>
+          )}
+
           {/* <TableFooter>
               <DataTableRow>
                 <TablePagination
@@ -116,8 +130,8 @@ export class TableContainer extends React.Component<
                 //   ActionsComponent={Pagination}
                 />
               </DataTableRow>
-            </TableFooter> */}
-        </DataTable>
+            </TableFooter> 
+        </DataTable>*/}
 
         <CostsCard sortedCosts={sortedCosts} />
       </>
