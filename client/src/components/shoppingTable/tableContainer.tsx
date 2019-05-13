@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { Store } from '../../lib/mobx/rootStore';
 import { Cost } from '../../lib/interfaces';
+import { StoreProps } from '../../lib/interfaces';
 
 import {
   DataTable,
@@ -16,12 +17,7 @@ import {
   DataTableHead
 } from '@rmwc/data-table';
 
-// import Pagination from "./tablePagination";
 import { CostsCard } from './costsCard';
-
-interface TableContainerProps {
-  store: Store;
-}
 
 interface TableContainerState {
   page: number;
@@ -31,7 +27,7 @@ interface TableContainerState {
 
 @observer
 export class TableContainer extends React.Component<
-  TableContainerProps,
+  StoreProps,
   TableContainerState
 > {
   state = {
@@ -78,7 +74,7 @@ export class TableContainer extends React.Component<
 
     return (
       <>
-        <DataTable >
+        <StyledDataTable>
           <StyledDataTableContent>
             <DataTableHead>
               <DataTableRow>
@@ -90,14 +86,18 @@ export class TableContainer extends React.Component<
             <DataTableBody>
               {sortedCosts.map((cost: Cost, index: number) => (
                 <DataTableRow key={index}>
-                  <StyledDataTableCell>{cost.chosenItems.join(', ')}</StyledDataTableCell>
+                  <StyledDataTableCell>
+                    {cost.chosenItems.join(', ')}
+                  </StyledDataTableCell>
                   <StyledDataTableCell>{cost.date}</StyledDataTableCell>
-                  <StyledDataTableCell alignEnd>{cost.count}</StyledDataTableCell>
+                  <StyledDataTableCell alignEnd>
+                    {cost.count + 'zł'}
+                  </StyledDataTableCell>
                 </DataTableRow>
               ))}
             </DataTableBody>
           </StyledDataTableContent>
-        </DataTable>
+        </StyledDataTable>
         <CostsCard sortedCosts={sortedCosts} />
       </>
     );
@@ -110,4 +110,9 @@ const StyledDataTableContent = styled(DataTableContent)`
 
 const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
+`;
+
+const StyledDataTable = styled(DataTable)`
+  min-width: 500px;
+  min-height: 400px;
 `;
