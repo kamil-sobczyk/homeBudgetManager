@@ -57,7 +57,7 @@ const StyledListContainer = styled.div`
   justify-content: space-around;
 `;
 
-const StyledButtonsContainer = styled.div`
+export const StyledButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
 `;

@@ -11,10 +11,6 @@ import {StyledContainer} from '../items/items';
 
 @observer
 export class Selected extends React.Component<StoreProps, {}> {
-  componentDidMount = () => {
-    // getSelectedFromServer(this.props.getSelected);
-  };
-
   render() {
     return (
       <StyledContainer>

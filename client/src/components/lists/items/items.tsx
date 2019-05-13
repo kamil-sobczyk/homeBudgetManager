@@ -10,6 +10,7 @@ import { Button } from '@rmwc/button';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
+import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 @observer
 export class Items extends React.Component<StoreProps, {}> {
@@ -24,7 +25,13 @@ export class Items extends React.Component<StoreProps, {}> {
             />
           )}
         </Droppable>
-        <Button onClick={this.props.store.visibilityClient.toggleShowAddDialog}>Add Item</Button>
+        <StyledButtonsContainer>
+          <Button
+            onClick={this.props.store.visibilityClient.toggleShowAddDialog}
+          >
+            Add Item
+          </Button>
+        </StyledButtonsContainer>
       </StyledContainer>
     );
   }
