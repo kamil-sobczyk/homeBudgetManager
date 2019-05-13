@@ -23,7 +23,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     } = this.props.store;
     const { index } = this.props;
     this.setState({ open: event.target });
-    setActiveItem(index);
+    setActiveItem("items", index);
     event.stopPropagation();
   };
 
@@ -48,6 +48,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
       }
     } = this.props.store;
 
+
     toggleShowEditDialog("items", index);
     event.stopPropagation();
     this.setOpen(event);
@@ -65,7 +66,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
       activeItem: { list, index }
     } = this.props.store.itemMenagerClient;
     return (
-      <MenuSurfaceAnchor onClick={(): void => setActiveItem(index, "selected")}>
+      <MenuSurfaceAnchor onClick={(): void => setActiveItem("selected", index )}>
         <Menu
           hoistToBody={true}
           open={this.state.open}

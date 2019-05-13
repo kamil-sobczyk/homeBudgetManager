@@ -4,7 +4,6 @@ import { Cost } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
-import { ApiClient } from './apiClient';
 import { observable } from 'mobx';
 
 export type ListType = 'items' | 'selected';
@@ -17,11 +16,9 @@ export class ItemMenagerClient {
 
   @observable activeItem = { list: 'items', index: 0 };
 
-  setActiveItem = (index: number, list?: ListType): void => {
-    if (list) {
-      this.activeItem.list = list;
-      this.activeItem.index = index;
-    } else this.activeItem.index = index;
+  setActiveItem = (list?: ListType, index?: number): void => {
+    if (index) this.activeItem.index = index;
+    if (list) this.activeItem.list = list;
   };
 
   addItem = (newItem: Item): Item[] =>
@@ -44,7 +41,7 @@ export class ItemMenagerClient {
   };
 
   toggleCheckItems = (list: ListType, index: number): void => {
-    this.setActiveItem(index, list);
+    this.setActiveItem(list, index);
     if (list === 'items') {
       this.store.items[index].checked = !this.store.items[index].checked;
     } else if (list === 'selected') {

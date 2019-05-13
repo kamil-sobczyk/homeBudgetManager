@@ -13,7 +13,7 @@ import { TextField } from '@rmwc/textfield';
 const initialState: Item = {
   name: '',
   info: '',
-  id: String(Date.now()),
+  id: '',
   checked: false
 };
 
@@ -34,14 +34,16 @@ export class EditDialog extends React.Component<StoreProps, Item> {
         newItem.name = this.props.store.items[index].name;
       } else if (newItem.name !== '' && newItem.info === '') {
         newItem.info = this.props.store.items[index].info;
-      } else return;
+      }
     } else if (list === 'selected') {
       if (newItem.name === '' && newItem.info !== '') {
         newItem.name = this.props.store.selected[index].name;
       } else if (newItem.name !== '' && newItem.info === '') {
         newItem.info = this.props.store.selected[index].info;
-      } else return;
-    } else return;
+      }
+    }
+
+    newItem.id = String(Date.now());
 
     editItem(newItem, list as ListType, index);
     toggleShowEditDialog(list as ListType, 0);
@@ -88,10 +90,11 @@ export class EditDialog extends React.Component<StoreProps, Item> {
     let defaultInfo;
 
     if ((this.props.store as any)[list][index]) {
+      console.log(list, index);
       if (list === 'items') {
         defaultName = this.props.store.items[index].name;
         defaultInfo = this.props.store.items[index].info;
-      } else {
+      } else if (list === 'selected') {
         defaultName = this.props.store.selected[index].name;
         defaultInfo = this.props.store.selected[index].info;
       }

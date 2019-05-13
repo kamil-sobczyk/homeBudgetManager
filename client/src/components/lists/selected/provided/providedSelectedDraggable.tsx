@@ -4,8 +4,10 @@ import { observer } from 'mobx-react';
 import { StoreProps } from '../../../../lib/interfaces';
 import { Item } from '../../../../lib/interfaces';
 
-
-import { StyledItem, StyledTextContainer } from '../../items/provided/providedItemsDraggable';
+import {
+  StyledItem,
+  StyledTextContainer
+} from '../../items/provided/providedItemsDraggable';
 
 import {
   ListItemText,
@@ -32,7 +34,7 @@ export class ProvidedSelectedDraggable extends React.Component<
   render() {
     const {
       selected,
-      itemMenagerClient: { toggleCheckItems },
+      itemMenagerClient: { toggleCheckItems, setActiveItem },
       visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
     const { providedDraggable, item, index } = this.props;
@@ -55,19 +57,19 @@ export class ProvidedSelectedDraggable extends React.Component<
               //   disableRipple
             />
             <StyledTextContainer>
-            <ListItemText>
-              <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
-              <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
-            </ListItemText>
-            <IconButton
-            icon='edit'
-              aria-label='Edit item'
-              onClick={e => {
-                e.stopPropagation();
-                toggleShowEditDialog('selected', index);
-              }}
-            >
-            </IconButton>
+              <ListItemText>
+                <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
+                <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
+              </ListItemText>
+              <IconButton
+                icon='edit'
+                aria-label='Edit item'
+                onClick={e => {
+                  e.stopPropagation();
+                  setActiveItem('selected', index);
+                  toggleShowEditDialog('selected', index);
+                }}
+              />
             </StyledTextContainer>
           </StyledItem>
           <ListDivider />
