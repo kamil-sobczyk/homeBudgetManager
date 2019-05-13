@@ -30,7 +30,7 @@ export class ItemMenagerClient {
     this.store.items = this.store.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     );
-    this.store.apiClient.deleteItemsOnServer(index);
+    this.store.apiClient.deleteItemOnServer(index);
   };
 
   editItem = (newItem: Item, list: ListType, index: number): void => {
@@ -40,10 +40,10 @@ export class ItemMenagerClient {
       this.store.selected[index] = newItem;
     }
 
-    this.store.apiClient.editItemsOnServer(list, index, newItem);
+    this.store.apiClient.editItemOnServer(list, index, newItem);
   };
 
-  toggleCheckItems = (list: ListType, index: number): void => {
+  toggleCheckItem = (list: ListType, index: number): void => {
     this.setActiveItem(list, index);
     if (list === 'items') {
       this.store.items[index].checked = !this.store.items[index].checked;

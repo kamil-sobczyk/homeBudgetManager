@@ -46,7 +46,7 @@ export class ProvidedSelectedDraggable extends React.Component<
   render() {
     const {
       selected,
-      itemMenagerClient: { toggleCheckItems }
+      itemMenagerClient: { toggleCheckItem }
     } = this.props.store;
     const { providedDraggable, item, index } = this.props;
     return (
@@ -58,7 +58,7 @@ export class ProvidedSelectedDraggable extends React.Component<
         >
           <StyledItem
             key={index}
-            onClick={() => toggleCheckItems('selected', index)}
+            onClick={() => toggleCheckItem('selected', index)}
           >
             <Checkbox
               //   className={checkbox}
