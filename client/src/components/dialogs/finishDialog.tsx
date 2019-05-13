@@ -86,26 +86,16 @@ export class FinishDialog extends React.Component<StoreProps, Cost> {
         aria-labelledby='alert-dialog-title'
         open={showFinish}
       >
-        <DialogTitle id='alert-dialog-title'>
-          {'Finishing shopping'}
-        </DialogTitle>
+        <DialogTitle id='alert-dialog-title'>'Finishing shopping'</DialogTitle>
         <DialogContent>
           Checked items will be moved to items list. <br /> Type how much you
           spent for shopping.
           <TextField
-            id='outlined-adornment-number'
             label='Amount'
             defaultValue={String(0)}
             onChange={this.handleChangeCounter}
             type='number'
             required
-
-            // InputProps={{
-            //   inputProps: { min: 0 },
-            //   endAdornment: <InputAdornment position="end">PLN</InputAdornment>
-            // }}
-            // margin="normal"
-            // variant="outlined"
           />
         </DialogContent>
         <DialogActions>
