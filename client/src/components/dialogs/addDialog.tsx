@@ -47,6 +47,7 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
       selected,
       visibilityClient: { toggleShowAddDialog }
     } = this.props.store;
+    const { name } = this.state.item;
 
     const allNames = [...selected, ...items].map(({ name }) => name);
 
@@ -54,7 +55,6 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
       const { item } = this.state;
 
       addItem(item);
-      //   addNewItemOnServer(item);
       this.setState({
         item: {
           checked: false,
@@ -64,9 +64,7 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
         }
       });
       toggleShowAddDialog();
-      //   resetAddFields();                        //////////////////////////////////
     };
-    const { name } = this.state.item;
 
     allNames.indexOf(name) < 0 && name !== ''
       ? finishAdding()
@@ -79,8 +77,8 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
 
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
-    //////////////////
     const { item } = this.state;
+
     if (target.name === 'info') {
       this.setState({
         item: {
@@ -108,18 +106,13 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
       toggleShowAddDialog
     } = this.props.store.visibilityClient;
     return (
-      <Dialog
-        open={showAddDialog}
-        // onClose={this.handleCloseAdd}
-      >
+      <Dialog open={showAddDialog}>
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
           defaultValue={this.state.item.name}
           id='outlined-required'
           label='New item'
           name='name'
-          //   margin="normal"
-          //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <TextField
@@ -127,8 +120,6 @@ export class AddDialog extends React.Component<StoreProps, AddDialogState> {
           id='outlined'
           label='Additional info'
           name='info'
-          //   margin="normal"
-          //   variant="outlined"
           onChange={this.changeNewItem}
         />
         <DialogActions>

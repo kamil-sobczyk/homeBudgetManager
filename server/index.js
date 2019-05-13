@@ -83,7 +83,8 @@ const appRouter = app => {
   });
 
   app.post("/store/items", (req, res) => {
-    store.items.push(req.body);
+    store.items.push(req.body.data.item);
+
     sortItemsByName();
     res.status(200).send(store.items);
   });

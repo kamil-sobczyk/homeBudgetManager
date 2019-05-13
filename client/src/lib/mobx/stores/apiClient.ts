@@ -58,19 +58,26 @@ export class ApiClient {
       .then(state => state.data as Item[]);
   };
 
-  addCostOnServer = async(cost: Cost) => {
+  addCostOnServer = async (cost: Cost) => {
     axios
-    .post<Cost>(server + 'store/costs', { data: { cost } })
-    .then(response => response)
-    .then(state => state.data as Cost);
-  }
+      .post<Cost>(server + 'store/costs', { data: { cost } })
+      .then(response => response)
+      .then(state => state.data as Cost);
+  };
 
-  checkItemOnServer = async(list: ListType, index: number) => {
-  axios
-    .put<Item>(server + 'store/checked', { data: { list, index } })
-    .then(response => response)
-    .then(state => state.data);
-  }
+  checkItemOnServer = async (list: ListType, index: number) => {
+    axios
+      .put<Item>(server + 'store/checked', { data: { list, index } })
+      .then(response => response)
+      .then(state => state.data);
+  };
+
+  addItemOnServer = (item: Item) => {
+    axios
+      .post<Item>(server + 'store/items', { data: { item } })
+      .then(response => response)
+      .then(state => state.data as Item);
+  };
 }
 
 // const addNewItemOnServer = body => {

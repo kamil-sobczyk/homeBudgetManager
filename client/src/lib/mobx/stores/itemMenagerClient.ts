@@ -21,15 +21,16 @@ export class ItemMenagerClient {
     if (list) this.activeItem.list = list;
   };
 
-  addItem = (newItem: Item): Item[] =>
-    (this.store.items = sortItemsByName([...this.store.items, newItem]));
+  addItem = (newItem: Item): void => {
+    this.store.items = sortItemsByName([...this.store.items, newItem]);
+    this.store.apiClient.addItemOnServer(newItem);
+  };
 
-  deleteItem = (index: number): Item[] => {
+  deleteItem = (index: number): void => {
     this.store.items = this.store.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     );
     this.store.apiClient.deleteItemsOnServer(index);
-    return this.store.items;
   };
 
   editItem = (newItem: Item, list: ListType, index: number): void => {

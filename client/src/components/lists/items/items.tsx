@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { StoreProps } from '../../../lib/interfaces';
 
+import { Button } from '@rmwc/button';
+
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
@@ -22,6 +24,7 @@ export class Items extends React.Component<StoreProps, {}> {
             />
           )}
         </Droppable>
+        <Button onClick={this.props.store.visibilityClient.toggleShowAddDialog}>Add Item</Button>
       </StyledContainer>
     );
   }
