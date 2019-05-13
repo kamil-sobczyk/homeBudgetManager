@@ -1,7 +1,7 @@
 import { Store } from '../rootStore';
 import { Item } from '../../interfaces';
 
-import { reorder, move } from '../../reorderFunctions';
+import { reorder, move, sortItemsByName } from '../../reorderFunctions';
 
 import { DropResult } from 'react-beautiful-dnd';
 
@@ -38,7 +38,9 @@ export class DnDClient {
         destination.index
       );
 
-      this.reorderList(destination.droppableId, items);
+      if (source.droppableId !== 'droppable2') {
+        this.reorderList(destination.droppableId, items);
+      }
     } else {
       const result = move(
         this.getDndList(source.droppableId),
@@ -49,9 +51,7 @@ export class DnDClient {
       result.droppable.forEach((item: Item) => (item.checked = false));
 
       this.store.selected = result.droppable;
-      this.store.items = result.droppable2;
-
-      // this.reorderLists()
+      this.store.items = sortItemsByName(result.droppable2);
 
       // getItems(sortItemsByName(result.droppable));
       // getSelected(result.droppable2);
