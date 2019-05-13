@@ -30,7 +30,7 @@ export class FinishDialog extends React.Component<StoreProps, Cost> {
 
   handleChangeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
-    console.log(typeof target.value);
+
     if (parseInt(target.value) > 0) {
       this.setState({
         count: parseInt(target.value)
@@ -66,10 +66,10 @@ export class FinishDialog extends React.Component<StoreProps, Cost> {
     });
 
     const item: Cost = this.state;
-    item.count = Math.round(this.state.count); ////////////////////
+    item.count = Math.round(this.state.count);
     item.chosenItems = chosenItems;
-    sortItemsByName(newItems);
 
+    sortItemsByName(newItems);
     reorderItems(newItems, newSelected);
     toggleShowFinishDialog(item);
   };

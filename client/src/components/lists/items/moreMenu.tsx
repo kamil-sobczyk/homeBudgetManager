@@ -23,7 +23,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     } = this.props.store;
     const { index } = this.props;
     this.setState({ open: event.target });
-    setActiveItem("items", index);
+    setActiveItem('items', index);
     event.stopPropagation();
   };
 
@@ -47,17 +47,11 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
         activeItem: { index }
       }
     } = this.props.store;
-
-
-    toggleShowEditDialog("items", index);
-    event.stopPropagation();
-    this.setOpen(event);
-  };
-
-  handleMoreMenuClick = (event: React.MouseEvent<any, MouseEvent>) => {
     event.persist();
-    console.log('Dddd');
-    console.log(event);
+
+    toggleShowEditDialog('items', index);
+    this.setOpen(event);
+    event.stopPropagation();
   };
 
   render() {
@@ -66,7 +60,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
       activeItem: { list, index }
     } = this.props.store.itemMenagerClient;
     return (
-      <MenuSurfaceAnchor onClick={(): void => setActiveItem("selected", index )}>
+      <MenuSurfaceAnchor onClick={(): void => setActiveItem('selected', index)}>
         <Menu
           hoistToBody={true}
           open={this.state.open}

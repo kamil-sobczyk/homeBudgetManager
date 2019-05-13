@@ -19,35 +19,41 @@ const initialState: Item = {
 
 @observer
 export class EditDialog extends React.Component<StoreProps, Item> {
-  state = initialState;
+  state = {
+    name: '',
+    info: '',
+    id: '',
+    checked: false
+  };
 
-  confirm = (activeItem: ActiveItem): void => {
+  confirm = (): void => {
     const {
-      itemMenagerClient: { editItem },
+      itemMenagerClient: {
+        editItem,
+        activeItem: { list, index }
+      },
       visibilityClient: { toggleShowEditDialog }
     } = this.props.store;
-    const { list, index } = activeItem;
+
     const newItem = this.state;
 
-    if (list === 'items') {
+    if (list === 'items' || list === 'selected') {
       if (newItem.name === '' && newItem.info !== '') {
-        newItem.name = this.props.store.items[index].name;
+        newItem.name = this.props.store[list][index].name;
       } else if (newItem.name !== '' && newItem.info === '') {
-        newItem.info = this.props.store.items[index].info;
-      }
-    } else if (list === 'selected') {
-      if (newItem.name === '' && newItem.info !== '') {
-        newItem.name = this.props.store.selected[index].name;
-      } else if (newItem.name !== '' && newItem.info === '') {
-        newItem.info = this.props.store.selected[index].info;
+        newItem.info = this.props.store[list][index].info;
       }
     }
-
     newItem.id = String(Date.now());
 
     editItem(newItem, list as ListType, index);
-    toggleShowEditDialog(list as ListType, 0);
-    this.setState(initialState);
+    toggleShowEditDialog();
+    this.setState({
+      name: '',
+      info: '',
+      id: '',
+      checked: false
+    });
   };
 
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
@@ -99,6 +105,9 @@ export class EditDialog extends React.Component<StoreProps, Item> {
       }
     }
 
+    console.log(defaultName);
+    console.log(defaultInfo);
+
     return (
       <Dialog open={showEditDialog}>
         <DialogTitle>Edit product</DialogTitle>
@@ -111,7 +120,7 @@ export class EditDialog extends React.Component<StoreProps, Item> {
         />
         <TextField
           id='outlined'
-          label='Type new additional info'
+          label='Type new info'
           defaultValue={defaultInfo}
           name='info'
           onChange={this.changeNewItem}
@@ -123,10 +132,7 @@ export class EditDialog extends React.Component<StoreProps, Item> {
           >
             Cancel
           </Button>
-          <Button
-            color='primary'
-            onClick={(): void => this.confirm(activeItem)}
-          >
+          <Button color='primary' onClick={this.confirm}>
             Confirm
           </Button>
         </DialogActions>

@@ -24,7 +24,6 @@ export class ShoppingDialog extends React.Component<StoreProps, {}> {
       <>
         <Dialog
           open={showShoppingDialog}
-          //   onClose={showShoppingDialog}
           aria-label='shopping-you-made'
         >
           <DialogTitle>Shopping you made</DialogTitle>
