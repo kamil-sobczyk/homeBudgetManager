@@ -34,7 +34,6 @@ export class App extends React.Component<{}, {}> {
         <Container>
           <Navbar />
           <ListBox store={this.store} />
-          <TableContainer store={this.store}/>
         </Container>
       </Provider>
     );

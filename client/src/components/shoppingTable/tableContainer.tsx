@@ -64,7 +64,9 @@ export class TableContainer extends React.Component<
 
     let sortedCosts: Cost[];
     if (costs.length > 0) {
-      sortedCosts = costs.slice().sort((b: Cost, a: Cost): any => a.date > b.date); ///////////////////////////////////
+      sortedCosts = costs
+        .slice()
+        .sort((b: Cost, a: Cost): any => a.date > b.date); ///////////////////////////////////
     } else
       sortedCosts = [
         {
@@ -74,10 +76,6 @@ export class TableContainer extends React.Component<
         }
       ];
 
-    if (costs.length > 0) sortedCosts = costs;
-
-    console.log(sortedCosts)
-
     return (
       <>
         <DataTable style={{ border: '1px solid black', minWidth: '500px' }}>
@@ -85,54 +83,21 @@ export class TableContainer extends React.Component<
             <DataTableHead>
               <DataTableRow>
                 <DataTableHeadCell>Items</DataTableHeadCell>
+                <DataTableHeadCell>Date</DataTableHeadCell>
                 <DataTableHeadCell alignEnd>Cost</DataTableHeadCell>
               </DataTableRow>
             </DataTableHead>
             <DataTableBody>
-              {sortedCosts.map(cost => {
-                <DataTableRow>
+              {sortedCosts.map((cost: Cost, index: number) => (
+                <DataTableRow key={index}>
                   <DataTableCell>{cost.chosenItems}</DataTableCell>
+                  <DataTableCell>{cost.date}</DataTableCell>
                   <DataTableCell alignEnd>{cost.count}</DataTableCell>
-                </DataTableRow>;
-              })}
+                </DataTableRow>
+              ))}
             </DataTableBody>
           </DataTableContent>
         </DataTable>
-        {/* <DataTable>
-          {sortedCosts
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => (
-              <DataTableRow key={index}>
-                <DataTableCell>{row.date}</DataTableCell>
-                <DataTableCell>{row.count + 'zł'}</DataTableCell>
-              </DataTableRow>
-            ))}
-
-          {emptyRows > 0 && (
-            <DataTableRow style={{ height: 48 * emptyRows }}>
-              <DataTableCell colSpan={6} />
-            </DataTableRow>
-          )}
-
-          {/* <TableFooter>
-              <DataTableRow>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25]}
-                  colSpan={3}
-                  count={costs.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    native: true
-                  }}
-                  onChangePage={this.handleChangePage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                //   ActionsComponent={Pagination}
-                />
-              </DataTableRow>
-            </TableFooter> 
-        </DataTable>*/}
-
         <CostsCard sortedCosts={sortedCosts} />
       </>
     );

@@ -23,4 +23,3 @@ export class ListBox extends React.Component<StoreProps, {}> {
     );
   }
 }
-//

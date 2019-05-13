@@ -29,7 +29,6 @@ export class CostsCard extends React.Component<CostsCardProps, {}> {
           <Typography use='subtitle2'>
             {countMothOutgoings(this.props.sortedCosts) + ' zł'}
           </Typography>
-  
       </Card>
     );
   }
