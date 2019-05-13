@@ -64,6 +64,13 @@ export class ApiClient {
     .then(response => response)
     .then(state => state.data as Cost);
   }
+
+  checkItemOnServer = async(list: ListType, index: number) => {
+  axios
+    .put<Item>(server + 'store/checked', { data: { list, index } })
+    .then(response => response)
+    .then(state => state.data);
+  }
 }
 
 // const addNewItemOnServer = body => {
@@ -80,24 +87,6 @@ export class ApiClient {
 //     })
 //     .then(item => {
 //       return item;
-//     })
-//     .catch(error => console.log('Ooops', error));
-// };
-
-// const addCostsOnServer = (dispatch, costs) => {
-//   fetch(server + 'store/costs', {
-//     method: 'POST',
-//     headers: {
-//       'Content-type': 'application/json'
-//     },
-//     mode: 'cors',
-//     body: JSON.stringify(costs)
-//   })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(state => {
-//       return dispatch(state);
 //     })
 //     .catch(error => console.log('Ooops', error));
 // };

@@ -37,7 +37,7 @@ export class ItemMenagerClient {
       this.store.items[index] = newItem;
     } else if (list === 'selected') {
       this.store.selected[index] = newItem;
-    } else return;
+    }
 
     this.store.apiClient.editItemsOnServer(list, index, newItem);
   };
@@ -49,7 +49,7 @@ export class ItemMenagerClient {
     } else if (list === 'selected') {
       this.store.selected[index].checked = !this.store.selected[index].checked;
     } else return;
-    // changeSelectedOnServer(selected);
+    this.store.apiClient.checkItemOnServer(list, index);
   };
 
   reorderItems = (items: Item[], selected: Item[]) => {
@@ -61,5 +61,5 @@ export class ItemMenagerClient {
   addCost = (cost: Cost): void => {
     this.store.costs.push(cost);
     this.store.apiClient.addCostOnServer(cost);
-  }
+  };
 }
