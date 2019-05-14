@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
+import { StoreProps, Item } from '../../lib/interfaces';
 
 import {
   Dialog,
@@ -10,17 +10,21 @@ import {
   DialogContent
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
+import { ListType } from '../../lib/mobx/stores/itemMenagerClient';
+
+interface DeleteDialogProps {
+  items: Item[];
+  list: ListType;
+  index: number;
+  deleteItem: (index: number) => void;
+  toggleShowDeleteDialog: (list: ListType, index: number) => void;
+  showDeleteDialog: boolean;
+}
 
 @observer
-export class DeleteDialog extends React.Component<StoreProps, {}> {
+export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
   confirm = (): void => {
-    const {
-      itemMenagerClient: {
-        deleteItem,
-        activeItem: { list, index }
-      },
-      visibilityClient: { toggleShowDeleteDialog }
-    } = this.props.store;
+    const { deleteItem, list, index, toggleShowDeleteDialog } = this.props;
 
     deleteItem(index);
     toggleShowDeleteDialog(list, index);
@@ -28,15 +32,14 @@ export class DeleteDialog extends React.Component<StoreProps, {}> {
 
   render() {
     const {
-      visibilityClient: { showDeleteDialog, toggleShowDeleteDialog },
-      itemMenagerClient: {
-        activeItem: { list, index }
-      }
-    } = this.props.store;
+      showDeleteDialog,
+      toggleShowDeleteDialog,
+      items,
+      list,
+      index
+    } = this.props;
 
-    const active = this.props.store.items[index]
-      ? this.props.store.items[index].name
-      : '';
+    const active = items[index] ? items[index].name : '';
 
     return (
       <Dialog

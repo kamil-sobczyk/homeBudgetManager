@@ -16,13 +16,15 @@ export class ListBox extends React.Component<StoreProps, {}> {
       items,
       selected,
       visibilityClient: {
-        showAddDialog,
-        toggleShowAddDialog,
         showFinish,
+        showAddDialog,
         showEditDialog,
+        showFailDialog,
+        showDeleteDialog,
+        toggleShowAddDialog,
         toggleShowEditDialog,
         toggleShowFailDialog,
-        showFailDialog
+        toggleShowDeleteDialog
       },
       itemMenagerClient: {
         currentItemName,
@@ -30,7 +32,9 @@ export class ListBox extends React.Component<StoreProps, {}> {
         updateCurrentItemName,
         updateCurrentItemInfo,
         addItem,
-        reorderItems
+        reorderItems,
+        deleteItem,
+        activeItem: { list, index }
       }
     } = this.props.store;
 
@@ -54,7 +58,14 @@ export class ListBox extends React.Component<StoreProps, {}> {
           isVisible={showEditDialog}
           hide={toggleShowEditDialog}
         />
-        <DeleteDialog {...this.props} />
+        <DeleteDialog
+          items={items}
+          deleteItem={deleteItem}
+          list={list}
+          index={index}
+          toggleShowDeleteDialog={toggleShowDeleteDialog}
+          showDeleteDialog={showDeleteDialog}
+        />
         <ShoppingDialog {...this.props} />
       </>
     );
