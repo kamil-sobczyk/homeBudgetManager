@@ -21,16 +21,16 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable info?: string = '';
 
   componentWillReceiveProps(props: EditDialogProps) {
-    console.log('props', props);
     this.name = props.name;
     this.info = props.info;
   }
 
   confirm = (): void => {
-    const { onChangeName, onChangeInfo } = this.props;
+    const { onChangeName, onChangeInfo, hide } = this.props;
 
     onChangeName(this.name ? this.name : '');
     onChangeInfo(this.info ? this.info : '');
+    hide("items", 0);
   };
 
   private updateName = (e: React.FormEvent<HTMLInputElement>): void => {

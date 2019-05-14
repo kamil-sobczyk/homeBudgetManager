@@ -19,11 +19,6 @@ export class VisibityClient {
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
 
-  // setActiveItem = (list?: ListType, index?: number): void => {
-  //   if (index) this.store.itemMenagerClient.activeItem.index = index;
-  //   if (list) this.store.itemMenagerClient.activeItem.list = list;
-  // };
-
   toggleShowShoppingDialog = (): boolean =>
     (this.showShoppingDialog = !this.showShoppingDialog);
 

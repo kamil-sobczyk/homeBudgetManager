@@ -32,19 +32,20 @@ export class Store {
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
 
   @computed get currentList(): Item[] | undefined {
-    switch(this.activeItem.list) {
-      case 'items': return this.items;
-      case 'selected': return this.selected;
-      default: return undefined;
+    switch (this.activeItem.list) {
+      case 'items':
+        return this.items;
+      case 'selected':
+        return this.selected;
+      default:
+        return undefined;
     }
   }
 
   @computed get currentItemName(): string | undefined {
-    console.log('arek info', this.currentList, this.activeItem);
     if (this.currentList && this.currentList[this.activeItem.index]) {
       return this.currentList[this.activeItem.index].name;
     }
-console.log("no return")
     return undefined;
   }
 
@@ -56,17 +57,19 @@ console.log("no return")
     return undefined;
   }
 
-  updateCurrentItemName(name: string): void {
-    console.log("curr list", this.currentList)
-    console.log("curr []", this.activeItem.index)
-    if (this.currentList && this.currentList[this.activeItem.index]) {
-      this.currentList[this.activeItem.index].name = name;
+  updateCurrentItemName = (name: string): void => {
+    const { list, index } = this.activeItem;
+    if (this.currentList && this.currentList[index]) {
+      this.currentList[index].name = name;
+      this.apiClient.editItemOnServer(list, index, this.currentList[index]);
     }
-  }
+  };
 
-  updateCurrentItemInfo(info: string): void {
+  updateCurrentItemInfo = (info: string): void => {
+    const { list, index } = this.activeItem;
     if (this.currentList && this.currentList[this.activeItem.index]) {
       this.currentList[this.activeItem.index].info = info;
+      this.apiClient.editItemOnServer(list, index, this.currentList[index]);
     }
-  }
+  };
 }

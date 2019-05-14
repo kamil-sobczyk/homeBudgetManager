@@ -17,15 +17,8 @@ export class ItemMenagerClient {
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
 
   @action setActiveItem = (list: ListType, index: number): void => {
-    console.log("set index", index)
-    console.log("set list", list)
-
-      this.store.activeItem.index = index;
-      console.log("set index", index)
-      console.log("set list", list)
-
-    
-    if (list) this.store.activeItem.list = list;
+    this.store.activeItem.index = index;
+    this.store.activeItem.list = list;
   };
 
   addItem = (newItem: Item): Item[] =>
@@ -68,5 +61,5 @@ export class ItemMenagerClient {
   addCost = (cost: Cost): void => {
     this.store.costs.push(cost);
     this.store.apiClient.addCostOnServer(cost);
-  }
+  };
 }
