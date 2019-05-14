@@ -18,23 +18,28 @@ export class ListBox extends React.Component<StoreProps, {}> {
       items,
       selected,
       visibilityClient: {
+        showItems,
         showFinish,
         showAddDialog,
         showEditDialog,
         showFailDialog,
         showDeleteDialog,
         showShoppingDialog,
+        toggleShowItems,
         toggleShowAddDialog,
         toggleShowEditDialog,
         toggleShowFailDialog,
+        toggleShowFinishDialog,
         toggleShowDeleteDialog,
         toggleShowShoppingDialog
       },
       itemMenagerClient: {
+        setActiveItem,
         currentItemName,
         currentItemInfo,
         updateCurrentItemName,
         updateCurrentItemInfo,
+        toggleCheckItems,
         addItem,
         reorderItems,
         deleteItem,
@@ -50,7 +55,8 @@ export class ListBox extends React.Component<StoreProps, {}> {
         addCostOnServer,
         checkItemOnServer,
         addItemOnServer
-      }
+      },
+      dndClient: { onDragEnd }
     } = this.props.store;
 
     return (

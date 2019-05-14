@@ -7,7 +7,7 @@ import { Button } from '@rmwc/button';
 import { StoreProps } from '../../lib/interfaces';
 
 interface ViewButtonProps {
-  toggleShowItems: (): => void;
+  toggleShowItems: () => void;
 }
 
 @observer
@@ -23,7 +23,7 @@ export class ViewButton extends React.Component<ViewButtonProps, {}> {
           ? 'SHOW ITEMS TO BUY ONLY'
           : 'ADD NEW ITEMS TO LIST'
     });
-    this.props.store.visibilityClient.toggleShowItems();
+    this.props.toggleShowItems();
   };
 
   render() {

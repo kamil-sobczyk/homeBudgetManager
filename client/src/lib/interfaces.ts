@@ -8,6 +8,8 @@ export interface Item {
   info: string;
 }
 
+export type ListType = 'items' | 'selected';
+
 export interface ActiveItem {
   list: ListType;
   index: number;

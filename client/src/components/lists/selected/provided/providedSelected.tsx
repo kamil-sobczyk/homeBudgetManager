@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../../../lib/interfaces';
+import { StoreProps, ListType, Item } from '../../../../lib/interfaces';
 
 import { Draggable, DraggableProvidedDraggableProps, DraggableProvided, DroppableProvided } from 'react-beautiful-dnd';
 
@@ -22,7 +22,13 @@ export class ProvidedSelected extends React.Component<
   {}
 > {
   render() {
-    const { selected, provided } = this.props;
+    const {
+      selected,
+      provided,
+      toggleShowEditDialog,
+      toggleCheckItems,
+      setActiveItem
+    } = this.props;
 
     return (
       <div
@@ -38,7 +44,7 @@ export class ProvidedSelected extends React.Component<
                 toggleCheckItems={toggleCheckItems}
                 toggleShowEditDialog={toggleShowEditDialog}
                 selected={selected}
-                
+
                 providedDraggable={providedDraggable}
                 item={item}
                 index={index}

@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps, Item } from '../../lib/interfaces';
+import { StoreProps, Item, ListType } from '../../lib/interfaces';
 
 import styled from 'styled-components';
 
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, onDragEnd } from 'react-beautiful-dnd';
 
 import { Button } from '@rmwc/button';
 
@@ -14,17 +14,17 @@ import { Items } from '../lists/items/items';
 import { Selected } from '../lists/selected/selected';
 
 interface ListsContainerProps {
-  getItems: () => Item[];
-  getSelected: () => Item[];
-  onDragEnd: () => void;
+  getItems: () => Promise<Item[]>;
+  getSelected: () => Promise<Item[]>;
+  onDragEnd: () => onDragEnd;
   toggleShowFinishDialog: () => void;
   toggleShowShoppingDialog: () => void;
-  toggleShowItems: (): => void;
+  toggleShowItems: () => void;
   showItems: boolean;
 
   setActiveItem: (list: ListType, index: number) => void;
-  toggleCheckItems: (list: ListType, index: number)=> void;
-  toggleShowEditDialog:(list: ListType, index: number)=> void;
+  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleShowEditDialog: (list: ListType, index: number) => void;
 }
 
 @observer
@@ -40,7 +40,12 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       showItems,
       toggleShowFinishDialog,
       toggleShowShoppingDialog,
-      toggleShowItems
+      toggleShowItems,
+      setActiveItem,
+      toggleShowEditDialog,
+      selected,
+      toggleCheckItems
+      
     } = this.props;
 
     return (
@@ -50,10 +55,13 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
         </StyledButtonsContainer>
         <StyledListContainer>
           <DragDropContext onDragEnd={onDragEnd}>
-            {showItems && <Items {...this.props} />}
-            <Selected  setActiveItem={setActiveItem}
-              store={this.props.store}
-              provided={provided} />
+            {/* {showItems && <Items {...this.props} />} */}
+            <Selected
+              setActiveItem={setActiveItem}
+              toggleCheckItems={toggleCheckItems}
+              toggleShowEditDialog={toggleShowEditDialog}
+              selected={selected}
+            />
           </DragDropContext>
         </StyledListContainer>
         <StyledButtonsContainer>

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../../../lib/interfaces';
-import { Item } from '../../../../lib/interfaces';
+import { ListType, Item } from '../../../../lib/interfaces.ts';
+
 
 import {
   StyledItem,
@@ -18,12 +18,19 @@ import {
 import { IconButton } from '@rmwc/icon-button';
 import { Checkbox } from '@rmwc/checkbox';
 
-import { DraggableProvided } from 'react-beautiful-dnd';
+import { DraggableProvided, DraggableProvided } from 'react-beautiful-dnd';
 
-interface ProvidedSelectedDraggableProps extends StoreProps {
+interface ProvidedSelectedDraggableProps {
   providedDraggable: DraggableProvided;
   item: Item;
   index: number;
+
+  setActiveItem: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, index: number) => any;
+  toggleShowEditDialog: (list: ListType, index: number) => void;
+  selected: Item[];
+
+
 }
 
 @observer
@@ -32,11 +39,7 @@ export class ProvidedSelectedDraggable extends React.Component<
   {}
 > {
   toggleEditItem = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const {
-      itemMenagerClient: { setActiveItem },
-      visibilityClient: { toggleShowEditDialog }
-    } = this.props.store;
-    const { index } = this.props;
+    const { setActiveItem, toggleShowEditDialog, index } = this.props;
 
     setActiveItem('selected', index);
     toggleShowEditDialog('selected', index);
@@ -46,9 +49,12 @@ export class ProvidedSelectedDraggable extends React.Component<
   render() {
     const {
       selected,
-      itemMenagerClient: { toggleCheckItems }
-    } = this.props.store;
-    const { providedDraggable, item, index } = this.props;
+      toggleCheckItems,
+      providedDraggable,
+      item,
+      index
+    } = this.props;
+
     return (
       <div>
         <div

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Item } from '../../../lib/interfaces';
+import { Item, ListType } from '../../../lib/interfaces';
 
 import { Droppable } from 'react-beautiful-dnd';
 
@@ -19,6 +19,12 @@ interface SelectedProps {
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
   render() {
+    const {
+      setActiveItem,
+      toggleCheckItems,
+      toggleShowEditDialog,
+      selected
+    } = this.props;
     return (
       <StyledContainer>
         <Droppable droppableId='droppable'>
