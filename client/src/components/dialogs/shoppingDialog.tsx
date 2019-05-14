@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { StoreProps, Cost } from '../../lib/interfaces';
+import { Cost } from '../../lib/interfaces';
 
 import {
   Dialog,
@@ -18,8 +18,8 @@ import { TableContainer } from '../shoppingTable/tableContainer';
 
 interface ShoppingDialogProps {
   toggleShowShoppingDialog: () => void;
-  showShoppingDialog: boolean;
   getCosts: () => void;
+  showShoppingDialog: boolean;
   costs: Cost[];
 }
 

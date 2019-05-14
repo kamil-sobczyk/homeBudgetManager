@@ -11,13 +11,13 @@ import { Item } from '../../lib/interfaces';
 import { FailDialog } from './failDialog';
 
 interface AddDialogProps {
-  showAddDialog: boolean;
+  addItem: (item: Item) => void;
   toggleShowAddDialog: () => boolean;
   toggleShowFailDialog: () => void;
   showFailDialog: boolean;
-  addItem: (item: Item) => void;
   items: Item[];
   selected: Item[];
+  showAddDialog: boolean;
 }
 
 @observer

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps, Item } from '../../lib/interfaces';
+import { Item } from '../../lib/interfaces';
 
 import {
   Dialog,
@@ -13,11 +13,11 @@ import { Button } from '@rmwc/button';
 import { ListType } from '../../lib/mobx/stores/itemMenagerClient';
 
 interface DeleteDialogProps {
+  deleteItem: (index: number) => void;
+  toggleShowDeleteDialog: (list: ListType, index: number) => void;
   items: Item[];
   list: ListType;
   index: number;
-  deleteItem: (index: number) => void;
-  toggleShowDeleteDialog: (list: ListType, index: number) => void;
   showDeleteDialog: boolean;
 }
 

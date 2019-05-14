@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
 
 import {
   Dialog,
@@ -12,8 +11,8 @@ import {
 import { Button } from '@rmwc/button';
 
 interface FailDialogProps {
-  showFailDialog: boolean
   toggleShowFailDialog: () => void;
+  showFailDialog: boolean
 } 
 
 @observer

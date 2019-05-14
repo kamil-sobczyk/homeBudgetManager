@@ -1,18 +1,21 @@
 import * as React from 'react';
+
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
+
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
+
 import { ListType } from '../../lib/mobx/stores/itemMenagerClient';
 
 interface EditDialogProps {
-  name?: string;
-  info?: string;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
-  isVisible: boolean;
   hide: (list: ListType, index: number) => void;
+  isVisible: boolean;
+  name?: string;
+  info?: string;
 }
 
 @observer
