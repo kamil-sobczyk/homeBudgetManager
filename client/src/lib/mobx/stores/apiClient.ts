@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 import { Store } from '../rootStore';
-import { Cost } from '../../interfaces';
 
-import { Item } from '../../interfaces';
-import { ListType } from './itemMenagerClient';
+import { Item, ListType, Cost } from '../../interfaces';
 
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';

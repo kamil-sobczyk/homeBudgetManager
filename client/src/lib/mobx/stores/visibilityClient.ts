@@ -1,8 +1,7 @@
 import { Store } from '../rootStore';
 import { observable } from 'mobx';
 
-import { ListType } from './itemMenagerClient';
-import { Cost } from '../../interfaces';
+import { Cost, ListType } from '../../interfaces';
 
 export class VisibityClient {
   store: Store;

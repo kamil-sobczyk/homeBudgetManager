@@ -16,12 +16,12 @@ import { Button } from '@rmwc/button';
 import { sortItemsByName } from '../../lib/reorderFunctions';
 
 interface FinishDialogProps {
+  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
+  toggleShowFinishDialog: (cost: Cost) => void;
   showFinish: boolean;
   items: Item[];
   selected: Item[];
-  showAdddialog: boolean;
-  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
-  toggleShowFinishDialog: (cost: Cost) => void;
+  showAddDialog: boolean;
 }
 
 @observer
@@ -80,7 +80,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
 
     sortItemsByName(newItems);
     reorderItems(newItems, newSelected);
-    
+
     toggleShowFinishDialog(item);
   };
 
@@ -106,7 +106,10 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
           />
         </DialogContent>
         <DialogActions>
-          <Button color='primary' onClick={() => toggleShowFinishDialog(this.state)}>
+          <Button
+            color='primary'
+            onClick={() => toggleShowFinishDialog(this.state)}
+          >
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={this.handleFinish}>

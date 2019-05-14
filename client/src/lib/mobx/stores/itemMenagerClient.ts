@@ -1,12 +1,10 @@
 import { Store } from '../rootStore';
-import { Cost, ActiveItem } from '../../interfaces';
+import { Cost, ActiveItem, ListType } from '../../interfaces';
 
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
 import { observable, action, computed } from 'mobx';
-
-export type ListType = 'items' | 'selected';
 
 export class ItemMenagerClient {
   store: Store;

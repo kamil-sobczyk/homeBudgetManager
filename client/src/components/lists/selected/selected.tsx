@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Item, ListType } from '../../../lib/interfaces';
+import { Item, ListType, Cost } from '../../../lib/interfaces';
 
 import { Droppable } from 'react-beautiful-dnd';
 
@@ -13,7 +13,12 @@ interface SelectedProps {
   setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
+  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
+  toggleShowFinishDialog: (cost: Cost) => void;
+  showFinish: boolean;
+  items: Item[];
   selected: Item[];
+  showAddDialog: boolean;
 }
 
 @observer
@@ -23,8 +28,14 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setActiveItem,
       toggleCheckItems,
       toggleShowEditDialog,
-      selected
+      selected,
+      reorderItems,
+      toggleShowFinishDialog,
+      showFinish,
+      items,
+      showAddDialog
     } = this.props;
+
     return (
       <StyledContainer>
         <Droppable droppableId='droppable'>
@@ -38,7 +49,14 @@ export class Selected extends React.Component<SelectedProps, {}> {
             />
           )}
         </Droppable>
-        {/* <FinishDialog store={this.props.store}  />  */}
+        <FinishDialog
+          reorderItems={reorderItems}
+          toggleShowFinishDialog={toggleShowFinishDialog}
+          showFinish={showFinish}
+          items={items}
+          selected={selected}
+          showAddDialog={showAddDialog}
+        />
       </StyledContainer>
     );
   }

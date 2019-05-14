@@ -7,7 +7,7 @@ import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
-import { ListType } from '../../lib/mobx/stores/itemMenagerClient';
+import { ListType } from '../../lib/interfaces';
 
 interface EditDialogProps {
   onChangeName: (name: string) => void;

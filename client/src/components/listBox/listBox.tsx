@@ -62,7 +62,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
     return (
       <>
         <ListsContainer
-        selected={selected}
+          selected={selected}
           getItems={getItems}
           getSelected={getSelected}
           onDragEnd={onDragEnd}
@@ -73,6 +73,10 @@ export class ListBox extends React.Component<StoreProps, {}> {
           setActiveItem={setActiveItem}
           toggleCheckItems={toggleCheckItems}
           toggleShowEditDialog={toggleShowEditDialog}
+          reorderItems={reorderItems}
+          showFinish={showFinish}
+          items={items}
+          showAddDialog={showAddDialog}
         />
         <AddDialog
           showAddDialog={showAddDialog}
