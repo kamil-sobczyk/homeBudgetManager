@@ -25,9 +25,14 @@ interface TableContainerState {
   costs: Cost[];
 }
 
+interface TableContainerProps {
+  getCosts: () => void;
+  costs: Cost[];
+}
+
 @observer
 export class TableContainer extends React.Component<
-  StoreProps,
+  TableContainerProps,
   TableContainerState
 > {
   state = {
@@ -37,7 +42,7 @@ export class TableContainer extends React.Component<
   };
 
   componentDidMount = (): void => {
-    this.props.store.apiClient.getCosts();
+    this.props.getCosts();
   };
 
   handleChangePage = (
@@ -53,7 +58,7 @@ export class TableContainer extends React.Component<
   };
 
   render() {
-    const { costs } = this.props.store;
+    const { costs } = this.props;
     const { rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);

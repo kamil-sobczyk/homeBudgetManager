@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
+import { StoreProps, Cost } from '../../lib/interfaces';
 
 import {
   Dialog,
@@ -16,13 +16,22 @@ import { Typography } from '@rmwc/typography';
 
 import { TableContainer } from '../shoppingTable/tableContainer';
 
+interface ShoppingDialogProps {
+  toggleShowShoppingDialog: () => void;
+  showShoppingDialog: boolean;
+  getCosts: () => void;
+  costs: Cost[];
+}
+
 @observer
-export class ShoppingDialog extends React.Component<StoreProps, {}> {
+export class ShoppingDialog extends React.Component<ShoppingDialogProps, {}> {
   render() {
     const {
       toggleShowShoppingDialog,
-      showShoppingDialog
-    } = this.props.store.visibilityClient;
+      showShoppingDialog,
+      getCosts,
+      costs
+    } = this.props;
     return (
       <>
         <Dialog open={showShoppingDialog} aria-label='shopping-you-made'>
@@ -32,7 +41,7 @@ export class ShoppingDialog extends React.Component<StoreProps, {}> {
             </StyledTypography>
           </DialogTitle>
           <DialogContent>
-            <TableContainer {...this.props} />
+            <TableContainer getCosts={getCosts} costs={costs} />
           </DialogContent>
           <DialogActions>
             <Button onClick={toggleShowShoppingDialog} color='primary'>
@@ -45,6 +54,4 @@ export class ShoppingDialog extends React.Component<StoreProps, {}> {
   }
 }
 
-const StyledTypography = styled(Typography)`
-
-`;
+const StyledTypography = styled(Typography)``;

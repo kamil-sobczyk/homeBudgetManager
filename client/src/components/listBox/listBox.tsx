@@ -8,11 +8,13 @@ import { AddDialog } from '../dialogs/addDialog';
 import { EditDialog } from '../dialogs/editDialog';
 import { DeleteDialog } from '../dialogs/deleteDialog';
 import { ShoppingDialog } from '../dialogs/shoppingDialog';
+import { ApiClient } from '../../lib/mobx/stores/apiClient';
 
 @observer
 export class ListBox extends React.Component<StoreProps, {}> {
   render() {
     const {
+      costs,
       items,
       selected,
       visibilityClient: {
@@ -21,10 +23,12 @@ export class ListBox extends React.Component<StoreProps, {}> {
         showEditDialog,
         showFailDialog,
         showDeleteDialog,
+        showShoppingDialog,
         toggleShowAddDialog,
         toggleShowEditDialog,
         toggleShowFailDialog,
-        toggleShowDeleteDialog
+        toggleShowDeleteDialog,
+        toggleShowShoppingDialog
       },
       itemMenagerClient: {
         currentItemName,
@@ -35,7 +39,8 @@ export class ListBox extends React.Component<StoreProps, {}> {
         reorderItems,
         deleteItem,
         activeItem: { list, index }
-      }
+      },
+      apiClient: { getCosts }
     } = this.props.store;
 
     return (
@@ -66,7 +71,12 @@ export class ListBox extends React.Component<StoreProps, {}> {
           toggleShowDeleteDialog={toggleShowDeleteDialog}
           showDeleteDialog={showDeleteDialog}
         />
-        <ShoppingDialog {...this.props} />
+        <ShoppingDialog
+          toggleShowShoppingDialog={toggleShowShoppingDialog}
+          showShoppingDialog={showShoppingDialog}
+          costs={costs}
+          getCosts={getCosts}
+        />
       </>
     );
   }
