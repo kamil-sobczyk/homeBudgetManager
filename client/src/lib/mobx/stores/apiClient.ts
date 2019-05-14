@@ -22,54 +22,54 @@ export class ApiClient {
       .then(items => (this.store.items = items.data as Item[]));
 
   getSelected = async (): Promise<Item[]> =>
-    axios
+    await axios
       .get<Item[]>(server + 'store/selected')
       .then(selected => (this.store.selected = selected.data as Item[]));
 
   getCosts = async (): Promise<Cost[]> =>
-    axios
+  await axios
       .get<Cost[]>(server + 'store/costs')
       .then(response => response)
       .then(costs => (this.store.costs = costs.data as Cost[]));
 
   deleteItemOnServer = async (index: number) => {
     ///type
-    axios
+    await axios
       .delete(server + 'store/items', { data: { index: index } })
       .then(response => response)
       .then(state => state.data as Item[]);
   };
 
   editItemOnServer = async (list: ListType, index: number, newItem: Item) => {
-    axios
+    await axios
       .put<Item>(server + 'store/' + list, { data: { index, newItem } })
       .then(response => response)
       .then(state => state.data as Item);
   };
 
   reorderItemsOnServer = async (items: Item[], selected: Item[]) => {
-    axios
+    await axios
       .put<Item[]>(server + 'store/', { data: { items, selected } })
       .then(response => response)
       .then(state => state.data as Item[]);
   };
 
   addCostOnServer = async (cost: Cost) => {
-    axios
+    await axios
       .post<Cost>(server + 'store/costs', { data: { cost } })
       .then(response => response)
       .then(state => state.data as Cost);
   };
 
   checkItemOnServer = async (list: ListType, index: number) => {
-    axios
+    await axios
       .put<Item>(server + 'store/checked', { data: { list, index } })
       .then(response => response)
       .then(state => state.data);
   };
 
   addItemOnServer = async (item: Item): Promise<void> => {
-    axios
+    await axios
       .post<Item>(server + 'store/items', { data: { item } })
       .then(response => response)
       .then(state => state.data as Item);

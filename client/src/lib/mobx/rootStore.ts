@@ -28,48 +28,4 @@ export class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
-
-  @observable activeItem: ActiveItem = { list: 'items', index: 0 };
-
-  @computed get currentList(): Item[] | undefined {
-    switch (this.activeItem.list) {
-      case 'items':
-        return this.items;
-      case 'selected':
-        return this.selected;
-      default:
-        return undefined;
-    }
-  }
-
-  @computed get currentItemName(): string | undefined {
-    if (this.currentList && this.currentList[this.activeItem.index]) {
-      return this.currentList[this.activeItem.index].name;
-    }
-    return undefined;
-  }
-
-  @computed get currentItemInfo(): string | undefined {
-    if (this.currentList && this.currentList[this.activeItem.index]) {
-      return this.currentList[this.activeItem.index].info;
-    }
-
-    return undefined;
-  }
-
-  updateCurrentItemName = (name: string): void => {
-    const { list, index } = this.activeItem;
-    if (this.currentList && this.currentList[index]) {
-      this.currentList[index].name = name;
-      this.apiClient.editItemOnServer(list, index, this.currentList[index]);
-    }
-  };
-
-  updateCurrentItemInfo = (info: string): void => {
-    const { list, index } = this.activeItem;
-    if (this.currentList && this.currentList[this.activeItem.index]) {
-      this.currentList[this.activeItem.index].info = info;
-      this.apiClient.editItemOnServer(list, index, this.currentList[index]);
-    }
-  };
 }

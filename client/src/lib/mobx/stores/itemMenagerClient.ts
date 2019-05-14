@@ -4,7 +4,7 @@ import { Cost, ActiveItem } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 export type ListType = 'items' | 'selected';
 
@@ -16,9 +16,51 @@ export class ItemMenagerClient {
 
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
 
+  @computed get currentList(): Item[] | undefined {
+    switch (this.activeItem.list) {
+      case 'items':
+        return this.store.items;
+      case 'selected':
+        return this.store.selected;
+      default:
+        return undefined;
+    }
+  }
+
+  @computed get currentItemName(): string | undefined {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      return this.currentList[this.activeItem.index].name;
+    }
+    return undefined;
+  }
+
+  @computed get currentItemInfo(): string | undefined {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      return this.currentList[this.activeItem.index].info;
+    }
+
+    return undefined;
+  }
+
+  updateCurrentItemName = (name: string): void => {
+    const { list, index } = this.activeItem;
+    if (this.currentList && this.currentList[index]) {
+      this.currentList[index].name = name;
+      this.store.apiClient.editItemOnServer(list, index, this.currentList[index]);
+    }
+  };
+
+  updateCurrentItemInfo = (info: string): void => {
+    const { list, index } = this.activeItem;
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      this.currentList[this.activeItem.index].info = info;
+      this.store.apiClient.editItemOnServer(list, index, this.currentList[index]);
+    }
+  };
+
   @action setActiveItem = (list: ListType, index: number): void => {
-    this.store.activeItem.index = index;
-    this.store.activeItem.list = list;
+    this.activeItem.index = index;
+    this.activeItem.list = list;
   };
 
   addItem = (newItem: Item): Item[] =>
@@ -49,7 +91,7 @@ export class ItemMenagerClient {
     } else if (list === 'selected') {
       this.store.selected[index].checked = !this.store.selected[index].checked;
     } else return;
-    // changeSelectedOnServer(selected);
+    this.store.apiClient.checkItemOnServer(list, index);
   };
 
   reorderItems = (items: Item[], selected: Item[]) => {

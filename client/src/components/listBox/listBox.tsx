@@ -21,10 +21,10 @@ export class ListBox extends React.Component<StoreProps, {}> {
         <ListsContainer {...this.props} />
         <AddDialog {...this.props} />
         <EditDialog 
-          name={store.currentItemName}
-          info={store.currentItemInfo}
-          onChangeName={store.updateCurrentItemName}
-          onChangeInfo={store.updateCurrentItemInfo}
+          name={store.itemMenagerClient.currentItemName}
+          info={store.itemMenagerClient.currentItemInfo}
+          onChangeName={store.itemMenagerClient.updateCurrentItemName}
+          onChangeInfo={store.itemMenagerClient.updateCurrentItemInfo}
           isVisible={store.visibilityClient.showEditDialog}
           hide={store.visibilityClient.toggleShowEditDialog}
         />
