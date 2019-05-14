@@ -27,5 +27,5 @@ export class Store {
 
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
-  @observable costs: Cost[] = []; ////
+  @observable costs: Cost[] = []; 
 }

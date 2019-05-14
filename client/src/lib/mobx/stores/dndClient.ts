@@ -51,7 +51,7 @@ export class DnDClient {
         destination
       );
 
-      result.droppable.forEach((item: Item) => (item.checked = false));
+      result.droppable.forEach((item: Item): boolean => (item.checked = false));
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);
       reorderItemsOnServer(this.store.items, this.store.selected);

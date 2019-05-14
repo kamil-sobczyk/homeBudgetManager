@@ -46,7 +46,11 @@ export class ItemMenagerClient {
     const { list, index } = this.activeItem;
     if (this.currentList && this.currentList[index]) {
       this.currentList[index].name = name;
-      this.store.apiClient.editItemOnServer(list, index, this.currentList[index]);
+      this.store.apiClient.editItemOnServer(
+        list,
+        index,
+        this.currentList[index]
+      );
     }
   };
 
@@ -54,7 +58,11 @@ export class ItemMenagerClient {
     const { list, index } = this.activeItem;
     if (this.currentList && this.currentList[this.activeItem.index]) {
       this.currentList[this.activeItem.index].info = info;
-      this.store.apiClient.editItemOnServer(list, index, this.currentList[index]);
+      this.store.apiClient.editItemOnServer(
+        list,
+        index,
+        this.currentList[index]
+      );
     }
   };
 
@@ -94,7 +102,7 @@ export class ItemMenagerClient {
     this.store.apiClient.checkItemOnServer(list, index);
   };
 
-  reorderItems = (items: Item[], selected: Item[]) => {
+  reorderItems = (items: Item[], selected: Item[]): void => {
     this.store.items = items;
     this.store.selected = selected;
     this.store.apiClient.reorderItemsOnServer(items, selected);

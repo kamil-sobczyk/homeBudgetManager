@@ -30,7 +30,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
 
     onChangeName(this.name ? this.name : '');
     onChangeInfo(this.info ? this.info : '');
-    hide("items", 0);
+    hide('items', 0);
   };
 
   private updateName = (e: React.FormEvent<HTMLInputElement>): void => {
