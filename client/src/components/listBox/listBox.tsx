@@ -40,7 +40,17 @@ export class ListBox extends React.Component<StoreProps, {}> {
         deleteItem,
         activeItem: { list, index }
       },
-      apiClient: { getCosts }
+      apiClient: {
+        getCosts,
+        getItems,
+        getSelected,
+        deleteItemOnServer,
+        editItemOnServer,
+        reorderItemsOnServer,
+        addCostOnServer,
+        checkItemOnServer,
+        addItemOnServer
+      }
     } = this.props.store;
 
     return (
