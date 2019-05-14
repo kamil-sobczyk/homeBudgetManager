@@ -55,7 +55,14 @@ export class ListBox extends React.Component<StoreProps, {}> {
 
     return (
       <>
-        <ListsContainer {...this.props} />
+        <ListsContainer
+          getItems={getItems}
+          getSelected={getSelected}
+          onDragEnd={onDragEnd}
+          toggleShowFinishDialog={toggleShowFinishDialog}
+          toggleShowShoppingDialog={toggleShowShoppingDialog}
+          showItems={showItems}
+        />
         <AddDialog
           showAddDialog={showAddDialog}
           toggleShowAddDialog={toggleShowAddDialog}

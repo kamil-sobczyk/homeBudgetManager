@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../lib/interfaces';
+import { StoreProps, Item } from '../../lib/interfaces';
 
 import styled from 'styled-components';
 
@@ -13,21 +13,30 @@ import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items/items';
 import { Selected } from '../lists/selected/selected';
 
+interface ListsContainerProps {
+  getItems: () => Item[];
+  getSelected: () => Item[];
+  onDragEnd: () => void;
+  toggleShowFinishDialog: () => void;
+  toggleShowShoppingDialog: () => void;
+  showItems: boolean;
+}
+
 @observer
-export class ListsContainer extends React.Component<StoreProps, {}> {
+export class ListsContainer extends React.Component<ListsContainerProps, {}> {
   componentDidMount = () => {
-    this.props.store.apiClient.getItems();
-    this.props.store.apiClient.getSelected();
+    const { getItems, getSelected } = this.props;
+    getItems();
+    getSelected();
   };
   render() {
     const {
-      dndClient: { onDragEnd },
-      visibilityClient: {
-        showItems,
-        toggleShowFinishDialog,
-        toggleShowShoppingDialog
-      }
-    } = this.props.store;
+      onDragEnd,
+      showItems,
+      toggleShowFinishDialog,
+      toggleShowShoppingDialog
+    } = this.props;
+    
     return (
       <>
         <StyledButtonsContainer>
@@ -43,7 +52,7 @@ export class ListsContainer extends React.Component<StoreProps, {}> {
           <Button onClick={toggleShowShoppingDialog}>
             Show previous shoppings
           </Button>
-          <Button color='primary' onClick={() =>toggleShowFinishDialog()}>
+          <Button color='primary' onClick={() => toggleShowFinishDialog()}>
             Finish shopping
           </Button>
         </StyledButtonsContainer>
