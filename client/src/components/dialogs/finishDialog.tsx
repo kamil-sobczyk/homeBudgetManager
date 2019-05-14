@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps, Cost } from '../../lib/interfaces';
+import { Cost } from '../../lib/interfaces';
 import { Item } from '../../lib/interfaces';
 
 import {
@@ -15,8 +15,17 @@ import { Button } from '@rmwc/button';
 
 import { sortItemsByName } from '../../lib/reorderFunctions';
 
+interface FinishDialogProps {
+  showFinish: boolean;
+  items: Item[];
+  selected: Item[];
+  showAdddialog: boolean;
+  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
+  toggleShowFinishDialog: (cost: Cost) => void;
+}
+
 @observer
-export class FinishDialog extends React.Component<StoreProps, Cost> {
+export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
   state = {
     chosenItems: [],
     count: 0,
@@ -49,9 +58,9 @@ export class FinishDialog extends React.Component<StoreProps, Cost> {
     const {
       items,
       selected,
-      itemMenagerClient: { reorderItems },
-      visibilityClient: { toggleShowFinishDialog }
-    } = this.props.store;
+      reorderItems,
+      toggleShowFinishDialog
+    } = this.props;
 
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
@@ -71,14 +80,12 @@ export class FinishDialog extends React.Component<StoreProps, Cost> {
 
     sortItemsByName(newItems);
     reorderItems(newItems, newSelected);
+    
     toggleShowFinishDialog(item);
   };
 
   render() {
-    const {
-      showFinish,
-      toggleShowFinishDialog
-    } = this.props.store.visibilityClient;
+    const { showFinish, toggleShowFinishDialog } = this.props;
 
     return (
       <Dialog
@@ -99,7 +106,7 @@ export class FinishDialog extends React.Component<StoreProps, Cost> {
           />
         </DialogContent>
         <DialogActions>
-          <Button color='primary' onClick={() => toggleShowFinishDialog()}>
+          <Button color='primary' onClick={() => toggleShowFinishDialog(this.state)}>
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={this.handleFinish}>

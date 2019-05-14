@@ -11,13 +11,18 @@ import {
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
+interface FailDialogProps {
+  showFailDialog: boolean
+  toggleShowFailDialog: () => void;
+} 
+
 @observer
-export class FailDialog extends React.Component<StoreProps, {}> {
+export class FailDialog extends React.Component<FailDialogProps, {}> {
   render() {
     const {
       showFailDialog,
       toggleShowFailDialog
-    } = this.props.store.visibilityClient;
+    } = this.props
     return (
       <Dialog
         open={showFailDialog}

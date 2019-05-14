@@ -17,7 +17,7 @@ export class Selected extends React.Component<StoreProps, {}> {
         <Droppable droppableId='droppable'>
           {provided => <ProvidedSelected store={this.props.store} provided={provided}/>}
         </Droppable>
-        <FinishDialog store={this.props.store}  />
+      {/* <FinishDialog store={this.props.store}  />  */}
       </StyledContainer>
     );
   }

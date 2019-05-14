@@ -13,20 +13,46 @@ import { ShoppingDialog } from '../dialogs/shoppingDialog';
 export class ListBox extends React.Component<StoreProps, {}> {
   render() {
     const {
-      store
-    } = this.props;
+      items,
+      selected,
+      visibilityClient: {
+        showAddDialog,
+        toggleShowAddDialog,
+        showFinish,
+        showEditDialog,
+        toggleShowEditDialog,
+        toggleShowFailDialog,
+        showFailDialog
+      },
+      itemMenagerClient: {
+        currentItemName,
+        currentItemInfo,
+        updateCurrentItemName,
+        updateCurrentItemInfo,
+        addItem,
+        reorderItems
+      }
+    } = this.props.store;
 
     return (
       <>
         <ListsContainer {...this.props} />
-        <AddDialog {...this.props} />
-        <EditDialog 
-          name={store.itemMenagerClient.currentItemName}
-          info={store.itemMenagerClient.currentItemInfo}
-          onChangeName={store.itemMenagerClient.updateCurrentItemName}
-          onChangeInfo={store.itemMenagerClient.updateCurrentItemInfo}
-          isVisible={store.visibilityClient.showEditDialog}
-          hide={store.visibilityClient.toggleShowEditDialog}
+        <AddDialog
+          showAddDialog={showAddDialog}
+          toggleShowAddDialog={toggleShowAddDialog}
+          addItem={addItem}
+          items={items}
+          selected={selected}
+          toggleShowFailDialog={toggleShowFailDialog}
+          showFailDialog={showFailDialog}
+        />
+        <EditDialog
+          name={currentItemName}
+          info={currentItemInfo}
+          onChangeName={updateCurrentItemName}
+          onChangeInfo={updateCurrentItemInfo}
+          isVisible={showEditDialog}
+          hide={toggleShowEditDialog}
         />
         <DeleteDialog {...this.props} />
         <ShoppingDialog {...this.props} />

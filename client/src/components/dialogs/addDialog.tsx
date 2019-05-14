@@ -11,21 +11,18 @@ import { Item } from '../../lib/interfaces';
 
 import { FailDialog } from './failDialog';
 
-// const resetAddFields = () => {
-//   const nameInput = document.getElementById("outlined-required");
-//   const infoInput = document.getElementById("outlined");
-
-//   if (nameInput !== null) {
-//     nameInput.value = "";
-//   } else nameInput.value = null;
-
-//   if (infoInput !== null) {
-//     infoInput.value = "";
-//   } else infoInput.value = null;
-// };
+interface AddDialogProps {
+  showAddDialog: boolean;
+  toggleShowAddDialog: () => boolean;
+  toggleShowFailDialog: () => void;
+  showFailDialog: boolean;
+  addItem: (item: Item) => void;
+  items: Item[];
+  selected: Item[];
+}
 
 @observer
-export class AddDialog extends React.Component<StoreProps, Item> {
+export class AddDialog extends React.Component<AddDialogProps, Item> {
   state = {
     checked: false,
     id: String(Date.now()),
@@ -34,11 +31,12 @@ export class AddDialog extends React.Component<StoreProps, Item> {
   };
   handleAddItem = () => {
     const {
-      itemMenagerClient: { addItem },
+      addItem,
       items,
       selected,
-      visibilityClient: { toggleShowAddDialog, toggleShowFailDialog }
-    } = this.props.store;
+      toggleShowAddDialog,
+      toggleShowFailDialog
+    } = this.props;
     const { name } = this.state;
 
     const allNames = [...selected, ...items].map(({ name }) => name);
@@ -72,19 +70,21 @@ export class AddDialog extends React.Component<StoreProps, Item> {
       return;
     }
     this.setState({
-        checked: false,
-        id: String(Date.now()),
-        info: this.state.info,
-        name: target.value
+      checked: false,
+      id: String(Date.now()),
+      info: this.state.info,
+      name: target.value
     });
   };
 
   render() {
     const {
       showAddDialog,
-      toggleShowAddDialog
-    } = this.props.store.visibilityClient;
-    const {name, info} = this.state;
+      toggleShowAddDialog,
+      toggleShowFailDialog,
+      showFailDialog
+    } = this.props;
+    const { name, info } = this.state;
     return (
       <Dialog open={showAddDialog}>
         <DialogTitle>Add a new product</DialogTitle>
@@ -110,7 +110,10 @@ export class AddDialog extends React.Component<StoreProps, Item> {
             Add
           </Button>
         </DialogActions>
-        <FailDialog {...this.props} />
+        <FailDialog
+          showFailDialog={showFailDialog}
+          toggleShowFailDialog={toggleShowFailDialog}
+        />
       </Dialog>
     );
   }
