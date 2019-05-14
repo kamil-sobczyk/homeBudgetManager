@@ -12,11 +12,22 @@ import { ShoppingDialog } from '../dialogs/shoppingDialog';
 @observer
 export class ListBox extends React.Component<StoreProps, {}> {
   render() {
+    const {
+      store
+    } = this.props;
+
     return (
       <>
         <ListsContainer {...this.props} />
         <AddDialog {...this.props} />
-        <EditDialog {...this.props} />
+        <EditDialog 
+          name={store.currentItemName}
+          info={store.currentItemInfo}
+          onChangeName={store.updateCurrentItemName}
+          onChangeInfo={store.updateCurrentItemInfo}
+          isVisible={store.visibilityClient.showEditDialog}
+          hide={store.visibilityClient.toggleShowEditDialog}
+        />
         <DeleteDialog {...this.props} />
         <ShoppingDialog {...this.props} />
       </>

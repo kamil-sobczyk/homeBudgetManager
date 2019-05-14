@@ -18,22 +18,17 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   setOpen = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const {
-      itemMenagerClient: { setActiveItem }
-    } = this.props.store;
+    const { setActiveItem } = this.props.store.itemMenagerClient;
     const { index } = this.props;
+
     this.setState({ open: event.target });
     setActiveItem('items', index);
     event.stopPropagation();
   };
 
   handleDeleteClick = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const {
-      visibilityClient: { toggleShowDeleteDialog },
-      itemMenagerClient: {
-        activeItem: { index }
-      }
-    } = this.props.store;
+    const { toggleShowDeleteDialog } = this.props.store.visibilityClient;
+    const { index } = this.props;
 
     toggleShowDeleteDialog(index);
     event.stopPropagation();
@@ -41,12 +36,9 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   handleEditClick = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const {
-      visibilityClient: { toggleShowEditDialog },
-      itemMenagerClient: {
-        activeItem: { index }
-      }
-    } = this.props.store;
+    const { toggleShowEditDialog } = this.props.store.visibilityClient;
+    const { index } = this.props;
+
     event.persist();
 
     toggleShowEditDialog('items', index);

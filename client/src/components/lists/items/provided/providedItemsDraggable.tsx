@@ -31,8 +31,8 @@ export class ProvidedItemsDraggable extends React.Component<
   {}
 > {
   render() {
-    const { toggleCheckItem } = this.props.store.itemMenagerClient;
-    const { providedDraggable2, item, index } = this.props;
+    const { providedDraggable2, item, index, store } = this.props;
+
     return (
       <>
         <div
@@ -42,14 +42,13 @@ export class ProvidedItemsDraggable extends React.Component<
         >
           <StyledItem
             key={index}
-            onClick={toggleCheckItem.bind(this, 'items', index)}
           >
             <StyledTextContainer>
               <ListItemText>
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
-              <MoreMenu index={index} store={this.props.store} />
+              <MoreMenu index={index} store={store} />
             </StyledTextContainer>
           </StyledItem>
 

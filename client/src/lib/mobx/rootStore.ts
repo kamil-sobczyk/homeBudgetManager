@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 
 import { Item, ActiveItem, Cost } from '../interfaces';
 
@@ -28,4 +28,45 @@ export class Store {
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
+
+  @computed get activeItem(): ActiveItem {
+    return this.itemMenagerClient.activeItem;
+  }
+
+  @computed get currentList(): Item[] | undefined {
+    switch(this.activeItem.list) {
+      case 'items': return this.items;
+      case 'selected': return this.selected;
+      default: return undefined;
+    }
+  }
+
+  @computed get currentItemName(): string | undefined {
+    console.log('arek info', this.currentList, this.activeItem);
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      return this.currentList[this.activeItem.index].name;
+    }
+
+    return undefined;
+  }
+
+  @computed get currentItemInfo(): string | undefined {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      return this.currentList[this.activeItem.index].info;
+    }
+
+    return undefined;
+  }
+
+  updateCurrentItemName(name: string): void {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      this.currentList[this.activeItem.index].name = name;
+    }
+  }
+
+  updateCurrentItemInfo(info: string): void {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      this.currentList[this.activeItem.index].info = info;
+    }
+  }
 }

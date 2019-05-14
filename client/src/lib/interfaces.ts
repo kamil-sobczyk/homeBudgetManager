@@ -1,4 +1,5 @@
 import { Store } from './mobx/rootStore';
+import { ListType } from './mobx/stores/itemMenagerClient';
 
 export interface Item {
   name: string;
@@ -8,7 +9,7 @@ export interface Item {
 }
 
 export interface ActiveItem {
-  list: string;
+  list: ListType;
   index: number;
 }
 

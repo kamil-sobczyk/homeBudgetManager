@@ -1,10 +1,10 @@
 import { Store } from '../rootStore';
-import { Cost } from '../../interfaces';
+import { Cost, ActiveItem } from '../../interfaces';
 
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 export type ListType = 'items' | 'selected';
 
@@ -14,23 +14,22 @@ export class ItemMenagerClient {
     this.store = store;
   }
 
-  @observable activeItem = { list: 'items', index: 0 };
+  @observable activeItem: ActiveItem = { list: 'items', index: 0 };
 
-  setActiveItem = (list?: ListType, index?: number): void => {
+  @action setActiveItem = (list?: ListType, index?: number): void => {
     if (index) this.activeItem.index = index;
     if (list) this.activeItem.list = list;
   };
 
-  addItem = (newItem: Item): void => {
-    this.store.items = sortItemsByName([...this.store.items, newItem]);
-    this.store.apiClient.addItemOnServer(newItem);
-  };
+  addItem = (newItem: Item): Item[] =>
+    (this.store.items = sortItemsByName([...this.store.items, newItem]));
 
-  deleteItem = (index: number): void => {
+  deleteItem = (index: number): Item[] => {
     this.store.items = this.store.items.filter(
       (item: Item, itemIndex: number) => itemIndex !== index
     );
     this.store.apiClient.deleteItemOnServer(index);
+    return this.store.items;
   };
 
   editItem = (newItem: Item, list: ListType, index: number): void => {
@@ -38,19 +37,19 @@ export class ItemMenagerClient {
       this.store.items[index] = newItem;
     } else if (list === 'selected') {
       this.store.selected[index] = newItem;
-    }
+    } else return;
 
     this.store.apiClient.editItemOnServer(list, index, newItem);
   };
 
-  toggleCheckItem = (list: ListType, index: number): void => {
+  toggleCheckItems = (list: ListType, index: number): void => {
     this.setActiveItem(list, index);
     if (list === 'items') {
       this.store.items[index].checked = !this.store.items[index].checked;
     } else if (list === 'selected') {
       this.store.selected[index].checked = !this.store.selected[index].checked;
     } else return;
-    this.store.apiClient.checkItemOnServer(list, index);
+    // changeSelectedOnServer(selected);
   };
 
   reorderItems = (items: Item[], selected: Item[]) => {
@@ -62,5 +61,5 @@ export class ItemMenagerClient {
   addCost = (cost: Cost): void => {
     this.store.costs.push(cost);
     this.store.apiClient.addCostOnServer(cost);
-  };
+  }
 }

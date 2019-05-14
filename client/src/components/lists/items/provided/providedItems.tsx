@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { observer } from 'mobx-react';
 import { StoreProps } from '../../../../lib/interfaces';
 
@@ -18,7 +20,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
     const { provided } = this.props;
 
     return (
-      <div ref={provided.innerRef} style={{ minHeight: '300px' }}>
+      <List innerRef={provided.innerRef} >
         {items.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable2 => (
@@ -32,7 +34,11 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
           </Draggable>
         ))}
         {provided.placeholder}
-      </div>
+      </List>
     );
   }
 }
+
+const List = styled.div`
+  min-height: 300px;
+`;

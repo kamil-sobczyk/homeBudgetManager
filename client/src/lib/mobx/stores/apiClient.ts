@@ -68,7 +68,7 @@ export class ApiClient {
       .then(state => state.data);
   };
 
-  addItemOnServer = (item: Item) => {
+  addItemOnServer = async (item: Item): Promise<void> => {
     axios
       .post<Item>(server + 'store/items', { data: { item } })
       .then(response => response)
