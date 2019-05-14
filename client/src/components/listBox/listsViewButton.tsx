@@ -6,8 +6,12 @@ import { Button } from '@rmwc/button';
 
 import { StoreProps } from '../../lib/interfaces';
 
+interface ViewButtonProps {
+  toggleShowItems: (): => void;
+}
+
 @observer
-export class ViewButton extends React.Component<StoreProps, {}> {
+export class ViewButton extends React.Component<ViewButtonProps, {}> {
   state = {
     text: 'ADD NEW ITEMS TO LIST'
   };

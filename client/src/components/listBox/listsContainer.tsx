@@ -19,6 +19,7 @@ interface ListsContainerProps {
   onDragEnd: () => void;
   toggleShowFinishDialog: () => void;
   toggleShowShoppingDialog: () => void;
+  toggleShowItems: (): => void;
   showItems: boolean;
 }
 
@@ -34,13 +35,14 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       onDragEnd,
       showItems,
       toggleShowFinishDialog,
-      toggleShowShoppingDialog
+      toggleShowShoppingDialog,
+      toggleShowItems
     } = this.props;
-    
+
     return (
       <>
         <StyledButtonsContainer>
-          <ViewButton {...this.props} />
+          <ViewButton toggleShowItems={toggleShowItems} />
         </StyledButtonsContainer>
         <StyledListContainer>
           <DragDropContext onDragEnd={onDragEnd}>
