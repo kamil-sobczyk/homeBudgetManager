@@ -30,7 +30,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
     const { toggleShowDeleteDialog } = this.props.store.visibilityClient;
     const { index } = this.props;
 
-    toggleShowDeleteDialog(index);
+    toggleShowDeleteDialog("items", index);
     event.stopPropagation();
     this.setOpen(event);
   };

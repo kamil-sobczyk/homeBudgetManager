@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
+import { ListType } from '../../lib/mobx/stores/itemMenagerClient';
 
 interface EditDialogProps {
   name?: string;
@@ -11,24 +12,22 @@ interface EditDialogProps {
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
   isVisible: boolean;
-  hide: () => void;
+  hide: (list: ListType, index: number) => void;
 }
 
 @observer
 export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable name?: string = '';
   @observable info?: string = '';
-  
+
   componentWillReceiveProps(props: EditDialogProps) {
+    console.log('props', props);
     this.name = props.name;
     this.info = props.info;
   }
 
   confirm = (): void => {
-    const {
-      onChangeName,
-      onChangeInfo
-    } = this.props;
+    const { onChangeName, onChangeInfo } = this.props;
 
     onChangeName(this.name ? this.name : '');
     onChangeInfo(this.info ? this.info : '');
@@ -43,10 +42,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   };
 
   render() {
-    const {
-      isVisible,
-      hide
-    } = this.props;
+    const { isVisible, hide } = this.props;
 
     return (
       <Dialog open={isVisible}>
@@ -66,10 +62,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
           onChange={this.updateInfo}
         />
         <DialogActions>
-          <Button
-            color='primary'
-            onClick={hide}
-          >
+          <Button color='primary' onClick={() => hide('items', 0)}>
             Cancel
           </Button>
           <Button color='primary' onClick={this.confirm}>

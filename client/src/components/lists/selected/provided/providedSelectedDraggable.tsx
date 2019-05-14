@@ -34,13 +34,17 @@ export class ProvidedSelectedDraggable extends React.Component<
   toggleEditItem = (event: React.MouseEvent<any, MouseEvent>): void => {
     const {
       itemMenagerClient: { setActiveItem },
-      visibilityClient: { toggleShowEditDialog }
+      visibilityClient: { toggleShowEditDialog },
+     
     } = this.props.store;
     const { index } = this.props;
+    // const {index} = this.props.store.itemMenagerClient.activeItem
+
+    console.log("index toggle edit", index)
     
-    event.stopPropagation();
     setActiveItem('selected', index);
     toggleShowEditDialog('selected', index);
+    event.stopPropagation();
   };
 
   render() {
@@ -57,7 +61,7 @@ export class ProvidedSelectedDraggable extends React.Component<
           {...providedDraggable.dragHandleProps}
         >
           <StyledItem
-            key={index}
+            key={item.id}
             onClick={() => toggleCheckItems('selected', index)}
           >
             <Checkbox

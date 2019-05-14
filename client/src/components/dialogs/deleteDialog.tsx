@@ -17,20 +17,20 @@ export class DeleteDialog extends React.Component<StoreProps, {}> {
     const {
       itemMenagerClient: {
         deleteItem,
-        activeItem: { index }
+        activeItem: { list, index }
       },
       visibilityClient: { toggleShowDeleteDialog }
     } = this.props.store;
 
     deleteItem(index);
-    toggleShowDeleteDialog();
+    toggleShowDeleteDialog(list, index);
   };
 
   render() {
     const {
       visibilityClient: { showDeleteDialog, toggleShowDeleteDialog },
       itemMenagerClient: {
-        activeItem: { index }
+        activeItem: { list, index }
       }
     } = this.props.store;
 
@@ -50,7 +50,7 @@ export class DeleteDialog extends React.Component<StoreProps, {}> {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={(): void => toggleShowDeleteDialog()}
+            onClick={(): void => toggleShowDeleteDialog(list, 0)}
             color='primary'
           >
             No

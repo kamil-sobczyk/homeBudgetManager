@@ -29,9 +29,7 @@ export class Store {
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; ////
 
-  @computed get activeItem(): ActiveItem {
-    return this.itemMenagerClient.activeItem;
-  }
+  @observable activeItem: ActiveItem = { list: 'items', index: 0 };
 
   @computed get currentList(): Item[] | undefined {
     switch(this.activeItem.list) {
@@ -46,7 +44,7 @@ export class Store {
     if (this.currentList && this.currentList[this.activeItem.index]) {
       return this.currentList[this.activeItem.index].name;
     }
-
+console.log("no return")
     return undefined;
   }
 
@@ -59,6 +57,8 @@ export class Store {
   }
 
   updateCurrentItemName(name: string): void {
+    console.log("curr list", this.currentList)
+    console.log("curr []", this.activeItem.index)
     if (this.currentList && this.currentList[this.activeItem.index]) {
       this.currentList[this.activeItem.index].name = name;
     }

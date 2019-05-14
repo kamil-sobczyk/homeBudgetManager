@@ -16,9 +16,16 @@ export class ItemMenagerClient {
 
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
 
-  @action setActiveItem = (list?: ListType, index?: number): void => {
-    if (index) this.activeItem.index = index;
-    if (list) this.activeItem.list = list;
+  @action setActiveItem = (list: ListType, index: number): void => {
+    console.log("set index", index)
+    console.log("set list", list)
+
+      this.store.activeItem.index = index;
+      console.log("set index", index)
+      console.log("set list", list)
+
+    
+    if (list) this.store.activeItem.list = list;
   };
 
   addItem = (newItem: Item): Item[] =>

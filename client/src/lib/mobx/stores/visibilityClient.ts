@@ -19,10 +19,10 @@ export class VisibityClient {
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
 
-  setActiveItem = (list?: ListType, index?: number): void => {
-    if (index) this.store.itemMenagerClient.activeItem.index = index;
-    if (list) this.store.itemMenagerClient.activeItem.list = list;
-  };
+  // setActiveItem = (list?: ListType, index?: number): void => {
+  //   if (index) this.store.itemMenagerClient.activeItem.index = index;
+  //   if (list) this.store.itemMenagerClient.activeItem.list = list;
+  // };
 
   toggleShowShoppingDialog = (): boolean =>
     (this.showShoppingDialog = !this.showShoppingDialog);
@@ -32,13 +32,13 @@ export class VisibityClient {
   toggleShowAddDialog = (): boolean =>
     (this.showAddDialog = !this.showAddDialog);
 
-  toggleShowDeleteDialog = (index?: number, list?: ListType): void => {
+  toggleShowDeleteDialog = (list: ListType, index: number ): void => {
     this.store.itemMenagerClient.setActiveItem(list, index);
     this.showDeleteDialog = !this.showDeleteDialog;
   };
 
-  toggleShowEditDialog = (list?: ListType, index?: number): void => {
-
+  toggleShowEditDialog = (list: ListType, index: number): void => {
+    console.log(list, index);
     this.store.itemMenagerClient.setActiveItem(list, index);
     this.showEditDialog = !this.showEditDialog;
   };
