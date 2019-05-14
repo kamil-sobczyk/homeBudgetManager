@@ -7,7 +7,12 @@ import { Draggable, DraggableProvidedDraggableProps, DraggableProvided, Droppabl
 
 import { ProvidedSelectedDraggable } from './providedSelectedDraggable';
 
-interface ProvidedSelectedProps extends StoreProps {
+interface ProvidedSelectedProps {
+   setActiveItem: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleShowEditDialog: (list: ListType, index: number) => void;
+  selected: Item[];
+
   provided: DroppableProvided;
 }
 
@@ -17,8 +22,8 @@ export class ProvidedSelected extends React.Component<
   {}
 > {
   render() {
-    const { selected } = this.props.store;
-    const { provided } = this.props;
+    const { selected, provided } = this.props;
+
     return (
       <div
         ref={provided.innerRef}
@@ -29,8 +34,12 @@ export class ProvidedSelected extends React.Component<
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable => (
               <ProvidedSelectedDraggable
+                setActiveItem={setActiveItem}
+                toggleCheckItems={toggleCheckItems}
+                toggleShowEditDialog={toggleShowEditDialog}
+                selected={selected}
+                
                 providedDraggable={providedDraggable}
-                store={this.props.store}
                 item={item}
                 index={index}
               />

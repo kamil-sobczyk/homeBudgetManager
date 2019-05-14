@@ -63,6 +63,9 @@ export class ListBox extends React.Component<StoreProps, {}> {
           toggleShowShoppingDialog={toggleShowShoppingDialog}
           showItems={showItems}
           toggleShowItems={toggleShowItems}
+          setActiveItem={setActiveItem}
+          toggleCheckItems={toggleCheckItems}
+          toggleShowEditDialog={toggleShowEditDialog}
         />
         <AddDialog
           showAddDialog={showAddDialog}
