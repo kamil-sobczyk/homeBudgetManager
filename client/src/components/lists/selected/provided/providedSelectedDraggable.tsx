@@ -3,7 +3,6 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { ListType, Item } from '../../../../lib/interfaces.ts';
 
-
 import {
   StyledItem,
   StyledTextContainer
@@ -18,7 +17,7 @@ import {
 import { IconButton } from '@rmwc/icon-button';
 import { Checkbox } from '@rmwc/checkbox';
 
-import { DraggableProvided, DraggableProvided } from 'react-beautiful-dnd';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 interface ProvidedSelectedDraggableProps {
   providedDraggable: DraggableProvided;
@@ -29,8 +28,6 @@ interface ProvidedSelectedDraggableProps {
   toggleCheckItems: (list: ListType, index: number) => any;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   selected: Item[];
-
-
 }
 
 @observer

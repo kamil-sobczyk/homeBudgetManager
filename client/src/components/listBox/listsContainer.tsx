@@ -5,7 +5,7 @@ import { StoreProps, Item, ListType } from '../../lib/interfaces';
 
 import styled from 'styled-components';
 
-import { DragDropContext, onDragEnd } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 import { Button } from '@rmwc/button';
 
@@ -16,15 +16,15 @@ import { Selected } from '../lists/selected/selected';
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
   getSelected: () => Promise<Item[]>;
-  onDragEnd: () => onDragEnd;
+  onDragEnd: (result: DropResult) => void;
   toggleShowFinishDialog: () => void;
   toggleShowShoppingDialog: () => void;
   toggleShowItems: () => void;
-  showItems: boolean;
-
   setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
+  showItems: boolean;
+  selected: Item[];
 }
 
 @observer
@@ -45,7 +45,6 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       toggleShowEditDialog,
       selected,
       toggleCheckItems
-      
     } = this.props;
 
     return (

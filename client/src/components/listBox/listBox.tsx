@@ -62,6 +62,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
     return (
       <>
         <ListsContainer
+        selected={selected}
           getItems={getItems}
           getSelected={getSelected}
           onDragEnd={onDragEnd}
