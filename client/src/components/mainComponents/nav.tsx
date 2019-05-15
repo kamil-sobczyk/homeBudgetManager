@@ -11,6 +11,7 @@ export class Navbar extends React.Component<{}, {}> {
       <>
         <StyledTopAppBar
           title='App Bar'
+          theme='primary'
           navigationIcon={{ onClick: () => console.log('Navigate') }}
           actionItems={[
             { icon: 'bookmark', onClick: () => console.log('Do Something') }
@@ -23,5 +24,5 @@ export class Navbar extends React.Component<{}, {}> {
 }
 
 const StyledTopAppBar = styled(SimpleTopAppBar)`
-  background: blue;
+  background: #4965ff;
 `;

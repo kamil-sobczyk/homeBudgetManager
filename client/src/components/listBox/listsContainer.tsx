@@ -1,9 +1,9 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { observer } from 'mobx-react';
 import { Item, ListType } from '../../lib/interfaces';
-
-import styled from 'styled-components';
 
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
