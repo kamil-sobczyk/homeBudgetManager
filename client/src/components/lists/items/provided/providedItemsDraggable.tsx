@@ -19,7 +19,6 @@ import { DraggableProvided } from 'react-beautiful-dnd';
 import { MoreMenu } from '../moreMenu';
 
 interface ProvidedItemsDraggableProps {
-  setActiveItem: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
   providedDraggable2: DraggableProvided;
@@ -37,7 +36,6 @@ export class ProvidedItemsDraggable extends React.Component<
       providedDraggable2,
       item,
       index,
-      setActiveItem,
       toggleShowDeleteDialog,
       toggleShowEditDialog
     } = this.props;
@@ -57,7 +55,6 @@ export class ProvidedItemsDraggable extends React.Component<
               </ListItemText>
               <MoreMenu
                 index={index}
-                setActiveItem={setActiveItem}
                 toggleShowDeleteDialog={toggleShowDeleteDialog}
                 toggleShowEditDialog={toggleShowEditDialog}
               />

@@ -66,7 +66,6 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
           <DragDropContext onDragEnd={onDragEnd}>
             {showItems && (
               <Items
-                setActiveItem={setActiveItem}
                 toggleShowEditDialog={toggleShowEditDialog}
                 toggleShowDeleteDialog={toggleShowDeleteDialog}
                 toggleShowAddDialog={toggleShowAddDialog}

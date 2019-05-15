@@ -13,7 +13,6 @@ import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 interface ItemsProps {
-  setActiveItem: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   toggleShowDeleteDialog: (list: ListType, index: number) => void; 
   toggleShowAddDialog: () => void;
@@ -26,7 +25,6 @@ interface ItemsProps {
 export class Items extends React.Component<ItemsProps, {}> {
   render() {
     const {
-      setActiveItem,
       toggleShowEditDialog,
       toggleShowAddDialog,
       toggleShowDeleteDialog,
@@ -38,7 +36,6 @@ export class Items extends React.Component<ItemsProps, {}> {
         <Droppable droppableId='droppable2'>
           {providedDroppable2 => (
             <ProvidedItems
-              setActiveItem={setActiveItem}
               toggleShowEditDialog={toggleShowEditDialog}
               toggleShowDeleteDialog={toggleShowDeleteDialog}
               items={items}

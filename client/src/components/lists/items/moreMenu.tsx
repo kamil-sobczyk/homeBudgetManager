@@ -2,12 +2,11 @@ import * as React from 'react';
 
 import { ListType } from '../../../lib/interfaces';
 
-import { MenuSurfaceAnchor, Menu, MenuItem, SimpleMenu } from '@rmwc/menu';
+import { MenuItem, SimpleMenu } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
 interface MoreMenuProps {
-  setActiveItem: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
   index: number;
