@@ -58,11 +58,9 @@ export class ProvidedSelectedDraggable extends React.Component<
           {...providedDraggable.draggableProps}
           {...providedDraggable.dragHandleProps}
         >
-          <StyledItem
-            key={item.id}
-            onClick={() => toggleCheckItems('selected', index)}
-          >
+          <StyledItem key={item.id}>
             <Checkbox
+              onClick={() => toggleCheckItems('selected', index)}
               checked={selected[index] ? selected[index].checked : false}
               tabIndex={-1}
               value={'checked'}
