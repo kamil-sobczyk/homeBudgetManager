@@ -48,7 +48,7 @@ export class Items extends React.Component<ItemsProps, {}> {
           )}
         </Droppable>
         <StyledButtonsContainer>
-          <Button onClick={toggleShowAddDialog}>Add Item</Button>
+          <Button onClick={toggleShowAddDialog} outlined>Add Item</Button>
         </StyledButtonsContainer>
       </StyledContainer>
     );

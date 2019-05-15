@@ -82,12 +82,16 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
           </DragDropContext>
         </StyledListContainer>
         <StyledButtonsContainer>
-          <Button onClick={toggleShowShoppingDialog}>
+          <StyledButton onClick={toggleShowShoppingDialog} outlined>
             Show previous shoppings
-          </Button>
-          <Button color='primary' onClick={() => toggleShowFinishDialog()}>
+          </StyledButton>
+          <StyledButton
+            color='primary'
+            outlined
+            onClick={() => toggleShowFinishDialog()}
+          >
             Finish shopping
-          </Button>
+          </StyledButton>
         </StyledButtonsContainer>
       </>
     );
@@ -99,7 +103,11 @@ const StyledListContainer = styled.div`
   justify-content: space-around;
 `;
 
+const StyledButton = styled(Button)`
+  margin: 10px 10px 0 10px;
+`;
+
 export const StyledButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
+  margin-top: 10px`;
