@@ -62,8 +62,6 @@ export class ProvidedSelectedDraggable extends React.Component<
             <Checkbox
               onClick={() => toggleCheckItems('selected', index)}
               checked={selected[index] ? selected[index].checked : false}
-              tabIndex={-1}
-              value={'checked'}
             />
             <StyledTextContainer>
               <ListItemText>
