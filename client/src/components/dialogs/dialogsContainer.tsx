@@ -1,0 +1,85 @@
+import * as React from 'react';
+
+import { observer } from 'mobx-react';
+import { AddDialog } from './addDialog';
+import { EditDialog } from './editDialog';
+import { DeleteDialog } from './deleteDialog';
+import { ShoppingDialog } from './shoppingDialog';
+import { FinishDialog } from './finishDialog';
+import { Cost, Item } from '../../lib/interfaces';
+import { Store } from '../../lib/mobx/rootStore';
+
+interface DialogsContainerProps {
+  items: Item[];
+  selected: Item[];
+  costs: Cost[];
+  visibilityClient: Store['visibilityClient'];
+  itemMenagerClient: Store['itemMenagerClient'];
+  apiClient: Store['apiClient'];
+  shoppingClient: Store['shoppingClient'];
+}
+
+@observer
+export class DialogsContainer extends React.Component<
+  DialogsContainerProps,
+  {}
+> {
+  render() {
+    const {
+      costs,
+      items,
+      selected,
+      visibilityClient,
+      itemMenagerClient,
+      apiClient,
+      shoppingClient
+    } = this.props;
+
+    return (
+      <>
+        <AddDialog
+          items={items}
+          selected={selected}
+          toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
+          toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
+          showAddDialog={visibilityClient.showAddDialog}
+          showFailDialog={visibilityClient.showFailDialog}
+          addItem={itemMenagerClient.addItem}
+          changeNewItem={itemMenagerClient.changeNewItem}
+        />
+        <EditDialog
+          name={itemMenagerClient.currentItemName}
+          info={itemMenagerClient.currentItemInfo}
+          onChangeName={itemMenagerClient.updateCurrentItemName}
+          onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
+          isVisible={visibilityClient.showEditDialog}
+          hide={visibilityClient.toggleShowEditDialog}
+        />
+        <DeleteDialog
+          items={items}
+          toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
+          deleteItem={itemMenagerClient.deleteItem}
+          list={itemMenagerClient.activeItem.list}
+          index={itemMenagerClient.activeItem.index}
+          showDeleteDialog={visibilityClient.showDeleteDialog}
+        />
+        <ShoppingDialog
+          getCosts={apiClient.getCosts}
+          costs={costs}
+          toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
+          showShoppingDialog={visibilityClient.showShoppingDialog}
+        />
+        <FinishDialog
+          items={items}
+          selected={selected}
+          toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
+          reorderItems={itemMenagerClient.reorderItems}
+          showFinish={visibilityClient.showFinish}
+          showAddDialog={visibilityClient.showAddDialog}
+          changeCounter={shoppingClient.changeCounter}
+          finishShopping={shoppingClient.finishShopping}
+        />
+      </>
+    );
+  }
+}
