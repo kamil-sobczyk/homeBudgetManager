@@ -34,15 +34,12 @@ interface ListsContainerProps {
 
 @observer
 export class ListsContainer extends React.Component<ListsContainerProps, {}> {
-  componentDidMount = () => {
-    const { getItems, getSelected } = this.props;
-    getItems();
-    getSelected();
-  };
   render() {
     const {
       onDragEnd,
       showItems,
+      getItems,
+      getSelected,
       toggleShowAddDialog,
       toggleShowFinishDialog,
       toggleShowShoppingDialog,
@@ -72,6 +69,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
                 deleteItem={deleteItem}
                 items={items}
                 showDeleteDialog={showDeleteDialog}
+                getItems={getItems}
               />
             )}
             <Selected
@@ -79,6 +77,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
               toggleCheckItems={toggleCheckItems}
               toggleShowEditDialog={toggleShowEditDialog}
               selected={selected}
+              getSelected={getSelected}
             />
           </DragDropContext>
         </StyledListContainer>

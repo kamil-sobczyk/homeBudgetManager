@@ -17,37 +17,10 @@ export class ListBox extends React.Component<StoreProps, {}> {
       costs,
       items,
       selected,
-      visibilityClient: {
-        showItems,
-        showFinish,
-        showAddDialog,
-        showEditDialog,
-        showFailDialog,
-        showDeleteDialog,
-        showShoppingDialog,
-        toggleShowItems,
-        toggleShowAddDialog,
-        toggleShowEditDialog,
-        toggleShowFailDialog,
-        toggleShowFinishDialog,
-        toggleShowDeleteDialog,
-        toggleShowShoppingDialog
-      },
-      itemMenagerClient: {
-        setActiveItem,
-        currentItemName,
-        currentItemInfo,
-        updateCurrentItemName,
-        updateCurrentItemInfo,
-        toggleCheckItems,
-        addItem,
-        reorderItems,
-        deleteItem,
-        activeItem: { list, index },
-        changeNewItem
-      },
-      apiClient: { getCosts, getItems, getSelected },
-      shoppingClient: { changeCounter, finishShopping },
+      visibilityClient,
+      itemMenagerClient,
+      apiClient,
+      shoppingClient,
       dndClient: { onDragEnd }
     } = this.props.store;
 
@@ -55,63 +28,63 @@ export class ListBox extends React.Component<StoreProps, {}> {
       <>
         <ListsContainer
           selected={selected}
-          getItems={getItems}
-          getSelected={getSelected}
-          deleteItem={deleteItem}
+          getItems={apiClient.getItems}
+          getSelected={apiClient.getSelected}
+          deleteItem={itemMenagerClient.deleteItem}
           onDragEnd={onDragEnd}
-          toggleShowAddDialog={toggleShowAddDialog}
-          toggleShowFinishDialog={toggleShowFinishDialog}
-          toggleShowShoppingDialog={toggleShowShoppingDialog}
-          toggleShowDeleteDialog={toggleShowDeleteDialog}
-          showItems={showItems}
-          toggleShowItems={toggleShowItems}
-          setActiveItem={setActiveItem}
-          toggleCheckItems={toggleCheckItems}
-          toggleShowEditDialog={toggleShowEditDialog}
+          toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
+          toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
+          toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
+          toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
+          showItems={visibilityClient.showItems}
+          toggleShowItems={visibilityClient.toggleShowItems}
+          setActiveItem={itemMenagerClient.setActiveItem}
+          toggleCheckItems={itemMenagerClient.toggleCheckItems}
+          toggleShowEditDialog={visibilityClient.toggleShowEditDialog}
           items={items}
-          showDeleteDialog={showDeleteDialog}
+          showDeleteDialog={visibilityClient.showDeleteDialog}
         />
         <AddDialog
-          showAddDialog={showAddDialog}
-          toggleShowAddDialog={toggleShowAddDialog}
-          addItem={addItem}
+          showAddDialog={visibilityClient.showAddDialog}
+          toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
+          addItem={itemMenagerClient.addItem}
           items={items}
           selected={selected}
-          toggleShowFailDialog={toggleShowFailDialog}
-          showFailDialog={showFailDialog}
-          changeNewItem={changeNewItem}
+          toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
+          showFailDialog={visibilityClient.showFailDialog}
+          changeNewItem={itemMenagerClient.changeNewItem}
         />
         <EditDialog
-          name={currentItemName}
-          info={currentItemInfo}
-          onChangeName={updateCurrentItemName}
-          onChangeInfo={updateCurrentItemInfo}
-          isVisible={showEditDialog}
-          hide={toggleShowEditDialog}
+          name={itemMenagerClient.currentItemName}
+          info={itemMenagerClient.currentItemInfo}
+          onChangeName={itemMenagerClient.updateCurrentItemName}
+          onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
+          isVisible={visibilityClient.showEditDialog}
+          hide={visibilityClient.toggleShowEditDialog}
         />
         <DeleteDialog
           items={items}
-          deleteItem={deleteItem}
-          list={list}
-          index={index}
-          toggleShowDeleteDialog={toggleShowDeleteDialog}
-          showDeleteDialog={showDeleteDialog}
+          deleteItem={itemMenagerClient.deleteItem}
+          list={itemMenagerClient.activeItem.list}
+          index={itemMenagerClient.activeItem.index}
+          toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
+          showDeleteDialog={visibilityClient.showDeleteDialog}
         />
         <ShoppingDialog
-          toggleShowShoppingDialog={toggleShowShoppingDialog}
-          showShoppingDialog={showShoppingDialog}
+          toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
+          showShoppingDialog={visibilityClient.showShoppingDialog}
           costs={costs}
-          getCosts={getCosts}
+          getCosts={apiClient.getCosts}
         />
         <FinishDialog
-          reorderItems={reorderItems}
-          toggleShowFinishDialog={toggleShowFinishDialog}
-          showFinish={showFinish}
+          reorderItems={itemMenagerClient.reorderItems}
+          toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
+          showFinish={visibilityClient.showFinish}
           items={items}
           selected={selected}
-          showAddDialog={showAddDialog}
-          changeCounter={changeCounter}
-          finishShopping={finishShopping}
+          showAddDialog={visibilityClient.showAddDialog}
+          changeCounter={shoppingClient.changeCounter}
+          finishShopping={shoppingClient.finishShopping}
         />
       </>
     );

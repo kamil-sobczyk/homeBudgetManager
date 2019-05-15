@@ -17,12 +17,16 @@ interface ItemsProps {
   toggleShowDeleteDialog: (list: ListType, index: number) => void; 
   toggleShowAddDialog: () => void;
   deleteItem: (index: number) => void;
+  getItems: () => void;
   items: Item[];
   showDeleteDialog: boolean;
 }
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
+  componentDidMount = () => {
+    this.props.getItems();
+  };
   render() {
     const {
       toggleShowEditDialog,

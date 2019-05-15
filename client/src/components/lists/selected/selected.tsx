@@ -13,11 +13,15 @@ interface SelectedProps {
   setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
+  getSelected: () => void;
   selected: Item[];
 }
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
+  componentDidMount = () => {
+    this.props.getSelected();
+  };
   render() {
     const {
       setActiveItem,
