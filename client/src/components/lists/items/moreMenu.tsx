@@ -26,6 +26,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   render() {
+  
     return (
       <SimpleMenu
         handle={<IconButton icon='menu'>Menu</IconButton>}
