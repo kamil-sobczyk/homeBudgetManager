@@ -48,12 +48,6 @@ export class ListBox extends React.Component<StoreProps, {}> {
         getCosts,
         getItems,
         getSelected,
-        deleteItemOnServer,
-        editItemOnServer,
-        reorderItemsOnServer,
-        addCostOnServer,
-        checkItemOnServer,
-        addItemOnServer
       },
       dndClient: { onDragEnd }
     } = this.props.store;

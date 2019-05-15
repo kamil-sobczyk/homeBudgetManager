@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps, Item, ListType } from '../../lib/interfaces';
+import { Item, ListType } from '../../lib/interfaces';
 
 import styled from 'styled-components';
 

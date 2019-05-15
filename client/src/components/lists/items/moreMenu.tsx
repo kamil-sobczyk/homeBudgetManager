@@ -5,8 +5,6 @@ import { ListType } from '../../../lib/interfaces';
 import { MenuSurfaceAnchor, Menu, MenuItem } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
-// import Tooltip from "@rmwc/Tooltip";
-// import Fade from "@rmwc/Fade";
 
 interface MoreMenuProps {
   setActiveItem: (list: ListType, index: number) => void;

@@ -1,12 +1,10 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps, ListType, Item } from '../../../../lib/interfaces';
+import { ListType, Item } from '../../../../lib/interfaces';
 
 import {
   Draggable,
-  DraggableProvidedDraggableProps,
-  DraggableProvided,
   DroppableProvided
 } from 'react-beautiful-dnd';
 
@@ -17,7 +15,6 @@ interface ProvidedSelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   selected: Item[];
-
   provided: DroppableProvided;
 }
 

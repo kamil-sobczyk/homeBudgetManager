@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { ListType, Item, Cost } from '../../../../lib/interfaces';
+import { ListType, Item } from '../../../../lib/interfaces';
 
 import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 
