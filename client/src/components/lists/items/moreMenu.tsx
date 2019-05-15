@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ListType } from '../../../lib/interfaces';
 
-import { MenuSurfaceAnchor, Menu, MenuItem } from '@rmwc/menu';
+import { MenuSurfaceAnchor, Menu, MenuItem, SimpleMenu } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
@@ -14,59 +14,32 @@ interface MoreMenuProps {
 }
 
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
-  state = {
-    open: false
-  };
+  handleOptionClick = (
+    event: React.MouseEvent<any, MouseEvent>,
+    action: string
+  ): void => {
+    const { toggleShowEditDialog, toggleShowDeleteDialog, index } = this.props;
 
-  setOpen = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { index, setActiveItem } = this.props;
-
-    this.setState({ open: event.target });
-    setActiveItem('items', index);
-    event.stopPropagation();
-  };
-
-  handleDeleteClick = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { toggleShowDeleteDialog, index } = this.props;
-
-    toggleShowDeleteDialog('items', index);
-    event.stopPropagation();
-    this.setOpen(event);
-  };
-
-  handleEditClick = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { toggleShowEditDialog, index } = this.props;
-
-    event.persist();
-
-    toggleShowEditDialog('items', index);
-    this.setOpen(event);
+    action === 'edit'
+      ? toggleShowEditDialog('items', index)
+      : toggleShowDeleteDialog('items', index);
     event.stopPropagation();
   };
 
   render() {
-    const { setActiveItem, index } = this.props;
     return (
-      <MenuSurfaceAnchor onClick={(): void => setActiveItem('items', index)}>
-        <Menu
-          hoistToBody={true}
-          open={this.state.open}
-          onSelect={e => console.log(e.detail.index)}
-          onClose={(): void => this.setState({ open: false })}
-        >
-          <MenuItem onClick={e => this.handleEditClick(e)}>
-            <IconButton icon='edit' />
-          </MenuItem>
-          <ListDivider />
-          <MenuItem onClick={e => this.handleDeleteClick(e)}>
-            <IconButton icon='delete' />
-          </MenuItem>
-        </Menu>
-
-        <IconButton icon='menu' onClick={e => this.setOpen(e)}>
-          Menu
-        </IconButton>
-      </MenuSurfaceAnchor>
+      <SimpleMenu
+        handle={<IconButton icon='menu'>Menu</IconButton>}
+        hoistToBody={true}
+      >
+        <MenuItem onClick={e => this.handleOptionClick(e, 'edit')}>
+          <IconButton icon='edit' />
+        </MenuItem>
+        <ListDivider />
+        <MenuItem onClick={e => this.handleOptionClick(e, 'delete')}>
+          <IconButton icon='delete' />
+        </MenuItem>
+      </SimpleMenu>
     );
   }
 }
