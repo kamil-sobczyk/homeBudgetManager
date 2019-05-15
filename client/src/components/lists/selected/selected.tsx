@@ -13,12 +13,7 @@ interface SelectedProps {
   setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
-  toggleShowFinishDialog: (cost: Cost) => void;
-  showFinish: boolean;
-  items: Item[];
   selected: Item[];
-  showAddDialog: boolean;
 }
 
 @observer
@@ -29,11 +24,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
       toggleCheckItems,
       toggleShowEditDialog,
       selected,
-      reorderItems,
-      toggleShowFinishDialog,
-      showFinish,
-      items,
-      showAddDialog
     } = this.props;
 
     return (
@@ -49,14 +39,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
             />
           )}
         </Droppable>
-        <FinishDialog
-          reorderItems={reorderItems}
-          toggleShowFinishDialog={toggleShowFinishDialog}
-          showFinish={showFinish}
-          items={items}
-          selected={selected}
-          showAddDialog={showAddDialog}
-        />
       </StyledContainer>
     );
   }

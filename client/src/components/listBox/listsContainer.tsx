@@ -86,11 +86,6 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
               toggleCheckItems={toggleCheckItems}
               toggleShowEditDialog={toggleShowEditDialog}
               selected={selected}
-              reorderItems={reorderItems}
-              toggleShowFinishDialog={toggleShowFinishDialog}
-              showFinish={showFinish}
-              items={items}
-              showAddDialog={showAddDialog}
             />
           </DragDropContext>
         </StyledListContainer>

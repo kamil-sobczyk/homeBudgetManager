@@ -8,6 +8,7 @@ import { AddDialog } from '../dialogs/addDialog';
 import { EditDialog } from '../dialogs/editDialog';
 import { DeleteDialog } from '../dialogs/deleteDialog';
 import { ShoppingDialog } from '../dialogs/shoppingDialog';
+import { FinishDialog } from '../dialogs/finishDialog';
 
 @observer
 export class ListBox extends React.Component<StoreProps, {}> {
@@ -50,6 +51,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
         getItems,
         getSelected,
       },
+      shoppingClient: {changeCounter, finishShopping},
       dndClient: { onDragEnd }
     } = this.props.store;
 
@@ -108,6 +110,14 @@ export class ListBox extends React.Component<StoreProps, {}> {
           costs={costs}
           getCosts={getCosts}
         />
+        <FinishDialog
+        reorderItems={reorderItems}
+        toggleShowFinishDialog={toggleShowFinishDialog}
+        showFinish={showFinish}
+        items={items}
+        selected={selected}
+        showAddDialog={showAddDialog}
+      />
       </>
     );
   }
