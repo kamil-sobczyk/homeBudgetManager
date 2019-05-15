@@ -18,6 +18,8 @@ import { sortItemsByName } from '../../lib/reorderFunctions';
 interface FinishDialogProps {
   reorderItems: (newItems: Item[], newSelected: Item[]) => void;
   toggleShowFinishDialog: (cost: Cost) => void;
+  changeCounter: (event: React.FormEvent<EventTarget>) => void;
+  finishShopping: () => void;
   showFinish: boolean;
   items: Item[];
   selected: Item[];
@@ -26,66 +28,8 @@ interface FinishDialogProps {
 
 @observer
 export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
-  state = {
-    chosenItems: [],
-    count: 0,
-    date: String(
-      new Date().toLocaleDateString('pl-PL', {
-        hour: '2-digit',
-        minute: '2-digit'
-      })
-    )
-  };
-
-  handleChangeCounter = (event: React.FormEvent<EventTarget>): void => {
-    const target = event.target as HTMLInputElement;
-
-    if (parseInt(target.value) > 0) {
-      this.setState({
-        count: parseInt(target.value)
-      });
-    } else {
-      target.value = '0';
-      this.setState({
-        count: 0
-      });
-    }
-  };
-
-  handleFinish = (): void => {
-    if (this.state.count < 1) return;
-
-    const {
-      items,
-      selected,
-      reorderItems,
-      toggleShowFinishDialog
-    } = this.props;
-
-    const newSelected: Item[] = [];
-    let newItems: Item[] = [];
-    const chosenItems: string[] = [];
-
-    newItems = items;
-    selected.forEach((item: Item) => {
-      if (item.checked) {
-        newItems.push(item);
-        chosenItems.push(item.name);
-      } else newSelected.push(item);
-    });
-
-    const item: Cost = this.state;
-    item.count = Math.round(this.state.count);
-    item.chosenItems = chosenItems;
-
-    sortItemsByName(newItems);
-    reorderItems(newItems, newSelected);
-
-    toggleShowFinishDialog(item);
-  };
-
   render() {
-    const { showFinish, toggleShowFinishDialog } = this.props;
+    const { showFinish, toggleShowFinishDialog, changeCounter, finishShopping } = this.props;
 
     return (
       <Dialog
@@ -100,7 +44,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
           <TextField
             label='Amount'
             defaultValue={String(0)}
-            onChange={this.handleChangeCounter}
+            onChange={(e: React.FormEvent<EventTarget>) => changeCounter(e)}
             type='number'
             required
           />
@@ -112,7 +56,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
           >
             Cancel
           </Button>
-          <Button autoFocus color='primary' onClick={this.handleFinish}>
+          <Button autoFocus color='primary' onClick={(): void => finishShopping()}>
             Confirm
           </Button>
         </DialogActions>

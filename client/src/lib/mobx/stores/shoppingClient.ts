@@ -38,7 +38,7 @@ export class ShoppingClient {
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
     const chosenItems: string[] = [];
-
+    newItems = this.store.items;
 
     this.store.selected.forEach((item: Item) => {
       if (item.checked) {

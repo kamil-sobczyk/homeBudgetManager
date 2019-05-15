@@ -46,12 +46,8 @@ export class ListBox extends React.Component<StoreProps, {}> {
         activeItem: { list, index },
         changeNewItem
       },
-      apiClient: {
-        getCosts,
-        getItems,
-        getSelected,
-      },
-      shoppingClient: {changeCounter, finishShopping},
+      apiClient: { getCosts, getItems, getSelected },
+      shoppingClient: { changeCounter, finishShopping },
       dndClient: { onDragEnd }
     } = this.props.store;
 
@@ -111,13 +107,15 @@ export class ListBox extends React.Component<StoreProps, {}> {
           getCosts={getCosts}
         />
         <FinishDialog
-        reorderItems={reorderItems}
-        toggleShowFinishDialog={toggleShowFinishDialog}
-        showFinish={showFinish}
-        items={items}
-        selected={selected}
-        showAddDialog={showAddDialog}
-      />
+          reorderItems={reorderItems}
+          toggleShowFinishDialog={toggleShowFinishDialog}
+          showFinish={showFinish}
+          items={items}
+          selected={selected}
+          showAddDialog={showAddDialog}
+          changeCounter={changeCounter}
+          finishShopping={finishShopping}
+        />
       </>
     );
   }
