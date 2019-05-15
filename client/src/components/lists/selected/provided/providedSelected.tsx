@@ -3,12 +3,10 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { ListType, Item } from '../../../../lib/interfaces';
 
-import {
-  Draggable,
-  DroppableProvided
-} from 'react-beautiful-dnd';
+import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 
 import { ProvidedSelectedDraggable } from './providedSelectedDraggable';
+import { List } from '../../items/provided/providedItems';
 
 interface ProvidedSelectedProps {
   setActiveItem: (list: ListType, index: number) => void;
@@ -33,8 +31,8 @@ export class ProvidedSelected extends React.Component<
     } = this.props;
 
     return (
-      <div
-        ref={provided.innerRef}
+      <List
+        innerRef={provided.innerRef}
         {...provided.droppableProps}
         style={{ minHeight: '300px' }}
       >
@@ -54,7 +52,7 @@ export class ProvidedSelected extends React.Component<
           </Draggable>
         ))}
         {provided.placeholder}
-      </div>
+      </List>
     );
   }
 }

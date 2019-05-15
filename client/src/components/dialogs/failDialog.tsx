@@ -32,7 +32,7 @@ export class FailDialog extends React.Component<FailDialogProps, {}> {
           Unable to add new product to the list!
         </DialogTitle>
         <DialogContent id='alert-dialog-description'>
-          This product is on your list already.
+          This product is on your list already or it has no name.
         </DialogContent>
         <DialogActions>
           <Button onClick={toggleShowFailDialog} color='primary' autoFocus>

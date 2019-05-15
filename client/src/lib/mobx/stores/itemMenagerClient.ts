@@ -13,6 +13,7 @@ export class ItemMenagerClient {
   }
 
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
+  @observable newItem: Item = { name: '', info: '', id: '', checked: false };
 
   @computed get currentList(): Item[] | undefined {
     switch (this.activeItem.list) {
@@ -40,6 +41,27 @@ export class ItemMenagerClient {
     return undefined;
   }
 
+  changeNewItem = (event: React.FormEvent<EventTarget>): void => {
+    const target = event.target as HTMLInputElement;
+
+    if (target.name === 'info') {
+      this.newItem = {
+        checked: false,
+        id: String(Date.now()),
+        info: target.value,
+        name: this.newItem.name
+      };
+      return;
+    } else if (target.name === 'name') {
+      this.newItem = {
+        checked: false,
+        id: String(Date.now()),
+        info: this.newItem.info,
+        name: target.value
+      };
+    }
+  };
+
   updateCurrentItemName = (name: string): void => {
     const { list, index } = this.activeItem;
     if (this.currentList && this.currentList[index]) {
@@ -54,7 +76,7 @@ export class ItemMenagerClient {
 
   updateCurrentItemInfo = (info: string): void => {
     const { list, index } = this.activeItem;
-    if (this.currentList && this.currentList[this.activeItem.index]) {
+    if (this.currentList && this.currentList[index]) {
       this.currentList[this.activeItem.index].info = info;
       this.store.apiClient.editItemOnServer(
         list,
@@ -69,8 +91,24 @@ export class ItemMenagerClient {
     this.activeItem.list = list;
   };
 
-  addItem = (newItem: Item): Item[] =>
-    (this.store.items = sortItemsByName([...this.store.items, newItem]));
+  addItem = (): void => {
+    const {
+      toggleShowFailDialog,
+      toggleShowAddDialog
+    } = this.store.visibilityClient;
+
+    const allNames = [...this.store.selected, ...this.store.items].map(
+      ({ name }) => name
+    );
+
+    if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
+      this.store.items = sortItemsByName([...this.store.items, this.newItem]);
+      toggleShowAddDialog();
+      this.store.apiClient.addItemOnServer(this.newItem);
+    } else {
+      toggleShowFailDialog();
+    }
+  };
 
   deleteItem = (index: number): Item[] => {
     this.store.items = this.store.items.filter(

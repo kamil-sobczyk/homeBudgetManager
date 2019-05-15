@@ -27,7 +27,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       setActiveItem,
       toggleShowDeleteDialog,
     } = this.props;
-
+    
     return (
       <List innerRef={provided.innerRef}>
         {items.map((item, index) => (
@@ -50,6 +50,6 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   }
 }
 
-const List = styled.div`
+export const List = styled.div`
   min-height: 300px;
 `;

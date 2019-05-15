@@ -11,9 +11,10 @@ import { Item } from '../../lib/interfaces';
 import { FailDialog } from './failDialog';
 
 interface AddDialogProps {
-  addItem: (item: Item) => void;
+  addItem: () => void;
   toggleShowAddDialog: () => boolean;
   toggleShowFailDialog: () => void;
+  changeNewItem: (event: React.FormEvent<EventTarget>) => void;
   showFailDialog: boolean;
   items: Item[];
   selected: Item[];
@@ -22,58 +23,8 @@ interface AddDialogProps {
 
 @observer
 export class AddDialog extends React.Component<AddDialogProps, Item> {
-  state = {
-    checked: false,
-    id: String(Date.now()),
-    info: '',
-    name: ''
-  };
-  handleAddItem = () => {
-    const {
-      addItem,
-      items,
-      selected,
-      toggleShowAddDialog,
-      toggleShowFailDialog
-    } = this.props;
-    const { name } = this.state;
-
-    const allNames = [...selected, ...items].map(({ name }) => name);
-
-    const finishAdding = (): void => {
-      addItem(this.state);
-      this.setState({
-        checked: false,
-        id: String(Date.now()),
-        info: '',
-        name: ''
-      });
-      toggleShowAddDialog();
-    };
-
-    allNames.indexOf(name) < 0 && name !== ''
-      ? finishAdding()
-      : toggleShowFailDialog();
-  };
-
-  changeNewItem = (event: React.FormEvent<EventTarget>): void => {
-    const target = event.target as HTMLInputElement;
-
-    if (target.name === 'info') {
-      this.setState({
-        checked: false,
-        id: String(Date.now()),
-        info: target.value,
-        name: this.state.name
-      });
-      return;
-    }
-    this.setState({
-      checked: false,
-      id: String(Date.now()),
-      info: this.state.info,
-      name: target.value
-    });
+  onItemChange = (e: React.FormEvent<any>) => {
+    this.props.changeNewItem(e);
   };
 
   render() {
@@ -81,31 +32,33 @@ export class AddDialog extends React.Component<AddDialogProps, Item> {
       showAddDialog,
       toggleShowAddDialog,
       toggleShowFailDialog,
-      showFailDialog
+      showFailDialog,
+      changeNewItem,
+      addItem
     } = this.props;
-    const { name, info } = this.state;
+
     return (
       <Dialog open={showAddDialog}>
         <DialogTitle>Add a new product</DialogTitle>
         <TextField
-          defaultValue={name}
+          defaultValue={''}
           id='outlined-required'
           label='New item'
           name='name'
-          onChange={this.changeNewItem}
+          onChange={(e: React.FormEvent<any>) => this.onItemChange(e)}
         />
         <TextField
-          defaultValue={info}
+          defaultValue={''}
           id='outlined'
           label='Additional info'
           name='info'
-          onChange={this.changeNewItem}
+          onChange={(e: React.FormEvent<any>) => changeNewItem(e)}
         />
         <DialogActions>
           <Button color='primary' onClick={toggleShowAddDialog}>
             Cancel
           </Button>
-          <Button color='primary' onClick={this.handleAddItem}>
+          <Button color='primary' onClick={() => addItem()}>
             Add
           </Button>
         </DialogActions>

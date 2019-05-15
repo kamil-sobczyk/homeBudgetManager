@@ -52,7 +52,7 @@ export class ProvidedSelectedDraggable extends React.Component<
     } = this.props;
 
     return (
-      <div>
+      <>
         <div
           ref={providedDraggable.innerRef}
           {...providedDraggable.draggableProps}
@@ -63,11 +63,9 @@ export class ProvidedSelectedDraggable extends React.Component<
             onClick={() => toggleCheckItems('selected', index)}
           >
             <Checkbox
-              //   className={checkbox}
               checked={selected[index] ? selected[index].checked : false}
               tabIndex={-1}
               value={'checked'}
-              //   disableRipple
             />
             <StyledTextContainer>
               <ListItemText>
@@ -84,7 +82,7 @@ export class ProvidedSelectedDraggable extends React.Component<
           <ListDivider />
         </div>
         {providedDraggable.placeholder}
-      </div>
+      </>
     );
   }
 }

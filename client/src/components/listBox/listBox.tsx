@@ -42,7 +42,8 @@ export class ListBox extends React.Component<StoreProps, {}> {
         addItem,
         reorderItems,
         deleteItem,
-        activeItem: { list, index }
+        activeItem: { list, index },
+        changeNewItem
       },
       apiClient: {
         getCosts,
@@ -83,6 +84,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
           selected={selected}
           toggleShowFailDialog={toggleShowFailDialog}
           showFailDialog={showFailDialog}
+          changeNewItem={changeNewItem}
         />
         <EditDialog
           name={currentItemName}
