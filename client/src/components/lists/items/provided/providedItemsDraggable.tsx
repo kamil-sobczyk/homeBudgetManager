@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { StoreProps } from '../../../../lib/interfaces';
-import { Item } from '../../../../lib/interfaces';
+import { StoreProps, ListType, Cost, Item } from '../../../../lib/interfaces';
 
 import styled from 'styled-components';
 
@@ -19,7 +18,10 @@ import { DraggableProvided } from 'react-beautiful-dnd';
 
 import { MoreMenu } from '../moreMenu';
 
-interface ProvidedItemsDraggableProps extends StoreProps {
+interface ProvidedItemsDraggableProps {
+  setActiveItem: (list: ListType, index: number) => void;
+  toggleShowEditDialog: (list: ListType, index: number) => void;
+  toggleShowDeleteDialog: (list: ListType, index: number) => void;
   providedDraggable2: DraggableProvided;
   item: Item;
   index: number;
@@ -31,7 +33,14 @@ export class ProvidedItemsDraggable extends React.Component<
   {}
 > {
   render() {
-    const { providedDraggable2, item, index, store } = this.props;
+    const {
+      providedDraggable2,
+      item,
+      index,
+      setActiveItem,
+      toggleShowDeleteDialog,
+      toggleShowEditDialog
+    } = this.props;
 
     return (
       <>
@@ -40,15 +49,18 @@ export class ProvidedItemsDraggable extends React.Component<
           {...providedDraggable2.draggableProps}
           {...providedDraggable2.dragHandleProps}
         >
-          <StyledItem
-            key={index}
-          >
+          <StyledItem key={index}>
             <StyledTextContainer>
               <ListItemText>
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
-              <MoreMenu index={index} store={store} />
+              <MoreMenu
+                index={index}
+                setActiveItem={setActiveItem}
+                toggleShowDeleteDialog={toggleShowDeleteDialog}
+                toggleShowEditDialog={toggleShowEditDialog}
+              />
             </StyledTextContainer>
           </StyledItem>
 

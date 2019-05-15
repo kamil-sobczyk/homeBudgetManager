@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StoreProps } from '../../../lib/interfaces';
+import { ListType } from '../../../lib/interfaces';
 
 import { MenuSurfaceAnchor, Menu, MenuItem } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
@@ -8,7 +8,10 @@ import { IconButton } from '@rmwc/icon-button';
 // import Tooltip from "@rmwc/Tooltip";
 // import Fade from "@rmwc/Fade";
 
-interface MoreMenuProps extends StoreProps {
+interface MoreMenuProps {
+  setActiveItem: (list: ListType, index: number) => void;
+  toggleShowEditDialog: (list: ListType, index: number) => void;
+  toggleShowDeleteDialog: (list: ListType, index: number) => void;
   index: number;
 }
 
@@ -18,8 +21,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   setOpen = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { setActiveItem } = this.props.store.itemMenagerClient;
-    const { index } = this.props;
+    const { index, setActiveItem } = this.props;
 
     this.setState({ open: event.target });
     setActiveItem('items', index);
@@ -27,17 +29,15 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   handleDeleteClick = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { toggleShowDeleteDialog } = this.props.store.visibilityClient;
-    const { index } = this.props;
+    const { toggleShowDeleteDialog, index } = this.props;
 
-    toggleShowDeleteDialog("items", index);
+    toggleShowDeleteDialog('items', index);
     event.stopPropagation();
     this.setOpen(event);
   };
 
   handleEditClick = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { toggleShowEditDialog } = this.props.store.visibilityClient;
-    const { index } = this.props;
+    const { toggleShowEditDialog, index } = this.props;
 
     event.persist();
 
@@ -47,12 +47,9 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   };
 
   render() {
-    const {
-      setActiveItem,
-      activeItem: { list, index }
-    } = this.props.store.itemMenagerClient;
+    const { setActiveItem, index } = this.props;
     return (
-      <MenuSurfaceAnchor onClick={(): void => setActiveItem('selected', index)}>
+      <MenuSurfaceAnchor onClick={(): void => setActiveItem('items', index)}>
         <Menu
           hoistToBody={true}
           open={this.state.open}

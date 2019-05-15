@@ -3,9 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Store } from '../../lib/mobx/rootStore';
 import { Cost } from '../../lib/interfaces';
-import { StoreProps } from '../../lib/interfaces';
 
 import {
   DataTable,

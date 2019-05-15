@@ -8,7 +8,6 @@ import { AddDialog } from '../dialogs/addDialog';
 import { EditDialog } from '../dialogs/editDialog';
 import { DeleteDialog } from '../dialogs/deleteDialog';
 import { ShoppingDialog } from '../dialogs/shoppingDialog';
-import { ApiClient } from '../../lib/mobx/stores/apiClient';
 
 @observer
 export class ListBox extends React.Component<StoreProps, {}> {
@@ -65,9 +64,12 @@ export class ListBox extends React.Component<StoreProps, {}> {
           selected={selected}
           getItems={getItems}
           getSelected={getSelected}
+          deleteItem={deleteItem}
           onDragEnd={onDragEnd}
+          toggleShowAddDialog={toggleShowAddDialog}
           toggleShowFinishDialog={toggleShowFinishDialog}
           toggleShowShoppingDialog={toggleShowShoppingDialog}
+          toggleShowDeleteDialog={toggleShowDeleteDialog}
           showItems={showItems}
           toggleShowItems={toggleShowItems}
           setActiveItem={setActiveItem}
@@ -77,6 +79,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
           showFinish={showFinish}
           items={items}
           showAddDialog={showAddDialog}
+          showDeleteDialog={showDeleteDialog}
         />
         <AddDialog
           showAddDialog={showAddDialog}
