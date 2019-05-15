@@ -16,19 +16,19 @@ import { Selected } from '../lists/selected/selected';
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
   getSelected: () => Promise<Item[]>;
-  onDragEnd: (result: DropResult) => void;
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
   toggleShowAddDialog: () => boolean;
   toggleShowFinishDialog: () => void;
   toggleShowShoppingDialog: () => void;
-  toggleShowItems: () => void;
-  setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
+  toggleShowItems: () => void;
+  onDragEnd: (result: DropResult) => void;
+  setActiveItem: (list: ListType, index: number) => void;
   deleteItem: (index: number) => void;
-  showItems: boolean;
   selected: Item[];
   items: Item[];
+  showItems: boolean;
   showDeleteDialog: boolean;
 }
 

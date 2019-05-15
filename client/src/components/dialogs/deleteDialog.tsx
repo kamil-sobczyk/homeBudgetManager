@@ -12,12 +12,13 @@ import {
 import { Button } from '@rmwc/button';
 
 interface DeleteDialogProps {
-  deleteItem: (index: number) => void;
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
+  deleteItem: (index: number) => void;
   items: Item[];
+  showDeleteDialog: boolean;
   list: ListType;
   index: number;
-  showDeleteDialog: boolean;
+
 }
 
 @observer

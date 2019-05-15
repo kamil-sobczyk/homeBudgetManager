@@ -11,13 +11,13 @@ import { Item } from '../../lib/interfaces';
 import { FailDialog } from './failDialog';
 
 interface AddDialogProps {
-  addItem: () => void;
   toggleShowAddDialog: () => boolean;
   toggleShowFailDialog: () => void;
+  addItem: () => void;
   changeNewItem: (event: React.FormEvent<EventTarget>) => void;
-  showFailDialog: boolean;
   items: Item[];
   selected: Item[];
+  showFailDialog: boolean;
   showAddDialog: boolean;
 }
 

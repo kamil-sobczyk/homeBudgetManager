@@ -21,37 +21,37 @@ export class ListBox extends React.Component<StoreProps, {}> {
       itemMenagerClient,
       apiClient,
       shoppingClient,
-      dndClient: { onDragEnd }
+      dndClient
     } = this.props.store;
 
     return (
       <>
         <ListsContainer
-          selected={selected}
           getItems={apiClient.getItems}
           getSelected={apiClient.getSelected}
-          deleteItem={itemMenagerClient.deleteItem}
-          onDragEnd={onDragEnd}
+          items={items}
+          selected={selected}
           toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
           toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
           toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
           toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
-          showItems={visibilityClient.showItems}
           toggleShowItems={visibilityClient.toggleShowItems}
-          setActiveItem={itemMenagerClient.setActiveItem}
           toggleCheckItems={itemMenagerClient.toggleCheckItems}
           toggleShowEditDialog={visibilityClient.toggleShowEditDialog}
-          items={items}
           showDeleteDialog={visibilityClient.showDeleteDialog}
+          showItems={visibilityClient.showItems}
+          setActiveItem={itemMenagerClient.setActiveItem}
+          deleteItem={itemMenagerClient.deleteItem}
+          onDragEnd={dndClient.onDragEnd}
         />
         <AddDialog
-          showAddDialog={visibilityClient.showAddDialog}
-          toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
-          addItem={itemMenagerClient.addItem}
           items={items}
           selected={selected}
           toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
+          toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
+          showAddDialog={visibilityClient.showAddDialog}
           showFailDialog={visibilityClient.showFailDialog}
+          addItem={itemMenagerClient.addItem}
           changeNewItem={itemMenagerClient.changeNewItem}
         />
         <EditDialog
@@ -64,24 +64,24 @@ export class ListBox extends React.Component<StoreProps, {}> {
         />
         <DeleteDialog
           items={items}
+          toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
           deleteItem={itemMenagerClient.deleteItem}
           list={itemMenagerClient.activeItem.list}
           index={itemMenagerClient.activeItem.index}
-          toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
           showDeleteDialog={visibilityClient.showDeleteDialog}
         />
         <ShoppingDialog
+          getCosts={apiClient.getCosts}
+          costs={costs}
           toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
           showShoppingDialog={visibilityClient.showShoppingDialog}
-          costs={costs}
-          getCosts={apiClient.getCosts}
         />
         <FinishDialog
-          reorderItems={itemMenagerClient.reorderItems}
-          toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
-          showFinish={visibilityClient.showFinish}
           items={items}
           selected={selected}
+          toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
+          reorderItems={itemMenagerClient.reorderItems}
+          showFinish={visibilityClient.showFinish}
           showAddDialog={visibilityClient.showAddDialog}
           changeCounter={shoppingClient.changeCounter}
           finishShopping={shoppingClient.finishShopping}

@@ -16,13 +16,13 @@ import { Button } from '@rmwc/button';
 import { sortItemsByName } from '../../lib/reorderFunctions';
 
 interface FinishDialogProps {
-  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
   toggleShowFinishDialog: (cost: Cost) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
-  showFinish: boolean;
+  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
   items: Item[];
   selected: Item[];
+  showFinish: boolean;
   showAddDialog: boolean;
 }
 

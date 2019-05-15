@@ -17,10 +17,11 @@ import { Typography } from '@rmwc/typography';
 import { TableContainer } from '../shoppingTable/tableContainer';
 
 interface ShoppingDialogProps {
-  toggleShowShoppingDialog: () => void;
   getCosts: () => void;
-  showShoppingDialog: boolean;
+  toggleShowShoppingDialog: () => void;
   costs: Cost[];
+  showShoppingDialog: boolean;
+
 }
 
 @observer

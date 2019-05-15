@@ -10,10 +10,10 @@ import { ProvidedSelected } from './provided/providedSelected';
 import { StyledContainer } from '../items/items';
 
 interface SelectedProps {
-  setActiveItem: (list: ListType, index: number) => void;
+  getSelected: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  getSelected: () => void;
+  setActiveItem: (list: ListType, index: number) => void;
   selected: Item[];
 }
 
@@ -27,7 +27,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setActiveItem,
       toggleCheckItems,
       toggleShowEditDialog,
-      selected,
+      selected
     } = this.props;
 
     return (

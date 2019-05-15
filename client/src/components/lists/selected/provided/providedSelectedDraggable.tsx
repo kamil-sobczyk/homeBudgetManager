@@ -20,9 +20,9 @@ import { Checkbox } from '@rmwc/checkbox';
 import { DraggableProvided } from 'react-beautiful-dnd';
 
 interface ProvidedSelectedDraggableProps {
-  setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => any;
   toggleShowEditDialog: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, index: number) => void;
   selected: Item[];
   providedDraggable: DraggableProvided;
   item: Item;

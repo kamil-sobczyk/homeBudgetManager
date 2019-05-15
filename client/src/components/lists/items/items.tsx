@@ -13,11 +13,11 @@ import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 interface ItemsProps {
+  getItems: () => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   toggleShowDeleteDialog: (list: ListType, index: number) => void; 
   toggleShowAddDialog: () => void;
   deleteItem: (index: number) => void;
-  getItems: () => void;
   items: Item[];
   showDeleteDialog: boolean;
 }

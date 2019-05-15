@@ -9,9 +9,9 @@ import { ProvidedSelectedDraggable } from './providedSelectedDraggable';
 import { List } from '../../items/provided/providedItems';
 
 interface ProvidedSelectedProps {
-  setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, index: number) => void;
   selected: Item[];
   provided: DroppableProvided;
 }
