@@ -25,14 +25,11 @@ interface ListsContainerProps {
   setActiveItem: (list: ListType, index: number) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
   deleteItem: (index: number) => void;
   showItems: boolean;
   selected: Item[];
   items: Item[];
-  showAddDialog: boolean;
   showDeleteDialog: boolean;
-  showFinish: boolean;
 }
 
 @observer
@@ -57,16 +54,13 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       toggleCheckItems,
       showDeleteDialog,
       deleteItem,
-      items,
-      reorderItems,
-      showAddDialog,
-      showFinish
+      items
     } = this.props;
 
     return (
       <>
         <StyledButtonsContainer>
-          <ViewButton toggleShowItems={toggleShowItems} />
+          <ViewButton toggleShowItems={toggleShowItems} showItems={showItems} />
         </StyledButtonsContainer>
         <StyledListContainer>
           <DragDropContext onDragEnd={onDragEnd}>

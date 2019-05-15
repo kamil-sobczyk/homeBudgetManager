@@ -1,6 +1,6 @@
-import { observable, computed } from 'mobx';
+import { observable } from 'mobx';
 
-import { Item, ActiveItem, Cost } from '../interfaces';
+import { Item, Cost } from '../interfaces';
 
 import { ApiClient } from './stores/apiClient';
 import { VisibityClient } from './stores/visibilityClient';

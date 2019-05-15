@@ -68,10 +68,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
           setActiveItem={setActiveItem}
           toggleCheckItems={toggleCheckItems}
           toggleShowEditDialog={toggleShowEditDialog}
-          reorderItems={reorderItems}
-          showFinish={showFinish}
           items={items}
-          showAddDialog={showAddDialog}
           showDeleteDialog={showDeleteDialog}
         />
         <AddDialog
