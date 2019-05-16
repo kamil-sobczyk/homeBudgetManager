@@ -12,7 +12,6 @@ import {
   DialogContent
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { Typography } from '@rmwc/typography';
 import '@material/typography/dist/mdc.typography.css';
 
 import { TableContainer } from '../shoppingTable/tableContainer';

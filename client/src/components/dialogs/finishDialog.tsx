@@ -16,7 +16,7 @@ import { Button } from '@rmwc/button';
 import {StyledDialogTitle} from './shoppingDialog';
 
 interface FinishDialogProps {
-  toggleShowFinishDialog: (cost?: Cost) => void;
+  toggleShowFinishDialog: () => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
   reorderItems: (newItems: Item[], newSelected: Item[]) => void;
@@ -52,7 +52,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
         <DialogActions>
           <Button
             color='primary'
-            onClick={() => toggleShowFinishDialog()}
+            onClick={toggleShowFinishDialog}
           >
             Cancel
           </Button>
