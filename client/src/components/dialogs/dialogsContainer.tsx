@@ -37,48 +37,62 @@ export class DialogsContainer extends React.Component<
 
     return (
       <>
-        <AddDialog
-          items={items}
-          selected={selected}
-          toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
-          toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
-          showAddDialog={visibilityClient.showAddDialog}
-          showFailDialog={visibilityClient.showFailDialog}
-          addItem={itemMenagerClient.addItem}
-          changeNewItem={itemMenagerClient.changeNewItem}
-        />
-        <EditDialog
-          name={itemMenagerClient.currentItemName}
-          info={itemMenagerClient.currentItemInfo}
-          onChangeName={itemMenagerClient.updateCurrentItemName}
-          onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
-          isVisible={visibilityClient.showEditDialog}
-          hide={visibilityClient.toggleShowEditDialog}
-        />
-        <DeleteDialog
-          items={items}
-          toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
-          deleteItem={itemMenagerClient.deleteItem}
-          list={itemMenagerClient.activeItem.list}
-          index={itemMenagerClient.activeItem.index}
-          showDeleteDialog={visibilityClient.showDeleteDialog}
-        />
-        <ShoppingDialog
-          getCosts={apiClient.getCosts}
-          costs={costs}
-          toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
-          showShoppingDialog={visibilityClient.showShoppingDialog}
-        />
-        <FinishDialog
-          items={items}
-          selected={selected}
-          toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
-          reorderItems={itemMenagerClient.reorderItems}
-          showFinish={visibilityClient.showFinish}
-          showAddDialog={visibilityClient.showAddDialog}
-          changeCounter={shoppingClient.changeCounter}
-          finishShopping={shoppingClient.finishShopping}
-        />
+        {visibilityClient.showAddDialog && (
+          <AddDialog
+            items={items}
+            selected={selected}
+            toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
+            toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
+            showAddDialog={visibilityClient.showAddDialog}
+            showFailDialog={visibilityClient.showFailDialog}
+            addItem={itemMenagerClient.addItem}
+            changeNewItem={itemMenagerClient.changeNewItem}
+          />
+        )}
+
+        {visibilityClient.showEditDialog && (
+          <EditDialog
+            name={itemMenagerClient.currentItemName}
+            info={itemMenagerClient.currentItemInfo}
+            onChangeName={itemMenagerClient.updateCurrentItemName}
+            onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
+            isVisible={visibilityClient.showEditDialog}
+            hide={visibilityClient.toggleShowEditDialog}
+          />
+        )}
+
+        {visibilityClient.showDeleteDialog && (
+          <DeleteDialog
+            items={items}
+            toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
+            deleteItem={itemMenagerClient.deleteItem}
+            list={itemMenagerClient.activeItem.list}
+            index={itemMenagerClient.activeItem.index}
+            showDeleteDialog={visibilityClient.showDeleteDialog}
+          />
+        )}
+
+        {visibilityClient.showShoppingDialog && (
+          <ShoppingDialog
+            getCosts={apiClient.getCosts}
+            costs={costs}
+            toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
+            showShoppingDialog={visibilityClient.showShoppingDialog}
+          />
+        )}
+
+        {visibilityClient.showFinish && (
+          <FinishDialog
+            items={items}
+            selected={selected}
+            toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
+            reorderItems={itemMenagerClient.reorderItems}
+            showFinish={visibilityClient.showFinish}
+            showAddDialog={visibilityClient.showAddDialog}
+            changeCounter={shoppingClient.changeCounter}
+            finishShopping={shoppingClient.finishShopping}
+          />
+        )}
       </>
     );
   }
