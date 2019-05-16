@@ -45,6 +45,8 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         }
       ];
 
+      console.log(sortedCosts)
+
     return (
       <>
         <StyledDataTable>

@@ -18,7 +18,7 @@ interface ListsContainerProps {
   getSelected: () => Promise<Item[]>;
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
   toggleShowAddDialog: () => boolean;
-  toggleShowFinishDialog: () => void;
+  toggleShowFinishDialog: (cost? : Cost) => void;
   toggleShowShoppingDialog: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
@@ -88,7 +88,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
           <StyledButton
             color='primary'
             outlined
-            onClick={toggleShowFinishDialog}
+            onClick={() => toggleShowFinishDialog()}
           >
             Finish shopping
           </StyledButton>
