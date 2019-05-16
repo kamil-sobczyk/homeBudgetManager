@@ -27,10 +27,6 @@ interface FinishDialogProps {
 export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
   @observable count: number = this.props.count;
 
-  componentWillReceiveProps(props: FinishDialogProps) {
-    this.count = props.count;
-  }
-
   render() {
     const {
       showFinish,

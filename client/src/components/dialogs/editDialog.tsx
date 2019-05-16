@@ -27,11 +27,6 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable isNameChangeInitialized: boolean = false;
   @observable isInfoChangeInitialized: boolean = false;
 
-  componentWillReceiveProps(props: EditDialogProps) {
-    this.name = props.name;
-    this.info = props.info;
-  }
-
   confirm = (): void => {
     const {
       toggleShowFailDialog,
