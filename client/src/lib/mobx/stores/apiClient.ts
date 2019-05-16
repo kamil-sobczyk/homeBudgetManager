@@ -32,7 +32,6 @@ export class ApiClient {
   deleteItemOnServer = async (index: number): Promise<void> => {
     await axios
       .delete(server + 'store/items', { data: { index: index } })
-      .then(state => state.data as Item[]);
   };
 
   editItemOnServer = async (
@@ -42,7 +41,6 @@ export class ApiClient {
   ): Promise<void> => {
     await axios
       .put<Item>(server + 'store/' + list, { data: { index, newItem } })
-      .then(state => state.data as Item);
   };
 
   reorderItemsOnServer = async (
@@ -51,24 +49,20 @@ export class ApiClient {
   ): Promise<void> => {
     await axios
       .put<Item[]>(server + 'store/', { data: { items, selected } })
-      .then(state => state.data as Item[]);
   };
 
   addCostOnServer = async (cost: Cost): Promise<void> => {
     await axios
       .post<Cost>(server + 'store/costs', { data: { cost } })
-      .then(state => state.data as Cost);
   };
 
   checkItemOnServer = async (list: ListType, index: number): Promise<void> => {
     await axios
       .put<Item>(server + 'store/checked', { data: { list, index } })
-      .then(state => state.data);
   };
 
   addItemOnServer = async (item: Item): Promise<void> => {
     await axios
       .post<Item>(server + 'store/items', { data: { item } })
-      .then(state => state.data as Item);
   };
 }
