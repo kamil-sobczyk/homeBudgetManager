@@ -4,7 +4,7 @@ import { Cost } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
-import { observable} from 'mobx';
+import { observable } from 'mobx';
 
 export class ShoppingClient {
   store: Store;
@@ -33,7 +33,7 @@ export class ShoppingClient {
   };
 
   finishShopping = (): void => {
-    if (this.count < 1) return;
+    if (this.count < 1 || typeof this.count !== 'number') return;
 
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
@@ -47,8 +47,13 @@ export class ShoppingClient {
       } else newSelected.push(item);
     });
 
-    const item: Cost = {chosenItems: this.chosenItems, count: this.count, date: this.date };
+    const item: Cost = {
+      chosenItems: this.chosenItems,
+      count: this.count,
+      date: this.date
+    };
     item.count = Math.round(this.count);
+    this.count = 0;
     item.chosenItems = chosenItems;
 
     sortItemsByName(newItems);

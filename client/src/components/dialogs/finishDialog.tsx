@@ -4,15 +4,12 @@ import { observer } from 'mobx-react';
 import { Cost } from '../../lib/interfaces';
 import { Item } from '../../lib/interfaces';
 
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-} from '@rmwc/dialog';
+import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
-import {StyledDialogTitle} from './shoppingDialog';
+import { StyledDialogTitle } from './shoppingDialog';
+import { observable } from 'mobx';
 
 interface FinishDialogProps {
   toggleShowFinishDialog: (cost?: Cost) => void;
@@ -23,12 +20,24 @@ interface FinishDialogProps {
   selected: Item[];
   showFinish: boolean;
   showAddDialog: boolean;
+  count: number;
 }
 
 @observer
 export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
+  @observable count: number = this.props.count;
+
+  componentWillReceiveProps(props: FinishDialogProps) {
+    this.count = props.count;
+  }
+
   render() {
-    const { showFinish, toggleShowFinishDialog, changeCounter, finishShopping } = this.props;
+    const {
+      showFinish,
+      toggleShowFinishDialog,
+      changeCounter,
+      finishShopping
+    } = this.props;
 
     return (
       <Dialog
@@ -36,7 +45,9 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
         aria-labelledby='alert-dialog-title'
         open={showFinish}
       >
-        <StyledDialogTitle id='alert-dialog-title'>Finishing shopping</StyledDialogTitle>
+        <StyledDialogTitle id='alert-dialog-title'>
+          Finishing shopping
+        </StyledDialogTitle>
         <DialogContent>
           Checked items will be moved to items list. <br /> Type how much you
           spent for shopping.
@@ -49,10 +60,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
           />
         </DialogContent>
         <DialogActions>
-          <Button
-            color='primary'
-            onClick={() => toggleShowFinishDialog()}
-          >
+          <Button color='primary' onClick={() => toggleShowFinishDialog()}>
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={finishShopping}>

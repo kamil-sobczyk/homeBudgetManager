@@ -91,6 +91,7 @@ export class DialogsContainer extends React.Component<
             showAddDialog={visibilityClient.showAddDialog}
             changeCounter={shoppingClient.changeCounter}
             finishShopping={shoppingClient.finishShopping}
+            count={shoppingClient.count}
           />
         )}
         {visibilityClient.showFailDialog && (
