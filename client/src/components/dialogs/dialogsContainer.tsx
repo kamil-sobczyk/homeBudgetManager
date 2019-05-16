@@ -8,6 +8,7 @@ import { ShoppingDialog } from './shoppingDialog';
 import { FinishDialog } from './finishDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
+import { FailDialog } from './failDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -41,10 +42,8 @@ export class DialogsContainer extends React.Component<
           <AddDialog
             items={items}
             selected={selected}
-            toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
             toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
             showAddDialog={visibilityClient.showAddDialog}
-            showFailDialog={visibilityClient.showFailDialog}
             addItem={itemMenagerClient.addItem}
             changeNewItem={itemMenagerClient.changeNewItem}
           />
@@ -52,6 +51,7 @@ export class DialogsContainer extends React.Component<
 
         {visibilityClient.showEditDialog && (
           <EditDialog
+            toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
             name={itemMenagerClient.currentItemName}
             info={itemMenagerClient.currentItemInfo}
             onChangeName={itemMenagerClient.updateCurrentItemName}
@@ -91,6 +91,12 @@ export class DialogsContainer extends React.Component<
             showAddDialog={visibilityClient.showAddDialog}
             changeCounter={shoppingClient.changeCounter}
             finishShopping={shoppingClient.finishShopping}
+          />
+        )}
+        {visibilityClient.showFailDialog && (
+          <FailDialog
+            showFailDialog={visibilityClient.showFailDialog}
+            toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
           />
         )}
       </>

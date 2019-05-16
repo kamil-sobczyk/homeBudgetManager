@@ -6,10 +6,10 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './shoppingDialog';
+import { observable } from 'mobx';
 
 interface FailDialogProps {
   toggleShowFailDialog: () => void;
@@ -18,6 +18,13 @@ interface FailDialogProps {
 
 @observer
 export class FailDialog extends React.Component<FailDialogProps, {}> {
+
+  @observable showFail?: boolean = false;
+
+
+  componentWillReceiveProps(props: FailDialogProps) {
+    this.showFail = props.showFailDialog
+  }
   render() {
     const {
       showFailDialog,
@@ -30,7 +37,7 @@ export class FailDialog extends React.Component<FailDialogProps, {}> {
         aria-describedby='alert-dialog-description'
       >
         <StyledDialogTitle id='alert-dialog-title'>
-          Unable to add new product to the list!
+          Unable to perform this action!
         </StyledDialogTitle>
         <DialogContent id='alert-dialog-description'>
           This product is on your list already or it has no name.

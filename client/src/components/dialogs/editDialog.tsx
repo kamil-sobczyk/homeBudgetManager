@@ -11,6 +11,7 @@ import { ListType } from '../../lib/interfaces';
 import { StyledDialogTitle } from './shoppingDialog';
 
 interface EditDialogProps {
+  toggleShowFailDialog: () => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
   hide: (list: ListType, index: number) => void;
@@ -21,8 +22,10 @@ interface EditDialogProps {
 
 @observer
 export class EditDialog extends React.Component<EditDialogProps, {}> {
-  @observable name?: string = '';
-  @observable info?: string = '';
+  @observable name?: string = this.props.name;
+  @observable info?: string = this.props.info;
+  @observable isNameChangeInitialized: boolean = false;
+  @observable isInfoChangeInitialized: boolean = false;
 
   componentWillReceiveProps(props: EditDialogProps) {
     this.name = props.name;
@@ -30,18 +33,45 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   }
 
   confirm = (): void => {
-    const { onChangeName, onChangeInfo, hide } = this.props;
+    const {
+      toggleShowFailDialog,
+      onChangeName,
+      onChangeInfo,
+      hide,
+      name
+    } = this.props;
 
-    onChangeName(this.name ? this.name : '');
-    onChangeInfo(this.info ? this.info : '');
-    hide('items', 0);
+    if (!this.isInfoChangeInitialized && !this.isNameChangeInitialized) {
+      hide('items', 0);
+      return;
+    } else if (
+      this.isNameChangeInitialized &&
+      this.name &&
+      this.name.length < 1
+    ) {
+      toggleShowFailDialog();
+      return;
+    } else if (this.isNameChangeInitialized || this.isInfoChangeInitialized) {
+      if (this.name && this.name.length > 0) {
+        onChangeName(
+          this.name && this.name.length > 0 ? this.name : name ? name : ''
+        );
+        onChangeInfo(this.info ? this.info : '');
+        hide('items', 0);
+      } else {
+        toggleShowFailDialog();
+        return;
+      }
+    } else return;
   };
 
   private updateName = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.isInfoChangeInitialized = true;
     this.name = e.currentTarget.value;
   };
 
   private updateInfo = (e: React.FormEvent<HTMLInputElement>): void => {
+    this.isInfoChangeInitialized = true;
     this.info = e.currentTarget.value;
   };
 
@@ -54,14 +84,14 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
         <TextField
           id='outlined-required'
           label='Type new name'
-          value={this.name}
+          defaultValue={this.name}
           name='name'
           onChange={this.updateName}
         />
         <TextField
           id='outlined'
           label='Type new info'
-          value={this.info}
+          defaultValue={this.info}
           name='info'
           onChange={this.updateInfo}
         />

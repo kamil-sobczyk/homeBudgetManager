@@ -8,7 +8,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle
 } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';

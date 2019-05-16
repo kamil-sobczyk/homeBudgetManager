@@ -34,7 +34,6 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     let sortedCosts: Cost[];
     if (costs.length > 0) {
       sortedCosts = costs
-        .slice()
         .sort((b: Cost, a: Cost): any => a.date > b.date);
     } else
       sortedCosts = [

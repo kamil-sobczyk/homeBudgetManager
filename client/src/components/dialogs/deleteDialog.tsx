@@ -6,7 +6,7 @@ import { Item, ListType } from '../../lib/interfaces';
 import {
   Dialog,
   DialogActions,
-  DialogTitle,
+
   DialogContent
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';

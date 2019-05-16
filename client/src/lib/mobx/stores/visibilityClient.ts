@@ -36,8 +36,10 @@ export class VisibityClient {
     this.showEditDialog = !this.showEditDialog;
   };
 
-  toggleShowFailDialog = (): boolean =>
-    (this.showFailDialog = !this.showFailDialog);
+  toggleShowFailDialog = (): void => {
+    this.showFailDialog = !this.showFailDialog;
+  }
+  
 
   toggleShowFinishDialog = (cost?: Cost): void => {
     this.showFinish = !this.showFinish;

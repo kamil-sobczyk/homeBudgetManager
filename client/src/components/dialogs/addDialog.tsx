@@ -8,17 +8,14 @@ import { TextField } from '@rmwc/textfield';
 
 import { Item } from '../../lib/interfaces';
 
-import { FailDialog } from './failDialog';
 import { StyledDialogTitle } from './shoppingDialog';
 
 interface AddDialogProps {
   toggleShowAddDialog: () => boolean;
-  toggleShowFailDialog: () => void;
   addItem: () => void;
   changeNewItem: (event: React.FormEvent<EventTarget>) => void;
   items: Item[];
   selected: Item[];
-  showFailDialog: boolean;
   showAddDialog: boolean;
 }
 
@@ -32,8 +29,6 @@ export class AddDialog extends React.Component<AddDialogProps, Item> {
     const {
       showAddDialog,
       toggleShowAddDialog,
-      toggleShowFailDialog,
-      showFailDialog,
       changeNewItem,
       addItem
     } = this.props;
@@ -63,10 +58,6 @@ export class AddDialog extends React.Component<AddDialogProps, Item> {
             Add
           </Button>
         </DialogActions>
-        <FailDialog
-          showFailDialog={showFailDialog}
-          toggleShowFailDialog={toggleShowFailDialog}
-        />
       </Dialog>
     );
   }
