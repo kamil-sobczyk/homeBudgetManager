@@ -17,49 +17,19 @@ import {
 
 import { CostsCard } from './costsCard';
 
-interface TableContainerState {
-  page: number;
-  rowsPerPage: number;
-  costs: Cost[];
-}
-
 interface TableContainerProps {
   getCosts: () => void;
   costs: Cost[];
 }
 
 @observer
-export class TableContainer extends React.Component<
-  TableContainerProps,
-  TableContainerState
-> {
-  state = {
-    page: 0,
-    rowsPerPage: 5,
-    costs: []
-  };
-
+export class TableContainer extends React.Component<TableContainerProps, {}> {
   componentDidMount = (): void => {
     this.props.getCosts();
   };
 
-  handleChangePage = (
-    event: React.FormEvent<EventTarget>,
-    page: number
-  ): void => {
-    this.setState({ page });
-  };
-
-  handleChangeRowsPerPage = (event: React.FormEvent<EventTarget>): void => {
-    const target = event.target as HTMLInputElement;
-    this.setState({ page: 0, rowsPerPage: parseInt(target.value) });
-  };
-
   render() {
     const { costs } = this.props;
-    const { rowsPerPage, page } = this.state;
-    const emptyRows =
-      rowsPerPage - Math.min(rowsPerPage, costs.length - page * rowsPerPage);
 
     let sortedCosts: Cost[];
     if (costs.length > 0) {
