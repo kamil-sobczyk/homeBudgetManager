@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { ListType } from '../../../lib/interfaces';
 
 import { MenuItem, SimpleMenu } from '@rmwc/menu';
@@ -23,7 +25,7 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
 
   render() {
     return (
-      <SimpleMenu
+      <StyledSimpleMenu
         handle={<IconButton icon='menu'>Menu</IconButton>}
         hoistToBody={true}
       >
@@ -34,7 +36,11 @@ export class MoreMenu extends React.Component<MoreMenuProps, {}> {
         <MenuItem onClick={() => this.handleOptionClick('delete')}>
           <IconButton icon='delete' />
         </MenuItem>
-      </SimpleMenu>
+      </StyledSimpleMenu>
     );
   }
 }
+
+const StyledSimpleMenu = styled(SimpleMenu)`
+  min-width: 20px;
+`;
