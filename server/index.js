@@ -125,9 +125,7 @@ const appRouter = app => {
 
   app.post("/store/costs", (req, res) => {
     store.costs.push(req.body.data.cost);
-    store.costs.sort((b, a)=> a.date > b.date);
-
-    console.log(store.costs)
+    store.costs.sort((b, a)=> Number(a.date[a.date.length -1] > Number(b.date[b.date.length -1])));
     res.status(200).json(store.costs);
   });
 

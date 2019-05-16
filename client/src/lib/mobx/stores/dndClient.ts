@@ -45,6 +45,7 @@ export class DnDClient {
       }
     } else {
       const result = move(
+        
         this.getDndList(source.droppableId),
         this.getDndList(destination.droppableId),
         source,
