@@ -16,7 +16,7 @@ const countMothOutgoings = (costs: Cost[]) => {
 };
 
 interface CostsCardProps {
-  sortedCosts: Cost[];
+  displayedCosts: Cost[];
 }
 
 @observer
@@ -26,7 +26,7 @@ export class CostsCard extends React.Component<CostsCardProps, {}> {
       <Card>
         <Typography use='subtitle1'>
           This month you spent:{' '}
-          {countMothOutgoings(this.props.sortedCosts) + ' zł'}
+          {countMothOutgoings(this.props.displayedCosts) + ' zł'}
         </Typography>
       </Card>
     );

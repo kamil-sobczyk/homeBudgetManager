@@ -31,18 +31,16 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
   render() {
     const { costs } = this.props;
 
-    let sortedCosts: Cost[];
-    if (costs.length > 0) {
-      sortedCosts = costs
-        .sort((b: Cost, a: Cost): any => a.date > b.date);
-    } else
-      sortedCosts = [
+    let displayedCosts: Cost[] = costs;
+    if (costs.length < 1) {
+      displayedCosts = [
         {
           count: 0,
           chosenItems: [' - - - - - - '],
           date: ' - - - - - - '
         }
       ];
+    }
 
     return (
       <>
@@ -56,7 +54,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
               </DataTableRow>
             </DataTableHead>
             <DataTableBody>
-              {sortedCosts.map((cost: Cost, index: number) => (
+              {displayedCosts.map((cost: Cost, index: number) => (
                 <DataTableRow key={index}>
                   <StyledDataTableCell>
                     {cost.chosenItems.join(', ')}
@@ -70,7 +68,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             </DataTableBody>
           </StyledDataTableContent>
         </StyledDataTable>
-        <CostsCard sortedCosts={sortedCosts} />
+        <CostsCard displayedCosts={displayedCosts} />
       </>
     );
   }
