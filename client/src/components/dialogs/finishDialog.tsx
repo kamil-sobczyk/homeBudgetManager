@@ -13,7 +13,7 @@ import {
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
-import { sortItemsByName } from '../../lib/reorderFunctions';
+import {StyledDialogTitle} from './shoppingDialog';
 
 interface FinishDialogProps {
   toggleShowFinishDialog: (cost: Cost) => void;
@@ -37,7 +37,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
         aria-labelledby='alert-dialog-title'
         open={showFinish}
       >
-        <DialogTitle id='alert-dialog-title'>'Finishing shopping'</DialogTitle>
+        <StyledDialogTitle id='alert-dialog-title'>Finishing shopping</StyledDialogTitle>
         <DialogContent>
           Checked items will be moved to items list. <br /> Type how much you
           spent for shopping.

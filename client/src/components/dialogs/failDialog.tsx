@@ -9,6 +9,7 @@ import {
   DialogTitle
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
+import { StyledDialogTitle } from './shoppingDialog';
 
 interface FailDialogProps {
   toggleShowFailDialog: () => void;
@@ -28,9 +29,9 @@ export class FailDialog extends React.Component<FailDialogProps, {}> {
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
-        <DialogTitle id='alert-dialog-title'>
+        <StyledDialogTitle id='alert-dialog-title'>
           Unable to add new product to the list!
-        </DialogTitle>
+        </StyledDialogTitle>
         <DialogContent id='alert-dialog-description'>
           This product is on your list already or it has no name.
         </DialogContent>

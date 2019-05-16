@@ -10,6 +10,7 @@ import {
   DialogContent
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
+import { StyledDialogTitle } from './shoppingDialog';
 
 interface DeleteDialogProps {
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
@@ -47,7 +48,7 @@ export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
-        <DialogTitle id='alert-dialog-title'>"Deleting product"</DialogTitle>
+        <StyledDialogTitle id='alert-dialog-title'>Deleting product</StyledDialogTitle>
         <DialogContent id='alert-dialog-description'>
           Are you sure want to delete {active} from your list?
         </DialogContent>

@@ -8,6 +8,7 @@ import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
 import { ListType } from '../../lib/interfaces';
+import { StyledDialogTitle } from './shoppingDialog';
 
 interface EditDialogProps {
   onChangeName: (name: string) => void;
@@ -49,7 +50,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
 
     return (
       <Dialog open={isVisible}>
-        <DialogTitle>Edit product</DialogTitle>
+        <StyledDialogTitle>Edit product</StyledDialogTitle>
         <TextField
           id='outlined-required'
           label='Type new name'

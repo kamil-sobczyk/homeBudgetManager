@@ -36,11 +36,7 @@ export class ShoppingDialog extends React.Component<ShoppingDialogProps, {}> {
     return (
       <>
         <Dialog open={showShoppingDialog} aria-label='shopping-you-made'>
-          <DialogTitle>
-            <StyledTypography use='headline6'>
-              Shopping you made
-            </StyledTypography>
-          </DialogTitle>
+          <StyledDialogTitle>Shopping you made</StyledDialogTitle>
           <DialogContent>
             <TableContainer getCosts={getCosts} costs={costs} />
           </DialogContent>
@@ -55,7 +51,8 @@ export class ShoppingDialog extends React.Component<ShoppingDialogProps, {}> {
   }
 }
 
-const StyledTypography = styled(Typography)`
+export const StyledDialogTitle = styled(DialogTitle)`
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 `;

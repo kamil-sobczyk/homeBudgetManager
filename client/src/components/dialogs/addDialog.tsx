@@ -9,6 +9,7 @@ import { TextField } from '@rmwc/textfield';
 import { Item } from '../../lib/interfaces';
 
 import { FailDialog } from './failDialog';
+import { StyledDialogTitle } from './shoppingDialog';
 
 interface AddDialogProps {
   toggleShowAddDialog: () => boolean;
@@ -39,7 +40,7 @@ export class AddDialog extends React.Component<AddDialogProps, Item> {
 
     return (
       <Dialog open={showAddDialog}>
-        <DialogTitle>Add a new product</DialogTitle>
+        <StyledDialogTitle>Add a new product</StyledDialogTitle>
         <TextField
           defaultValue={''}
           id='outlined-required'
