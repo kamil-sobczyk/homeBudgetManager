@@ -13,30 +13,25 @@ interface MoreMenuProps {
 }
 
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
-  handleOptionClick = (
-    event: React.MouseEvent<any, MouseEvent>,
-    action: string
-  ): void => {
+  handleOptionClick = (action: string): void => {
     const { toggleShowEditDialog, toggleShowDeleteDialog, index } = this.props;
 
     action === 'edit'
       ? toggleShowEditDialog('items', index)
       : toggleShowDeleteDialog('items', index);
-    event.stopPropagation();
   };
 
   render() {
-  
     return (
       <SimpleMenu
         handle={<IconButton icon='menu'>Menu</IconButton>}
         hoistToBody={true}
       >
-        <MenuItem onClick={e => this.handleOptionClick(e, 'edit')}>
+        <MenuItem onClick={() => this.handleOptionClick('edit')}>
           <IconButton icon='edit' />
         </MenuItem>
         <ListDivider />
-        <MenuItem onClick={e => this.handleOptionClick(e, 'delete')}>
+        <MenuItem onClick={() => this.handleOptionClick('delete')}>
           <IconButton icon='delete' />
         </MenuItem>
       </SimpleMenu>
