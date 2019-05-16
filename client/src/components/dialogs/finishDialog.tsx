@@ -16,7 +16,7 @@ import { Button } from '@rmwc/button';
 import {StyledDialogTitle} from './shoppingDialog';
 
 interface FinishDialogProps {
-  toggleShowFinishDialog: (cost: Cost) => void;
+  toggleShowFinishDialog: (cost?: Cost) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
   reorderItems: (newItems: Item[], newSelected: Item[]) => void;
@@ -44,7 +44,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
           <TextField
             label='Amount'
             defaultValue={String(0)}
-            onChange={(e: React.FormEvent<EventTarget>) => changeCounter(e)}
+            onChange={e => changeCounter(e)}
             type='number'
             required
           />
@@ -52,11 +52,11 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
         <DialogActions>
           <Button
             color='primary'
-            onClick={() => toggleShowFinishDialog(this.state)}
+            onClick={() => toggleShowFinishDialog()}
           >
             Cancel
           </Button>
-          <Button autoFocus color='primary' onClick={(): void => finishShopping()}>
+          <Button autoFocus color='primary' onClick={finishShopping}>
             Confirm
           </Button>
         </DialogActions>

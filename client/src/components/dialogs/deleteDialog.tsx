@@ -54,7 +54,7 @@ export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={(): void => toggleShowDeleteDialog(list, 0)}
+            onClick={() => toggleShowDeleteDialog(list, 0)}
             color='primary'
           >
             No

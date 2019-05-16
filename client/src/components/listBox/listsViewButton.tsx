@@ -14,7 +14,7 @@ export class ViewButton extends React.Component<ViewButtonProps, {}> {
   render() {
     const { showItems, toggleShowItems } = this.props;
     return (
-      <Button onClick={() => toggleShowItems()} theme='primary' outlined>
+      <Button onClick={toggleShowItems} theme='primary' outlined>
         {showItems ? 'SHOW ITEMS TO BUY ONLY' : 'ADD NEW ITEMS TO LIST'}
       </Button>
     );

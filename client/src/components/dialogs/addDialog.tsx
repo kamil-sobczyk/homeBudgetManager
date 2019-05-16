@@ -46,20 +46,20 @@ export class AddDialog extends React.Component<AddDialogProps, Item> {
           id='outlined-required'
           label='New item'
           name='name'
-          onChange={(e: React.FormEvent<any>) => this.onItemChange(e)}
+          onChange={e => this.onItemChange(e)}
         />
         <TextField
           defaultValue={''}
           id='outlined'
           label='Additional info'
           name='info'
-          onChange={(e: React.FormEvent<any>) => changeNewItem(e)}
+          onChange={e => changeNewItem(e)}
         />
         <DialogActions>
           <Button color='primary' onClick={toggleShowAddDialog}>
             Cancel
           </Button>
-          <Button color='primary' onClick={() => addItem()}>
+          <Button color='primary' onClick={addItem}>
             Add
           </Button>
         </DialogActions>

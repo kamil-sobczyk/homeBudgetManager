@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Item, ListType } from '../../lib/interfaces';
+import { Item, ListType, Cost } from '../../lib/interfaces';
 
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
@@ -18,7 +18,7 @@ interface ListsContainerProps {
   getSelected: () => Promise<Item[]>;
   toggleShowDeleteDialog: (list: ListType, index: number) => void;
   toggleShowAddDialog: () => boolean;
-  toggleShowFinishDialog: () => void;
+  toggleShowFinishDialog: (cost?: Cost) => void;
   toggleShowShoppingDialog: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
