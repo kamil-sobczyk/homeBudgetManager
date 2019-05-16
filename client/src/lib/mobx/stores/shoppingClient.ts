@@ -14,12 +14,7 @@ export class ShoppingClient {
 
   @observable chosenItems = [];
   @observable count = 0;
-  @observable date = String(
-    new Date().toLocaleDateString('pl-PL', {
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  );
+  @observable date = new Date();
 
   changeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
@@ -33,7 +28,7 @@ export class ShoppingClient {
   };
 
   finishShopping = (): void => {
-    if (this.count < 1 || typeof this.count !== 'number') return;
+    if (this.count < 1 ) return;
 
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
@@ -50,7 +45,12 @@ export class ShoppingClient {
     const item: Cost = {
       chosenItems: this.chosenItems,
       count: this.count,
-      date: this.date
+      date: String(
+        new Date().toLocaleDateString('pl-PL', {
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      )
     };
     item.count = Math.round(this.count);
     this.count = 0;
