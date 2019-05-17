@@ -57,5 +57,6 @@ export class Items extends React.Component<ItemsProps, {}> {
 
 export const StyledContainer = styled.div`
   min-height: 300px;
-  min-width: 250px;
+  min-width: 150px;
+  margin: 5px;
 `;

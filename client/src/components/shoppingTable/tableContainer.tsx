@@ -57,7 +57,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             <DataTableBody>
               {displayedCosts.map((cost: Cost, index: number) => (
                 <DataTableRow
-                  key={cost.date}
+                  key={index}
                   style={cost.bill ? { color: 'blue' } : { color: 'green' }}
                 >
                   <StyledDataTableCell>
@@ -87,6 +87,6 @@ const StyledDataTableCell = styled(DataTableCell)`
 `;
 
 const StyledDataTable = styled(DataTable)`
-  min-width: 500px;
+  min-width: 300px;
   min-height: 400px;
 `;

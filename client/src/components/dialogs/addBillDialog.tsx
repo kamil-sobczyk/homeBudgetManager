@@ -36,7 +36,7 @@ export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
         <TextField
           defaultValue={''}
           id='outlined-required'
-          label='Bill'
+          label='Bill name'
           name='name'
           onChange={e => changeNewBill(e)}
         />
