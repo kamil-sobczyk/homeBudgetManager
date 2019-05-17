@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Cost } from '../../lib/interfaces';
+import { Cost } from '../../../../lib/interfaces';
 
 import { Card } from '@rmwc/card';
 import { Typography } from '@rmwc/typography';

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { AddItemDialog } from './addItemDialog';
 import { EditDialog } from './editItemDialog';
 import { DeleteItemDialog } from './deleteItemDialog';
-import { SpendingsDialog } from './spendingsDialog';
+import { SpendingsDialog } from './spendingsDialog/spendingsDialog';
 import { FinishShoppingDialog } from './finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';

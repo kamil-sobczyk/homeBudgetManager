@@ -8,7 +8,7 @@ import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
-import { StyledDialogTitle } from './spendingsDialog';
+import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 import { observable } from 'mobx';
 
 interface FinishShoppingDialogProps {

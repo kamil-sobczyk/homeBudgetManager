@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Cost } from '../../lib/interfaces';
+import { Cost } from '../../../lib/interfaces';
 
 import {
   Dialog,
@@ -14,7 +14,7 @@ import {
 import { Button } from '@rmwc/button';
 import '@material/typography/dist/mdc.typography.css';
 
-import { TableContainer } from '../shoppingTable/tableContainer';
+import { TableContainer } from './spendingsTable/tableContainer';
 
 interface SpendingsDialogProps {
   getCosts: () => void;

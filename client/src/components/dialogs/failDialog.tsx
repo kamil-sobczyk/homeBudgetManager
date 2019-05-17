@@ -8,7 +8,7 @@ import {
   DialogContent,
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { StyledDialogTitle } from './spendingsDialog';
+import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 import { observable } from 'mobx';
 
 interface FailDialogProps {

@@ -10,7 +10,7 @@ import {
   DialogContent
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { StyledDialogTitle } from './spendingsDialog';
+import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface deleteItemDialogProps {
   toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
