@@ -145,7 +145,7 @@ export class ItemMenagerClient {
   };
 
   addCost = (cost: Cost): void => {
-    this.store.costs.push(cost);
+    this.store.costs.unshift(cost);
     this.store.apiClient.addCostOnServer(cost);
   };
 }

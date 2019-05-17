@@ -25,9 +25,9 @@ const store = {
       checked: false
     },
     {
-      name: "Beef",
-      info: "1kg",
-      id: "frefp43ifjdsfs",
+      name: "Bananas",
+      info: "10pcs",
+      id: "fdswefi3ddddddddddd",
       checked: false
     }
   ],
@@ -54,6 +54,12 @@ const store = {
       name: "Aples",
       info: "3kg",
       id: "ekflkdsdsaljd",
+      checked: false
+    },
+    {
+      name: "Beef",
+      info: "1kg",
+      id: "frefp43ifjdsfs",
       checked: false
     }
   ],
@@ -108,7 +114,7 @@ const appRouter = app => {
 
   app.put("/store/checked", (req, res) => {
     const { list, index } = req.body.data;
-    
+
     store.selected[index].checked = !store.selected[index].checked;
   });
 
@@ -124,8 +130,7 @@ const appRouter = app => {
   });
 
   app.post("/store/costs", (req, res) => {
-    store.costs.push(req.body.data.cost);
-    store.costs.sort((b, a)=> Number(a.date[a.date.length -1] > Number(b.date[b.date.length -1])));
+    store.costs.unshift(req.body.data.cost);
     res.status(200).json(store.costs);
   });
 
