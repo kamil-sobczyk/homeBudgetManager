@@ -56,7 +56,10 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             </DataTableHead>
             <DataTableBody>
               {displayedCosts.map((cost: Cost, index: number) => (
-                <DataTableRow key={index} style={cost.bill ? {"color": "blue"} : {"color": "green"}} > 
+                <DataTableRow
+                  key={cost.date}
+                  style={cost.bill ? { color: 'blue' } : { color: 'green' }}
+                >
                   <StyledDataTableCell>
                     {cost.chosenItems.join(', ')}
                   </StyledDataTableCell>
