@@ -61,5 +61,5 @@ export const StyledEditButton = styled(IconButton)`
 `;
 
 const StyledMenuButton = styled(IconButton)`
-color: #0d49aa;
-`
+  color: #0d49aa;
+`;

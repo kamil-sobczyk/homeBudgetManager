@@ -15,6 +15,7 @@ import { Button } from '@rmwc/button';
 import '@material/typography/dist/mdc.typography.css';
 
 import { TableContainer } from './spendingsTable/tableContainer';
+import { Icon } from '@rmwc/icon';
 
 interface SpendingsDialogProps {
   getCosts: () => void;
@@ -36,6 +37,34 @@ export class SpendingsDialog extends React.Component<SpendingsDialogProps, {}> {
       <>
         <Dialog open={showSpendingsDialog} aria-label='shopping-you-made'>
           <StyledDialogTitle>Spendings you made</StyledDialogTitle>
+          <StyledLegendContainer>
+            <StyledColorIcon
+              icon={
+                <div
+                  style={{
+                    background: 'green',
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%'
+                  }}
+                />
+              }
+            />
+            Shopping
+            <StyledColorIcon
+              icon={
+                <div
+                  style={{
+                    background: 'blue',
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%'
+                  }}
+                />
+              }
+            />
+            Bills
+          </StyledLegendContainer>
           <DialogContent>
             <TableContainer getCosts={getCosts} costs={costs} />
           </DialogContent>
@@ -54,4 +83,14 @@ export const StyledDialogTitle = styled(DialogTitle)`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+`;
+
+const StyledLegendContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+`;
+
+const StyledColorIcon = styled(Icon)`
+  margin: 0 5px 0 25px;
 `;
