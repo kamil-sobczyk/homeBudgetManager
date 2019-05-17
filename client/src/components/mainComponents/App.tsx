@@ -8,7 +8,6 @@ import { Navbar } from './nav';
 import { ListBox } from '../listBox/listBox';
 import { Store } from '../../lib/mobx/rootStore';
 import { ProgressBar } from './progressBar';
-import { TableContainer } from '../shoppingTable/tableContainer';
 
 @observer
 export class App extends React.Component<{}, {}> {
