@@ -16,7 +16,7 @@ import {
 } from '@rmwc/data-table';
 import '@rmwc/data-table/data-table.css';
 
-import { CostsCard } from './costsCard';
+import { CostsCounter } from './costsCounter';
 
 interface TableContainerProps {
   getCosts: () => void;
@@ -72,7 +72,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             </DataTableBody>
           </StyledDataTableContent>
         </StyledDataTable>
-        <CostsCard displayedCosts={displayedCosts} />
+        <CostsCounter displayedCosts={displayedCosts} />
       </>
     );
   }
