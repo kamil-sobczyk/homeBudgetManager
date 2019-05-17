@@ -15,11 +15,7 @@ interface FinishShoppingDialogProps {
   toggleShowFinishShoppingDialog: (cost?: Cost) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
-  reorderItems: (newItems: Item[], newSelected: Item[]) => void;
-  items: Item[];
-  selected: Item[];
   showFinish: boolean;
-  showAddItemDialog: boolean;
   count: number;
 }
 

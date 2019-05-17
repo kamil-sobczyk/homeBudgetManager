@@ -88,14 +88,10 @@ export class DialogsContainer extends React.Component<
 
         {visibilityClient.showFinish && (
           <FinishShoppingDialog
-            items={items}
-            selected={selected}
             toggleShowFinishShoppingDialog={
               visibilityClient.toggleShowFinishShoppingDialog
             }
-            reorderItems={itemMenagerClient.reorderItems}
             showFinish={visibilityClient.showFinish}
-            showAddItemDialog={visibilityClient.showAddItemDialog}
             changeCounter={shoppingClient.changeCounter}
             finishShopping={shoppingClient.finishShopping}
             count={shoppingClient.count}
