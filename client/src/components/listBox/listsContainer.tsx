@@ -7,8 +7,6 @@ import { Item, ListType, Cost } from '../../lib/interfaces';
 
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-import { Button } from '@rmwc/button';
-
 import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items/items';
 import { Selected } from '../lists/selected/selected';

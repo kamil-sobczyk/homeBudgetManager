@@ -18,6 +18,7 @@ import { IconButton } from '@rmwc/icon-button';
 import { Checkbox } from '@rmwc/checkbox';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
+import { StyledEditButton } from '../../items/moreMenu';
 
 interface ProvidedSelectedDraggableProps {
   toggleCheckItems: (list: ListType, index: number) => any;
@@ -68,7 +69,7 @@ export class ProvidedSelectedDraggable extends React.Component<
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
-              <IconButton
+              <StyledEditButton
                 icon='edit'
                 aria-label='Edit item'
                 onClick={e => this.toggleEditItem(e)}

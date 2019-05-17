@@ -5,15 +5,13 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { ListType, Item } from '../../../lib/interfaces';
 
-import { Button } from '@rmwc/button';
+import { IconButton } from '@rmwc/icon-button';
+import '@rmwc/icon/icon.css';
 
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
-import { IconButton } from '@rmwc/icon-button';
-import { Icon } from '@rmwc/icon';
-import '@rmwc/icon/icon.css';
 
 interface ItemsProps {
   getItems: () => void;
@@ -51,7 +49,7 @@ export class Items extends React.Component<ItemsProps, {}> {
           )}
         </Droppable>
         <StyledButtonsContainer>
-          <StyledIconButton
+          <StyledAddItemIconButton
             onClick={toggleshowAddItemDialog}
             icon={{ icon: 'add_circle', size: 'xlarge' }}
           />
@@ -67,8 +65,8 @@ export const StyledContainer = styled.div`
   margin: 5px;
 `;
 
-export const StyledIconButton = styled(IconButton)`
-  color: blue;
+const StyledAddItemIconButton = styled(IconButton)`
+  color: #4cad4f;
   margin-top: 20px;
   padding: 0;
 `;

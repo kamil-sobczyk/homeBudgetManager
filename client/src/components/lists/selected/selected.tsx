@@ -6,8 +6,10 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
-import { StyledContainer, StyledIconButton } from '../items/items';
+import { StyledContainer } from '../items/items';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
+import { IconButton } from '@rmwc/icon-button';
+import styled from 'styled-components';
 
 interface SelectedProps {
   getSelected: () => void;
@@ -46,7 +48,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
           )}
         </Droppable>
         <StyledButtonsContainer>
-          <StyledIconButton
+          <StyledFinishShoppingButton
             onClick={() => toggleShowFinishShoppingDialog()}
             icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
           />
@@ -55,3 +57,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
     );
   }
 }
+
+const StyledFinishShoppingButton = styled(IconButton)`
+  color: #0d49aa;
+`;
