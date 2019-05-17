@@ -17,6 +17,10 @@ export class VisibityClient {
   @observable showFinish: boolean = false;
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
+  @observable showAddBillDialog: boolean = false;
+
+  toggleShowAddBillDialog = (): boolean =>
+    (this.showAddBillDialog = !this.showAddBillDialog);
 
   toggleShowSpendingsDialog = (): boolean =>
     (this.showSpendingsDialog = !this.showSpendingsDialog);
@@ -38,8 +42,7 @@ export class VisibityClient {
 
   toggleShowFailDialog = (): void => {
     this.showFailDialog = !this.showFailDialog;
-  }
-  
+  };
 
   toggleShowFinishShoppingDialog = (cost?: Cost): void => {
     this.showFinish = !this.showFinish;

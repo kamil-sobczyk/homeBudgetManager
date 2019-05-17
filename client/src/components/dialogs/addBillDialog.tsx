@@ -11,30 +11,26 @@ import { Item } from '../../lib/interfaces';
 import { StyledDialogTitle } from './spendingsDialog';
 
 interface AddBillDialogProps {
-  toggleshowAddItemDialog: () => boolean;
-  addItem: () => void;
-  changeNewItem: (event: React.FormEvent<EventTarget>) => void;
-  items: Item[];
-  selected: Item[];
-  showAddItemDialog: boolean;
+  toggleshowAddBillDialog: () => boolean;
+  addBill: () => void;
+  showAddBillDialog: boolean;
 }
 
 @observer
 export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
   onItemChange = (e: React.FormEvent<any>) => {
-    this.props.changeNewItem(e);
+    // this.props.changeNewItem(e);
   };
 
   render() {
     const {
-      showAddItemDialog,
-      toggleshowAddItemDialog,
-      changeNewItem,
-      addItem
+      showAddBillDialog,
+      toggleshowAddBillDialog,
+      addBill
     } = this.props;
 
     return (
-      <Dialog open={showAddItemDialog}>
+      <Dialog open={showAddBillDialog}>
         <StyledDialogTitle>Add a new product</StyledDialogTitle>
         <TextField
           defaultValue={''}
@@ -48,13 +44,13 @@ export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
           id='outlined'
           label='Additional info'
           name='info'
-          onChange={e => changeNewItem(e)}
+          // onChange={e => changeNewItem(e)}
         />
         <DialogActions>
-          <Button color='primary' onClick={toggleshowAddItemDialog}>
+          <Button color='primary' onClick={toggleshowAddBillDialog}>
             Cancel
           </Button>
-          <Button color='primary' onClick={addItem}>
+          <Button color='primary' onClick={addBill}>
             Add
           </Button>
         </DialogActions>
