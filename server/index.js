@@ -113,8 +113,7 @@ const appRouter = app => {
   });
 
   app.put("/store/checked", (req, res) => {
-    const { list, index } = req.body.data;
-
+    const { index } = req.body.data;
     store.selected[index].checked = !store.selected[index].checked;
   });
 
