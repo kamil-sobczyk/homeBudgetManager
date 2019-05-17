@@ -14,6 +14,7 @@ import {
   DataTableContent,
   DataTableHead
 } from '@rmwc/data-table';
+import '@rmwc/data-table/data-table.css';
 
 import { CostsCard } from './costsCard';
 
@@ -55,7 +56,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             </DataTableHead>
             <DataTableBody>
               {displayedCosts.map((cost: Cost, index: number) => (
-                <DataTableRow key={index}>
+                <DataTableRow key={index} style={cost.bill ? {"color": "blue"} : {"color": "green"}} > 
                   <StyledDataTableCell>
                     {cost.chosenItems.join(', ')}
                   </StyledDataTableCell>
