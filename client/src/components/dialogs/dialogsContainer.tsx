@@ -97,18 +97,20 @@ export class DialogsContainer extends React.Component<
             count={shoppingClient.count}
           />
         )}
+        {visibilityClient.showAddBillDialog && (
+          <AddBillDialog
+            toggleShowAddBillDialog={visibilityClient.toggleShowAddBillDialog}
+            addBill={shoppingClient.addBill}
+            changeNewBill={shoppingClient.changeBillName}
+            showAddBillDialog={visibilityClient.showAddBillDialog}
+            changeCounter={shoppingClient.changeCounter}
+            count={shoppingClient.count}
+          />
+        )}
         {visibilityClient.showFailDialog && (
           <FailDialog
             showFailDialog={visibilityClient.showFailDialog}
             toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
-          />
-        )}
-        {visibilityClient.showAddBillDialog && (
-          <AddBillDialog
-            toggleShowAddBillDialog={visibilityClient.toggleShowAddBillDialog}
-            addBill={itemMenagerClient.addItem}
-            changeNewBill={itemMenagerClient.changeNewItem}
-            showAddBillDialog={visibilityClient.showAddBillDialog}
           />
         )}
       </>

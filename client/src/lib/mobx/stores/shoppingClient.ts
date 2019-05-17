@@ -1,3 +1,4 @@
+import { FormEvent } from 'react';
 import { Store } from '../rootStore';
 import { Cost } from '../../interfaces';
 
@@ -6,15 +7,43 @@ import { sortItemsByName } from '../../reorderFunctions';
 import { Item } from '../../interfaces';
 import { observable } from 'mobx';
 
+
 export class ShoppingClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;
   }
 
-  @observable chosenItems = [];
-  @observable count = 0;
-  @observable date = new Date();
+  @observable chosenItems: string[] = [];
+  @observable count: number = 0;
+  @observable date: Date = new Date();
+
+  addCost = (cost: Cost): void => {
+    this.store.costs.unshift(cost);
+    this.store.apiClient.addCostOnServer(cost);
+  };
+
+  addBill = () => {
+    const billCost: Cost = {
+      chosenItems: this.chosenItems,
+      count: this.count,
+      date: String(
+        new Date().toLocaleDateString('pl-PL', {
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      )
+    };
+
+    this.store.costs.unshift(billCost);
+    this.store.apiClient.addCostOnServer(billCost);
+    this.store.visibilityClient.toggleShowAddBillDialog();
+  }
+
+  changeBillName = (event: FormEvent<EventTarget>): void => {
+    const target = event.target as HTMLInputElement;
+    this.chosenItems[0] = target.value;
+  }
 
   changeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;

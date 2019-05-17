@@ -46,7 +46,7 @@ export class VisibityClient {
 
   toggleShowFinishShoppingDialog = (cost?: Cost): void => {
     this.showFinish = !this.showFinish;
-    if (cost) this.store.itemMenagerClient.addCost(cost);
+    if (cost) this.store.shoppingClient.addCost(cost);
   };
 
   toggleShowMoreMenu = (): boolean => (this.showMoreMenu = !this.showMoreMenu);

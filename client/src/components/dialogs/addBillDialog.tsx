@@ -14,7 +14,9 @@ interface AddBillDialogProps {
   toggleShowAddBillDialog: () => boolean;
   addBill: () => void;
   changeNewBill: (event: React.FormEvent<EventTarget>) => void;
+  changeCounter: (event: React.FormEvent<EventTarget>) => void;
   showAddBillDialog: boolean;
+  count: number;
 }
 
 @observer
@@ -24,7 +26,8 @@ export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
       showAddBillDialog,
       toggleShowAddBillDialog,
       addBill,
-      changeNewBill
+      changeNewBill,
+      changeCounter
     } = this.props;
 
     return (
@@ -38,12 +41,12 @@ export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
           onChange={e => changeNewBill(e)}
         />
         <TextField
-          defaultValue={''}
-          id='outlined'
-          label='Additional info'
-          name='info'
-          onChange={e => changeNewBill(e)}
-        />
+        label='Cost'
+        defaultValue={String(0)}
+        onChange={e => changeCounter(e)}
+        type='number'
+        required
+      />
         <DialogActions>
           <Button color='primary' onClick={toggleShowAddBillDialog}>
             Cancel

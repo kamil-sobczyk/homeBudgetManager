@@ -143,9 +143,4 @@ export class ItemMenagerClient {
     this.store.selected = selected;
     this.store.apiClient.reorderItemsOnServer(items, selected);
   };
-
-  addCost = (cost: Cost): void => {
-    this.store.costs.unshift(cost);
-    this.store.apiClient.addCostOnServer(cost);
-  };
 }
