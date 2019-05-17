@@ -10,7 +10,7 @@ const countMothOutgoings = (costs: Cost[]) => {
   let sumOfCost: number = 0;
 
   if (costs.length > 0) {
-    costs.forEach((item: Cost) => (sumOfCost += item.count));
+    costs.forEach((cost: Cost) => (sumOfCost += cost.count));
   }
   return sumOfCost;
 };
