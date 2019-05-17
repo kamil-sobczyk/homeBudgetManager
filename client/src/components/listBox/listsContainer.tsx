@@ -17,7 +17,7 @@ interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
   getSelected: () => Promise<Item[]>;
   toggleShowDeleteItemDialog: (list: ListType, index: number) => void;
-  toggleShowAddBillDialog:  () => boolean;
+  toggleShowAddBillDialog: () => boolean;
   toggleshowAddItemDialog: () => boolean;
   toggleShowFinishShoppingDialog: (cost?: Cost) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
@@ -78,19 +78,13 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
               toggleShowEditDialog={toggleShowEditDialog}
               selected={selected}
               getSelected={getSelected}
+              toggleShowFinishShoppingDialog={toggleShowFinishShoppingDialog}
             />
           </DragDropContext>
         </StyledListContainer>
         <StyledButtonsContainer>
           <StyledButton onClick={toggleShowAddBillDialog} outlined>
             Add bill
-          </StyledButton>
-          <StyledButton
-            color='primary'
-            outlined
-            onClick={() => toggleShowFinishShoppingDialog()}
-          >
-            Finish shopping
           </StyledButton>
         </StyledButtonsContainer>
       </>
@@ -103,7 +97,7 @@ const StyledListContainer = styled.div`
   justify-content: space-around;
 `;
 
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   margin: 10px 10px 0 10px;
 `;
 

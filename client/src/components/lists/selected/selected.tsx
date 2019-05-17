@@ -6,10 +6,15 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
-import { StyledContainer } from '../items/items';
+import { StyledContainer, StyledIconButton } from '../items/items';
+import {
+  StyledButton,
+  StyledButtonsContainer
+} from '../../listBox/listsContainer';
 
 interface SelectedProps {
   getSelected: () => void;
+  toggleShowFinishShoppingDialog: (cost?: Cost) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
@@ -26,6 +31,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setActiveItem,
       toggleCheckItems,
       toggleShowEditDialog,
+      toggleShowFinishShoppingDialog,
       selected
     } = this.props;
 
@@ -42,6 +48,12 @@ export class Selected extends React.Component<SelectedProps, {}> {
             />
           )}
         </Droppable>
+        <StyledButtonsContainer>
+          <StyledIconButton
+            onClick={() => toggleShowFinishShoppingDialog()}
+            icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
+          />
+        </StyledButtonsContainer>
       </StyledContainer>
     );
   }

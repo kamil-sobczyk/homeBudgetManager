@@ -53,7 +53,7 @@ export class Items extends React.Component<ItemsProps, {}> {
         <StyledButtonsContainer>
           <StyledIconButton
             onClick={toggleshowAddItemDialog}
-            icon={{ icon: 'add_circle', size: 'xlarge', color: 'blue' }}
+            icon={{ icon: 'add_circle', size: 'xlarge' }}
           />
         </StyledButtonsContainer>
       </StyledContainer>
@@ -67,7 +67,7 @@ export const StyledContainer = styled.div`
   margin: 5px;
 `;
 
-const StyledIconButton = styled(IconButton)`
+export const StyledIconButton = styled(IconButton)`
   color: blue;
   margin-top: 20px;
   padding: 0;
