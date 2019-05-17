@@ -10,17 +10,17 @@ import { IconButton } from '@rmwc/icon-button';
 
 interface MoreMenuProps {
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
+  toggleShowDeleteItemDialog: (list: ListType, index: number) => void;
   index: number;
 }
 
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   handleOptionClick = (action: string): void => {
-    const { toggleShowEditDialog, toggleShowdeleteItemDialog, index } = this.props;
+    const { toggleShowEditDialog, toggleShowDeleteItemDialog, index } = this.props;
 
     action === 'edit'
       ? toggleShowEditDialog('items', index)
-      : toggleShowdeleteItemDialog('items', index);
+      : toggleShowDeleteItemDialog('items', index);
   };
 
   render() {

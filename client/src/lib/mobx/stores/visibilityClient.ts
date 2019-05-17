@@ -30,7 +30,7 @@ export class VisibityClient {
   toggleshowAddItemDialog = (): boolean =>
     (this.showAddItemDialog = !this.showAddItemDialog);
 
-  toggleShowdeleteItemDialog = (list: ListType, index: number): void => {
+  toggleShowDeleteItemDialog = (list: ListType, index: number): void => {
     this.store.itemMenagerClient.setActiveItem(list, index);
     this.showdeleteItemDialog = !this.showdeleteItemDialog;
   };

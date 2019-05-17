@@ -9,6 +9,7 @@ import { FinishShoppingDialog } from './finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './failDialog';
+import { AddBillDialog } from './addBillDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -64,7 +65,9 @@ export class DialogsContainer extends React.Component<
         {visibilityClient.showdeleteItemDialog && (
           <DeleteItemDialog
             items={items}
-            toggleShowdeleteItemDialog={visibilityClient.toggleShowdeleteItemDialog}
+            toggleShowdeleteItemDialog={
+              visibilityClient.toggleShowDeleteItemDialog
+            }
             deleteItem={itemMenagerClient.deleteItem}
             list={itemMenagerClient.activeItem.list}
             index={itemMenagerClient.activeItem.index}
@@ -76,7 +79,9 @@ export class DialogsContainer extends React.Component<
           <SpendingsDialog
             getCosts={apiClient.getCosts}
             costs={costs}
-            toggleShowSpendingsDialog={visibilityClient.toggleShowSpendingsDialog}
+            toggleShowSpendingsDialog={
+              visibilityClient.toggleShowSpendingsDialog
+            }
             showSpendingsDialog={visibilityClient.showSpendingsDialog}
           />
         )}
@@ -85,7 +90,9 @@ export class DialogsContainer extends React.Component<
           <FinishShoppingDialog
             items={items}
             selected={selected}
-            toggleShowFinishShoppingDialog={visibilityClient.toggleShowFinishShoppingDialog}
+            toggleShowFinishShoppingDialog={
+              visibilityClient.toggleShowFinishShoppingDialog
+            }
             reorderItems={itemMenagerClient.reorderItems}
             showFinish={visibilityClient.showFinish}
             showAddItemDialog={visibilityClient.showAddItemDialog}
@@ -98,6 +105,14 @@ export class DialogsContainer extends React.Component<
           <FailDialog
             showFailDialog={visibilityClient.showFailDialog}
             toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
+          />
+        )}
+        {visibilityClient.showAddBillDialog && (
+          <AddBillDialog
+            toggleShowAddBillDialog={visibilityClient.toggleShowAddBillDialog}
+            addBill={itemMenagerClient.addItem}
+            changeNewBill={itemMenagerClient.changeNewItem}
+            showAddBillDialog={visibilityClient.showAddBillDialog}
           />
         )}
       </>
