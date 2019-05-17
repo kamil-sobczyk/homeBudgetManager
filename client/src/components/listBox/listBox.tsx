@@ -29,7 +29,6 @@ export class ListBox extends React.Component<StoreProps, {}> {
           selected={selected}
           toggleshowAddItemDialog={visibilityClient.toggleshowAddItemDialog}
           toggleShowFinishShoppingDialog={visibilityClient.toggleShowFinishShoppingDialog}
-          toggleShowSpendingsDialog={visibilityClient.toggleShowSpendingsDialog}
           toggleShowDeleteItemDialog={visibilityClient.toggleShowDeleteItemDialog}
           toggleShowAddBillDialog={visibilityClient.toggleShowAddBillDialog}
           toggleShowItems={visibilityClient.toggleShowItems}

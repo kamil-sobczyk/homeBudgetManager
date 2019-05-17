@@ -20,7 +20,6 @@ interface ListsContainerProps {
   toggleShowAddBillDialog:  () => boolean;
   toggleshowAddItemDialog: () => boolean;
   toggleShowFinishShoppingDialog: (cost?: Cost) => void;
-  toggleShowSpendingsDialog: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   toggleShowItems: () => void;
@@ -44,7 +43,6 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       toggleshowAddItemDialog,
       toggleShowFinishShoppingDialog,
       toggleShowAddBillDialog,
-      toggleShowSpendingsDialog,
       toggleShowDeleteItemDialog,
       toggleShowItems,
       setActiveItem,
@@ -86,9 +84,6 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
         <StyledButtonsContainer>
           <StyledButton onClick={toggleShowAddBillDialog} outlined>
             Add bill
-          </StyledButton>
-          <StyledButton onClick={toggleShowSpendingsDialog} outlined>
-            Show spendings
           </StyledButton>
           <StyledButton
             color='primary'

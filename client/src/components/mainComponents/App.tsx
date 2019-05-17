@@ -31,7 +31,7 @@ export class App extends React.Component<{}, {}> {
     return (
       <Provider store={this.store}>
         <Container>
-          <Navbar />
+          <Navbar toggleShowSpendingsDialog={this.store.visibilityClient.toggleShowSpendingsDialog}/>
           <ListBox store={this.store} />
         </Container>
       </Provider>
