@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { observer } from 'mobx-react';
 import { Cost } from '../../../../lib/interfaces';
 
@@ -22,12 +24,16 @@ interface CostsCounterProps {
 export class CostsCounter extends React.Component<CostsCounterProps, {}> {
   render() {
     return (
-<div>
-        <Typography use='subtitle1'>
-          This month you spent:{' '}
-          {countMothOutgoings(this.props.displayedCosts) + ' zł'}
-        </Typography>
-        </div>
+      <StyledTypography use='subtitle1'>
+        This month you spent:{' '}
+        {countMothOutgoings(this.props.displayedCosts) + ' zł'}
+      </StyledTypography>
     );
   }
 }
+
+const StyledTypography = styled(Typography)`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
