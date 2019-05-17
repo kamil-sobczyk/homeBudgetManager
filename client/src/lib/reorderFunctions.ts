@@ -34,4 +34,4 @@ export const move = (
 };
 
 export const sortItemsByName = (items: Item[]): Item[] =>
-  items.sort((a: Item, b: Item): number => a.name.localeCompare(b.name));
+  items.slice().sort((a: Item, b: Item): number => a.name.localeCompare(b.name));
