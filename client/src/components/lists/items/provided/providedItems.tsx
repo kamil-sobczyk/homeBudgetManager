@@ -11,7 +11,7 @@ import { ProvidedItemsDraggable } from './providedItemsDraggable';
 
 interface ProvidedItemsProps {
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowDeleteDialog: (list: ListType, index: number) => void;
+  toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
   items: Item[];
   provided: DroppableProvided;
 }
@@ -23,7 +23,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       provided,
       toggleShowEditDialog,
       items,
-      toggleShowDeleteDialog,
+      toggleShowdeleteItemDialog,
     } = this.props;
     
     return (
@@ -34,7 +34,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
               <ProvidedItemsDraggable
                 providedDraggable2={providedDraggable2}
                 toggleShowEditDialog={toggleShowEditDialog}
-                toggleShowDeleteDialog={toggleShowDeleteDialog}
+                toggleShowdeleteItemDialog={toggleShowdeleteItemDialog}
                 item={item}
                 index={index}
               />

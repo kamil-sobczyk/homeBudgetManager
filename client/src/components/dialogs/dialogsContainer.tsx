@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { AddDialog } from './addDialog';
-import { EditDialog } from './editDialog';
-import { DeleteDialog } from './deleteDialog';
-import { ShoppingDialog } from './shoppingDialog';
-import { FinishDialog } from './finishDialog';
+import { AddItemDialog } from './addItemDialog';
+import { EditDialog } from './editItemDialog';
+import { DeleteItemDialog } from './deleteItemDialog';
+import { SpendingsDialog } from './spendingsDialog';
+import { FinishShoppingDialog } from './finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './failDialog';
@@ -38,12 +38,12 @@ export class DialogsContainer extends React.Component<
 
     return (
       <>
-        {visibilityClient.showAddDialog && (
-          <AddDialog
+        {visibilityClient.showAddItemDialog && (
+          <AddItemDialog
             items={items}
             selected={selected}
-            toggleShowAddDialog={visibilityClient.toggleShowAddDialog}
-            showAddDialog={visibilityClient.showAddDialog}
+            toggleshowAddItemDialog={visibilityClient.toggleshowAddItemDialog}
+            showAddItemDialog={visibilityClient.showAddItemDialog}
             addItem={itemMenagerClient.addItem}
             changeNewItem={itemMenagerClient.changeNewItem}
           />
@@ -61,34 +61,34 @@ export class DialogsContainer extends React.Component<
           />
         )}
 
-        {visibilityClient.showDeleteDialog && (
-          <DeleteDialog
+        {visibilityClient.showdeleteItemDialog && (
+          <DeleteItemDialog
             items={items}
-            toggleShowDeleteDialog={visibilityClient.toggleShowDeleteDialog}
+            toggleShowdeleteItemDialog={visibilityClient.toggleShowdeleteItemDialog}
             deleteItem={itemMenagerClient.deleteItem}
             list={itemMenagerClient.activeItem.list}
             index={itemMenagerClient.activeItem.index}
-            showDeleteDialog={visibilityClient.showDeleteDialog}
+            showdeleteItemDialog={visibilityClient.showdeleteItemDialog}
           />
         )}
 
-        {visibilityClient.showShoppingDialog && (
-          <ShoppingDialog
+        {visibilityClient.showSpendingsDialog && (
+          <SpendingsDialog
             getCosts={apiClient.getCosts}
             costs={costs}
-            toggleShowShoppingDialog={visibilityClient.toggleShowShoppingDialog}
-            showShoppingDialog={visibilityClient.showShoppingDialog}
+            toggleShowSpendingsDialog={visibilityClient.toggleShowSpendingsDialog}
+            showSpendingsDialog={visibilityClient.showSpendingsDialog}
           />
         )}
 
         {visibilityClient.showFinish && (
-          <FinishDialog
+          <FinishShoppingDialog
             items={items}
             selected={selected}
-            toggleShowFinishDialog={visibilityClient.toggleShowFinishDialog}
+            toggleShowFinishShoppingDialog={visibilityClient.toggleShowFinishShoppingDialog}
             reorderItems={itemMenagerClient.reorderItems}
             showFinish={visibilityClient.showFinish}
-            showAddDialog={visibilityClient.showAddDialog}
+            showAddItemDialog={visibilityClient.showAddItemDialog}
             changeCounter={shoppingClient.changeCounter}
             finishShopping={shoppingClient.finishShopping}
             count={shoppingClient.count}

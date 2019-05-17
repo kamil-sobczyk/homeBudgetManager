@@ -8,29 +8,29 @@ import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
-import { StyledDialogTitle } from './shoppingDialog';
+import { StyledDialogTitle } from './spendingsDialog';
 import { observable } from 'mobx';
 
-interface FinishDialogProps {
-  toggleShowFinishDialog: (cost?: Cost) => void;
+interface FinishShoppingDialogProps {
+  toggleShowFinishShoppingDialog: (cost?: Cost) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
   reorderItems: (newItems: Item[], newSelected: Item[]) => void;
   items: Item[];
   selected: Item[];
   showFinish: boolean;
-  showAddDialog: boolean;
+  showAddItemDialog: boolean;
   count: number;
 }
 
 @observer
-export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
+export class FinishShoppingDialog extends React.Component<FinishShoppingDialogProps, Cost> {
   @observable count: number = this.props.count;
 
   render() {
     const {
       showFinish,
-      toggleShowFinishDialog,
+      toggleShowFinishShoppingDialog,
       changeCounter,
       finishShopping
     } = this.props;
@@ -56,7 +56,7 @@ export class FinishDialog extends React.Component<FinishDialogProps, Cost> {
           />
         </DialogContent>
         <DialogActions>
-          <Button color='primary' onClick={() => toggleShowFinishDialog()}>
+          <Button color='primary' onClick={() => toggleShowFinishShoppingDialog()}>
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={finishShopping}>

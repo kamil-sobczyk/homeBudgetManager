@@ -9,26 +9,26 @@ export class VisibityClient {
     this.store = store;
   }
 
-  @observable showAddDialog: boolean = false;
+  @observable showAddItemDialog: boolean = false;
   @observable showEditDialog: boolean = false;
-  @observable showDeleteDialog: boolean = false;
-  @observable showShoppingDialog: boolean = false;
+  @observable showdeleteItemDialog: boolean = false;
+  @observable showSpendingsDialog: boolean = false;
   @observable showItems: boolean = true;
   @observable showFinish: boolean = false;
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
 
-  toggleShowShoppingDialog = (): boolean =>
-    (this.showShoppingDialog = !this.showShoppingDialog);
+  toggleShowSpendingsDialog = (): boolean =>
+    (this.showSpendingsDialog = !this.showSpendingsDialog);
 
   toggleShowItems = (): boolean => (this.showItems = !this.showItems);
 
-  toggleShowAddDialog = (): boolean =>
-    (this.showAddDialog = !this.showAddDialog);
+  toggleshowAddItemDialog = (): boolean =>
+    (this.showAddItemDialog = !this.showAddItemDialog);
 
-  toggleShowDeleteDialog = (list: ListType, index: number): void => {
+  toggleShowdeleteItemDialog = (list: ListType, index: number): void => {
     this.store.itemMenagerClient.setActiveItem(list, index);
-    this.showDeleteDialog = !this.showDeleteDialog;
+    this.showdeleteItemDialog = !this.showdeleteItemDialog;
   };
 
   toggleShowEditDialog = (list: ListType, index: number): void => {
@@ -41,7 +41,7 @@ export class VisibityClient {
   }
   
 
-  toggleShowFinishDialog = (cost?: Cost): void => {
+  toggleShowFinishShoppingDialog = (cost?: Cost): void => {
     this.showFinish = !this.showFinish;
     if (cost) this.store.itemMenagerClient.addCost(cost);
   };

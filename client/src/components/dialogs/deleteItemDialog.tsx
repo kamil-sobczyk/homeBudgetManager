@@ -10,31 +10,31 @@ import {
   DialogContent
 } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { StyledDialogTitle } from './shoppingDialog';
+import { StyledDialogTitle } from './spendingsDialog';
 
-interface DeleteDialogProps {
-  toggleShowDeleteDialog: (list: ListType, index: number) => void;
+interface deleteItemDialogProps {
+  toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
   deleteItem: (index: number) => void;
   items: Item[];
-  showDeleteDialog: boolean;
+  showdeleteItemDialog: boolean;
   list: ListType;
   index: number;
 
 }
 
 @observer
-export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
+export class DeleteItemDialog extends React.Component<deleteItemDialogProps, {}> {
   confirm = (): void => {
-    const { deleteItem, list, index, toggleShowDeleteDialog } = this.props;
+    const { deleteItem, list, index, toggleShowdeleteItemDialog } = this.props;
 
     deleteItem(index);
-    toggleShowDeleteDialog(list, index);
+    toggleShowdeleteItemDialog(list, index);
   };
 
   render() {
     const {
-      showDeleteDialog,
-      toggleShowDeleteDialog,
+      showdeleteItemDialog,
+      toggleShowdeleteItemDialog,
       items,
       list,
       index
@@ -44,7 +44,7 @@ export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
 
     return (
       <Dialog
-        open={showDeleteDialog}
+        open={showdeleteItemDialog}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
@@ -54,7 +54,7 @@ export class DeleteDialog extends React.Component<DeleteDialogProps, {}> {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => toggleShowDeleteDialog(list, 0)}
+            onClick={() => toggleShowdeleteItemDialog(list, 0)}
             color='primary'
           >
             No

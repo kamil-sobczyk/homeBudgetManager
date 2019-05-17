@@ -59,6 +59,6 @@ export class ShoppingClient {
     sortItemsByName(newItems);
     this.store.itemMenagerClient.reorderItems(newItems, newSelected);
 
-    this.store.visibilityClient.toggleShowFinishDialog(item);
+    this.store.visibilityClient.toggleShowFinishShoppingDialog(item);
   };
 }

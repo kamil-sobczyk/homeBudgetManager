@@ -5,7 +5,6 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 
 import { Droppable } from 'react-beautiful-dnd';
 
-import { FinishDialog } from '../../dialogs/finishDialog';
 import { ProvidedSelected } from './provided/providedSelected';
 import { StyledContainer } from '../items/items';
 

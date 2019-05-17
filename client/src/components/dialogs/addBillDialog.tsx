@@ -8,33 +8,33 @@ import { TextField } from '@rmwc/textfield';
 
 import { Item } from '../../lib/interfaces';
 
-import { StyledDialogTitle } from './shoppingDialog';
+import { StyledDialogTitle } from './spendingsDialog';
 
-interface AddDialogProps {
-  toggleShowAddDialog: () => boolean;
+interface AddBillDialogProps {
+  toggleshowAddItemDialog: () => boolean;
   addItem: () => void;
   changeNewItem: (event: React.FormEvent<EventTarget>) => void;
   items: Item[];
   selected: Item[];
-  showAddDialog: boolean;
+  showAddItemDialog: boolean;
 }
 
 @observer
-export class AddDialog extends React.Component<AddDialogProps, Item> {
+export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
   onItemChange = (e: React.FormEvent<any>) => {
     this.props.changeNewItem(e);
   };
 
   render() {
     const {
-      showAddDialog,
-      toggleShowAddDialog,
+      showAddItemDialog,
+      toggleshowAddItemDialog,
       changeNewItem,
       addItem
     } = this.props;
 
     return (
-      <Dialog open={showAddDialog}>
+      <Dialog open={showAddItemDialog}>
         <StyledDialogTitle>Add a new product</StyledDialogTitle>
         <TextField
           defaultValue={''}
@@ -51,7 +51,7 @@ export class AddDialog extends React.Component<AddDialogProps, Item> {
           onChange={e => changeNewItem(e)}
         />
         <DialogActions>
-          <Button color='primary' onClick={toggleShowAddDialog}>
+          <Button color='primary' onClick={toggleshowAddItemDialog}>
             Cancel
           </Button>
           <Button color='primary' onClick={addItem}>

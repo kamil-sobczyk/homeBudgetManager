@@ -16,31 +16,31 @@ import '@material/typography/dist/mdc.typography.css';
 
 import { TableContainer } from '../shoppingTable/tableContainer';
 
-interface ShoppingDialogProps {
+interface SpendingsDialogProps {
   getCosts: () => void;
-  toggleShowShoppingDialog: () => void;
+  toggleShowSpendingsDialog: () => void;
   costs: Cost[];
-  showShoppingDialog: boolean;
+  showSpendingsDialog: boolean;
 }
 
 @observer
-export class ShoppingDialog extends React.Component<ShoppingDialogProps, {}> {
+export class SpendingsDialog extends React.Component<SpendingsDialogProps, {}> {
   render() {
     const {
-      toggleShowShoppingDialog,
-      showShoppingDialog,
+      toggleShowSpendingsDialog,
+      showSpendingsDialog,
       getCosts,
       costs
     } = this.props;
     return (
       <>
-        <Dialog open={showShoppingDialog} aria-label='shopping-you-made'>
-          <StyledDialogTitle>Shopping you made</StyledDialogTitle>
+        <Dialog open={showSpendingsDialog} aria-label='shopping-you-made'>
+          <StyledDialogTitle>Spendings you made</StyledDialogTitle>
           <DialogContent>
             <TableContainer getCosts={getCosts} costs={costs} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={toggleShowShoppingDialog} color='primary'>
+            <Button onClick={toggleShowSpendingsDialog} color='primary'>
               Close
             </Button>
           </DialogActions>

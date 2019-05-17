@@ -20,7 +20,7 @@ import { MoreMenu } from '../moreMenu';
 
 interface ProvidedItemsDraggableProps {
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowDeleteDialog: (list: ListType, index: number) => void;
+  toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
   providedDraggable2: DraggableProvided;
   item: Item;
   index: number;
@@ -36,7 +36,7 @@ export class ProvidedItemsDraggable extends React.Component<
       providedDraggable2,
       item,
       index,
-      toggleShowDeleteDialog,
+      toggleShowdeleteItemDialog,
       toggleShowEditDialog
     } = this.props;
 
@@ -55,7 +55,7 @@ export class ProvidedItemsDraggable extends React.Component<
               </ListItemText>
               <MoreMenu
                 index={index}
-                toggleShowDeleteDialog={toggleShowDeleteDialog}
+                toggleShowdeleteItemDialog={toggleShowdeleteItemDialog}
                 toggleShowEditDialog={toggleShowEditDialog}
               />
             </StyledTextContainer>

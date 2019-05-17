@@ -8,7 +8,7 @@ import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
 import { ListType } from '../../lib/interfaces';
-import { StyledDialogTitle } from './shoppingDialog';
+import { StyledDialogTitle } from './spendingsDialog';
 
 interface EditDialogProps {
   toggleShowFailDialog: () => void;

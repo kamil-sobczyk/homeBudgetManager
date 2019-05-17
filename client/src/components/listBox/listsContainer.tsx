@@ -16,10 +16,10 @@ import { Selected } from '../lists/selected/selected';
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
   getSelected: () => Promise<Item[]>;
-  toggleShowDeleteDialog: (list: ListType, index: number) => void;
-  toggleShowAddDialog: () => boolean;
-  toggleShowFinishDialog: (cost? : Cost) => void;
-  toggleShowShoppingDialog: () => void;
+  toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
+  toggleshowAddItemDialog: () => boolean;
+  toggleShowFinishShoppingDialog: (cost? : Cost) => void;
+  toggleShowSpendingsDialog: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
   toggleShowItems: () => void;
@@ -29,7 +29,7 @@ interface ListsContainerProps {
   selected: Item[];
   items: Item[];
   showItems: boolean;
-  showDeleteDialog: boolean;
+  showdeleteItemDialog: boolean;
 }
 
 @observer
@@ -40,16 +40,16 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       showItems,
       getItems,
       getSelected,
-      toggleShowAddDialog,
-      toggleShowFinishDialog,
-      toggleShowShoppingDialog,
-      toggleShowDeleteDialog,
+      toggleshowAddItemDialog,
+      toggleShowFinishShoppingDialog,
+      toggleShowSpendingsDialog,
+      toggleShowdeleteItemDialog,
       toggleShowItems,
       setActiveItem,
       toggleShowEditDialog,
       selected,
       toggleCheckItems,
-      showDeleteDialog,
+      showdeleteItemDialog,
       deleteItem,
       items
     } = this.props;
@@ -64,11 +64,11 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
             {showItems && (
               <Items
                 toggleShowEditDialog={toggleShowEditDialog}
-                toggleShowDeleteDialog={toggleShowDeleteDialog}
-                toggleShowAddDialog={toggleShowAddDialog}
+                toggleShowdeleteItemDialog={toggleShowdeleteItemDialog}
+                toggleshowAddItemDialog={toggleshowAddItemDialog}
                 deleteItem={deleteItem}
                 items={items}
-                showDeleteDialog={showDeleteDialog}
+                showdeleteItemDialog={showdeleteItemDialog}
                 getItems={getItems}
               />
             )}
@@ -82,13 +82,13 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
           </DragDropContext>
         </StyledListContainer>
         <StyledButtonsContainer>
-          <StyledButton onClick={toggleShowShoppingDialog} outlined>
-            Show previous shoppings
+          <StyledButton onClick={toggleShowSpendingsDialog} outlined>
+            Show spendings
           </StyledButton>
           <StyledButton
             color='primary'
             outlined
-            onClick={() => toggleShowFinishDialog()}
+            onClick={() => toggleShowFinishShoppingDialog()}
           >
             Finish shopping
           </StyledButton>
