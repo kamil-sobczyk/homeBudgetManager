@@ -17,7 +17,7 @@ const countMothOutgoings = (costs: Cost[]) => {
 };
 
 interface CostsCounterProps {
-  displayedCosts: Cost[];
+  costs: Cost[];
 }
 
 @observer
@@ -26,7 +26,7 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
     return (
       <StyledTypography use='subtitle1'>
         This month you spent:{' '}
-        {countMothOutgoings(this.props.displayedCosts) + ' zł'}
+        {countMothOutgoings(this.props.costs) + ' zł'}
       </StyledTypography>
     );
   }

@@ -16,8 +16,6 @@ import {
 } from '@rmwc/data-table';
 import '@rmwc/data-table/data-table.css';
 
-import { CostsCounter } from './costsCounter';
-
 interface TableContainerProps {
   getCosts: () => void;
   costs: Cost[];
@@ -44,36 +42,33 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
 
     return (
-      <>
-        <StyledDataTable>
-          <StyledDataTableContent>
-            <DataTableHead>
-              <DataTableRow>
-                <DataTableHeadCell>Items</DataTableHeadCell>
-                <DataTableHeadCell>Date</DataTableHeadCell>
-                <DataTableHeadCell alignEnd>Cost</DataTableHeadCell>
+      <StyledDataTable>
+        <StyledDataTableContent>
+          <DataTableHead>
+            <DataTableRow>
+              <StyledDataTableHeadCell>Items</StyledDataTableHeadCell>
+              <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
+              <StyledDataTableHeadCell alignEnd>Cost</StyledDataTableHeadCell>
+            </DataTableRow>
+          </DataTableHead>
+          <DataTableBody>
+            {displayedCosts.map((cost: Cost, index: number) => (
+              <DataTableRow
+                key={index}
+                style={cost.bill ? { color: 'blue' } : { color: 'green' }}
+              >
+                <StyledDataTableCell>
+                  {cost.chosenItems.join(', ')}
+                </StyledDataTableCell>
+                <StyledDataTableCell>{cost.date}</StyledDataTableCell>
+                <StyledDataTableCell alignEnd>
+                  {cost.count + 'zł'}
+                </StyledDataTableCell>
               </DataTableRow>
-            </DataTableHead>
-            <DataTableBody>
-              {displayedCosts.map((cost: Cost, index: number) => (
-                <DataTableRow
-                  key={index}
-                  style={cost.bill ? { color: 'blue' } : { color: 'green' }}
-                >
-                  <StyledDataTableCell>
-                    {cost.chosenItems.join(', ')}
-                  </StyledDataTableCell>
-                  <StyledDataTableCell>{cost.date}</StyledDataTableCell>
-                  <StyledDataTableCell alignEnd>
-                    {cost.count + 'zł'}
-                  </StyledDataTableCell>
-                </DataTableRow>
-              ))}
-            </DataTableBody>
-          </StyledDataTableContent>
-        </StyledDataTable>
-        <CostsCounter displayedCosts={displayedCosts} />
-      </>
+            ))}
+          </DataTableBody>
+        </StyledDataTableContent>
+      </StyledDataTable>
     );
   }
 }
@@ -86,7 +81,11 @@ const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
 `;
 
+const StyledDataTableHeadCell = styled(DataTableHeadCell)`
+  text-align: center;
+`;
+
 const StyledDataTable = styled(DataTable)`
-  min-width: 300px;
+  min-width: 350px;
   min-height: 400px;
 `;

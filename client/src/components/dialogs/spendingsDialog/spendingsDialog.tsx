@@ -16,6 +16,7 @@ import '@material/typography/dist/mdc.typography.css';
 
 import { TableContainer } from './spendingsTable/tableContainer';
 import { Icon } from '@rmwc/icon';
+import { CostsCounter } from './spendingsTable/costsCounter';
 
 interface SpendingsDialogProps {
   getCosts: () => void;
@@ -67,6 +68,7 @@ export class SpendingsDialog extends React.Component<SpendingsDialogProps, {}> {
           </StyledLegendContainer>
           <DialogContent>
             <TableContainer getCosts={getCosts} costs={costs} />
+            <CostsCounter costs={costs} />
           </DialogContent>
           <DialogActions>
             <Button onClick={toggleShowSpendingsDialog} color='primary'>
