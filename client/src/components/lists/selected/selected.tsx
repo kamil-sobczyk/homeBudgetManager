@@ -7,10 +7,7 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
 import { StyledContainer, StyledIconButton } from '../items/items';
-import {
-  StyledButton,
-  StyledButtonsContainer
-} from '../../listBox/listsContainer';
+import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 interface SelectedProps {
   getSelected: () => void;

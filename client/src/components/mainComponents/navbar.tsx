@@ -7,11 +7,12 @@ import { TopAppBarFixedAdjust } from '@rmwc/top-app-bar';
 
 interface NavbarProps {
   toggleShowSpendingsDialog: () => boolean;
+  toggleShowAddBillDialog: () => boolean;
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
-    const {toggleShowSpendingsDialog} = this.props;
+    const {toggleShowSpendingsDialog, toggleShowAddBillDialog} = this.props;
     return (
       <>
         <StyledTopAppBar
@@ -19,7 +20,8 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           theme='primary'
           navigationIcon={{ onClick: () => console.log('Navigate') }}
           actionItems={[
-            { icon: 'shopping_cart', size: 'xlarge', onClick: toggleShowSpendingsDialog }
+            { icon: 'shopping_cart', size: 'xlarge', onClick: toggleShowSpendingsDialog },
+            {icon: 'note_add', size: 'xlarge', onClick: toggleShowAddBillDialog}
           ]}
         />
         <TopAppBarFixedAdjust />

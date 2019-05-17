@@ -28,10 +28,18 @@ export class App extends React.Component<{}, {}> {
       return <div>App initialization error!</div>;
     }
 
+    const {
+      toggleShowSpendingsDialog,
+      toggleShowAddBillDialog
+    } = this.store.visibilityClient;
+
     return (
       <Provider store={this.store}>
         <Container>
-          <Navbar toggleShowSpendingsDialog={this.store.visibilityClient.toggleShowSpendingsDialog}/>
+          <Navbar
+            toggleShowSpendingsDialog={toggleShowSpendingsDialog}
+            toggleShowAddBillDialog={toggleShowAddBillDialog}
+          />
           <ListBox store={this.store} />
         </Container>
       </Provider>
