@@ -18,6 +18,7 @@ export interface Cost {
   count: number;
   chosenItems: string[];
   date: string;
+  bill?: boolean;
 }
 
 export interface StoreProps {

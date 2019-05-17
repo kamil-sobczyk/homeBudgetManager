@@ -32,7 +32,8 @@ export class ShoppingClient {
           hour: '2-digit',
           minute: '2-digit'
         })
-      )
+      ),
+      bill: true
     };
 
     this.store.costs.unshift(billCost);
