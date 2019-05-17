@@ -11,11 +11,14 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
+import { IconButton } from '@rmwc/icon-button';
+import { Icon } from '@rmwc/icon';
+import '@rmwc/icon/icon.css';
 
 interface ItemsProps {
   getItems: () => void;
   toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowDeleteItemDialog: (list: ListType, index: number) => void; 
+  toggleShowDeleteItemDialog: (list: ListType, index: number) => void;
   toggleshowAddItemDialog: () => void;
   deleteItem: (index: number) => void;
   items: Item[];
@@ -32,7 +35,7 @@ export class Items extends React.Component<ItemsProps, {}> {
       toggleShowEditDialog,
       toggleshowAddItemDialog,
       toggleShowDeleteItemDialog,
-      items,
+      items
     } = this.props;
 
     return (
@@ -48,7 +51,10 @@ export class Items extends React.Component<ItemsProps, {}> {
           )}
         </Droppable>
         <StyledButtonsContainer>
-          <Button onClick={toggleshowAddItemDialog} outlined>Add Item</Button>
+          <StyledIconButton
+            onClick={toggleshowAddItemDialog}
+            icon={{ icon: 'add_circle', size: 'xlarge', color: 'blue' }}
+          />
         </StyledButtonsContainer>
       </StyledContainer>
     );
@@ -59,4 +65,10 @@ export const StyledContainer = styled.div`
   min-height: 300px;
   min-width: 150px;
   margin: 5px;
+`;
+
+const StyledIconButton = styled(IconButton)`
+  color: blue;
+  margin-top: 20px;
+  padding: 0;
 `;
