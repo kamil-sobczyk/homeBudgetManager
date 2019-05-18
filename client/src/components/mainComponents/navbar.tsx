@@ -45,7 +45,3 @@ export class Navbar extends React.Component<NavbarProps, {}> {
     );
   }
 }
-
-const StyledTopAppBar = styled(TopAppBar)`
-  background: #4965ff;
-`;
