@@ -1,8 +1,9 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { observer } from 'mobx-react';
 import { Cost } from '../../lib/interfaces';
-import { Item } from '../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
@@ -20,7 +21,10 @@ interface FinishShoppingDialogProps {
 }
 
 @observer
-export class FinishShoppingDialog extends React.Component<FinishShoppingDialogProps, Cost> {
+export class FinishShoppingDialog extends React.Component<
+  FinishShoppingDialogProps,
+  Cost
+> {
   @observable count: number = this.props.count;
 
   render() {
@@ -40,7 +44,7 @@ export class FinishShoppingDialog extends React.Component<FinishShoppingDialogPr
         <StyledDialogTitle id='alert-dialog-title'>
           Finishing shopping
         </StyledDialogTitle>
-        <DialogContent>
+        <StyledDialogContent>
           Checked items will be moved to items list. <br /> Type how much you
           spent for shopping.
           <TextField
@@ -50,9 +54,12 @@ export class FinishShoppingDialog extends React.Component<FinishShoppingDialogPr
             type='number'
             required
           />
-        </DialogContent>
+        </StyledDialogContent>
         <DialogActions>
-          <Button color='primary' onClick={() => toggleShowFinishShoppingDialog()}>
+          <Button
+            color='primary'
+            onClick={() => toggleShowFinishShoppingDialog()}
+          >
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={finishShopping}>
@@ -63,3 +70,9 @@ export class FinishShoppingDialog extends React.Component<FinishShoppingDialogPr
     );
   }
 }
+
+const StyledDialogContent = styled(DialogContent)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
