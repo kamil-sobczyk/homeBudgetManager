@@ -48,5 +48,5 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
 }
 
 export const List = styled.div`
-  min-height: 300px;
+  min-height: 50px;
 `;

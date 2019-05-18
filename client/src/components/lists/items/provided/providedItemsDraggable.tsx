@@ -70,7 +70,7 @@ export class ProvidedItemsDraggable extends React.Component<
 }
 
 export const StyledItem = styled(ListItem)`
-  min-height: 80px;
+  min-height: 75px;
 `;
 
 export const StyledTextContainer = styled.div`

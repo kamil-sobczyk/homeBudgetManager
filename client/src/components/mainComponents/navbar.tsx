@@ -12,15 +12,24 @@ interface NavbarProps {
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
-    const {toggleShowSpendingsDialog, toggleShowAddBillDialog} = this.props;
+    const { toggleShowSpendingsDialog, toggleShowAddBillDialog } = this.props;
     return (
       <>
         <StyledTopAppBar
+          fixed
           title='Home Budget Menager'
           navigationIcon={{ onClick: () => console.log('Navigate') }}
           actionItems={[
-            { icon: 'shopping_cart', size: 'xlarge', onClick: toggleShowSpendingsDialog },
-            {icon: 'note_add', size: 'xlarge', onClick: toggleShowAddBillDialog}
+            {
+              icon: 'shopping_cart',
+              size: 'xlarge',
+              onClick: toggleShowSpendingsDialog
+            },
+            {
+              icon: 'note_add',
+              size: 'xlarge',
+              onClick: toggleShowAddBillDialog
+            }
           ]}
         />
         <TopAppBarFixedAdjust />
