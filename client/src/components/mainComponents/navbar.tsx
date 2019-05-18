@@ -2,8 +2,15 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { SimpleTopAppBar } from '@rmwc/top-app-bar';
-import { TopAppBarFixedAdjust } from '@rmwc/top-app-bar';
+import {
+  TopAppBar,
+  TopAppBarSection,
+  TopAppBarNavigationIcon,
+  TopAppBarTitle,
+  TopAppBarActionItem,
+  TopAppBarFixedAdjust,
+  TopAppBarRow
+} from '@rmwc/top-app-bar';
 
 interface NavbarProps {
   toggleShowSpendingsDialog: () => boolean;
@@ -15,29 +22,30 @@ export class Navbar extends React.Component<NavbarProps, {}> {
     const { toggleShowSpendingsDialog, toggleShowAddBillDialog } = this.props;
     return (
       <>
-        <StyledTopAppBar
-          fixed
-          title='Home Budget Menager'
-          navigationIcon={{ onClick: () => console.log('Navigate') }}
-          actionItems={[
-            {
-              icon: 'shopping_cart',
-              size: 'xlarge',
-              onClick: toggleShowSpendingsDialog
-            },
-            {
-              icon: 'note_add',
-              size: 'xlarge',
-              onClick: toggleShowAddBillDialog
-            }
-          ]}
-        />
+        <TopAppBar>
+          <TopAppBarRow>
+            <TopAppBarSection alignStart>
+              <TopAppBarNavigationIcon icon='menu' />
+              <TopAppBarTitle>Home Budget Menager</TopAppBarTitle>
+            </TopAppBarSection>
+            <TopAppBarSection alignEnd>
+              <TopAppBarActionItem
+                icon='shopping_cart'
+                onClick={toggleShowSpendingsDialog}
+              />
+              <TopAppBarActionItem
+                icon='note_add'
+                onClick={toggleShowAddBillDialog}
+              />
+            </TopAppBarSection>
+          </TopAppBarRow>
+        </TopAppBar>
         <TopAppBarFixedAdjust />
       </>
     );
   }
 }
 
-const StyledTopAppBar = styled(SimpleTopAppBar)`
+const StyledTopAppBar = styled(TopAppBar)`
   background: #4965ff;
 `;
