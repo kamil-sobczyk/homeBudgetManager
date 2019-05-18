@@ -6,24 +6,32 @@ import {
   TopAppBarTitle,
   TopAppBarActionItem,
   TopAppBarFixedAdjust,
-  TopAppBarRow
+  TopAppBarRow,
+  TopAppBarNavigationIcon
 } from '@rmwc/top-app-bar';
 import { DrawerBar } from './drawer';
 
 interface NavbarProps {
   toggleShowSpendingsDialog: () => boolean;
   toggleShowAddBillDialog: () => boolean;
+  toggleShowDrawer: () => boolean;
+  showDrawer: boolean;
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
-    const { toggleShowSpendingsDialog, toggleShowAddBillDialog } = this.props;
+    const {
+      toggleShowSpendingsDialog,
+      toggleShowAddBillDialog,
+      toggleShowDrawer,
+      showDrawer
+    } = this.props;
     return (
       <>
         <TopAppBar>
           <TopAppBarRow>
             <TopAppBarSection alignStart>
-              <DrawerBar/>
+              <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
               <TopAppBarTitle>Home Budget Menager</TopAppBarTitle>
             </TopAppBarSection>
             <TopAppBarSection alignEnd>
@@ -38,6 +46,10 @@ export class Navbar extends React.Component<NavbarProps, {}> {
             </TopAppBarSection>
           </TopAppBarRow>
         </TopAppBar>
+        <DrawerBar
+          toggleShowDrawer={toggleShowDrawer}
+          showDrawer={showDrawer}
+        />
         <TopAppBarFixedAdjust />
       </>
     );

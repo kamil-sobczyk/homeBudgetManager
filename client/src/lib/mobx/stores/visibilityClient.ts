@@ -18,6 +18,9 @@ export class VisibityClient {
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
   @observable showAddBillDialog: boolean = false;
+  @observable showDrawer: boolean = false;
+
+  toggleShowDrawer = (): boolean => (this.showDrawer = !this.showDrawer);
 
   toggleShowAddBillDialog = (): boolean =>
     (this.showAddBillDialog = !this.showAddBillDialog);

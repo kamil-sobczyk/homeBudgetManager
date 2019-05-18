@@ -30,7 +30,9 @@ export class App extends React.Component<{}, {}> {
 
     const {
       toggleShowSpendingsDialog,
-      toggleShowAddBillDialog
+      toggleShowAddBillDialog,
+      toggleShowDrawer,
+      showDrawer
     } = this.store.visibilityClient;
 
     return (
@@ -39,6 +41,8 @@ export class App extends React.Component<{}, {}> {
           <Navbar
             toggleShowSpendingsDialog={toggleShowSpendingsDialog}
             toggleShowAddBillDialog={toggleShowAddBillDialog}
+            toggleShowDrawer={toggleShowDrawer}
+            showDrawer={showDrawer}
           />
           <ListBox store={this.store} />
         </Container>
