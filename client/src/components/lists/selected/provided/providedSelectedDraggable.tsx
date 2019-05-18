@@ -14,7 +14,6 @@ import {
   ListItemSecondaryText,
   ListDivider
 } from '@rmwc/list';
-import { IconButton } from '@rmwc/icon-button';
 import { Checkbox } from '@rmwc/checkbox';
 
 import { DraggableProvided } from 'react-beautiful-dnd';

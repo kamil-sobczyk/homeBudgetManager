@@ -4,7 +4,7 @@ import { observer, Provider } from 'mobx-react';
 
 import styled from 'styled-components';
 
-import { Navbar } from './navbar';
+import { Navbar } from './navbar/navbar';
 import { ListBox } from '../listBox/listBox';
 import { Store } from '../../lib/mobx/rootStore';
 import { ProgressBar } from './progressBar';

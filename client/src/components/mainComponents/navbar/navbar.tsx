@@ -1,16 +1,14 @@
 import * as React from 'react';
 
-import styled from 'styled-components';
-
 import {
   TopAppBar,
   TopAppBarSection,
-  TopAppBarNavigationIcon,
   TopAppBarTitle,
   TopAppBarActionItem,
   TopAppBarFixedAdjust,
   TopAppBarRow
 } from '@rmwc/top-app-bar';
+import { DrawerBar } from './drawer';
 
 interface NavbarProps {
   toggleShowSpendingsDialog: () => boolean;
@@ -25,7 +23,7 @@ export class Navbar extends React.Component<NavbarProps, {}> {
         <TopAppBar>
           <TopAppBarRow>
             <TopAppBarSection alignStart>
-              <TopAppBarNavigationIcon icon='menu' />
+              <DrawerBar/>
               <TopAppBarTitle>Home Budget Menager</TopAppBarTitle>
             </TopAppBarSection>
             <TopAppBarSection alignEnd>
