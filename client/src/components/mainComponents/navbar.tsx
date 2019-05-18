@@ -16,8 +16,7 @@ export class Navbar extends React.Component<NavbarProps, {}> {
     return (
       <>
         <StyledTopAppBar
-          title='App Bar'
-          theme='primary'
+          title='Home Budget Menager'
           navigationIcon={{ onClick: () => console.log('Navigate') }}
           actionItems={[
             { icon: 'shopping_cart', size: 'xlarge', onClick: toggleShowSpendingsDialog },
