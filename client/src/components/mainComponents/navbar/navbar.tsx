@@ -10,11 +10,13 @@ import {
   TopAppBarNavigationIcon
 } from '@rmwc/top-app-bar';
 import { DrawerBar } from './drawer';
+import { bool } from 'prop-types';
 
 interface NavbarProps {
   toggleShowSpendingsDialog: () => boolean;
   toggleShowAddBillDialog: () => boolean;
   toggleShowDrawer: () => boolean;
+  toggleshowAddItemDialog: () => boolean;
   showDrawer: boolean;
 }
 
@@ -24,7 +26,8 @@ export class Navbar extends React.Component<NavbarProps, {}> {
       toggleShowSpendingsDialog,
       toggleShowAddBillDialog,
       toggleShowDrawer,
-      showDrawer
+      showDrawer,
+      toggleshowAddItemDialog
     } = this.props;
     return (
       <>
@@ -49,6 +52,9 @@ export class Navbar extends React.Component<NavbarProps, {}> {
         <DrawerBar
           toggleShowDrawer={toggleShowDrawer}
           showDrawer={showDrawer}
+          toggleShowSpendingsDialog={toggleShowSpendingsDialog}
+          toggleShowAddBillDialog={ toggleShowAddBillDialog}
+          toggleshowAddItemDialog={toggleshowAddItemDialog}
         />
         <TopAppBarFixedAdjust />
       </>

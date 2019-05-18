@@ -32,13 +32,15 @@ export class App extends React.Component<{}, {}> {
       toggleShowSpendingsDialog,
       toggleShowAddBillDialog,
       toggleShowDrawer,
-      showDrawer
+      showDrawer,
+      toggleshowAddItemDialog,
     } = this.store.visibilityClient;
 
     return (
       <Provider store={this.store}>
         <Container>
           <Navbar
+          toggleshowAddItemDialog={toggleshowAddItemDialog}
             toggleShowSpendingsDialog={toggleShowSpendingsDialog}
             toggleShowAddBillDialog={toggleShowAddBillDialog}
             toggleShowDrawer={toggleShowDrawer}

@@ -67,6 +67,6 @@ export const StyledContainer = styled.div`
 
 const StyledAddItemIconButton = styled(IconButton)`
   color: #4cad4f;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 0;
 `;
