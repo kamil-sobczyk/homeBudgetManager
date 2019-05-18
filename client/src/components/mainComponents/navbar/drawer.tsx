@@ -8,6 +8,7 @@ import {
   DrawerContent
 } from '@rmwc/drawer';
 import { List, ListItem } from '@rmwc/list';
+import styled from 'styled-components';
 
 interface DrawerBarProps {
   toggleShowDrawer: () => boolean;
@@ -19,20 +20,30 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
     const { toggleShowDrawer, showDrawer } = this.props;
     return (
       <>
-        <Drawer modal open={showDrawer} onClose={toggleShowDrawer}>
+        <StyledDrawer modal open={showDrawer} onClose={toggleShowDrawer}>
           <DrawerHeader>
-            <DrawerTitle>DrawerHeader</DrawerTitle>
-            <DrawerSubtitle>Subtitle</DrawerSubtitle>
+            <DrawerTitle>Budget Menager</DrawerTitle>
           </DrawerHeader>
           <DrawerContent>
             <List>
-              <ListItem>Add</ListItem>
-              <ListItem>Pizza</ListItem>
-              <ListItem>Icecream</ListItem>
+              <StyledDrawerItem>Add new item</StyledDrawerItem>
+              <StyledDrawerItem>Add new bill</StyledDrawerItem>
+              <StyledDrawerItem>Show spendings</StyledDrawerItem>
+              <StyledDrawerItem>About</StyledDrawerItem>
             </List>
           </DrawerContent>
-        </Drawer>
+        </StyledDrawer>
       </>
     );
   }
 }
+
+const StyledDrawer = styled(Drawer)`
+  background: #007ccc;
+  text-align: center;
+`;
+
+const StyledDrawerItem = styled(ListItem)`
+display: flex;
+justify-content: center;
+`;
