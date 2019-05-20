@@ -12,7 +12,7 @@ import {
 import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
-interface deleteItemDialogProps {
+interface DeleteItemDialogProps {
   deleteItem: (index: number) => void;
   setVisibleDialog: (dialog?: string) => string;
   visibleDialog: string;
@@ -22,7 +22,7 @@ interface deleteItemDialogProps {
 }
 
 @observer
-export class DeleteItemDialog extends React.Component<deleteItemDialogProps, {}> {
+export class DeleteItemDialog extends React.Component<DeleteItemDialogProps, {}> {
   confirm = (): void => {
     const { deleteItem, index, setVisibleDialog } = this.props;
 
