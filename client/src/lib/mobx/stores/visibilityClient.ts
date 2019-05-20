@@ -19,9 +19,5 @@ export class VisibityClient {
 
   toggleShowItems = (): boolean => (this.showItems = !this.showItems);
 
-  toggleShowFailDialog = (): void => {
-    this.showFailDialog = !this.showFailDialog;
-  };
-
   toggleShowMoreMenu = (): boolean => (this.showMoreMenu = !this.showMoreMenu);
 }

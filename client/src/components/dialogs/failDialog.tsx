@@ -2,37 +2,22 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-} from '@rmwc/dialog';
+import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
-import { observable } from 'mobx';
 
 interface FailDialogProps {
-  toggleShowFailDialog: () => void;
-  showFailDialog: boolean
-} 
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
+}
 
 @observer
 export class FailDialog extends React.Component<FailDialogProps, {}> {
-
-  @observable showFail?: boolean = false;
-
-
-  componentWillReceiveProps(props: FailDialogProps) {
-    this.showFail = props.showFailDialog
-  }
   render() {
-    const {
-      showFailDialog,
-      toggleShowFailDialog
-    } = this.props
+    const { setVisibleDialog, visibleDialog } = this.props;
     return (
       <Dialog
-        open={showFailDialog}
+        open={visibleDialog === 'FailDialog'}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
@@ -43,7 +28,11 @@ export class FailDialog extends React.Component<FailDialogProps, {}> {
           This product is on your list already or it has no name.
         </DialogContent>
         <DialogActions>
-          <Button onClick={toggleShowFailDialog} color='primary' autoFocus>
+          <Button
+            onClick={() => setVisibleDialog()}
+            color='primary'
+            autoFocus
+          >
             OK
           </Button>
         </DialogActions>

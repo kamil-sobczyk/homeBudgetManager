@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Item, ListType } from '../../lib/interfaces';
+import { Item } from '../../lib/interfaces';
 
 import {
   Dialog,

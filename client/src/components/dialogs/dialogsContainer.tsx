@@ -54,7 +54,6 @@ export class DialogsContainer extends React.Component<
           <EditDialog
             setVisibleDialog={visibilityClient.setVisibleDialog}
             visibleDialog={visibilityClient.visibleDialog}
-            toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
             name={itemMenagerClient.currentItemName}
             info={itemMenagerClient.currentItemInfo}
             onChangeName={itemMenagerClient.updateCurrentItemName}
@@ -100,10 +99,10 @@ export class DialogsContainer extends React.Component<
             count={shoppingClient.count}
           />
         )}
-        {visibilityClient.showFailDialog && (
+        {visibilityClient.visibleDialog === 'FailDialog' && (
           <FailDialog
-            showFailDialog={visibilityClient.showFailDialog}
-            toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
           />
         )}
       </>

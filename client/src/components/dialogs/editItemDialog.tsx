@@ -7,13 +7,11 @@ import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
-import { ListType } from '../../lib/interfaces';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface EditDialogProps {
   setVisibleDialog: (dialog?: string) => string;
   visibleDialog: string;
-  toggleShowFailDialog: () => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
   name?: string;
@@ -28,13 +26,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable isInfoChangeInitialized: boolean = false;
 
   confirm = (): void => {
-    const {
-      toggleShowFailDialog,
-      onChangeName,
-      onChangeInfo,
-      name,
-      setVisibleDialog
-    } = this.props;
+    const { onChangeName, onChangeInfo, name, setVisibleDialog } = this.props;
 
     if (!this.isInfoChangeInitialized && !this.isNameChangeInitialized) {
       setVisibleDialog();
@@ -44,7 +36,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
       this.name &&
       this.name.length < 1
     ) {
-      toggleShowFailDialog();
+      setVisibleDialog('FailDialog');
       return;
     } else if (this.isNameChangeInitialized || this.isInfoChangeInitialized) {
       if (this.name && this.name.length > 0) {
@@ -54,7 +46,8 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
         onChangeInfo(this.info ? this.info : '');
         setVisibleDialog();
       } else {
-        toggleShowFailDialog();
+        setVisibleDialog("FailDialog");
+  
         return;
       }
     } else return;

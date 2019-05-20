@@ -92,10 +92,7 @@ export class ItemMenagerClient {
   };
 
   addItem = (): void => {
-    const {
-      toggleShowFailDialog,
-      setVisibleDialog
-    } = this.store.visibilityClient;
+    const { setVisibleDialog } = this.store.visibilityClient;
 
     const allNames = [...this.store.selected, ...this.store.items].map(
       ({ name }) => name
@@ -106,7 +103,7 @@ export class ItemMenagerClient {
       setVisibleDialog();
       this.store.apiClient.addItemOnServer(this.newItem);
     } else {
-      toggleShowFailDialog();
+      setVisibleDialog('FailDialog');
     }
   };
 
