@@ -7,7 +7,6 @@ import { sortItemsByName } from '../../reorderFunctions';
 import { Item } from '../../interfaces';
 import { observable } from 'mobx';
 
-
 export class ShoppingClient {
   store: Store;
   constructor(store: Store) {
@@ -39,12 +38,12 @@ export class ShoppingClient {
     this.store.costs.unshift(billCost);
     this.store.apiClient.addCostOnServer(billCost);
     this.store.visibilityClient.setVisibleDialog();
-  }
+  };
 
   changeBillName = (event: FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
     this.chosenItems[0] = target.value;
-  }
+  };
 
   changeCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
@@ -58,7 +57,7 @@ export class ShoppingClient {
   };
 
   finishShopping = (): void => {
-    if (this.count < 1 ) return;
+    if (this.count < 1) return;
 
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
@@ -72,7 +71,7 @@ export class ShoppingClient {
       } else newSelected.push(item);
     });
 
-    const item: Cost = {
+    const cost: Cost = {
       chosenItems: this.chosenItems,
       count: this.count,
       date: String(
@@ -82,10 +81,11 @@ export class ShoppingClient {
         })
       )
     };
-    item.count = Math.round(this.count);
+    cost.count = Math.round(this.count);
     this.count = 0;
-    item.chosenItems = chosenItems;
+    cost.chosenItems = chosenItems;
 
+    this.addCost(cost);
     sortItemsByName(newItems);
     this.store.itemMenagerClient.reorderItems(newItems, newSelected);
 
