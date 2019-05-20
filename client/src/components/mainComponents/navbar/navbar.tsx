@@ -13,12 +13,12 @@ import {
 import { DrawerBar } from './drawer';
 import { AboutDialog } from '../../dialogs/aboutDialog';
 
-
 interface NavbarProps {
   toggleShowSpendingsDialog: () => boolean;
   toggleShowAddBillDialog: () => boolean;
   toggleShowDrawer: () => boolean;
   toggleshowAddItemDialog: () => boolean;
+  setDialog: (dialog?: string) => string;
   showDrawer: boolean;
 }
 
@@ -29,7 +29,8 @@ export class Navbar extends React.Component<NavbarProps, {}> {
       toggleShowAddBillDialog,
       toggleShowDrawer,
       showDrawer,
-      toggleshowAddItemDialog
+      toggleshowAddItemDialog,
+      setDialog
     } = this.props;
     return (
       <>
@@ -37,12 +38,14 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           <TopAppBarRow>
             <TopAppBarSection alignStart>
               <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-              <TopAppBarTitle onClick={toggleShowSpendingsDialog}>Home Budget Menager</TopAppBarTitle>
+              <TopAppBarTitle onClick={toggleShowSpendingsDialog}>
+                Home Budget Menager
+              </TopAppBarTitle>
             </TopAppBarSection>
             <TopAppBarSection alignEnd>
               <TopAppBarActionItem
                 icon='shopping_cart'
-                onClick={toggleShowSpendingsDialog}
+                onClick={() => setDialog('spendingsDialog')}
               />
               <TopAppBarActionItem
                 icon='note_add'
@@ -55,10 +58,10 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           toggleShowDrawer={toggleShowDrawer}
           showDrawer={showDrawer}
           toggleShowSpendingsDialog={toggleShowSpendingsDialog}
-          toggleShowAddBillDialog={ toggleShowAddBillDialog}
+          toggleShowAddBillDialog={toggleShowAddBillDialog}
           toggleshowAddItemDialog={toggleshowAddItemDialog}
         />
-        <AboutDialog/>
+        <AboutDialog />
         <TopAppBarFixedAdjust />
       </>
     );

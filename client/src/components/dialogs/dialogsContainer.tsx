@@ -34,7 +34,7 @@ export class DialogsContainer extends React.Component<
       visibilityClient,
       itemMenagerClient,
       apiClient,
-      shoppingClient
+      shoppingClient, 
     } = this.props;
 
     return (
@@ -75,14 +75,12 @@ export class DialogsContainer extends React.Component<
           />
         )}
 
-        {visibilityClient.showSpendingsDialog && (
+        {visibilityClient.showDialog === "spendingsDialog" && (
           <SpendingsDialog
             getCosts={apiClient.getCosts}
             costs={costs}
-            toggleShowSpendingsDialog={
-              visibilityClient.toggleShowSpendingsDialog
-            }
-            showSpendingsDialog={visibilityClient.showSpendingsDialog}
+            setDialog={visibilityClient.setDialog}
+            showDialog={visibilityClient.showDialog}
           />
         )}
 
