@@ -13,10 +13,9 @@ import styled from 'styled-components';
 
 interface SelectedProps {
   getSelected: () => void;
-  toggleShowFinishShoppingDialog: (cost?: Cost) => void;
   toggleCheckItems: (list: ListType, index: number) => void;
-  toggleShowEditDialog: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  setVisibleDialog: (dialog?: string) => string;
   selected: Item[];
 }
 
@@ -29,9 +28,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
     const {
       setActiveItem,
       toggleCheckItems,
-      toggleShowEditDialog,
-      toggleShowFinishShoppingDialog,
-      selected
+      selected,
+      setVisibleDialog
     } = this.props;
 
     return (
@@ -41,7 +39,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
             <ProvidedSelected
               setActiveItem={setActiveItem}
               toggleCheckItems={toggleCheckItems}
-              toggleShowEditDialog={toggleShowEditDialog}
+              setVisibleDialog={setVisibleDialog}
               selected={selected}
               provided={provided}
             />
@@ -49,7 +47,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
         </Droppable>
         <StyledButtonsContainer>
           <StyledFinishShoppingButton
-            onClick={() => toggleShowFinishShoppingDialog()}
+            onClick={() => setVisibleDialog('FinishShoppingDialog')}
             icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
           />
         </StyledButtonsContainer>

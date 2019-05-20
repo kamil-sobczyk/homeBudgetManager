@@ -34,73 +34,68 @@ export class DialogsContainer extends React.Component<
       visibilityClient,
       itemMenagerClient,
       apiClient,
-      shoppingClient, 
+      shoppingClient
     } = this.props;
 
     return (
       <>
-        {visibilityClient.showAddItemDialog && (
+        {visibilityClient.visibleDialog === 'AddItemDialog' && (
           <AddItemDialog
             items={items}
             selected={selected}
-            toggleshowAddItemDialog={visibilityClient.toggleshowAddItemDialog}
-            showAddItemDialog={visibilityClient.showAddItemDialog}
             addItem={itemMenagerClient.addItem}
             changeNewItem={itemMenagerClient.changeNewItem}
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
           />
         )}
 
-        {visibilityClient.showEditDialog && (
+        {visibilityClient.visibleDialog === 'EditItemDialog' && (
           <EditDialog
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
             toggleShowFailDialog={visibilityClient.toggleShowFailDialog}
             name={itemMenagerClient.currentItemName}
             info={itemMenagerClient.currentItemInfo}
             onChangeName={itemMenagerClient.updateCurrentItemName}
             onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
-            isVisible={visibilityClient.showEditDialog}
-            hide={visibilityClient.toggleShowEditDialog}
           />
         )}
 
-        {visibilityClient.showdeleteItemDialog && (
+        {visibilityClient.visibleDialog === 'DeleteItemDialog' && (
           <DeleteItemDialog
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
             items={items}
-            toggleShowdeleteItemDialog={
-              visibilityClient.toggleShowDeleteItemDialog
-            }
             deleteItem={itemMenagerClient.deleteItem}
-            list={itemMenagerClient.activeItem.list}
             index={itemMenagerClient.activeItem.index}
-            showdeleteItemDialog={visibilityClient.showdeleteItemDialog}
           />
         )}
 
-        {visibilityClient.showDialog === "spendingsDialog" && (
+        {visibilityClient.visibleDialog === 'SpendingsDialog' && (
           <SpendingsDialog
             getCosts={apiClient.getCosts}
             costs={costs}
-            setDialog={visibilityClient.setDialog}
-            showDialog={visibilityClient.showDialog}
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
           />
         )}
 
-        {visibilityClient.showFinish && (
+        {visibilityClient.visibleDialog === 'FinishShoppingDialog' && (
           <FinishShoppingDialog
-            toggleShowFinishShoppingDialog={
-              visibilityClient.toggleShowFinishShoppingDialog
-            }
-            showFinish={visibilityClient.showFinish}
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
             changeCounter={shoppingClient.changeCounter}
             finishShopping={shoppingClient.finishShopping}
             count={shoppingClient.count}
           />
         )}
-        {visibilityClient.showAddBillDialog && (
+        {visibilityClient.visibleDialog === 'AddBillDialog' && (
           <AddBillDialog
-            toggleShowAddBillDialog={visibilityClient.toggleShowAddBillDialog}
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
             addBill={shoppingClient.addBill}
             changeNewBill={shoppingClient.changeBillName}
-            showAddBillDialog={visibilityClient.showAddBillDialog}
             changeCounter={shoppingClient.changeCounter}
             count={shoppingClient.count}
           />

@@ -15,12 +15,10 @@ import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 interface ItemsProps {
   getItems: () => void;
-  toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowDeleteItemDialog: (list: ListType, index: number) => void;
-  toggleshowAddItemDialog: () => void;
   deleteItem: (index: number) => void;
+  setVisibleDialog: (dialog?: string) => string;
+  setActiveItem: (list: ListType, index: number) => void;
   items: Item[];
-  showdeleteItemDialog: boolean;
 }
 
 @observer
@@ -29,20 +27,15 @@ export class Items extends React.Component<ItemsProps, {}> {
     this.props.getItems();
   };
   render() {
-    const {
-      toggleShowEditDialog,
-      toggleshowAddItemDialog,
-      toggleShowDeleteItemDialog,
-      items
-    } = this.props;
+    const { items, setVisibleDialog, setActiveItem } = this.props;
 
     return (
       <StyledContainer>
         <Droppable droppableId='droppable2'>
           {providedDroppable2 => (
             <ProvidedItems
-              toggleShowEditDialog={toggleShowEditDialog}
-              toggleShowDeleteItemDialog={toggleShowDeleteItemDialog}
+              setActiveItem={setActiveItem}
+              setVisibleDialog={setVisibleDialog}
               items={items}
               provided={providedDroppable2}
             />
@@ -50,7 +43,7 @@ export class Items extends React.Component<ItemsProps, {}> {
         </Droppable>
         <StyledButtonsContainer>
           <StyledAddItemIconButton
-            onClick={toggleshowAddItemDialog}
+            onClick={() => setVisibleDialog('AddItemDialog')}
             icon={{ icon: 'add_circle', size: 'xlarge' }}
           />
         </StyledButtonsContainer>

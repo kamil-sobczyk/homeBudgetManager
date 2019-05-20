@@ -11,12 +11,12 @@ import { Item } from '../../lib/interfaces';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface AddItemDialogProps {
-  toggleshowAddItemDialog: () => boolean;
   addItem: () => void;
   changeNewItem: (event: React.FormEvent<EventTarget>) => void;
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
   items: Item[];
   selected: Item[];
-  showAddItemDialog: boolean;
 }
 
 @observer
@@ -27,14 +27,14 @@ export class AddItemDialog extends React.Component<AddItemDialogProps, Item> {
 
   render() {
     const {
-      showAddItemDialog,
-      toggleshowAddItemDialog,
       changeNewItem,
-      addItem
+      addItem,
+      setVisibleDialog,
+      visibleDialog
     } = this.props;
 
     return (
-      <Dialog open={showAddItemDialog}>
+      <Dialog open={visibleDialog === 'AddItemDialog'}>
         <StyledDialogTitle>Add a new product</StyledDialogTitle>
         <TextField
           defaultValue={''}
@@ -51,7 +51,7 @@ export class AddItemDialog extends React.Component<AddItemDialogProps, Item> {
           onChange={e => changeNewItem(e)}
         />
         <DialogActions>
-          <Button color='primary' onClick={toggleshowAddItemDialog}>
+          <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
           </Button>
           <Button color='primary' onClick={addItem}>

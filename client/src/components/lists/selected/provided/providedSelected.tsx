@@ -10,8 +10,8 @@ import { List } from '../../items/provided/providedItems';
 
 interface ProvidedSelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
-  toggleShowEditDialog: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  setVisibleDialog: (dialog?: string) => string;
   selected: Item[];
   provided: DroppableProvided;
 }
@@ -25,9 +25,9 @@ export class ProvidedSelected extends React.Component<
     const {
       selected,
       provided,
-      toggleShowEditDialog,
       toggleCheckItems,
-      setActiveItem
+      setActiveItem,
+      setVisibleDialog
     } = this.props;
 
     return (
@@ -42,7 +42,7 @@ export class ProvidedSelected extends React.Component<
               <ProvidedSelectedDraggable
                 setActiveItem={setActiveItem}
                 toggleCheckItems={toggleCheckItems}
-                toggleShowEditDialog={toggleShowEditDialog}
+                setVisibleDialog={setVisibleDialog}
                 selected={selected}
                 providedDraggable={providedDraggable}
                 item={item}

@@ -10,8 +10,8 @@ import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 import { ProvidedItemsDraggable } from './providedItemsDraggable';
 
 interface ProvidedItemsProps {
-  toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowDeleteItemDialog: (list: ListType, index: number) => void;
+  setVisibleDialog: (dialog?: string) => string;
+  setActiveItem: (list: ListType, index: number) => void;
   items: Item[];
   provided: DroppableProvided;
 }
@@ -19,13 +19,8 @@ interface ProvidedItemsProps {
 @observer
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   render() {
-    const {
-      provided,
-      toggleShowEditDialog,
-      items,
-      toggleShowDeleteItemDialog,
-    } = this.props;
-    
+    const { provided, setVisibleDialog, items, setActiveItem } = this.props;
+
     return (
       <List innerRef={provided.innerRef}>
         {items.map((item, index) => (
@@ -33,8 +28,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
             {providedDraggable2 => (
               <ProvidedItemsDraggable
                 providedDraggable2={providedDraggable2}
-                toggleShowEditDialog={toggleShowEditDialog}
-                toggleShowDeleteItemDialog={toggleShowDeleteItemDialog}
+                setActiveItem={setActiveItem}
+                setVisibleDialog={setVisibleDialog}
                 item={item}
                 index={index}
               />

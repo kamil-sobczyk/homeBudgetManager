@@ -4,19 +4,15 @@ import {
   Drawer,
   DrawerHeader,
   DrawerTitle,
-  DrawerSubtitle,
   DrawerContent
 } from '@rmwc/drawer';
 import { List, ListItem } from '@rmwc/list';
 import styled from 'styled-components';
-import { Icon } from '@rmwc/icon';
 import { IconButton } from '@rmwc/icon-button';
 
 interface DrawerBarProps {
   toggleShowDrawer: () => boolean;
-  toggleshowAddItemDialog: () => boolean;
-  toggleShowSpendingsDialog: () => boolean;
-  toggleShowAddBillDialog: () => boolean;
+  setVisibleDialog: (dialog?: string) => string;
   showDrawer: boolean;
 }
 
@@ -25,9 +21,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
     const {
       toggleShowDrawer,
       showDrawer,
-      toggleShowAddBillDialog,
-      toggleShowSpendingsDialog,
-      toggleshowAddItemDialog
+      setVisibleDialog
     } = this.props;
     return (
       <>
@@ -37,7 +31,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
           </DrawerHeader>
           <DrawerContent>
             <List>
-              <StyledDrawerItemContainer onClick={toggleshowAddItemDialog}>
+              <StyledDrawerItemContainer onClick={() => setVisibleDialog("AddItemDialog")}>
                 <StyledDrawerIconButton
                   icon='add_circle'
                   style={{ color: '#00bf02' }}
@@ -45,7 +39,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
                 <ListItem>Add new item </ListItem>
                 <StyledDrawerEmptyItem />
               </StyledDrawerItemContainer>
-              <StyledDrawerItemContainer onClick={toggleShowAddBillDialog}>
+              <StyledDrawerItemContainer onClick={() => setVisibleDialog("AddBillDialog")}>
                 <StyledDrawerIconButton
                   icon='note_add'
                   style={{ color: '#0400ff' }}
@@ -53,7 +47,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
                 <ListItem>Add new bill </ListItem>
                 <StyledDrawerEmptyItem />
               </StyledDrawerItemContainer>
-              <StyledDrawerItemContainer onClick={toggleShowSpendingsDialog}>
+              <StyledDrawerItemContainer onClick={() => setVisibleDialog("SpendingsDialog")}>
                 <StyledDrawerIconButton
                   icon='shopping_cart'
                   style={{ color: '#0d49aa' }}
@@ -61,7 +55,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
                 <ListItem>Show spendings </ListItem>
                 <StyledDrawerEmptyItem />
               </StyledDrawerItemContainer>
-              <StyledDrawerItemContainer>
+              <StyledDrawerItemContainer onClick={() => setVisibleDialog("AboutDialog")}>
                 <StyledDrawerIconButton
                   icon='info'
                   style={{ color: '#adad00' }}

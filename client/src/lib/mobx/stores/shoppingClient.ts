@@ -38,7 +38,7 @@ export class ShoppingClient {
 
     this.store.costs.unshift(billCost);
     this.store.apiClient.addCostOnServer(billCost);
-    this.store.visibilityClient.toggleShowAddBillDialog();
+    this.store.visibilityClient.setVisibleDialog();
   }
 
   changeBillName = (event: FormEvent<EventTarget>): void => {
@@ -89,6 +89,6 @@ export class ShoppingClient {
     sortItemsByName(newItems);
     this.store.itemMenagerClient.reorderItems(newItems, newSelected);
 
-    this.store.visibilityClient.toggleShowFinishShoppingDialog(item);
+    this.store.visibilityClient.setVisibleDialog();
   };
 }

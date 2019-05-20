@@ -19,11 +19,11 @@ import { Icon } from '@rmwc/icon';
 import { CostsCounter } from './spendingsTable/costsCounter';
 
 interface SpendingsDialogProps {
-  setDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
   getCosts: () => void;
   costs: Cost[];
 
-  showDialog: string;
 }
 
 @observer
@@ -32,13 +32,13 @@ export class SpendingsDialog extends React.Component<SpendingsDialogProps, {}> {
     const {
       getCosts,
       costs,
-      setDialog,
-      showDialog
+      setVisibleDialog,
+      visibleDialog
     } = this.props;
     return (
       <>
         <Dialog
-          open={showDialog === 'spendingsDialog'}
+          open={visibleDialog === 'SpendingsDialog'}
           aria-label='shopping-you-made'
         >
           <StyledDialogTitle>Spendings you made</StyledDialogTitle>
@@ -75,7 +75,7 @@ export class SpendingsDialog extends React.Component<SpendingsDialogProps, {}> {
             <CostsCounter costs={costs} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setDialog()} color='primary'>
+            <Button onClick={() => setVisibleDialog()} color='primary'>
               Close
             </Button>
           </DialogActions>

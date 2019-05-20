@@ -13,11 +13,10 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface deleteItemDialogProps {
-  toggleShowdeleteItemDialog: (list: ListType, index: number) => void;
   deleteItem: (index: number) => void;
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
   items: Item[];
-  showdeleteItemDialog: boolean;
-  list: ListType;
   index: number;
 
 }
@@ -25,36 +24,33 @@ interface deleteItemDialogProps {
 @observer
 export class DeleteItemDialog extends React.Component<deleteItemDialogProps, {}> {
   confirm = (): void => {
-    const { deleteItem, list, index, toggleShowdeleteItemDialog } = this.props;
+    const { deleteItem, index, setVisibleDialog } = this.props;
 
     deleteItem(index);
-    toggleShowdeleteItemDialog(list, index);
+    setVisibleDialog();
   };
 
   render() {
     const {
-      showdeleteItemDialog,
-      toggleShowdeleteItemDialog,
       items,
-      list,
-      index
+      index,
+      setVisibleDialog,
+      visibleDialog
     } = this.props;
-
-    const active = items[index] ? items[index].name : '';
 
     return (
       <Dialog
-        open={showdeleteItemDialog}
+        open={visibleDialog === 'DeleteItemDialog'}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
         <StyledDialogTitle id='alert-dialog-title'>Deleting product</StyledDialogTitle>
         <DialogContent id='alert-dialog-description'>
-          Are you sure want to delete {active} from your list?
+          Are you sure want to delete {items[index] ? items[index].name : ''} from your list?
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => toggleShowdeleteItemDialog(list, 0)}
+            onClick={() => setVisibleDialog()}
             color='primary'
           >
             No

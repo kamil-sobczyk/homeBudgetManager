@@ -11,11 +11,11 @@ import { ListType } from '../../lib/interfaces';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface EditDialogProps {
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
   toggleShowFailDialog: () => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
-  hide: (list: ListType, index: number) => void;
-  isVisible: boolean;
   name?: string;
   info?: string;
 }
@@ -32,12 +32,12 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
       toggleShowFailDialog,
       onChangeName,
       onChangeInfo,
-      hide,
-      name
+      name,
+      setVisibleDialog
     } = this.props;
 
     if (!this.isInfoChangeInitialized && !this.isNameChangeInitialized) {
-      hide('items', 0);
+      setVisibleDialog();
       return;
     } else if (
       this.isNameChangeInitialized &&
@@ -52,7 +52,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
           this.name && this.name.length > 0 ? this.name : name ? name : ''
         );
         onChangeInfo(this.info ? this.info : '');
-        hide('items', 0);
+        setVisibleDialog();
       } else {
         toggleShowFailDialog();
         return;
@@ -71,10 +71,10 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   };
 
   render() {
-    const { isVisible, hide } = this.props;
+    const { setVisibleDialog, visibleDialog } = this.props;
 
     return (
-      <Dialog open={isVisible}>
+      <Dialog open={visibleDialog === 'EditItemDialog'}>
         <StyledDialogTitle>Edit product</StyledDialogTitle>
         <TextField
           id='outlined-required'
@@ -91,7 +91,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
           onChange={this.updateInfo}
         />
         <DialogActions>
-          <Button color='primary' onClick={() => hide('items', 0)}>
+          <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
           </Button>
           <Button color='primary' onClick={this.confirm}>

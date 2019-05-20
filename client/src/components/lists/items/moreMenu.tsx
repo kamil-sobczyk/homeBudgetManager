@@ -2,29 +2,27 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { ListType } from '../../../lib/interfaces';
-
 import { SimpleMenu } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
+import { ListType } from '../../../lib/interfaces';
+
 interface MoreMenuProps {
-  toggleShowEditDialog: (list: ListType, index: number) => void;
-  toggleShowDeleteItemDialog: (list: ListType, index: number) => void;
+  setVisibleDialog: (dialog?: string) => string;
+  setActiveItem: (list: ListType, index: number) => void;
   index: number;
 }
 
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   handleOptionClick = (action: string): void => {
-    const {
-      toggleShowEditDialog,
-      toggleShowDeleteItemDialog,
-      index
-    } = this.props;
+    const { setVisibleDialog, index, setActiveItem } = this.props;
+
+    setActiveItem('items', index);
 
     action === 'edit'
-      ? toggleShowEditDialog('items', index)
-      : toggleShowDeleteItemDialog('items', index);
+      ? setVisibleDialog('EditItemDialog')
+      : setVisibleDialog('DeleteItemDialog');
   };
 
   render() {

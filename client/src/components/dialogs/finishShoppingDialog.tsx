@@ -13,10 +13,10 @@ import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 import { observable } from 'mobx';
 
 interface FinishShoppingDialogProps {
-  toggleShowFinishShoppingDialog: (cost?: Cost) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
-  showFinish: boolean;
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
   count: number;
 }
 
@@ -29,17 +29,17 @@ export class FinishShoppingDialog extends React.Component<
 
   render() {
     const {
-      showFinish,
-      toggleShowFinishShoppingDialog,
       changeCounter,
-      finishShopping
+      finishShopping,
+      setVisibleDialog,
+      visibleDialog
     } = this.props;
 
     return (
       <Dialog
         aria-describedby='alert-dialog-description'
         aria-labelledby='alert-dialog-title'
-        open={showFinish}
+        open={visibleDialog === 'FinishShoppingDialog'}
       >
         <StyledDialogTitle id='alert-dialog-title'>
           Finishing shopping
@@ -58,7 +58,7 @@ export class FinishShoppingDialog extends React.Component<
         <DialogActions>
           <Button
             color='primary'
-            onClick={() => toggleShowFinishShoppingDialog()}
+            onClick={() => setVisibleDialog()}
           >
             Cancel
           </Button>

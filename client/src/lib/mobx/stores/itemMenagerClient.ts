@@ -94,7 +94,7 @@ export class ItemMenagerClient {
   addItem = (): void => {
     const {
       toggleShowFailDialog,
-      toggleshowAddItemDialog
+      setVisibleDialog
     } = this.store.visibilityClient;
 
     const allNames = [...this.store.selected, ...this.store.items].map(
@@ -103,7 +103,7 @@ export class ItemMenagerClient {
 
     if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
-      toggleshowAddItemDialog();
+      setVisibleDialog();
       this.store.apiClient.addItemOnServer(this.newItem);
     } else {
       toggleShowFailDialog();

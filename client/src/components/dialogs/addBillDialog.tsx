@@ -11,11 +11,11 @@ import { Item } from '../../lib/interfaces';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface AddBillDialogProps {
-  toggleShowAddBillDialog: () => boolean;
   addBill: () => void;
   changeNewBill: (event: React.FormEvent<EventTarget>) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
-  showAddBillDialog: boolean;
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
   count: number;
 }
 
@@ -23,15 +23,15 @@ interface AddBillDialogProps {
 export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
   render() {
     const {
-      showAddBillDialog,
-      toggleShowAddBillDialog,
       addBill,
       changeNewBill,
-      changeCounter
+      changeCounter,
+      setVisibleDialog,
+      visibleDialog
     } = this.props;
 
     return (
-      <Dialog open={showAddBillDialog}>
+      <Dialog open={visibleDialog === 'AddBillDialog'}>
         <StyledDialogTitle>Add new bill</StyledDialogTitle>
         <TextField
           defaultValue={''}
@@ -48,7 +48,7 @@ export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
         required
       />
         <DialogActions>
-          <Button color='primary' onClick={toggleShowAddBillDialog}>
+          <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
           </Button>
           <Button color='primary' onClick={addBill}>

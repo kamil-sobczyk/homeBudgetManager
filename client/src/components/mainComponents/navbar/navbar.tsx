@@ -14,23 +14,17 @@ import { DrawerBar } from './drawer';
 import { AboutDialog } from '../../dialogs/aboutDialog';
 
 interface NavbarProps {
-  toggleShowSpendingsDialog: () => boolean;
-  toggleShowAddBillDialog: () => boolean;
   toggleShowDrawer: () => boolean;
-  toggleshowAddItemDialog: () => boolean;
-  setDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => string;
   showDrawer: boolean;
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
     const {
-      toggleShowSpendingsDialog,
-      toggleShowAddBillDialog,
       toggleShowDrawer,
       showDrawer,
-      toggleshowAddItemDialog,
-      setDialog
+      setVisibleDialog
     } = this.props;
     return (
       <>
@@ -38,28 +32,26 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           <TopAppBarRow>
             <TopAppBarSection alignStart>
               <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-              <TopAppBarTitle onClick={toggleShowSpendingsDialog}>
+              <TopAppBarTitle onClick={() => setVisibleDialog('SpendingsDialog')}>
                 Home Budget Menager
               </TopAppBarTitle>
             </TopAppBarSection>
             <TopAppBarSection alignEnd>
               <TopAppBarActionItem
                 icon='shopping_cart'
-                onClick={() => setDialog('spendingsDialog')}
+                onClick={() => setVisibleDialog('SpendingsDialog')}
               />
               <TopAppBarActionItem
                 icon='note_add'
-                onClick={toggleShowAddBillDialog}
+                onClick={() => setVisibleDialog('AddBillDialog')}
               />
             </TopAppBarSection>
           </TopAppBarRow>
         </TopAppBar>
         <DrawerBar
+          setVisibleDialog={setVisibleDialog}
           toggleShowDrawer={toggleShowDrawer}
           showDrawer={showDrawer}
-          toggleShowSpendingsDialog={toggleShowSpendingsDialog}
-          toggleShowAddBillDialog={toggleShowAddBillDialog}
-          toggleshowAddItemDialog={toggleshowAddItemDialog}
         />
         <AboutDialog />
         <TopAppBarFixedAdjust />
