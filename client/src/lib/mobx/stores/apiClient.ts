@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import { Store } from '../rootStore';
 
@@ -14,6 +14,10 @@ export class ApiClient {
   constructor(store: Store) {
     this.store = store;
   }
+
+  addUser = async (user: string): Promise<any> =>
+    await axios.post<AxiosResponse>(server + 'store', { data: { user } });
+
   getItems = async (): Promise<Item[]> =>
     await axios
       .get<Item[]>(server + 'store/items')
@@ -30,8 +34,9 @@ export class ApiClient {
       .then(costs => (this.store.costs = costs.data as Cost[]));
 
   deleteItemOnServer = async (index: number): Promise<void> => {
-    await axios
-      .delete(server + 'store/items', { data: { index: index } })
+    await axios.delete(server + 'store/items', {
+      data: { index: index, user: this.store.userEmail }
+    });
   };
 
   editItemOnServer = async (
@@ -39,30 +44,36 @@ export class ApiClient {
     index: number,
     newItem: Item
   ): Promise<void> => {
-    await axios
-      .put<Item>(server + 'store/' + list, { data: { index, newItem } })
+    await axios.put<Item>(server + 'store/' + list, {
+      data: { index, newItem, user: this.store.userEmail }
+    });
   };
 
   reorderItemsOnServer = async (
     items: Item[],
     selected: Item[]
   ): Promise<void> => {
-    await axios
-      .put<Item[]>(server + 'store/', { data: { items, selected } })
+    await axios.put<Item[]>(server + 'store/', {
+      data: { items, selected, user: this.store.userEmail }
+    });
   };
 
   addCostOnServer = async (cost: Cost): Promise<void> => {
-    await axios
-      .post<Cost>(server + 'store/costs', { data: { cost } })
+    await axios.post<Cost>(server + 'store/costs', {
+      data: { cost, user: this.store.userEmail }
+    });
   };
 
   checkItemOnServer = async (list: ListType, index: number): Promise<void> => {
-    await axios
-      .put<Item>(server + 'store/checked', { data: { list, index } })
+    await axios.put<Item>(server + 'store/checked', {
+      data: { list, index, user: this.store.userEmail }
+    });
   };
 
   addItemOnServer = async (item: Item): Promise<void> => {
-    await axios
-      .post<Item>(server + 'store/items', { data: { item } })
+    await axios.post<Item>(server + 'store/items', {
+      data: { item },
+      user: this.store.userEmail
+    });
   };
 }

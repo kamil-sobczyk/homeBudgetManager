@@ -4,12 +4,11 @@ import { observer, Provider } from 'mobx-react';
 
 import styled from 'styled-components';
 
-import {LoginDialog } from './loginDialog';
+import { LoginDialog } from './loginDialog';
 import { Navbar } from './navbar/navbar';
 import { ListBox } from '../listBox/listBox';
 import { Store } from '../../lib/mobx/rootStore';
 import { ProgressBar } from './progressBar';
-
 
 @observer
 export class App extends React.Component<{}, {}> {
@@ -19,6 +18,7 @@ export class App extends React.Component<{}, {}> {
   componentDidMount() {
     this.loading = false;
     this.store = new Store();
+    this.store.apiClient.addUser(this.store.userEmail);
   }
 
   render() {
@@ -37,21 +37,28 @@ export class App extends React.Component<{}, {}> {
       visibleDialog
     } = this.store.visibilityClient;
 
-if (visibleDialog !== "LoginDialog"){
-  return (
-    <Provider store={this.store}>
-      <Container>
-        <Navbar
-          toggleShowDrawer={toggleShowDrawer}
-          showDrawer={showDrawer}
+    if (visibleDialog !== 'LoginDialog') {
+      return (
+        <Provider store={this.store}>
+          <Container>
+            <Navbar
+              toggleShowDrawer={toggleShowDrawer}
+              showDrawer={showDrawer}
+              setVisibleDialog={setVisibleDialog}
+            />
+            <ListBox store={this.store} />
+          </Container>
+        </Provider>
+      );
+    } else
+      return (
+        <LoginDialog
+          visibleDialog={visibleDialog}
           setVisibleDialog={setVisibleDialog}
+          setUserEmail={this.store.setUserEmail}
+          addUser={this.store.apiClient.addUser}
         />
-        <ListBox store={this.store} />
-      </Container>
-    </Provider>
-  );
-} else return <LoginDialog visibleDialog={visibleDialog} />
-    
+      );
   }
 }
 

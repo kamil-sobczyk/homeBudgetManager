@@ -23,7 +23,10 @@ export class Store {
   itemMenagerClient: ItemMenagerClient;
   shoppingClient: ShoppingClient;
 
+  @observable userEmail: string = 'ogar616@gmail.com';
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = []; 
+
+  setUserEmail = (email: string): string => this.userEmail = email;
 }

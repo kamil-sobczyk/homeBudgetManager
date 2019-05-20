@@ -40,7 +40,7 @@ export class ListsContainer extends React.Component<ListsContainerProps, {}> {
       toggleCheckItems,
       deleteItem,
       items,
-      setVisibleDialog
+      setVisibleDialog,
     } = this.props;
 
     return (

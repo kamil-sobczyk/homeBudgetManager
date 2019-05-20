@@ -3,3 +3,5 @@ node_modules/
 
 # web/
 !web/index
+
+public
