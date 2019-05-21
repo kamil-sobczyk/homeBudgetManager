@@ -106,7 +106,7 @@ const appRouter = app => {
     const { user, item } = req.body.data;
 
     store[user].items.push(item);
-    sortItemsByName(user);
+    sortItemsByName();
     res.status(200).send(store[user].items);
   });
 
