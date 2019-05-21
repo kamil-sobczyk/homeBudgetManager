@@ -14,6 +14,7 @@ async function authenticate({ username, password }) {
     if (user) {
         const token = jwt.sign({ sub: user.id }, config.secret);
         const { password, ...userWithoutPassword } = user;
+console.log(user)
         return {
             ...userWithoutPassword,
             token

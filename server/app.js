@@ -10,7 +10,7 @@ const errorHandler = require('_helpers/error-handler');
 
 
 
-const PORT = 8080;
+const PORT = 6666;
 const HOST = "0.0.0.0";
 
 app.use(bodyParser.json());
