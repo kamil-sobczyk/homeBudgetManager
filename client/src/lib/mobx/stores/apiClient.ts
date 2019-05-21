@@ -7,6 +7,7 @@ import { Item, ListType, Cost } from '../../interfaces';
 const localhost = 'http://0.0.0.0:8080/';
 const privateList = 'http://35.224.13.129/';
 const publicDemo = 'http://35.184.211.161/';
+const herokuApp = 'https://shopping-1111.herokuapp.com/'
 const server = localhost;
 
 export class ApiClient {
