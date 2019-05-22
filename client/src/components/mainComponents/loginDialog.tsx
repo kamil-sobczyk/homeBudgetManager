@@ -10,7 +10,7 @@ import styled from 'styled-components';
 interface LoginDialogProps {
   visibleDialog: string;
   setVisibleDialog: (dialog?: string) => string;
-  setUserToken: (token: string) => string;
+  setUser: (token: string, id: string) => void;
 }
 
 
@@ -21,23 +21,20 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     const {
       visibleDialog,
       setVisibleDialog,
-      setUserToken,
+      setUser,
     } = this.props;
 
     const responseGoogle = (response: any) => {
       console.log(response);
       if (response.profileObj) {
-        setUserToken(response.tokenObj.access_token);
+        setUser(response.accessToken, response.googleId);
         setVisibleDialog();
       }
     };
 
     const responseGoogleFailure = (response: any) => {
       console.log('failure', response);
-      if (response.profileObj) {
-
-        setVisibleDialog();
-      }
+     
     };
 
     return (

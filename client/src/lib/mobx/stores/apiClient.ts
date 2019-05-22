@@ -11,6 +11,7 @@ const server = localhost;
 
 interface Headers {
   token: string;
+  id: string;
 }
 
 export class ApiClient {
@@ -20,16 +21,20 @@ export class ApiClient {
   }
 
   @observable headers: Headers = {
-    token: localStorage.googleToken || ''
+    token: localStorage.googleToken || '',
+    id: localStorage.id || ''
   };
 
-  setUserToken = (token: string): void => {
-    if (!localStorage.googleToken){
+  setUser = (token: string, id: string): void => {
+    
+    if (!localStorage.googleToken) {
       localStorage.googleToken = token;
-    } else this.headers.token = token;
-  
-
-  }
+      localStorage.id = id;
+    } else {
+      this.headers.token = token;
+      this.headers.id = id;
+    }
+  };
 
   getItems = async (): Promise<Item[]> =>
     await axios({

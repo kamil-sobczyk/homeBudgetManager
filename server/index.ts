@@ -1,149 +1,106 @@
-const store = {
-  items: [
-    {
-      name: "Bread",
-      info: "Buy in Lidl",
-      id: "sdfsdfsadfsdfdsf",
-      checked: false
-    },
-    {
-      name: "Cola",
-      info: "",
-      id: "gfvfsddwed",
-      checked: false
-    },
-    {
-      name: "Milk",
-      info: "Buy in Tesco",
-      id: "324rijdsojfddsaoid",
-      checked: false
-    },
-    {
-      name: "Beer",
-      info: "",
-      id: "fdswefi343fdsdf",
-      checked: false
-    },
-    {
-      name: "Bananas",
-      info: "10pcs",
-      id: "fdswefi3ddddddddddd",
-      checked: false
-    }
-  ],
-  selected: [
-    {
-      name: "Ham",
-      info: "In slices",
-      id: "43rpijdskjfna",
-      checked: false
-    },
-    {
-      name: "Rice",
-      info: "",
-      id: "e3rijfisdnc.kas3",
-      checked: false
-    },
-    {
-      name: "Potatoes",
-      info: "Buy in Tesco",
-      id: "43ifpjsdljnfew33",
-      checked: false
-    },
-    {
-      name: "Aples",
-      info: "3kg",
-      id: "ekflkdsdsaljd",
-      checked: false
-    },
-    {
-      name: "Beef",
-      info: "1kg",
-      id: "frefp43ifjdsfs",
-      checked: false
-    }
-  ],
-  costs: []
+const store = require('./store');
+
+const userService = require("./users/user.service");
+
+
+const authenticate = (req, res, next) => {
+  userService
+    .authenticate(req.body)
+    .then(user => {
+      console.log(user);
+      user
+        ? res.json(user)
+        : res.status(400).json({
+            message: "Username or passghghgghghghghword is incorrect"
+          });
+    })
+    .catch(err => next(err));
 };
 
-const sortItemsByName = () =>
-  store.items.sort((a, b) => a.name.localeCompare(b.name));
+const getAll = (req, res, next) => {
+  userService
+    .getAll()
+    .then(users => res.json(users))
+    .catch(err => next(err));
+};
 
-const sortSelectedByCheckedValue = () => {
+const sortItemsByName = id =>
+  store[id].items.sort((a, b) => a.name.localeCompare(b.name));
+
+const sortSelectedByCheckedValue = id => {
   let checkedItems = [];
   let uncheckedItems = [];
-  store.selected.forEach(item =>
+  store[id].selected.forEach(item =>
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
-  store.selected = [...checkedItems, ...uncheckedItems];
+  store[id].selected = [...checkedItems, ...uncheckedItems];
 };
 
 const appRouter = app => {
-  app.get("/", (req, res) => {
-    res.send("ShoppingList API!\n");
-  });
-
+  app.get("/", getAll);
+  app.post("/authenticate", authenticate);
   app
     .route("/store/items")
     .get((req, res) => {
-      console.log("get items");
-      console.log(JSON.stringify(req.headers.token));
-      sortItemsByName();
-      res.status(200).send(store.items);
+      sortItemsByName(req.headers.id);
+      res.status(200).send(store[req.headers.id].items);
     })
     .post((req, res) => {
-      store.items.push(req.body.item);
+      store[req.headers.id].items.push(req.body.item);
 
-      sortItemsByName();
-      res.status(200).send(store.items);
+      sortItemsByName(req.headers.id);
+      res.status(200).send(store[req.headers.id].items);
     })
     .put((req, res) => {
       const { index, newItem } = req.body;
 
-      store.items[index] = newItem;
-      res.status(200).json(store.items);
+      store[req.headers.id].items[index] = newItem;
+      res.status(200).json(store[req.headers.id].items);
     })
     .delete((req, res) => {
-      store.items.splice(req.body.index, 1);
-      res.status(200).json(store.items);
+      store[req.headers.id].items.splice(req.body.index, 1);
+      res.status(200).json(store[req.headers.id].items);
     });
 
   app
     .route("/store/selected")
     .get((req, res) => {
-      sortSelectedByCheckedValue();
-      res.status(200).json(store.selected);
+      sortSelectedByCheckedValue(req.headers.id);
+      res.status(200).json(store[req.headers.id].selected);
     })
     .put((req, res) => {
       const { index, newItem } = req.body;
 
-      store.selected[index] = newItem;
-      res.status(200).json(store.selected);
+      store[req.headers.id].selected[index] = newItem;
+      res.status(200).json(store[req.headers.id].selected);
     });
 
   app.put("/store/checked", (req, res) => {
     const { index } = req.body;
-    if (store.selected[index]) {
-      store.selected[index].checked = !store.selected[index].checked;
+    if (store[req.headers.id].selected[index]) {
+      store[req.headers.id].selected[index].checked = !store[req.headers.id]
+        .selected[index].checked;
     }
   });
 
   app
     .route("/store/costs")
     .get((req, res) => {
-      res.status(200).json(store.costs);
+      res.status(200).json(store[req.headers.id].costs);
     })
     .post((req, res) => {
-      store.costs.unshift(req.body.cost);
-      res.status(200).json(store.costs);
+      store[req.headers.id].costs.unshift(req.body.cost);
+      res.status(200).json(store[req.headers.id].costs);
     });
 
   app.put("/store", (req, res) => {
     const { items, selected } = req.body;
 
-    if (items !== store.items) store.items = items;
-    if (selected !== store.selected) store.selected = selected;
-    res.status(200).json(store);
+    if (items !== store[req.headers.id].items)
+      store[req.headers.id].items = items;
+    if (selected !== store[req.headers.id].selected)
+      store[req.headers.id].selected = selected;
+    res.status(200).json(store[req.headers.id]);
   });
 };
 
