@@ -10,8 +10,10 @@ import styled from 'styled-components';
 interface LoginDialogProps {
   visibleDialog: string;
   setVisibleDialog: (dialog?: string) => string;
-  setUserEmail: (email: string) => string;
+  setUserToken: (token: string) => string;
 }
+
+
 
 @observer
 export class LoginDialog extends React.Component<LoginDialogProps, {}> {
@@ -19,13 +21,13 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     const {
       visibleDialog,
       setVisibleDialog,
-      setUserEmail,
+      setUserToken,
     } = this.props;
 
     const responseGoogle = (response: any) => {
       console.log(response);
       if (response.profileObj) {
-        setUserEmail(response.profileObj.email);
+        setUserToken(response.tokenObj.access_token);
         setVisibleDialog();
       }
     };
@@ -33,7 +35,7 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     const responseGoogleFailure = (response: any) => {
       console.log('failure', response);
       if (response.profileObj) {
-        setUserEmail(response.profileObj.email);
+
         setVisibleDialog();
       }
     };

@@ -54,7 +54,7 @@ export class App extends React.Component<{}, {}> {
         <LoginDialog
           visibleDialog={visibleDialog}
           setVisibleDialog={setVisibleDialog}
-          setUserEmail={this.store.setUserEmail}
+          setUserToken={this.store.apiClient.setUserToken}
         />
       );
   }
