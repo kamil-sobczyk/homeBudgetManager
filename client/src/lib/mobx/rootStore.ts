@@ -6,7 +6,7 @@ import { ApiClient } from './stores/apiClient';
 import { VisibityClient } from './stores/visibilityClient';
 import { DnDClient } from './stores/dndClient';
 import { ItemMenagerClient } from './stores/itemMenagerClient';
-import {ShoppingClient} from './stores/shoppingClient';
+import { ShoppingClient } from './stores/shoppingClient';
 
 export class Store {
   constructor() {
@@ -23,10 +23,7 @@ export class Store {
   itemMenagerClient: ItemMenagerClient;
   shoppingClient: ShoppingClient;
 
-  @observable userEmail: string = 'ogar616@gmail.com';
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
-  @observable costs: Cost[] = []; 
-
-  setUserEmail = (email: string): string => this.userEmail = email;
+  @observable costs: Cost[] = [];
 }
