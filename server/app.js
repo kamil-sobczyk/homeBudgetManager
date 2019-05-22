@@ -10,16 +10,17 @@ const errorHandler = require('_helpers/error-handler');
 
 
 
-const PORT = 6666;
-const HOST = "0.0.0.0";
+const PORT = 8080;
+const HOST = "localhost";
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(jwt());
+// app.use(jwt());
 app.use('/users', require('./users/users.controller'));
 app.use(errorHandler);
 app.use((req, res, next) => {
+  console.log('hit endpoint')
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
