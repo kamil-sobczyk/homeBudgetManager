@@ -1,86 +1,81 @@
 const store = {
-  "ogar616@gmail.com": {
-    items: [
-      {
-        name: "Bread",
-        info: "Buy in Lidl",
-        id: "sdfsdfsadfsdfdsf",
-        checked: false
-      },
-      {
-        name: "Cola",
-        info: "",
-        id: "gfvfsddwed",
-        checked: false
-      },
-      {
-        name: "Milk",
-        info: "Buy in Tesco",
-        id: "324rijdsojfddsaoid",
-        checked: false
-      },
-      {
-        name: "Beer",
-        info: "",
-        id: "fdswefi343fdsdf",
-        checked: false
-      },
-      {
-        name: "Bananas",
-        info: "10pcs",
-        id: "fdswefi3ddddddddddd",
-        checked: false
-      }
-    ],
-    selected: [
-      {
-        name: "Ham",
-        info: "In slices",
-        id: "43rpijdskjfna",
-        checked: false
-      },
-      {
-        name: "Rice",
-        info: "",
-        id: "e3rijfisdnc.kas3",
-        checked: false
-      },
-      {
-        name: "Potatoes",
-        info: "Buy in Tesco",
-        id: "43ifpjsdljnfew33",
-        checked: false
-      },
-      {
-        name: "Aples",
-        info: "3kg",
-        id: "ekflkdsdsaljd",
-        checked: false
-      },
-      {
-        name: "Beef",
-        info: "1kg",
-        id: "frefp43ifjdsfs",
-        checked: false
-      }
-    ],
-    costs: []
-  }
+  items: [
+    {
+      name: "Bread",
+      info: "Buy in Lidl",
+      id: "sdfsdfsadfsdfdsf",
+      checked: false
+    },
+    {
+      name: "Cola",
+      info: "",
+      id: "gfvfsddwed",
+      checked: false
+    },
+    {
+      name: "Milk",
+      info: "Buy in Tesco",
+      id: "324rijdsojfddsaoid",
+      checked: false
+    },
+    {
+      name: "Beer",
+      info: "",
+      id: "fdswefi343fdsdf",
+      checked: false
+    },
+    {
+      name: "Bananas",
+      info: "10pcs",
+      id: "fdswefi3ddddddddddd",
+      checked: false
+    }
+  ],
+  selected: [
+    {
+      name: "Ham",
+      info: "In slices",
+      id: "43rpijdskjfna",
+      checked: false
+    },
+    {
+      name: "Rice",
+      info: "",
+      id: "e3rijfisdnc.kas3",
+      checked: false
+    },
+    {
+      name: "Potatoes",
+      info: "Buy in Tesco",
+      id: "43ifpjsdljnfew33",
+      checked: false
+    },
+    {
+      name: "Aples",
+      info: "3kg",
+      id: "ekflkdsdsaljd",
+      checked: false
+    },
+    {
+      name: "Beef",
+      info: "1kg",
+      id: "frefp43ifjdsfs",
+      checked: false
+    }
+  ],
+  costs: []
 };
 
-let activeUser = "";
-let usersCount = 0;
-
 const sortItemsByName = () =>
-  store[activeUser].items.sort((a, b) => a.name.localeCompare(b.name));
+  store.items.sort((a, b) => a.name.localeCompare(b.name));
 
 const sortSelectedByCheckedValue = () => {
   let checkedItems = [];
   let uncheckedItems = [];
-  store[activeUser].selected.forEach(item =>
+  store.selected.forEach(item =>
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
-  store[activeUser].selected = [...checkedItems, ...uncheckedItems];
+  store.selected = [...checkedItems, ...uncheckedItems];
 };
 
 const appRouter = app => {
@@ -88,77 +83,64 @@ const appRouter = app => {
     res.send("ShoppingList API!\n");
   });
 
-  app.post("/store/", (req, res) => {
-    const { user } = req.body.data;
-    if (!store[user]) {
-      store[user] = { items: [], selected: [], costs: [] };
-      usersCount++;
-    }
-    activeUser = user;
-  });
-
   app.get("/store/items", (req, res) => {
     sortItemsByName();
-    res.status(200).send(store[activeUser].items);
+    res.status(200).send(store.items);
   });
 
   app.post("/store/items", (req, res) => {
-    const { user, item } = req.body.data;
+    store.items.push(req.body.data.item);
 
-    store[user].items.push(item);
     sortItemsByName();
-    res.status(200).send(store[user].items);
+    res.status(200).send(store.items);
   });
 
   app.put("/store/items", (req, res) => {
-    const { index, newItem, user } = req.body.data;
+    const { index, newItem } = req.body.data;
 
-    store[user].items[index] = newItem;
-    res.status(200).json(store[user].items);
+    store.items[index] = newItem;
+    res.status(200).json(store.items);
   });
 
   app.delete("/store/items", (req, res) => {
-    const { user, index } = req.body.data;
-    store[user].items.splice(index, 1);
-    res.status(200).json(store[user].items);
+    store.items.splice(req.body.index, 1);
+    res.status(200).json(store.items);
   });
 
   app.get("/store/selected", (req, res) => {
     sortSelectedByCheckedValue();
-    res.status(200).json(store[activeUser].selected);
+    res.status(200).json(store.selected);
   });
 
   app.put("/store/checked", (req, res) => {
-    const { index, user } = req.body.data;
-    if (store[user].selected[index]) {
-      store[user].selected[index].checked = !store[user].selected[index]
-        .checked;
+    const { index } = req.body.data;
+    if (store.selected[index]) {
+      store.selected[index].checked = !store.selected[index].checked;
     }
   });
 
   app.put("/store/selected", (req, res) => {
-    const { index, newItem, user } = req.body.data;
+    const { index, newItem } = req.body.data;
 
-    store[user].selected[index] = newItem;
-    res.status(200).json(store[user].selected);
+    store.selected[index] = newItem;
+    res.status(200).json(store.selected);
   });
 
   app.get("/store/costs", (req, res) => {
-    res.status(200).json(store[activeUser].costs);
+    res.status(200).json(store.costs);
   });
 
   app.post("/store/costs", (req, res) => {
-    const { user, cost } = req.body.data;
-    store[user].costs.unshift(cost);
-    res.status(200).json(store[user].costs);
+    store.costs.unshift(req.body.data.cost);
+    res.status(200).json(store.costs);
   });
 
   app.put("/store", (req, res) => {
-    const { items, selected, user } = req.body.data;
+    const { items, selected } = req.body.data;
 
-    if (items !== store[user].items) store[user].items = items;
-    if (selected !== store[user].selected) store[user].selected = selected;
-    res.status(200).json(store[user]);
+    if (items !== store.items) store.items = items;
+    if (selected !== store.selected) store.selected = selected;
+    res.status(200).json(store);
   });
 };
 
