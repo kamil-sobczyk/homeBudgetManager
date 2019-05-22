@@ -129,7 +129,7 @@ const appRouter = app => {
   });
 
   app
-    .roure("/store/costs")
+    .route("/store/costs")
     .get((req, res) => {
       res.status(200).json(store.costs);
     })
