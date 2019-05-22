@@ -83,34 +83,43 @@ const appRouter = app => {
     res.send("ShoppingList API!\n");
   });
 
-  app.get("/store/items", (req, res) => {
-    sortItemsByName();
-    res.status(200).send(store.items);
-  });
+  app
+    .route("/store/items")
+    .get((req, res) => {
+      console.log("get items");
+      console.log(JSON.stringify(req.headers.token));
+      sortItemsByName();
+      res.status(200).send(store.items);
+    })
+    .post((req, res) => {
+      store.items.push(req.body.data.item);
 
-  app.post("/store/items", (req, res) => {
-    store.items.push(req.body.data.item);
+      sortItemsByName();
+      res.status(200).send(store.items);
+    })
+    .put((req, res) => {
+      const { index, newItem } = req.body.data;
 
-    sortItemsByName();
-    res.status(200).send(store.items);
-  });
+      store.items[index] = newItem;
+      res.status(200).json(store.items);
+    })
+    .delete((req, res) => {
+      store.items.splice(req.body.index, 1);
+      res.status(200).json(store.items);
+    });
 
-  app.put("/store/items", (req, res) => {
-    const { index, newItem } = req.body.data;
+  app
+    .route("/store/selected")
+    .get((req, res) => {
+      sortSelectedByCheckedValue();
+      res.status(200).json(store.selected);
+    })
+    .put((req, res) => {
+      const { index, newItem } = req.body.data;
 
-    store.items[index] = newItem;
-    res.status(200).json(store.items);
-  });
-
-  app.delete("/store/items", (req, res) => {
-    store.items.splice(req.body.index, 1);
-    res.status(200).json(store.items);
-  });
-
-  app.get("/store/selected", (req, res) => {
-    sortSelectedByCheckedValue();
-    res.status(200).json(store.selected);
-  });
+      store.selected[index] = newItem;
+      res.status(200).json(store.selected);
+    });
 
   app.put("/store/checked", (req, res) => {
     const { index } = req.body.data;
@@ -119,21 +128,15 @@ const appRouter = app => {
     }
   });
 
-  app.put("/store/selected", (req, res) => {
-    const { index, newItem } = req.body.data;
-
-    store.selected[index] = newItem;
-    res.status(200).json(store.selected);
-  });
-
-  app.get("/store/costs", (req, res) => {
-    res.status(200).json(store.costs);
-  });
-
-  app.post("/store/costs", (req, res) => {
-    store.costs.unshift(req.body.data.cost);
-    res.status(200).json(store.costs);
-  });
+  app
+    .roure("/store/costs")
+    .get((req, res) => {
+      res.status(200).json(store.costs);
+    })
+    .post((req, res) => {
+      store.costs.unshift(req.body.data.cost);
+      res.status(200).json(store.costs);
+    });
 
   app.put("/store", (req, res) => {
     const { items, selected } = req.body.data;
