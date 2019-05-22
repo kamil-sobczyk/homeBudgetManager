@@ -11,7 +11,6 @@ interface LoginDialogProps {
   visibleDialog: string;
   setVisibleDialog: (dialog?: string) => string;
   setUserEmail: (email: string) => string;
-  addUser: (user: string) => void;
 }
 
 @observer
@@ -21,14 +20,20 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
       visibleDialog,
       setVisibleDialog,
       setUserEmail,
-      addUser
     } = this.props;
 
     const responseGoogle = (response: any) => {
       console.log(response);
-      if (!response.profileObj) {
-        addUser('ogar616@gmail.com');
-        // setUserEmail(response.profileObj.email);
+      if (response.profileObj) {
+        setUserEmail(response.profileObj.email);
+        setVisibleDialog();
+      }
+    };
+
+    const responseGoogleFailure = (response: any) => {
+      console.log('failure', response);
+      if (response.profileObj) {
+        setUserEmail(response.profileObj.email);
         setVisibleDialog();
       }
     };
@@ -44,7 +49,7 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
           clientId='21462024369-kc67gih727cs3gctmvfe5iede4t9sdqe.apps.googleusercontent.com'
           buttonText='LOGIN WITH GOOGLE'
           onSuccess={responseGoogle}
-          onFailure={responseGoogle}
+          onFailure={responseGoogleFailure}
         />
       </Dialog>
     );

@@ -4,7 +4,7 @@ import { Store } from '../rootStore';
 
 import { Item, ListType, Cost } from '../../interfaces';
 
-const localhost = 'http://0.0.0.0:8080/';
+const localhost = 'http://localhost:8080/';
 const herokuApp = 'https://shopping-1111.herokuapp.com/'
 const server = localhost;
 
@@ -13,9 +13,6 @@ export class ApiClient {
   constructor(store: Store) {
     this.store = store;
   }
-
-  addUser = async (user: string): Promise<any> =>
-    await axios.post<AxiosResponse>(server + 'store', { data: { user } });
 
   getItems = async (): Promise<Item[]> =>
     await axios

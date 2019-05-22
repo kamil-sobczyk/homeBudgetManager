@@ -18,7 +18,6 @@ export class App extends React.Component<{}, {}> {
   componentDidMount() {
     this.loading = false;
     this.store = new Store();
-    this.store.apiClient.addUser(this.store.userEmail);
   }
 
   render() {
@@ -56,7 +55,6 @@ export class App extends React.Component<{}, {}> {
           visibleDialog={visibleDialog}
           setVisibleDialog={setVisibleDialog}
           setUserEmail={this.store.setUserEmail}
-          addUser={this.store.apiClient.addUser}
         />
       );
   }
