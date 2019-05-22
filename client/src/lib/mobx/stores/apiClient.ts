@@ -20,10 +20,16 @@ export class ApiClient {
   }
 
   @observable headers: Headers = {
-    token: 'test token'
+    token: localStorage.googleToken || ''
   };
 
-  setUserToken = (token: string): string => (this.headers.token = token);
+  setUserToken = (token: string): void => {
+    if (!localStorage.googleToken){
+      localStorage.googleToken = token;
+    } else this.headers.token = token;
+  
+
+  }
 
   getItems = async (): Promise<Item[]> =>
     await axios({
