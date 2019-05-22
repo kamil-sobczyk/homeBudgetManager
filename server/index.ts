@@ -92,13 +92,13 @@ const appRouter = app => {
       res.status(200).send(store.items);
     })
     .post((req, res) => {
-      store.items.push(req.body.data.item);
+      store.items.push(req.body.item);
 
       sortItemsByName();
       res.status(200).send(store.items);
     })
     .put((req, res) => {
-      const { index, newItem } = req.body.data;
+      const { index, newItem } = req.body;
 
       store.items[index] = newItem;
       res.status(200).json(store.items);
@@ -115,14 +115,14 @@ const appRouter = app => {
       res.status(200).json(store.selected);
     })
     .put((req, res) => {
-      const { index, newItem } = req.body.data;
+      const { index, newItem } = req.body;
 
       store.selected[index] = newItem;
       res.status(200).json(store.selected);
     });
 
   app.put("/store/checked", (req, res) => {
-    const { index } = req.body.data;
+    const { index } = req.body;
     if (store.selected[index]) {
       store.selected[index].checked = !store.selected[index].checked;
     }
@@ -134,12 +134,12 @@ const appRouter = app => {
       res.status(200).json(store.costs);
     })
     .post((req, res) => {
-      store.costs.unshift(req.body.data.cost);
+      store.costs.unshift(req.body.cost);
       res.status(200).json(store.costs);
     });
 
   app.put("/store", (req, res) => {
-    const { items, selected } = req.body.data;
+    const { items, selected } = req.body;
 
     if (items !== store.items) store.items = items;
     if (selected !== store.selected) store.selected = selected;
