@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { Drawer } from '@rmwc/drawer';
 import { List, ListItem } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
@@ -10,22 +9,26 @@ const drawerItems = [
   {
     action: 'AddItemDialog',
     icon: 'add_circle',
-    iconColor: '#00bf02'
+    iconColor: '#00bf02',
+    title: "Add new Item"
   },
   {
     action: 'AddBillDialog',
     icon: 'note_add',
-    iconColor: '#0400ff'
+    iconColor: '#0400ff',
+    title: "Add new bill"
   },
   {
     action: 'SpendingsDialog',
     icon: 'shopping_cart',
-    iconColor: '#0d49aa'
+    iconColor: '#0d49aa',
+    title: "Show spendings"
   },
   {
     action: 'AboutDialog',
     icon: 'info',
-    iconColor: '#adad00'
+    iconColor: '#adad00',
+    title: "About"
   }
 ];
 
@@ -47,7 +50,7 @@ export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
               icon={item.icon}
               style={{ color: item.iconColor }}
             />
-            <ListItem>Add new item </ListItem>
+            <ListItem>{item.title}</ListItem>
             <StyledDrawerEmptyItem />
           </StyledDrawerItemContainer>
         ))}
