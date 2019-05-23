@@ -15,7 +15,7 @@ import { Button } from '@rmwc/button';
 
 import { TableContainer } from './spendingsTable/tableContainer';
 import { CostsCounter } from './spendingsTable/costsCounter';
-import { Legend } from './spendingsTable/legend';
+import { Legend } from './spendingsTable/legend/legend';
 
 interface SpendingsDialogProps {
   setVisibleDialog: (dialog?: string) => string;
