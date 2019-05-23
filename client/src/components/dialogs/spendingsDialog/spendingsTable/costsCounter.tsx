@@ -8,22 +8,34 @@ import { Cost } from '../../../../lib/interfaces';
 import { Typography } from '@rmwc/typography';
 import { ColoredIcon } from './legend/coloredIcon';
 
+const dateNow = String(
+  new Date().toLocaleDateString('pl-PL', {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+);
+
 const countCosts = (costs: Cost[], bill?: string) => {
   let sumOfCosts: number = 0;
+  let monthCosts: Cost[] = [];
 
   if (costs.length > 0) {
-    costs.forEach((cost: Cost) => {
-      if (bill) {
-        if (cost.bill) {
-          sumOfCosts += cost.count;
-        }
-      } else {
-        if (!cost.bill) {
-          sumOfCosts += cost.count;
-        }
-      }
-    });
+    monthCosts = costs.filter(
+      cost => cost.date[3] === dateNow[3] && cost.date[4] === dateNow[4]
+    );
   }
+
+  monthCosts.forEach((cost: Cost) => {
+    if (bill) {
+      if (cost.bill) {
+        sumOfCosts += cost.count;
+      }
+    } else {
+      if (!cost.bill) {
+        sumOfCosts += cost.count;
+      }
+    }
+  });
 
   return sumOfCosts;
 };
@@ -38,9 +50,9 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
     const { costs } = this.props;
     return (
       <StyledTypography use='subtitle1'>
-        This month you spent: 
+        This month you spent:
         <ColoredIcon color='green' />
-        {countCosts(costs) + ' zł'} 
+        {countCosts(costs) + ' zł'}
         <ColoredIcon color='blue' />
         {countCosts(costs, 'bill') + ' zł'}
       </StyledTypography>
