@@ -2,12 +2,8 @@ import * as React from 'react';
 
 import {
   TopAppBar,
-  TopAppBarSection,
-  TopAppBarTitle,
-  TopAppBarActionItem,
   TopAppBarFixedAdjust,
   TopAppBarRow,
-  TopAppBarNavigationIcon
 } from '@rmwc/top-app-bar';
 
 import { DrawerBar } from './drawer';

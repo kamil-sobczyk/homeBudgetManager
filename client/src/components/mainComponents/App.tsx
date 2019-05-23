@@ -6,7 +6,7 @@ import { Store } from '../../lib/mobx/rootStore';
 import { observable } from 'mobx';
 import { observer, Provider } from 'mobx-react';
 
-import { LoginDialog } from './loginDialog';
+import { LoginDialog } from '../dialogs/loginDialog';
 import { Navbar } from './navbar/navbar';
 import { ListBox } from '../listBox/listBox';
 import { ProgressBar } from './progressBar';
