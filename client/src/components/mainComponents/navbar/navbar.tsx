@@ -17,6 +17,7 @@ interface NavbarProps {
   toggleShowDrawer: () => boolean;
   setVisibleDialog: (dialog?: string) => string;
   showDrawer: boolean;
+  visibleDialog: string;
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
@@ -24,7 +25,8 @@ export class Navbar extends React.Component<NavbarProps, {}> {
     const {
       toggleShowDrawer,
       showDrawer,
-      setVisibleDialog
+      setVisibleDialog,
+      visibleDialog
     } = this.props;
     return (
       <>
@@ -32,7 +34,9 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           <TopAppBarRow>
             <TopAppBarSection alignStart>
               <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-              <TopAppBarTitle onClick={() => setVisibleDialog('SpendingsDialog')}>
+              <TopAppBarTitle
+                onClick={() => setVisibleDialog('SpendingsDialog')}
+              >
                 Home Budget Menager
               </TopAppBarTitle>
             </TopAppBarSection>
@@ -53,7 +57,10 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           toggleShowDrawer={toggleShowDrawer}
           showDrawer={showDrawer}
         />
-        <AboutDialog />
+        <AboutDialog
+          setVisibleDialog={setVisibleDialog}
+          visibleDialog={visibleDialog}
+        />
         <TopAppBarFixedAdjust />
       </>
     );

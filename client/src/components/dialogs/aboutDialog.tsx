@@ -8,14 +8,18 @@ import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 import { observable } from 'mobx';
 import { IconButton } from '@rmwc/icon-button';
 
-@observer
-export class AboutDialog extends React.Component<{}, {}> {
-  @observable showFail?: boolean = false;
+interface AboutDialogProps {
+  setVisibleDialog: (dialog?: string) => string;
+  visibleDialog: string;
+}
 
+@observer
+export class AboutDialog extends React.Component<AboutDialogProps, {}> {
   render() {
+    const { visibleDialog, setVisibleDialog } = this.props;
     return (
       <Dialog
-        open={true}
+        open={visibleDialog === 'AboutDialog'}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
@@ -27,21 +31,31 @@ export class AboutDialog extends React.Component<{}, {}> {
           <br />
           <IconButton
             icon='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-            style={{width:'40px', height:'40px', backgroundSize: 'cover', padding: 0}}
+            style={{
+              width: '40px',
+              height: '40px',
+              backgroundSize: 'cover',
+              padding: 0
+            }}
             tag='a'
             target='_blank'
             href='https://github.com/Ogar616/homeBudgetCombine'
           />
           <IconButton
-          icon='https://cdn1.iconfinder.com/data/icons/logotypes/32/square-linkedin-512.png'
-          style={{width:'35px', height:'35px', backgroundSize: 'cover', padding: 0}}
-          tag='a'
-          target='_blank'
-          href='https://www.linkedin.com/in/kamilsobczyk6/'
-        />
+            icon='https://cdn1.iconfinder.com/data/icons/logotypes/32/square-linkedin-512.png'
+            style={{
+              width: '35px',
+              height: '35px',
+              backgroundSize: 'cover',
+              padding: 0
+            }}
+            tag='a'
+            target='_blank'
+            href='https://www.linkedin.com/in/kamilsobczyk6/'
+          />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => null} color='primary' autoFocus>
+          <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
             OK
           </Button>
         </DialogActions>
@@ -49,4 +63,3 @@ export class AboutDialog extends React.Component<{}, {}> {
     );
   }
 }
-

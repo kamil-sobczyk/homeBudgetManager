@@ -44,6 +44,7 @@ export class App extends React.Component<{}, {}> {
               toggleShowDrawer={toggleShowDrawer}
               showDrawer={showDrawer}
               setVisibleDialog={setVisibleDialog}
+              visibleDialog={visibleDialog}
             />
             <ListBox store={this.store} />
           </Container>
