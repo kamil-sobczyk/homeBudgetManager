@@ -11,9 +11,9 @@ import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 interface EditDialogProps {
   setVisibleDialog: (dialog?: string) => string;
-  visibleDialog: string;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
+  visibleDialog: string;
   name?: string;
   info?: string;
 }

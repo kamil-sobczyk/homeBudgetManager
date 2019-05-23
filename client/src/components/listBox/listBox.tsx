@@ -44,7 +44,6 @@ export class ListBox extends React.Component<StoreProps, {}> {
           itemMenagerClient={itemMenagerClient}
           apiClient={apiClient}
           shoppingClient={shoppingClient}
-
         />
       </>
     );

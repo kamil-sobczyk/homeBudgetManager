@@ -21,16 +21,12 @@ interface AddItemDialogProps {
 
 @observer
 export class AddItemDialog extends React.Component<AddItemDialogProps, Item> {
-  onItemChange = (e: React.FormEvent<any>) => {
-    this.props.changeNewItem(e);
-  };
-
   render() {
     const {
       changeNewItem,
       addItem,
       setVisibleDialog,
-      visibleDialog
+      visibleDialog,
     } = this.props;
 
     return (
@@ -41,7 +37,7 @@ export class AddItemDialog extends React.Component<AddItemDialogProps, Item> {
           id='outlined-required'
           label='New item'
           name='name'
-          onChange={e => this.onItemChange(e)}
+          onChange={e => changeNewItem(e)}
         />
         <TextField
           defaultValue={''}
