@@ -7,7 +7,6 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 import { observable } from 'mobx';
 import { IconButton } from '@rmwc/icon-button';
-import { Icon } from '@rmwc/icon';
 
 @observer
 export class AboutDialog extends React.Component<{}, {}> {
@@ -16,7 +15,7 @@ export class AboutDialog extends React.Component<{}, {}> {
   render() {
     return (
       <Dialog
-        open={false}
+        open={true}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
@@ -27,16 +26,19 @@ export class AboutDialog extends React.Component<{}, {}> {
           Coded by Kamil Sobczyk 2019
           <br />
           <IconButton
-            >
-            <Icon icon='../../lib/assets/git.svg' width='30px' height='30px'/>
-            {' '}
-            // <a href='https://github.com/Ogar616/homeBudgetCombine'>
-              Github repository
-            </a>
-          </IconButton>
-          <IconButton>
-            <a href='https://www.linkedin.com/in/kamilsobczyk6/'>Linked IN</a>
-          </IconButton>
+            icon='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+            style={{width:'40px', height:'40px', backgroundSize: 'cover', padding: 0}}
+            tag='a'
+            target='_blank'
+            href='https://github.com/Ogar616/homeBudgetCombine'
+          />
+          <IconButton
+          icon='https://cdn1.iconfinder.com/data/icons/logotypes/32/square-linkedin-512.png'
+          style={{width:'35px', height:'35px', backgroundSize: 'cover', padding: 0}}
+          tag='a'
+          target='_blank'
+          href='https://www.linkedin.com/in/kamilsobczyk6/'
+        />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => null} color='primary' autoFocus>
@@ -47,3 +49,4 @@ export class AboutDialog extends React.Component<{}, {}> {
     );
   }
 }
+
