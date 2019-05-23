@@ -7,7 +7,7 @@ import {
 } from '@rmwc/top-app-bar';
 
 import { DrawerBar } from './drawer/drawer';
-import { NavbarSectionLeft } from './navbarSections/NavbarSectionLeft';
+import { NavbarSectionLeft } from './navbarSections/navbarSectionLeft';
 import { NavbarSectionRight } from './navbarSections/navbarSectionRight';
 
 interface NavbarProps {
