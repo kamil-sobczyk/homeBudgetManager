@@ -28,43 +28,39 @@ interface AboutDialogProps {
   visibleDialog: string;
 }
 
-@observer
-export class AboutDialog extends React.Component<AboutDialogProps, {}> {
-  render() {
-    const { visibleDialog, setVisibleDialog } = this.props;
-    return (
-      <Dialog
-        open={visibleDialog === 'AboutDialog'}
-        aria-labelledby='about'
-        aria-describedby='about'
-      >
-        <StyledDialogTitle id='alert-dialog-title'>
-          Home Budget Menager
-        </StyledDialogTitle>
-        <DialogContent id='alert-dialog-description'>
-          Coded by Kamil Sobczyk 2019
-          <br />
-          {aboutDialogButtons.map(button => (
-            <IconButton
-              key={button.icon}
-              icon={button.icon}
-              style={{
-                width: button.size,
-                height: button.size,
-                backgroundSize: 'cover',
-              }}
-              tag='a'
-              target='_blank'
-              href={button.href}
-            />
-          ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-}
+export const AboutDialog = observer(
+  ({ visibleDialog, setVisibleDialog }: AboutDialogProps) => (
+    <Dialog
+      open={visibleDialog === 'AboutDialog'}
+      aria-labelledby='about'
+      aria-describedby='about'
+    >
+      <StyledDialogTitle id='alert-dialog-title'>
+        Home Budget Menager
+      </StyledDialogTitle>
+      <DialogContent id='alert-dialog-description'>
+        Coded by Kamil Sobczyk 2019
+        <br />
+        {aboutDialogButtons.map(button => (
+          <IconButton
+            key={button.icon}
+            icon={button.icon}
+            style={{
+              width: button.size,
+              height: button.size,
+              backgroundSize: 'cover'
+            }}
+            tag='a'
+            target='_blank'
+            href={button.href}
+          />
+        ))}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
+          OK
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+);

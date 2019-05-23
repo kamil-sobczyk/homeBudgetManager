@@ -112,6 +112,7 @@ export class ItemMenagerClient {
       (item: Item, itemIndex: number) => itemIndex !== index
     );
     this.store.apiClient.deleteItemOnServer(index);
+    this.store.visibilityClient.setVisibleDialog();
     return this.store.items;
   };
 

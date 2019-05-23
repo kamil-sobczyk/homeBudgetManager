@@ -19,42 +19,37 @@ interface AddBillDialogProps {
   count: number;
 }
 
-@observer
-export class AddBillDialog extends React.Component<AddBillDialogProps, Item> {
-  render() {
-    const {
-      addBill,
-      changeNewBill,
-      changeCounter,
-      setVisibleDialog,
-      visibleDialog
-    } = this.props;
-
-    return (
-      <Dialog open={visibleDialog === 'AddBillDialog'}>
-        <StyledDialogTitle>Add new bill</StyledDialogTitle>
-        <TextField
-          defaultValue={''}
-          label='Bill name'
-          name='name'
-          onChange={e => changeNewBill(e)}
-        />
-        <TextField
+export const AddBillDialog = observer(
+  ({
+    addBill,
+    changeNewBill,
+    changeCounter,
+    setVisibleDialog,
+    visibleDialog
+  }: AddBillDialogProps) => (
+    <Dialog open={visibleDialog === 'AddBillDialog'}>
+      <StyledDialogTitle>Add new bill</StyledDialogTitle>
+      <TextField
+        defaultValue={''}
+        label='Bill name'
+        name='name'
+        onChange={e => changeNewBill(e)}
+      />
+      <TextField
         label='Cost'
         defaultValue={String(0)}
         onChange={e => changeCounter(e)}
         type='number'
         required
       />
-        <DialogActions>
-          <Button color='primary' onClick={() => setVisibleDialog()}>
-            Cancel
-          </Button>
-          <Button color='primary' onClick={addBill}>
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-}
+      <DialogActions>
+        <Button color='primary' onClick={() => setVisibleDialog()}>
+          Cancel
+        </Button>
+        <Button color='primary' onClick={addBill}>
+          Add
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+);

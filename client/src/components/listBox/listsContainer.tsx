@@ -26,52 +26,47 @@ interface ListsContainerProps {
   showItems: boolean;
 }
 
-@observer
-export class ListsContainer extends React.Component<ListsContainerProps, {}> {
-  render() {
-    const {
-      onDragEnd,
-      showItems,
-      getItems,
-      getSelected,
-      toggleShowItems,
-      setActiveItem,
-      selected,
-      toggleCheckItems,
-      deleteItem,
-      items,
-      setVisibleDialog,
-    } = this.props;
-
-    return (
-      <>
-        <StyledButtonsContainer>
-          <ViewButton toggleShowItems={toggleShowItems} showItems={showItems} />
-        </StyledButtonsContainer>
-        <StyledListContainer>
-          <DragDropContext onDragEnd={onDragEnd}>
-            {showItems && (
-              <Items
-                setActiveItem={setActiveItem}
-                setVisibleDialog={setVisibleDialog}
-                deleteItem={deleteItem}
-                items={items}
-                getItems={getItems}
-              />
-            )}
-            <Selected
-            setVisibleDialog={setVisibleDialog}
+export const ListsContainer = observer(
+  ({
+    onDragEnd,
+    showItems,
+    getItems,
+    getSelected,
+    toggleShowItems,
+    setActiveItem,
+    selected,
+    toggleCheckItems,
+    deleteItem,
+    items,
+    setVisibleDialog
+  }: ListsContainerProps) => (
+    <>
+      <StyledButtonsContainer>
+        <ViewButton toggleShowItems={toggleShowItems} showItems={showItems} />
+      </StyledButtonsContainer>
+      <StyledListContainer>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {showItems && (
+            <Items
               setActiveItem={setActiveItem}
-              toggleCheckItems={toggleCheckItems}
-              selected={selected}
-              getSelected={getSelected}
+              setVisibleDialog={setVisibleDialog}
+              deleteItem={deleteItem}
+              items={items}
+              getItems={getItems}
             />
-          </DragDropContext>
-        </StyledListContainer>
-      </>
-    );
-  }
-}
+          )}
+          <Selected
+            setVisibleDialog={setVisibleDialog}
+            setActiveItem={setActiveItem}
+            toggleCheckItems={toggleCheckItems}
+            selected={selected}
+            getSelected={getSelected}
+          />
+        </DragDropContext>
+      </StyledListContainer>
+    </>
+  )
+);
 
 const StyledListContainer = styled.div`
   display: flex;

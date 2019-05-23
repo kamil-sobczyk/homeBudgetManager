@@ -21,14 +21,9 @@ interface TableContainerProps {
   costs: Cost[];
 }
 
-@observer
-export class TableContainer extends React.Component<TableContainerProps, {}> {
-  componentDidMount = (): void => {
-    this.props.getCosts();
-  };
-
-  render() {
-    const { costs } = this.props;
+export const TableContainer = observer(
+  ({ costs, getCosts }: TableContainerProps) => {
+    getCosts();
 
     let displayedCosts: Cost[] = costs;
     if (costs.length < 1) {
@@ -71,7 +66,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
       </StyledDataTable>
     );
   }
-}
+);
 
 const StyledDataTableContent = styled(DataTableContent)`
   width: 100%;

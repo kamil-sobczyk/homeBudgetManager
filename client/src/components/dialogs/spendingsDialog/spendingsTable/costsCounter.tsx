@@ -43,21 +43,15 @@ interface CostsCounterProps {
   costs: Cost[];
 }
 
-@observer
-export class CostsCounter extends React.Component<CostsCounterProps, {}> {
-  render() {
-    const { costs } = this.props;
-    return (
-      <StyledTypography use='subtitle1'>
-        This month you spent:
-        <ColoredIcon color='green' />
-        {countCosts(costs) + ' zł'}
-        <ColoredIcon color='blue' />
-        {countCosts(costs, 'bill') + ' zł'}
-      </StyledTypography>
-    );
-  }
-}
+export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
+  <StyledTypography use='subtitle1'>
+    This month you spent:
+    <ColoredIcon color='green' />
+    {countCosts(costs) + ' zł'}
+    <ColoredIcon color='blue' />
+    {countCosts(costs, 'bill') + ' zł'}
+  </StyledTypography>
+));
 
 const StyledTypography = styled(Typography)`
   display: flex;

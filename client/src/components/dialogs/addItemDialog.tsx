@@ -19,42 +19,37 @@ interface AddItemDialogProps {
   selected: Item[];
 }
 
-@observer
-export class AddItemDialog extends React.Component<AddItemDialogProps, Item> {
-  render() {
-    const {
-      changeNewItem,
-      addItem,
-      setVisibleDialog,
-      visibleDialog,
-    } = this.props;
-
-    return (
-      <Dialog open={visibleDialog === 'AddItemDialog'}>
-        <StyledDialogTitle>Add a new product</StyledDialogTitle>
-        <TextField
-          defaultValue={''}
-          id='outlined-required'
-          label='New item'
-          name='name'
-          onChange={e => changeNewItem(e)}
-        />
-        <TextField
-          defaultValue={''}
-          id='outlined'
-          label='Additional info'
-          name='info'
-          onChange={e => changeNewItem(e)}
-        />
-        <DialogActions>
-          <Button color='primary' onClick={() => setVisibleDialog()}>
-            Cancel
-          </Button>
-          <Button color='primary' onClick={addItem}>
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-}
+export const AddItemDialog = observer(
+  ({
+    changeNewItem,
+    addItem,
+    setVisibleDialog,
+    visibleDialog
+  }: AddItemDialogProps) => (
+    <Dialog open={visibleDialog === 'AddItemDialog'}>
+      <StyledDialogTitle>Add a new product</StyledDialogTitle>
+      <TextField
+        defaultValue={''}
+        id='outlined-required'
+        label='New item'
+        name='name'
+        onChange={e => changeNewItem(e)}
+      />
+      <TextField
+        defaultValue={''}
+        id='outlined'
+        label='Additional info'
+        name='info'
+        onChange={e => changeNewItem(e)}
+      />
+      <DialogActions>
+        <Button color='primary' onClick={() => setVisibleDialog()}>
+          Cancel
+        </Button>
+        <Button color='primary' onClick={addItem}>
+          Add
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+);
