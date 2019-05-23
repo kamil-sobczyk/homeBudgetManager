@@ -6,9 +6,9 @@ import {
   TopAppBarRow,
 } from '@rmwc/top-app-bar';
 
-import { DrawerBar } from './drawer';
-import { NavbarSectionLeft } from './NavbarSectionLeft';
-import { NavbarSectionRight } from './navbarSectionRight';
+import { DrawerBar } from './drawer/drawer';
+import { NavbarSectionLeft } from './navbarSections/NavbarSectionLeft';
+import { NavbarSectionRight } from './navbarSections/navbarSectionRight';
 
 interface NavbarProps {
   toggleShowDrawer: () => boolean;
