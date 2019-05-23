@@ -11,13 +11,11 @@ import {
 } from '@rmwc/top-app-bar';
 
 import { DrawerBar } from './drawer';
-import { AboutDialog } from '../../dialogs/aboutDialog';
 
 interface NavbarProps {
   toggleShowDrawer: () => boolean;
   setVisibleDialog: (dialog?: string) => string;
   showDrawer: boolean;
-  visibleDialog: string;
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
@@ -26,7 +24,6 @@ export class Navbar extends React.Component<NavbarProps, {}> {
       toggleShowDrawer,
       showDrawer,
       setVisibleDialog,
-      visibleDialog
     } = this.props;
     return (
       <>
@@ -56,10 +53,6 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           setVisibleDialog={setVisibleDialog}
           toggleShowDrawer={toggleShowDrawer}
           showDrawer={showDrawer}
-        />
-        <AboutDialog
-          setVisibleDialog={setVisibleDialog}
-          visibleDialog={visibleDialog}
         />
         <TopAppBarFixedAdjust />
       </>

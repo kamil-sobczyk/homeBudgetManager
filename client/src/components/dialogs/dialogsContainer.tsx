@@ -10,6 +10,7 @@ import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './failDialog';
 import { AddBillDialog } from './addBillDialog';
+import { AboutDialog } from './aboutDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -105,6 +106,12 @@ export class DialogsContainer extends React.Component<
             visibleDialog={visibilityClient.visibleDialog}
           />
         )}
+        {visibilityClient.visibleDialog === 'AboutDialog' && (
+        <AboutDialog
+        setVisibleDialog={visibilityClient.setVisibleDialog}
+        visibleDialog={visibilityClient.visibleDialog}
+      />
+      )}
       </>
     );
   }

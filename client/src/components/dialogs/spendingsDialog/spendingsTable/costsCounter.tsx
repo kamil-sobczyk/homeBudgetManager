@@ -8,16 +8,15 @@ import { Cost } from '../../../../lib/interfaces';
 import { Typography } from '@rmwc/typography';
 import { ColoredIcon } from './legend/coloredIcon';
 
-const dateNow = String(
-  new Date().toLocaleDateString('pl-PL', {
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-);
-
 const countCosts = (costs: Cost[], bill?: string) => {
   let sumOfCosts: number = 0;
   let monthCosts: Cost[] = [];
+  const dateNow = String(
+    new Date().toLocaleDateString('pl-PL', {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  );
 
   if (costs.length > 0) {
     monthCosts = costs.filter(
