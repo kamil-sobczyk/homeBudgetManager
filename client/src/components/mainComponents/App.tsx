@@ -17,7 +17,7 @@ export class App extends React.Component<{}, {}> {
 
   componentDidMount() {
     this.loading = false;
-    this.store = new Store();   
+    this.store = new Store(); 
   }
 
   render() {
@@ -36,7 +36,7 @@ export class App extends React.Component<{}, {}> {
       visibleDialog
     } = this.store.visibilityClient;
 
-    if (visibleDialog !== 'LoginDialog') {
+    if (localStorage.id) {
       return (
         <Provider store={this.store}>
           <Container>

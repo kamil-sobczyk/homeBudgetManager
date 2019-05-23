@@ -27,7 +27,7 @@ export class ApiClient {
 
   setUser = (token: string, id: string): void => {
     
-    if (!localStorage.googleToken) {
+    if (!localStorage.id) {
       localStorage.googleToken = token;
       localStorage.id = id;
     } else {
