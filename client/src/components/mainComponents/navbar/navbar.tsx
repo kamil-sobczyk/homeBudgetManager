@@ -11,6 +11,8 @@ import {
 } from '@rmwc/top-app-bar';
 
 import { DrawerBar } from './drawer';
+import { NavbarSectionLeft } from './NavbarSectionLeft';
+import { NavbarSectionRight } from './navbarSectionRight';
 
 interface NavbarProps {
   toggleShowDrawer: () => boolean;
@@ -20,33 +22,16 @@ interface NavbarProps {
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
-    const {
-      toggleShowDrawer,
-      showDrawer,
-      setVisibleDialog,
-    } = this.props;
+    const { toggleShowDrawer, showDrawer, setVisibleDialog } = this.props;
     return (
       <>
         <TopAppBar>
           <TopAppBarRow>
-            <TopAppBarSection alignStart>
-              <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-              <TopAppBarTitle
-                onClick={() => setVisibleDialog('SpendingsDialog')}
-              >
-                Home Budget Menager
-              </TopAppBarTitle>
-            </TopAppBarSection>
-            <TopAppBarSection alignEnd>
-              <TopAppBarActionItem
-                icon='shopping_cart'
-                onClick={() => setVisibleDialog('SpendingsDialog')}
-              />
-              <TopAppBarActionItem
-                icon='note_add'
-                onClick={() => setVisibleDialog('AddBillDialog')}
-              />
-            </TopAppBarSection>
+            <NavbarSectionLeft
+              toggleShowDrawer={toggleShowDrawer}
+              setVisibleDialog={setVisibleDialog}
+            />
+            <NavbarSectionRight setVisibleDialog={setVisibleDialog} />
           </TopAppBarRow>
         </TopAppBar>
         <DrawerBar

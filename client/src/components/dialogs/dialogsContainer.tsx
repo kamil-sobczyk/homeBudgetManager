@@ -107,11 +107,11 @@ export class DialogsContainer extends React.Component<
           />
         )}
         {visibilityClient.visibleDialog === 'AboutDialog' && (
-        <AboutDialog
-        setVisibleDialog={visibilityClient.setVisibleDialog}
-        visibleDialog={visibilityClient.visibleDialog}
-      />
-      )}
+          <AboutDialog
+            setVisibleDialog={visibilityClient.setVisibleDialog}
+            visibleDialog={visibilityClient.visibleDialog}
+          />
+        )}
       </>
     );
   }
