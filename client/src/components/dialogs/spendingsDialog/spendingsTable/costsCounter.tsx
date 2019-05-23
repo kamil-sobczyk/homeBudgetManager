@@ -6,14 +6,26 @@ import { observer } from 'mobx-react';
 import { Cost } from '../../../../lib/interfaces';
 
 import { Typography } from '@rmwc/typography';
+import { ColoredIcon } from './legend/coloredIcon';
 
-const countMothOutgoings = (costs: Cost[]) => {
-  let sumOfCost: number = 0;
+const countCosts = (costs: Cost[], bill?: string) => {
+  let sumOfCosts: number = 0;
 
   if (costs.length > 0) {
-    costs.forEach((cost: Cost) => (sumOfCost += cost.count));
+    costs.forEach((cost: Cost) => {
+      if (bill) {
+        if (cost.bill) {
+          sumOfCosts += cost.count;
+        }
+      } else {
+        if (!cost.bill) {
+          sumOfCosts += cost.count;
+        }
+      }
+    });
   }
-  return sumOfCost;
+
+  return sumOfCosts;
 };
 
 interface CostsCounterProps {
@@ -23,10 +35,14 @@ interface CostsCounterProps {
 @observer
 export class CostsCounter extends React.Component<CostsCounterProps, {}> {
   render() {
+    const { costs } = this.props;
     return (
       <StyledTypography use='subtitle1'>
-        This month you spent:{' '}
-        {countMothOutgoings(this.props.costs) + ' zł'}
+        This month you spent: 
+        <ColoredIcon color='green' />
+        {countCosts(costs) + ' zł'} 
+        <ColoredIcon color='blue' />
+        {countCosts(costs, 'bill') + ' zł'}
       </StyledTypography>
     );
   }
