@@ -49,10 +49,10 @@ export const AboutDialog = observer(
               key={button.icon}
               icon={button.icon}
               style={{
-                width: '35px',
-                height: '35px',
+                width: '45px',
+                height: '45px',
                 backgroundSize: 'cover',
-                margin: '10px'
+                margin: '10px',
               }}
               tag='a'
               target='_blank'
