@@ -5,6 +5,7 @@ import {
   TopAppBarTitle,
   TopAppBarNavigationIcon
 } from '@rmwc/top-app-bar';
+import styled from 'styled-components';
 
 interface NavbarSectionLeftProps {
   toggleShowDrawer: () => boolean;
@@ -20,10 +21,14 @@ export class NavbarSectionLeft extends React.Component<
     return (
       <TopAppBarSection alignStart>
         <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-        <TopAppBarTitle onClick={() => setVisibleDialog('SpendingsDialog')}>
+        <StyledTopAppBarTitle onClick={() => setVisibleDialog('AboutDialog')}>
           Home Budget Menager
-        </TopAppBarTitle>
+        </StyledTopAppBarTitle>
       </TopAppBarSection>
     );
   }
 }
+
+const StyledTopAppBarTitle = styled(TopAppBarTitle)`
+  cursor: pointer;
+`;
