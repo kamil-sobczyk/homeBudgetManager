@@ -16,28 +16,31 @@ interface ProvidedItemsProps {
   provided: DroppableProvided;
 }
 
-export const ProvidedItems = observer(
-  ({
-    provided, setVisibleDialog, items, setActiveItem
-  }: ProvidedItemsProps) => (
-    <List innerRef={provided.innerRef}>
-    {items.map((item, index) => (
-      <Draggable key={item.id} draggableId={item.id} index={index}>
-        {providedDraggable2 => (
-          <ProvidedItemsDraggable
-            providedDraggable2={providedDraggable2}
-            setActiveItem={setActiveItem}
-            setVisibleDialog={setVisibleDialog}
-            item={item}
-            index={index}
-          />
-        )}
-      </Draggable>
-    ))}
-    {provided.placeholder}
-  </List>
-  )
-);
+@observer
+export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
+  render() {
+    const { provided, setVisibleDialog, items, setActiveItem } = this.props;
+
+    return (
+      <List innerRef={provided.innerRef}>
+        {items.map((item, index) => (
+          <Draggable key={item.id} draggableId={item.id} index={index}>
+            {providedDraggable2 => (
+              <ProvidedItemsDraggable
+                providedDraggable2={providedDraggable2}
+                setActiveItem={setActiveItem}
+                setVisibleDialog={setVisibleDialog}
+                item={item}
+                index={index}
+              />
+            )}
+          </Draggable>
+        ))}
+        {provided.placeholder}
+      </List>
+    );
+  }
+}
 
 export const List = styled.div`
   min-height: 50px;

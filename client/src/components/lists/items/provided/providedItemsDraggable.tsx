@@ -26,33 +26,38 @@ interface ProvidedItemsDraggableProps {
   index: number;
 }
 
+@observer
+export class ProvidedItemsDraggable extends React.Component<
+  ProvidedItemsDraggableProps,
+  {}
+> {
+  render() {
+    const { setVisibleDialog, providedDraggable2, item, index, setActiveItem } = this.props;
 
-export const ProvidedItemsDraggable = observer(
-  ({
-    setVisibleDialog, providedDraggable2, item, index, setActiveItem 
-  }: ProvidedItemsDraggableProps) => (
-    <>
-    <div
-      ref={providedDraggable2.innerRef}
-      {...providedDraggable2.draggableProps}
-      {...providedDraggable2.dragHandleProps}
-    >
-      <StyledItem key={index}>
-        <StyledTextContainer>
-          <ListItemText>
-            <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
-            <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
-          </ListItemText>
-          <MoreMenu index={index} setVisibleDialog={setVisibleDialog}        setActiveItem={setActiveItem} />
-        </StyledTextContainer>
-      </StyledItem>
+    return (
+      <>
+        <div
+          ref={providedDraggable2.innerRef}
+          {...providedDraggable2.draggableProps}
+          {...providedDraggable2.dragHandleProps}
+        >
+          <StyledItem key={index}>
+            <StyledTextContainer>
+              <ListItemText>
+                <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
+                <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
+              </ListItemText>
+              <MoreMenu index={index} setVisibleDialog={setVisibleDialog}        setActiveItem={setActiveItem} />
+            </StyledTextContainer>
+          </StyledItem>
 
-      <ListDivider />
-    </div>
-    {providedDraggable2.placeholder}
-  </>
-  )
-);
+          <ListDivider />
+        </div>
+        {providedDraggable2.placeholder}
+      </>
+    );
+  }
+}
 
 export const StyledItem = styled(ListItem)`
   min-height: 75px;
