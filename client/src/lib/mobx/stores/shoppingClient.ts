@@ -1,11 +1,13 @@
-import { FormEvent } from 'react';
+import { CategoryType } from './../../interfaces';
 import { Store } from '../rootStore';
 import { Cost } from '../../interfaces';
 
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
+
 import { observable } from 'mobx';
+import { SelectValue } from '../../../components/dialogs/spendingsDialogs/addOtherDialog';
 
 export class ShoppingClient {
   store: Store;
@@ -16,13 +18,15 @@ export class ShoppingClient {
   @observable chosenItems: string[] = [];
   @observable count: number = 0;
   @observable date: Date = new Date();
+  @observable category: CategoryType = 'bill';
+  @observable categoryName: SelectValue = { label: '', value: '' };
 
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
     this.store.apiClient.addCostOnServer(cost);
   };
 
-  addBill = () => {
+  addNewSpending = () => {
     const billCost: Cost = {
       chosenItems: this.chosenItems,
       count: this.count,
@@ -32,7 +36,7 @@ export class ShoppingClient {
           minute: '2-digit'
         })
       ),
-      category: 'bill'
+      category: this.category
     };
 
     this.store.costs.unshift(billCost);
@@ -40,12 +44,15 @@ export class ShoppingClient {
     this.store.visibilityClient.setVisibleDialog();
   };
 
-  changeBillName = (event: FormEvent<EventTarget>): void => {
-    const target = event.target as HTMLInputElement;
-    this.chosenItems[0] = target.value;
+  changeNewSpendingName = (event: any): void => {
+    this.chosenItems[0] = event.value;
+    this.category = event.value;
+    this.categoryName = event;
   };
 
-  changeCounter = (event: React.FormEvent<EventTarget>): void => {
+  changeNewSpendingNameCounter = (
+    event: React.FormEvent<EventTarget>
+  ): void => {
     const target = event.target as HTMLInputElement;
 
     if (parseInt(target.value) > 0) {

@@ -89,7 +89,7 @@ export const DialogsContainer = observer(
         <FinishShoppingDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
-          changeCounter={shoppingClient.changeCounter}
+          changeNewSpendingNameCounter={shoppingClient.changeNewSpendingNameCounter}
           finishShopping={shoppingClient.finishShopping}
           count={shoppingClient.count}
         />
@@ -98,10 +98,11 @@ export const DialogsContainer = observer(
         <AddOtherDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
-          addBill={shoppingClient.addBill}
-          changeNewBill={shoppingClient.changeBillName}
-          changeCounter={shoppingClient.changeCounter}
+          addNewSpending={shoppingClient.addNewSpending}
+          changeNewSpendingName={shoppingClient.changeNewSpendingName}
+          changeNewSpendingNameCounter={shoppingClient.changeNewSpendingNameCounter}
           count={shoppingClient.count}
+          categoryName={shoppingClient.categoryName}
         />
       )}
       {visibilityClient.visibleDialog === 'FailDialog' && (
