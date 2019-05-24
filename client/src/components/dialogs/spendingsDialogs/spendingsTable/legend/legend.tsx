@@ -6,10 +6,14 @@ import { ColoredIcon } from './coloredIcon';
 
 export const Legend = () => (
   <StyledLegendContainer>
-    <ColoredIcon color='green' />
+    <ColoredIcon color='black' />
     Shopping
     <ColoredIcon color='blue' />
     Bills
+    <ColoredIcon color='red' />
+    Car
+    <ColoredIcon color='green' />
+    Health
   </StyledLegendContainer>
 );
 
