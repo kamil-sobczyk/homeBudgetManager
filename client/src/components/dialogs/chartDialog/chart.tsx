@@ -27,10 +27,8 @@ export class Chart extends React.Component<ChartProps, {}> {
     this.props.getCosts();
   };
   render() {
-    const { costs } = this.props;
-
-    return (
-          <BarChart width={730} height={250} data={splitCosts(costs)}>
+      return (
+          <BarChart width={530} height={250} data={splitCosts(this.props.costs)}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='name' />
             <YAxis />

@@ -6,6 +6,21 @@ interface NavbarSectionRightProps {
   setVisibleDialog: (dialog?: string) => string;
 }
 
+const navbarSectionRightItems = [
+  {
+    icon: 'bar_chart',
+    action: 'ChartDialog'
+  },
+  {
+    icon: 'shopping_cart',
+    action: 'SpendingsDialog'
+  },
+  {
+    icon: 'note_add',
+    action: 'AddBillDialog'
+  }
+];
+
 export class NavbarSectionRight extends React.Component<
   NavbarSectionRightProps,
   {}
@@ -14,14 +29,13 @@ export class NavbarSectionRight extends React.Component<
     const { setVisibleDialog } = this.props;
     return (
       <TopAppBarSection alignEnd>
-        <TopAppBarActionItem
-          icon='shopping_cart'
-          onClick={() => setVisibleDialog('SpendingsDialog')}
-        />
-        <TopAppBarActionItem
-          icon='note_add'
-          onClick={() => setVisibleDialog('AddBillDialog')}
-        />
+        {navbarSectionRightItems.map(item => (
+          <TopAppBarActionItem
+            icon={item.icon}
+            onClick={() => setVisibleDialog(item.action)}
+            key={item.action}
+          />
+        ))}
       </TopAppBarSection>
     );
   }
