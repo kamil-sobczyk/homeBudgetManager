@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { Cost } from '../../lib/interfaces';
+
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
@@ -15,59 +17,57 @@ import {
   Legend,
   Bar
 } from 'recharts';
+import { number } from 'prop-types';
 
 const chartData = [
   {
     name: 'May',
     shopping: 4000,
-    bills: 2400,
-    amt: 2400
+    bills: 2400
   },
   {
     name: 'June',
     shopping: 3000,
-    bills: 1398,
-    amt: 2210
+    bills: 1398
   },
   {
     name: 'July',
     shopping: 2000,
-    bills: 200,
-    amt: 2290
+    bills: 200
   },
   {
     name: 'September',
     shopping: 2780,
-    bills: 3908,
-    amt: 2000
+    bills: 3908
   },
   {
     name: 'October',
     shopping: 1890,
-    bills: 4800,
-    amt: 2181
+    bills: 4800
   },
   {
     name: 'November',
     shopping: 2390,
-    bills: 3800,
-    amt: 2500
+    bills: 3800
   },
   {
     name: 'December',
     shopping: 3490,
-    bills: 4300,
-    amt: 2100
+    bills: 4300
   }
 ];
-
-import { Cost } from '../../lib/interfaces';
 
 interface ChartDialogProps {
   costs: Cost[];
   visibleDialog: string;
   setVisibleDialog: () => string;
   getCosts: () => void;
+}
+
+interface Spending {
+  name: String;
+  shopping: number;
+  bills: number;
 }
 
 const months = [
@@ -85,6 +85,65 @@ const months = [
   'December'
 ];
 
+const monthNumbers = months.map((month, index) =>
+  ('0' + (index + 1)).slice(-2)
+);
+
+console.log('mmmm', monthNumbers);
+
+const getBillsCount = (costs: Cost[], month: string): number => {
+  let sumOfBills: number = 0;
+
+  costs.forEach(cost => {
+    if (cost.bill) {
+      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
+        sumOfBills += cost.count;
+      }
+    }
+  });
+
+  return sumOfBills;
+};
+
+const getShoppingCount = (costs: Cost[], month: string): number => {
+  let sumOfShoppings: number = 0;
+
+  costs.forEach(cost => {
+    if (!cost.bill) {
+      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
+        sumOfShoppings += cost.count;
+      }
+    }
+  });
+
+  return sumOfShoppings;
+};
+
+interface Spendings {
+  bills: number;
+  shopping: number;
+  total?: number;
+}
+
+const splitCosts = (costs: Cost[]): [] => {
+  let monthSpendings: any = [];
+  months.forEach((month, index) =>
+    monthSpendings.push({
+      name: month,
+      bills: getBillsCount(costs, monthNumbers[index]),
+      shopping: getShoppingCount(costs, monthNumbers[index])
+    })
+  );
+
+monthSpendings.forEach((month: Spendings) => {
+    month.total = month.bills + month.shopping
+});
+
+  console.log(monthSpendings);
+
+  return monthSpendings;
+};
+
 const getMonth = (stringDate: string): string =>
   months[Number(stringDate.slice(4, 5)) - 1];
 
@@ -96,14 +155,7 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
   render() {
     const { setVisibleDialog, visibleDialog, costs } = this.props;
     if (costs.length > 0) {
-      console.log(JSON.stringify(costs[0]));
-      console.log(getMonth(costs[0].date));
-
-      
-
-    //   const data = costs.map(cost => { {name: getMonth(cost.date), shopping: }
-
-    //   })
+      splitCosts(costs);
     }
 
     return (
@@ -116,7 +168,7 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
           Your spendings
         </StyledDialogTitle>
         <DialogContent id='alert-dialog-description'>
-          <BarChart width={730} height={250} data={chartData}>
+          <BarChart width={730} height={250} data={splitCosts(costs)}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='name' />
             <YAxis />
@@ -124,6 +176,7 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
             <Legend />
             <Bar dataKey='bills' fill='blue' />
             <Bar dataKey='shopping' fill='green' />
+            <Bar dataKey='total' fill='red' />
           </BarChart>
         </DialogContent>
         <DialogActions>
