@@ -23,9 +23,11 @@ interface TableContainerProps {
 }
 
 const getRowColor = (category: CategoryType) => {
-  if (category === 'shopping') return 'red';
+  if (category === 'shopping') return 'black';
   else if (category === 'bill') return 'blue';
-  else return 'green';
+  else if (category === 'health') return 'green';
+  else if (category === 'car') return 'red';
+  else return 'yellow';
 };
 
 @observer
@@ -34,7 +36,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     this.props.getCosts();
   };
   render() {
-    const { costs, getCosts } = this.props;
+    const { costs } = this.props;
 
     let displayedCosts: Cost[] = costs;
     if (costs.length < 1) {
@@ -58,23 +60,20 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
-            {displayedCosts.map((cost: Cost, index: number) => {
-              console.log(JSON.stringify(displayedCosts));
-              return (
-                <DataTableRow
-                  key={index}
-                  style={{ color: getRowColor(cost.category) }}
-                >
-                  <StyledDataTableCell>
-                    {cost.chosenItems.join(', ')}
-                  </StyledDataTableCell>
-                  <StyledDataTableCell>{cost.date}</StyledDataTableCell>
-                  <StyledDataTableCell alignEnd>
-                    {cost.count + 'zł'}
-                  </StyledDataTableCell>
-                </DataTableRow>
-              );
-            })}
+            {displayedCosts.map((cost: Cost, index: number) => (
+              <DataTableRow
+                key={index}
+                style={{ color: getRowColor(cost.category) }}
+              >
+                <StyledDataTableCell>
+                  {cost.chosenItems.join(', ')}
+                </StyledDataTableCell>
+                <StyledDataTableCell>{cost.date}</StyledDataTableCell>
+                <StyledDataTableCell alignEnd>
+                  {cost.count + 'zł'}
+                </StyledDataTableCell>
+              </DataTableRow>
+            ))}
           </DataTableBody>
         </StyledDataTableContent>
       </StyledDataTable>
