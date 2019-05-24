@@ -13,8 +13,6 @@ interface LoginDialogProps {
   setUser: (token: string, id: string) => void;
 }
 
-
-
 @observer
 export class LoginDialog extends React.Component<LoginDialogProps, {}> {
   render() {
@@ -25,7 +23,6 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     } = this.props;
 
     const responseGoogle = (response: any) => {
-      console.log(response);
       if (response.profileObj) {
         setUser(response.accessToken, response.googleId);
         setVisibleDialog();
@@ -34,7 +31,6 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
 
     const responseGoogleFailure = (response: any) => {
       console.log('failure', response);
-     
     };
 
     return (

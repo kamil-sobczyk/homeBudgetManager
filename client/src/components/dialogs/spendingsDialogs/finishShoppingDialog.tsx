@@ -3,13 +3,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Cost } from '../../lib/interfaces';
+import { Cost } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
-import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
+import { StyledDialogTitle } from './spendingsDialog';
 import { observable } from 'mobx';
 
 interface FinishShoppingDialogProps {
@@ -41,7 +41,7 @@ export class FinishShoppingDialog extends React.Component<
         aria-labelledby='alert-dialog-title'
         open={visibleDialog === 'FinishShoppingDialog'}
       >
-        <StyledDialogTitle id='alert-dialog-title'>
+        <StyledDialogTitle>
           Finishing shopping
         </StyledDialogTitle>
         <StyledDialogContent>

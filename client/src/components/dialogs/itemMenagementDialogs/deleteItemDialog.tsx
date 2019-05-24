@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Item } from '../../lib/interfaces';
+import { Item } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
+import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface DeleteItemDialogProps {
   deleteItem: (index: number) => void;
@@ -28,10 +28,8 @@ export const DeleteItemDialog = observer(
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
     >
-      <StyledDialogTitle id='alert-dialog-title'>
-        Deleting product
-      </StyledDialogTitle>
-      <DialogContent id='alert-dialog-description'>
+      <StyledDialogTitle>Deleting product</StyledDialogTitle>
+      <DialogContent>
         Are you sure want to delete {items[index] ? items[index].name : ''} from
         your list?
       </DialogContent>

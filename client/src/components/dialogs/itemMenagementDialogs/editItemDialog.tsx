@@ -7,7 +7,7 @@ import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
-import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
+import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface EditDialogProps {
   setVisibleDialog: (dialog?: string) => string;
@@ -70,14 +70,12 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
       <Dialog open={visibleDialog === 'EditItemDialog'}>
         <StyledDialogTitle>Edit product</StyledDialogTitle>
         <TextField
-          id='outlined-required'
           label='Type new name'
           defaultValue={this.name}
           name='name'
           onChange={this.updateName}
         />
         <TextField
-          id='outlined'
           label='Type new info'
           defaultValue={this.info}
           name='info'

@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Cost } from '../../../lib/interfaces';
+import { Cost } from '../../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
-import { StyledDialogTitle } from '../spendingsDialog/spendingsDialog';
+import { StyledDialogTitle } from '../spendingsDialog';
 import { Chart } from './chart';
 
 interface ChartDialogProps {
@@ -25,13 +25,11 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
     return (
       <Dialog
         open={visibleDialog === 'ChartDialog'}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
+        aria-labelledby='Chart dialog'
+        aria-describedby='Chart with all spendings'
       >
-        <StyledDialogTitle id='alert-dialog-title'>
-          Your spendings
-        </StyledDialogTitle>
-        <DialogContent id='alert-dialog-description'>
+        <StyledDialogTitle>Your spendings</StyledDialogTitle>
+        <DialogContent>
           <Chart costs={costs} getCosts={getCosts} />
         </DialogContent>
         <DialogActions>

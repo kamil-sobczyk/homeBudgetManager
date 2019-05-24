@@ -1,4 +1,4 @@
-import { Cost } from './../../../lib/interfaces';
+import { Cost } from '../../../../lib/interfaces';
 
 interface MonthSpendings {
   bills: number;

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
+import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface FailDialogProps {
   setVisibleDialog: (dialog?: string) => string;
@@ -15,13 +15,13 @@ export const FailDialog = observer(
   ({ setVisibleDialog, visibleDialog }: FailDialogProps) => (
     <Dialog
       open={visibleDialog === 'FailDialog'}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
+      aria-labelledby='FailDialog'
+      aria-describedby='FailDialog'
     >
-      <StyledDialogTitle id='alert-dialog-title'>
+      <StyledDialogTitle>
         Unable to perform this action!
       </StyledDialogTitle>
-      <DialogContent id='alert-dialog-description'>
+      <DialogContent>
         This product is on your list already or it has no name.
       </DialogContent>
       <DialogActions>

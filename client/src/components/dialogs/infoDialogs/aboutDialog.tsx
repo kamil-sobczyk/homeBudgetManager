@@ -6,8 +6,8 @@ import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import { IconButton } from '@rmwc/icon-button';
 
-import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
-import { StyledButtonsContainer } from '../listBox/listsContainer';
+import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 const aboutDialogButtons = [
   {
@@ -37,10 +37,8 @@ export const AboutDialog = observer(
       aria-labelledby='about'
       aria-describedby='about'
     >
-      <StyledDialogTitle id='alert-dialog-title'>
-        Home Budget Menager
-      </StyledDialogTitle>
-      <DialogContent id='alert-dialog-description'>
+      <StyledDialogTitle>Home Budget Menager</StyledDialogTitle>
+      <DialogContent>
         Coded by Kamil Sobczyk 2019
         <br />
         <StyledButtonsContainer>
@@ -52,7 +50,7 @@ export const AboutDialog = observer(
                 width: '45px',
                 height: '45px',
                 backgroundSize: 'cover',
-                margin: '10px',
+                margin: '10px'
               }}
               tag='a'
               target='_blank'

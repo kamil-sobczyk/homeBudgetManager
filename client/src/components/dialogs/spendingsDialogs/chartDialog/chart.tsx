@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Cost } from '../../../lib/interfaces';
+import { Cost } from '../../../../lib/interfaces';
 
 import {
   XAxis,

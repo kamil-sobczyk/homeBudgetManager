@@ -2,17 +2,17 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { AddItemDialog } from './addItemDialog';
-import { EditDialog } from './editItemDialog';
-import { DeleteItemDialog } from './deleteItemDialog';
-import { SpendingsDialog } from './spendingsDialog/spendingsDialog';
-import { FinishShoppingDialog } from './finishShoppingDialog';
+import { AddItemDialog } from './itemMenagementDialogs/addItemDialog';
+import { EditDialog } from './itemMenagementDialogs/editItemDialog';
+import { DeleteItemDialog } from './itemMenagementDialogs/deleteItemDialog';
+import { SpendingsDialog } from './spendingsDialogs/spendingsDialog';
+import { FinishShoppingDialog } from './spendingsDialogs/finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
-import { FailDialog } from './failDialog';
-import { AddBillDialog } from './addBillDialog';
-import { AboutDialog } from './aboutDialog';
-import { ChartDialog } from './chartDialog/chartDialog';
+import { FailDialog } from './infoDialogs/failDialog';
+import { AddBillDialog } from './spendingsDialogs/addBillDialog';
+import { AboutDialog } from './infoDialogs/aboutDialog';
+import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
 
 interface DialogsContainerProps {
   items: Item[];

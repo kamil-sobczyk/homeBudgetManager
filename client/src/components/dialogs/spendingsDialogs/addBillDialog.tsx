@@ -6,9 +6,9 @@ import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
-import { Item } from '../../lib/interfaces';
+import { Item } from '../../../lib/interfaces';
 
-import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
+import { StyledDialogTitle } from './spendingsDialog';
 
 interface AddBillDialogProps {
   addBill: () => void;
