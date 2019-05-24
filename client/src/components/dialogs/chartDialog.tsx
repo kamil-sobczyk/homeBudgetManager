@@ -7,12 +7,10 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from './spendingsDialog/spendingsDialog';
 
 import {
-  AreaChart,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Area,
   BarChart,
   Legend,
   Bar
@@ -69,34 +67,82 @@ interface ChartDialogProps {
   costs: Cost[];
   visibleDialog: string;
   setVisibleDialog: () => string;
+  getCosts: () => void;
 }
 
-export const ChartDialog = observer(
-  ({ setVisibleDialog, visibleDialog }: ChartDialogProps) => (
-    <Dialog
-      open={visibleDialog === 'ChartDialog'}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
-    >
-      <StyledDialogTitle id='alert-dialog-title'>
-        Unable to perform this action!
-      </StyledDialogTitle>
-      <DialogContent id='alert-dialog-description'>
-        <BarChart width={730} height={250} data={chartData}>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='name' />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey='bills' fill='blue' />
-          <Bar dataKey='shopping' fill='green' />
-        </BarChart>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
-          OK
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
-);
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+const getMonth = (stringDate: string): string =>
+  months[Number(stringDate.slice(4, 5)) - 1];
+
+@observer
+export class ChartDialog extends React.Component<ChartDialogProps, {}> {
+  componentDidMount = () => {
+    this.props.getCosts();
+  };
+  render() {
+    const { setVisibleDialog, visibleDialog, costs } = this.props;
+    if (costs.length > 0) {
+      console.log(JSON.stringify(costs[0]));
+      console.log(getMonth(costs[0].date));
+
+      
+
+    //   const data = costs.map(cost => { {name: getMonth(cost.date), shopping: }
+
+    //   })
+    }
+
+    return (
+      <Dialog
+        open={visibleDialog === 'ChartDialog'}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <StyledDialogTitle id='alert-dialog-title'>
+          Your spendings
+        </StyledDialogTitle>
+        <DialogContent id='alert-dialog-description'>
+          <BarChart width={730} height={250} data={chartData}>
+            <CartesianGrid strokeDasharray='3 3' />
+            <XAxis dataKey='name' />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey='bills' fill='blue' />
+            <Bar dataKey='shopping' fill='green' />
+          </BarChart>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
+}
+
+// export const ChartDialog = observer(
+//   ({ setVisibleDialog, visibleDialog, costs }: ChartDialogProps) => {
+//     console.log(JSON.stringify(costs));
+//     console.log(visibleDialog)
+
+//     return (
+
+//     );
+//   }
+// );

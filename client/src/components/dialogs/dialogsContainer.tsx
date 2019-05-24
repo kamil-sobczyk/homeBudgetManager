@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
+
 import { AddItemDialog } from './addItemDialog';
 import { EditDialog } from './editItemDialog';
 import { DeleteItemDialog } from './deleteItemDialog';
@@ -75,6 +76,15 @@ export const DialogsContainer = observer(
         />
       )}
 
+      {visibilityClient.visibleDialog === 'ChartDialog' && (
+        <ChartDialog
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+          getCosts={apiClient.getCosts}
+          costs={costs}
+        />
+      )}
+
       {visibilityClient.visibleDialog === 'FinishShoppingDialog' && (
         <FinishShoppingDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
@@ -104,13 +114,6 @@ export const DialogsContainer = observer(
         <AboutDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
-        />
-      )}
-      {visibilityClient.visibleDialog === 'ChartDialog' && (
-        <ChartDialog
-          setVisibleDialog={visibilityClient.setVisibleDialog}
-          visibleDialog={visibilityClient.visibleDialog}
-          costs={costs}
         />
       )}
     </>

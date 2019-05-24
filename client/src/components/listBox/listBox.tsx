@@ -6,9 +6,6 @@ import { StoreProps } from '../../lib/interfaces';
 import { ListsContainer } from './listsContainer';
 import { DialogsContainer } from '../dialogs/dialogsContainer';
 
-
-
-
 export const ListBox = observer(({ store }: StoreProps) => {
   const {
     costs,
@@ -45,7 +42,6 @@ export const ListBox = observer(({ store }: StoreProps) => {
         apiClient={apiClient}
         shoppingClient={shoppingClient}
       />
-
     </>
   );
 });
