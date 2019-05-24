@@ -35,8 +35,9 @@ export class Chart extends React.Component<ChartProps, {}> {
             <Tooltip />
             <Legend />
             <Bar dataKey='bills' fill='blue' />
-            <Bar dataKey='shopping' fill='green' />
-            <Bar dataKey='total' fill='red' />
+            <Bar dataKey='shopping' fill='black' />
+            <Bar dataKey='health' fill='green' />
+            <Bar dataKey='car' fill='red' />
           </BarChart>
     );
   }

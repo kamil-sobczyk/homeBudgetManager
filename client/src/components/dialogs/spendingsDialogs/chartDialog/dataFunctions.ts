@@ -1,3 +1,4 @@
+import { CategoryType } from './../../../../lib/interfaces';
 import { Cost } from '../../../../lib/interfaces';
 
 interface MonthSpendings {
@@ -25,32 +26,34 @@ const monthNumbers = months.map((month, index) =>
   ('0' + (index + 1)).slice(-2)
 );
 
-const getBillsCount = (costs: Cost[], month: string): number => {
-  let sumOfBills: number = 0;
+const getMonthCostCount = (
+  costs: Cost[],
+  month: string,
+  category: CategoryType
+): number => {
+  let sumOfCosts: number = 0;
 
   costs.forEach(cost => {
-    if (cost.category === 'bill') {
+    if ((cost.category && category) === 'bill') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
-        sumOfBills += cost.count;
+        sumOfCosts += cost.count;
+      }
+    } else if ((cost.category && category) === 'shopping') {
+      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
+        sumOfCosts += cost.count;
+      }
+    } else if ((cost.category && category) === 'health') {
+      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
+        sumOfCosts += cost.count;
+      }
+    } else if ((cost.category && category) === 'car') {
+      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
+        sumOfCosts += cost.count;
       }
     }
   });
 
-  return sumOfBills;
-};
-
-const getShoppingCount = (costs: Cost[], month: string): number => {
-  let sumOfShoppings: number = 0;
-
-  costs.forEach(cost => {
-    if (cost.category === 'shopping') {
-      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
-        sumOfShoppings += cost.count;
-      }
-    }
-  });
-
-  return sumOfShoppings;
+  return sumOfCosts;
 };
 
 export const splitCosts = (costs: Cost[]): [] => {
@@ -58,8 +61,10 @@ export const splitCosts = (costs: Cost[]): [] => {
   months.forEach((month, index) =>
     monthSpendings.push({
       name: month,
-      bills: getBillsCount(costs, monthNumbers[index]),
-      shopping: getShoppingCount(costs, monthNumbers[index])
+      bills: getMonthCostCount(costs, monthNumbers[index], 'bill'),
+      shopping: getMonthCostCount(costs, monthNumbers[index], 'shopping'),
+      car: getMonthCostCount(costs, monthNumbers[index], 'car'),
+      health: getMonthCostCount(costs, monthNumbers[index], 'health')
     })
   );
 
