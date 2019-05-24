@@ -30,6 +30,7 @@ export class ItemMenagerClient {
     if (this.currentList && this.currentList[this.activeItem.index]) {
       return this.currentList[this.activeItem.index].name;
     }
+
     return undefined;
   }
 
@@ -49,7 +50,7 @@ export class ItemMenagerClient {
         checked: false,
         id: String(Date.now()),
         info: target.value,
-        name: this.newItem.name
+        name: this.newItem.name,
       };
       return;
     } else if (target.name === 'name') {
@@ -57,7 +58,7 @@ export class ItemMenagerClient {
         checked: false,
         id: String(Date.now()),
         info: this.newItem.info,
-        name: target.value
+        name: target.value,
       };
     }
   };

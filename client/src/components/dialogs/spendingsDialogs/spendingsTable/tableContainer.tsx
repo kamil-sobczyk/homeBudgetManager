@@ -3,7 +3,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Cost } from '../../../../lib/interfaces';
+
+import { Cost, CategoryType } from '../../../../lib/interfaces';
 
 import {
   DataTable,
@@ -21,9 +22,19 @@ interface TableContainerProps {
   costs: Cost[];
 }
 
-export const TableContainer = observer(
-  ({ costs, getCosts }: TableContainerProps) => {
-    getCosts();
+const getRowColor = (category: CategoryType) => {
+  if (category === 'shopping') return 'red';
+  else if (category === 'bill') return 'blue';
+  else return 'green';
+};
+
+@observer
+export class TableContainer extends React.Component<TableContainerProps, {}> {
+  componentDidMount = () => {
+    this.props.getCosts();
+  };
+  render() {
+    const { costs, getCosts } = this.props;
 
     let displayedCosts: Cost[] = costs;
     if (costs.length < 1) {
@@ -31,11 +42,11 @@ export const TableContainer = observer(
         {
           count: 0,
           chosenItems: [' - - - - - - '],
-          date: ' - - - - - - '
+          date: ' - - - - - - ',
+          category: 'bill'
         }
       ];
     }
-
     return (
       <StyledDataTable stickyRows={1}>
         <StyledDataTableContent>
@@ -47,26 +58,29 @@ export const TableContainer = observer(
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
-            {displayedCosts.map((cost: Cost, index: number) => (
-              <DataTableRow
-                key={index}
-                style={cost.bill ? { color: 'blue' } : { color: 'green' }}
-              >
-                <StyledDataTableCell>
-                  {cost.chosenItems.join(', ')}
-                </StyledDataTableCell>
-                <StyledDataTableCell>{cost.date}</StyledDataTableCell>
-                <StyledDataTableCell alignEnd>
-                  {cost.count + 'zł'}
-                </StyledDataTableCell>
-              </DataTableRow>
-            ))}
+            {displayedCosts.map((cost: Cost, index: number) => {
+              console.log(JSON.stringify(displayedCosts));
+              return (
+                <DataTableRow
+                  key={index}
+                  style={{ color: getRowColor(cost.category) }}
+                >
+                  <StyledDataTableCell>
+                    {cost.chosenItems.join(', ')}
+                  </StyledDataTableCell>
+                  <StyledDataTableCell>{cost.date}</StyledDataTableCell>
+                  <StyledDataTableCell alignEnd>
+                    {cost.count + 'zł'}
+                  </StyledDataTableCell>
+                </DataTableRow>
+              );
+            })}
           </DataTableBody>
         </StyledDataTableContent>
       </StyledDataTable>
     );
   }
-);
+}
 
 const StyledDataTableContent = styled(DataTableContent)`
   width: 100%;

@@ -8,7 +8,7 @@ import { Cost } from '../../../../lib/interfaces';
 import { Typography } from '@rmwc/typography';
 import { ColoredIcon } from './legend/coloredIcon';
 
-const countCosts = (costs: Cost[], bill?: string) => {
+const countCosts = (costs: Cost[], category: string) => {
   let sumOfCosts: number = 0;
   let monthCosts: Cost[] = [];
   const dateNow = String(
@@ -25,14 +25,10 @@ const countCosts = (costs: Cost[], bill?: string) => {
   }
 
   monthCosts.forEach((cost: Cost) => {
-    if (bill) {
-      if (cost.bill) {
-        sumOfCosts += cost.count;
-      }
-    } else {
-      if (!cost.bill) {
-        sumOfCosts += cost.count;
-      }
+    if (category === 'shopping' && cost.category === 'shopping') {
+      sumOfCosts += cost.count;
+    } else if (category === 'bill' && cost.category === 'bill') {
+      sumOfCosts += cost.count;
     }
   });
 
@@ -47,7 +43,7 @@ export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
   <StyledTypography use='subtitle1'>
     This month you spent:
     <ColoredIcon color='green' />
-    {countCosts(costs) + ' zł'}
+    {countCosts(costs, 'shopping') + ' zł'}
     <ColoredIcon color='blue' />
     {countCosts(costs, 'bill') + ' zł'}
   </StyledTypography>

@@ -13,7 +13,7 @@ const drawerItems = [
     title: "Add new Item"
   },
   {
-    action: 'AddBillDialog',
+    action: 'AddOtherDialog',
     icon: 'note_add',
     iconColor: '#0400ff',
     title: "Add new bill"

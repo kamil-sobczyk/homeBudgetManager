@@ -1,5 +1,7 @@
 import { Store } from './mobx/rootStore';
 
+export type CategoryType = 'shopping' | 'bill' | 'health' | 'car';
+
 export interface Item {
   name: string;
   checked: boolean;
@@ -18,7 +20,7 @@ export interface Cost {
   count: number;
   chosenItems: string[];
   date: string;
-  bill?: boolean;
+  category: CategoryType;
 }
 
 export interface StoreProps {

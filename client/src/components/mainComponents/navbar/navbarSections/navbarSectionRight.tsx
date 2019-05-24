@@ -17,7 +17,7 @@ const navbarSectionRightItems = [
   },
   {
     icon: 'note_add',
-    action: 'AddBillDialog'
+    action: 'AddOtherDialog'
   }
 ];
 

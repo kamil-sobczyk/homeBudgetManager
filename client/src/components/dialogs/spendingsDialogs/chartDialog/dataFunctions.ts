@@ -29,7 +29,7 @@ const getBillsCount = (costs: Cost[], month: string): number => {
   let sumOfBills: number = 0;
 
   costs.forEach(cost => {
-    if (cost.bill) {
+    if (cost.category === 'bill') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfBills += cost.count;
       }
@@ -43,7 +43,7 @@ const getShoppingCount = (costs: Cost[], month: string): number => {
   let sumOfShoppings: number = 0;
 
   costs.forEach(cost => {
-    if (!cost.bill) {
+    if (cost.category === 'shopping') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfShoppings += cost.count;
       }

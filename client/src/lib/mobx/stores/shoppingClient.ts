@@ -32,7 +32,7 @@ export class ShoppingClient {
           minute: '2-digit'
         })
       ),
-      bill: true
+      category: 'bill'
     };
 
     this.store.costs.unshift(billCost);
@@ -79,7 +79,8 @@ export class ShoppingClient {
           hour: '2-digit',
           minute: '2-digit'
         })
-      )
+      ),
+      category: 'shopping'
     };
     cost.count = Math.round(this.count);
     this.count = 0;

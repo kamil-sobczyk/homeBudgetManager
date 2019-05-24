@@ -10,7 +10,7 @@ import { Item } from '../../../lib/interfaces';
 
 import { StyledDialogTitle } from './spendingsDialog';
 
-interface AddBillDialogProps {
+interface AddOtherDialogProps {
   addBill: () => void;
   changeNewBill: (event: React.FormEvent<EventTarget>) => void;
   changeCounter: (event: React.FormEvent<EventTarget>) => void;
@@ -19,15 +19,15 @@ interface AddBillDialogProps {
   count: number;
 }
 
-export const AddBillDialog = observer(
+export const AddOtherDialog = observer(
   ({
     addBill,
     changeNewBill,
     changeCounter,
     setVisibleDialog,
     visibleDialog
-  }: AddBillDialogProps) => (
-    <Dialog open={visibleDialog === 'AddBillDialog'}>
+  }: AddOtherDialogProps) => (
+    <Dialog open={visibleDialog === 'AddOtherDialog'}>
       <StyledDialogTitle>Add new bill</StyledDialogTitle>
       <TextField
         defaultValue={''}

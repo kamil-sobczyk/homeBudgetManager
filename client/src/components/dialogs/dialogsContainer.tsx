@@ -10,7 +10,7 @@ import { FinishShoppingDialog } from './spendingsDialogs/finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './infoDialogs/failDialog';
-import { AddBillDialog } from './spendingsDialogs/addBillDialog';
+import { AddOtherDialog } from './spendingsDialogs/addOtherDialog';
 import { AboutDialog } from './infoDialogs/aboutDialog';
 import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
 
@@ -94,8 +94,8 @@ export const DialogsContainer = observer(
           count={shoppingClient.count}
         />
       )}
-      {visibilityClient.visibleDialog === 'AddBillDialog' && (
-        <AddBillDialog
+      {visibilityClient.visibleDialog === 'AddOtherDialog' && (
+        <AddOtherDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
           addBill={shoppingClient.addBill}
