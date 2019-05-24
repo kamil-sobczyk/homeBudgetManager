@@ -89,8 +89,6 @@ const monthNumbers = months.map((month, index) =>
   ('0' + (index + 1)).slice(-2)
 );
 
-console.log('mmmm', monthNumbers);
-
 const getBillsCount = (costs: Cost[], month: string): number => {
   let sumOfBills: number = 0;
 
@@ -119,7 +117,7 @@ const getShoppingCount = (costs: Cost[], month: string): number => {
   return sumOfShoppings;
 };
 
-interface Spendings {
+interface MonthSpendings {
   bills: number;
   shopping: number;
   total?: number;
@@ -135,13 +133,15 @@ const splitCosts = (costs: Cost[]): [] => {
     })
   );
 
-monthSpendings.forEach((month: Spendings) => {
-    month.total = month.bills + month.shopping
-});
+  monthSpendings.forEach(
+    (month: MonthSpendings, index: number) =>
+      (month.total = month.bills + month.shopping)
+  );
 
-  console.log(monthSpendings);
+  const monthsWithSpendings = monthSpendings.filter((month: MonthSpendings) => month.total !== 0);
 
-  return monthSpendings;
+  console.log(monthsWithSpendings);
+  return monthsWithSpendings;
 };
 
 const getMonth = (stringDate: string): string =>
