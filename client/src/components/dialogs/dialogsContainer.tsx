@@ -12,7 +12,7 @@ import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './failDialog';
 import { AddBillDialog } from './addBillDialog';
 import { AboutDialog } from './aboutDialog';
-import { ChartDialog } from './chartDialog';
+import { ChartDialog } from './chartDialog/chartDialog';
 
 interface DialogsContainerProps {
   items: Item[];
