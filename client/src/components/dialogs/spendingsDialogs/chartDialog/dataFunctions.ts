@@ -34,19 +34,19 @@ const getMonthCostCount = (
   let sumOfCosts: number = 0;
 
   costs.forEach(cost => {
-    if ((cost.category && category) === 'bill') {
+    if (cost.category === 'bill' && category === 'bill') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
       }
-    } else if ((cost.category && category) === 'shopping') {
+    } else if (cost.category === 'shopping' && category === 'shopping') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
       }
-    } else if ((cost.category && category) === 'health') {
+    } else if (cost.category === 'health' && category === 'health') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
       }
-    } else if ((cost.category && category) === 'car') {
+    } else if (cost.category === 'car' && category === 'car') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
       }
