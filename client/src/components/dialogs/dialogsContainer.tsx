@@ -11,6 +11,7 @@ import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './failDialog';
 import { AddBillDialog } from './addBillDialog';
 import { AboutDialog } from './aboutDialog';
+import { ChartDialog } from './chartDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -103,6 +104,13 @@ export const DialogsContainer = observer(
         <AboutDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
+        />
+      )}
+      {visibilityClient.visibleDialog === 'ChartDialog' && (
+        <ChartDialog
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+          costs={costs}
         />
       )}
     </>
