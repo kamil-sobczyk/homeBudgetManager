@@ -34,6 +34,12 @@ export class Selected extends React.Component<SelectedProps, {}> {
 
     return (
       <StyledContainer>
+        <StyledButtonsContainer>
+          <StyledFinishShoppingButton
+            onClick={() => setVisibleDialog('FinishShoppingDialog')}
+            icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
+          />
+        </StyledButtonsContainer>
         <Droppable droppableId='droppable'>
           {provided => (
             <ProvidedSelected
@@ -45,12 +51,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
             />
           )}
         </Droppable>
-        <StyledButtonsContainer>
-          <StyledFinishShoppingButton
-            onClick={() => setVisibleDialog('FinishShoppingDialog')}
-            icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
-          />
-        </StyledButtonsContainer>
       </StyledContainer>
     );
   }
@@ -58,6 +58,5 @@ export class Selected extends React.Component<SelectedProps, {}> {
 
 const StyledFinishShoppingButton = styled(IconButton)`
   color: #0d49aa;
-  margin-top: 15px;
   padding: 0;
 `;

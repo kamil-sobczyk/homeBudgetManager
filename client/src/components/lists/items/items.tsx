@@ -31,6 +31,12 @@ export class Items extends React.Component<ItemsProps, {}> {
 
     return (
       <StyledContainer>
+        <StyledButtonsContainer>
+          <StyledAddItemIconButton
+            onClick={() => setVisibleDialog('AddItemDialog')}
+            icon={{ icon: 'add_circle', size: 'xlarge' }}
+          />
+        </StyledButtonsContainer>
         <Droppable droppableId='droppable2'>
           {providedDroppable2 => (
             <ProvidedItems
@@ -41,12 +47,6 @@ export class Items extends React.Component<ItemsProps, {}> {
             />
           )}
         </Droppable>
-        <StyledButtonsContainer>
-          <StyledAddItemIconButton
-            onClick={() => setVisibleDialog('AddItemDialog')}
-            icon={{ icon: 'add_circle', size: 'xlarge' }}
-          />
-        </StyledButtonsContainer>
       </StyledContainer>
     );
   }
@@ -60,6 +60,5 @@ export const StyledContainer = styled.div`
 
 const StyledAddItemIconButton = styled(IconButton)`
   color: #4cad4f;
-  margin-top: 15px;
   padding: 0;
 `;
