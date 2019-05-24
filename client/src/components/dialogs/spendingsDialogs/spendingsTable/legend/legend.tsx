@@ -17,4 +17,5 @@ const StyledLegendContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: baseline;
+  height: 40px;
 `;
