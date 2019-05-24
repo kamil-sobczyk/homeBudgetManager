@@ -21,13 +21,9 @@ interface ItemsProps {
   items: Item[];
 }
 
-@observer
-export class Items extends React.Component<ItemsProps, {}> {
-  componentDidMount = () => {
-    this.props.getItems();
-  };
-  render() {
-    const { items, setVisibleDialog, setActiveItem } = this.props;
+export const Items = observer(
+  ({ items, setVisibleDialog, setActiveItem, getItems }: ItemsProps) => {
+    getItems();
 
     return (
       <StyledContainer>
@@ -50,7 +46,7 @@ export class Items extends React.Component<ItemsProps, {}> {
       </StyledContainer>
     );
   }
-}
+);
 
 export const StyledContainer = styled.div`
   min-height: 50px;
