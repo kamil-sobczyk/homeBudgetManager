@@ -65,33 +65,134 @@ const store = {
       }
     ],
     costs: [
-      { chosenItems: [], count: 1, date: "24.06.2019, 15:01" },
-      { chosenItems: ["Potatoes"], count: 3, date: "24.06.2019, 14:57" },
-      { chosenItems: ["sds"], count: 2, date: "24.06.2019, 14:57", bill: true },
-      { chosenItems: ["Aples"], count: 3, date: "24.06.2019, 14:57" },
-      { chosenItems: ["sds"], count: 2, date: "24.06.2019, 14:59", bill: true },
-      { chosenItems: ["Rice"], count: 1, date: "24.06.2019, 14:57" },
-      { chosenItems: [], count: 3, date: "24.06.2019, 14:57" },
+      {
+        chosenItems: [],
+        count: 1,
+        date: "24.06.2019, 15:01",
+        category: "bill"
+      },
+      {
+        chosenItems: ["Potatoes"],
+        count: 3,
+        date: "24.06.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["sds"],
+        count: 2,
+        date: "24.06.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["Aples"],
+        count: 3,
+        date: "24.06.2019, 14:57",
+        category: "bill"
+      },
+      {
+        chosenItems: ["sds"],
+        count: 2,
+        date: "24.06.2019, 14:59",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["Rice"],
+        count: 1,
+        date: "24.06.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: [],
+        count: 3,
+        date: "24.06.2019, 14:57",
+        category: "bill"
+      },
 
-      { chosenItems: [], count: 1, date: "24.05.2019, 15:01" },
-      { chosenItems: ["Potatoes"], count: 3, date: "24.05.2019, 14:57" },
-      { chosenItems: ["sds"], count: 2, date: "24.05.2019, 14:57", bill: true },
-      { chosenItems: ["Aples"], count: 3, date: "24.05.2019, 14:57" },
-      { chosenItems: ["sds"], count: 2, date: "24.05.2019, 14:59", bill: true },
-      { chosenItems: ["Rice"], count: 1, date: "24.05.2019, 14:57" },
-      { chosenItems: [], count: 3, date: "24.05.2019, 14:57", bill: true },
+      {
+        chosenItems: [],
+        count: 1,
+        date: "24.05.2019, 15:01",
+        category: "bill"
+      },
+      {
+        chosenItems: ["Potatoes"],
+        count: 3,
+        date: "24.05.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["sds"],
+        count: 2,
+        date: "24.05.2019, 14:57",
+        category: "bill"
+      },
+      {
+        chosenItems: ["Aples"],
+        count: 3,
+        date: "24.05.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["sds"],
+        count: 2,
+        date: "24.05.2019, 14:59",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["Rice"],
+        count: 1,
+        date: "24.05.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: [],
+        count: 3,
+        date: "24.05.2019, 14:57",
+        category: "bill"
+      },
 
-      { chosenItems: [], count: 1, date: "24.04.2019, 15:01" },
-      { chosenItems: ["Potatoes"], count: 3, date: "24.04.2019, 14:57" },
-      { chosenItems: ["sds"], count: 2, date: "24.04.2019, 14:57", bill: true },
-      { chosenItems: ["Aples"], count: 3, date: "24.04.2019, 14:57" },
-      { chosenItems: ["sds"], count: 2, date: "24.04.2019, 14:59", bill: true },
-      { chosenItems: ["Rice"], count: 1, date: "24.04.2019, 14:57" },
-      { chosenItems: [], count: 3, date: "24.04.2019, 14:57" , bill: true},
-
-
-   
-
+      {
+        chosenItems: [],
+        count: 1,
+        date: "24.04.2019, 15:01",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["Potatoes"],
+        count: 3,
+        date: "24.04.2019, 14:57",
+        category: "bill"
+      },
+      {
+        chosenItems: ["sds"],
+        count: 2,
+        date: "24.04.2019, 14:57",
+        category: "shopping"
+      },
+      {
+        chosenItems: ["Aples"],
+        count: 3,
+        date: "24.04.2019, 14:57",
+        category: "bill"
+      },
+      {
+        chosenItems: ["sds"],
+        count: 2,
+        date: "24.04.2019, 14:59",
+        category: "bill"
+      },
+      {
+        chosenItems: ["Rice"],
+        count: 1,
+        date: "24.04.2019, 14:57",
+        category: "bill"
+      },
+      {
+        chosenItems: [],
+        count: 3,
+        date: "24.04.2019, 14:57",
+        category: "shopping"
+      }
     ]
   }
 };
