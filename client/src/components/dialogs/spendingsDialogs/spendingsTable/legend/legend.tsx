@@ -18,4 +18,5 @@ const StyledLegendContainer = styled.div`
   justify-content: center;
   align-items: baseline;
   height: 40px;
+  overflow: hidden;
 `;

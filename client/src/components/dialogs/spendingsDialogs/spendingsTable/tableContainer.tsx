@@ -37,7 +37,7 @@ export const TableContainer = observer(
     }
 
     return (
-      <StyledDataTable>
+      <StyledDataTable stickyRows={1}>
         <StyledDataTableContent>
           <DataTableHead>
             <DataTableRow>
