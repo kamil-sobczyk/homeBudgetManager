@@ -8,18 +8,7 @@ import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
 import { StyledDialogTitle } from '../spendingsDialog/spendingsDialog';
-
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  BarChart,
-  Legend,
-  Bar
-} from 'recharts';
-
-import { splitCosts } from './dataFunctions';
+import { Chart } from './chart';
 
 interface ChartDialogProps {
   costs: Cost[];
@@ -30,11 +19,8 @@ interface ChartDialogProps {
 
 @observer
 export class ChartDialog extends React.Component<ChartDialogProps, {}> {
-  componentDidMount = () => {
-    this.props.getCosts();
-  };
   render() {
-    const { setVisibleDialog, visibleDialog, costs } = this.props;
+    const { setVisibleDialog, visibleDialog, costs, getCosts } = this.props;
 
     return (
       <Dialog
@@ -46,16 +32,7 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
           Your spendings
         </StyledDialogTitle>
         <DialogContent id='alert-dialog-description'>
-          <BarChart width={730} height={250} data={splitCosts(costs)}>
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey='bills' fill='blue' />
-            <Bar dataKey='shopping' fill='green' />
-            <Bar dataKey='total' fill='red' />
-          </BarChart>
+          <Chart costs={costs} getCosts={getCosts} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
@@ -66,14 +43,3 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
     );
   }
 }
-
-// export const ChartDialog = observer(
-//   ({ setVisibleDialog, visibleDialog, costs }: ChartDialogProps) => {
-//     console.log(JSON.stringify(costs));
-//     console.log(visibleDialog)
-
-//     return (
-
-//     );
-//   }
-// );
