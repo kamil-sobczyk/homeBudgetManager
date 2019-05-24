@@ -58,6 +58,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
 
 const StyledFinishShoppingButton = styled(IconButton)`
   color: #0d49aa;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 0;
 `;

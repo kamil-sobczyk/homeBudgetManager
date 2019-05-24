@@ -34,7 +34,6 @@ export class ProvidedSelected extends React.Component<
       <List
         innerRef={provided.innerRef}
         {...provided.droppableProps}
-        style={{ minHeight: '300px' }}
       >
         {selected.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
