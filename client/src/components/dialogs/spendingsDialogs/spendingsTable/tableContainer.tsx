@@ -81,7 +81,7 @@ const StyledDataTableHeadCell = styled(DataTableHeadCell)`
 `;
 
 const StyledDataTable = styled(DataTable)`
-  min-width: 350px;
-  min-height: 400px;
+  width: 400px;
+  height: 500px;
   overflow: hidden;
 `;
