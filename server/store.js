@@ -81,7 +81,7 @@ const store = {
         chosenItems: ["sds"],
         count: 2,
         date: "24.06.2019, 14:57",
-        category: "shopping"
+        category: "health"
       },
       {
         chosenItems: ["Aples"],
@@ -99,7 +99,7 @@ const store = {
         chosenItems: ["Rice"],
         count: 1,
         date: "24.06.2019, 14:57",
-        category: "shopping"
+        category: "car"
       },
       {
         chosenItems: [],
@@ -118,7 +118,7 @@ const store = {
         chosenItems: ["Potatoes"],
         count: 3,
         date: "24.05.2019, 14:57",
-        category: "shopping"
+        category: "car"
       },
       {
         chosenItems: ["sds"],
@@ -130,7 +130,7 @@ const store = {
         chosenItems: ["Aples"],
         count: 3,
         date: "24.05.2019, 14:57",
-        category: "shopping"
+        category: "health"
       },
       {
         chosenItems: ["sds"],
@@ -142,7 +142,7 @@ const store = {
         chosenItems: ["Rice"],
         count: 1,
         date: "24.05.2019, 14:57",
-        category: "shopping"
+        category: "health"
       },
       {
         chosenItems: [],
