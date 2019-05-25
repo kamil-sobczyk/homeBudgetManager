@@ -85,7 +85,7 @@ export const splitCosts = (costs: Cost[]): [] => {
   );
 
   monthSpendings.forEach(
-    (month: MonthSpendings, index: number): number =>
+    (month: MonthSpendings): number =>
       (month.total = month.bills + month.shopping)
   );
 
