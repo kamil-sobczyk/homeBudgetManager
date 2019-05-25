@@ -102,7 +102,6 @@ export const DialogsContainer = observer(
           changeNewSpendingName={shoppingClient.changeNewSpendingName}
           changeNewSpendingNameCounter={shoppingClient.changeNewSpendingNameCounter}
           count={shoppingClient.count}
-          categoryName={shoppingClient.categoryName}
         />
       )}
       {visibilityClient.visibleDialog === 'FailDialog' && (

@@ -1,35 +1,23 @@
 import * as React from 'react';
 
-import Select from 'react-select';
+import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
 
 import { Button } from '@rmwc/button';
-import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
+import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
+import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from './spendingsDialog';
 
-import { CategoryType } from '../../../lib/interfaces';
-import styled from 'styled-components';
-
-export interface SelectValue {
-  value: CategoryType;
-  label: string;
-}
-
-const selectValues = [
-  { value: 'bill', label: 'Bill' },
-  { value: 'car', label: 'Car exploatation' },
-  { value: 'health', label: 'Health care' }
-];
+const selectValues = ['Bill', 'Car exploatation', 'Health care'];
 
 interface AddOtherDialogProps {
   addNewSpending: () => void;
-  changeNewSpendingName: (event: SelectValue) => void;
+  changeNewSpendingName: (event: React.FormEvent<any>) => void;
   changeNewSpendingNameCounter: (event: React.FormEvent<EventTarget>) => void;
   setVisibleDialog: (dialog?: string) => string;
-  categoryName: SelectValue;
   visibleDialog: string;
   count: number;
 }
@@ -41,15 +29,12 @@ export const AddOtherDialog = observer(
     changeNewSpendingNameCounter,
     setVisibleDialog,
     visibleDialog,
-    categoryName
   }: AddOtherDialogProps) => {
     return (
       <Dialog open={visibleDialog === 'AddOtherDialog'}>
         <StyledDialogTitle>Add other</StyledDialogTitle>
         <StyledSelect
-          value={categoryName}
-          onChange={(selectValue: 
-            SelectValue) => changeNewSpendingName(selectValue)}
+          onChange={(e: React.FormEvent<any>) => changeNewSpendingName(e)}
           options={selectValues}
         />
         <TextField
@@ -73,5 +58,5 @@ export const AddOtherDialog = observer(
 );
 
 const StyledSelect = styled(Select)`
-  height: 100px;
+  /* height: 100px; */
 `;

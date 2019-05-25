@@ -7,7 +7,6 @@ import { sortItemsByName } from '../../reorderFunctions';
 import { Item } from '../../interfaces';
 
 import { observable } from 'mobx';
-import { SelectValue } from '../../../components/dialogs/spendingsDialogs/addOtherDialog';
 
 export class ShoppingClient {
   store: Store;
@@ -19,7 +18,6 @@ export class ShoppingClient {
   @observable count: number = 0;
   @observable date: Date = new Date();
   @observable category: CategoryType = 'bill';
-  @observable categoryName: SelectValue = { label: 'Car Exploatation', value: 'car' };
 
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
@@ -44,11 +42,18 @@ export class ShoppingClient {
     this.store.visibilityClient.setVisibleDialog();
   };
 
-  changeNewSpendingName = (selectValue: SelectValue): void => {
-    console.log(typeof event)
-    this.chosenItems[0] = selectValue.value;
-    this.category = selectValue.value;
-    this.categoryName = selectValue;
+  changeNewSpendingName = (event: React.FormEvent<any>): void => {
+    const target = event.target as HTMLInputElement;
+    let chosenValue: CategoryType;
+
+    if (target.value === "Bill") chosenValue = 'bill';
+    else if (target.value === 'Health care') chosenValue = 'health';
+    else if (target.value === 'Car exploatation') chosenValue = 'car';
+    else chosenValue = 'bill';
+    
+    this.chosenItems[0] = chosenValue;
+    this.category = chosenValue;
+
   };
 
   changeNewSpendingNameCounter = (
