@@ -8,11 +8,6 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
-    "@rmwc/types": "5.5.1",
-    "@types/react-beautiful-dnd": "^11.0.2",
-    "@types/react-select": "^2.0.19",
-    "@types/recharts": "^1.1.16",
-    "@uirouter/react": "0.8.2",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "material-components-web": "^2.1.0",
@@ -29,9 +24,6 @@
     "styled-components": "3.3.3"
   },
   "devDependencies": {
-    "@types/react": "16.8.11",
-    "@types/react-dom": "16.8.4",
-    "@types/styled-components": "^4.1.15",
     "babel-eslint": "9.0.0",
     "babel-loader": "7.1.5",
     "clean-webpack-plugin": "0.1.19",
