@@ -44,10 +44,11 @@ export class ShoppingClient {
     this.store.visibilityClient.setVisibleDialog();
   };
 
-  changeNewSpendingName = (event: any): void => {
-    this.chosenItems[0] = event.value;
-    this.category = event.value;
-    this.categoryName = event;
+  changeNewSpendingName = (selectValue: SelectValue): void => {
+    console.log(typeof event)
+    this.chosenItems[0] = selectValue.value;
+    this.category = selectValue.value;
+    this.categoryName = selectValue;
   };
 
   changeNewSpendingNameCounter = (

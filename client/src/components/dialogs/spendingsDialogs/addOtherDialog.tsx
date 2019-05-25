@@ -11,9 +11,10 @@ import { TextField } from '@rmwc/textfield';
 import { StyledDialogTitle } from './spendingsDialog';
 
 import { CategoryType } from '../../../lib/interfaces';
+import styled from 'styled-components';
 
 export interface SelectValue {
-  value: string;
+  value: CategoryType;
   label: string;
 }
 
@@ -25,7 +26,7 @@ const selectValues = [
 
 interface AddOtherDialogProps {
   addNewSpending: () => void;
-  changeNewSpendingName: (event: React.FormEvent<EventTarget>) => void;
+  changeNewSpendingName: (event: SelectValue) => void;
   changeNewSpendingNameCounter: (event: React.FormEvent<EventTarget>) => void;
   setVisibleDialog: (dialog?: string) => string;
   categoryName: SelectValue;
@@ -44,10 +45,11 @@ export const AddOtherDialog = observer(
   }: AddOtherDialogProps) => {
     return (
       <Dialog open={visibleDialog === 'AddOtherDialog'}>
-        <StyledDialogTitle>Add new bill</StyledDialogTitle>
-        <Select
+        <StyledDialogTitle>Add other</StyledDialogTitle>
+        <StyledSelect
           value={categoryName}
-          onChange={(e: any) => changeNewSpendingName(e)}
+          onChange={(selectValue: 
+            SelectValue) => changeNewSpendingName(selectValue)}
           options={selectValues}
         />
         <TextField
@@ -69,3 +71,7 @@ export const AddOtherDialog = observer(
     );
   }
 );
+
+const StyledSelect = styled(Select)`
+  height: 100px;
+`;
