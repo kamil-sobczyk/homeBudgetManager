@@ -28,14 +28,16 @@ export const AddOtherDialog = observer(
     changeNewSpendingName,
     changeNewSpendingNameCounter,
     setVisibleDialog,
-    visibleDialog,
+    visibleDialog
   }: AddOtherDialogProps) => {
     return (
       <Dialog open={visibleDialog === 'AddOtherDialog'}>
         <StyledDialogTitle>Add other</StyledDialogTitle>
         <StyledSelect
+          label='Spending type'
           onChange={(e: React.FormEvent<any>) => changeNewSpendingName(e)}
           options={selectValues}
+          required
         />
         <TextField
           label='Cost'
