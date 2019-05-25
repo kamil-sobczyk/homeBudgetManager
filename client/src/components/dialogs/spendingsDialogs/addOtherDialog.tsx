@@ -51,12 +51,6 @@ export const AddOtherDialog = observer(
           options={selectValues}
         />
         <TextField
-          defaultValue={''}
-          label='Bill name'
-          name='name'
-          onChange={e => changeNewSpendingName(e)}
-        />
-        <TextField
           label='Cost'
           defaultValue={String(0)}
           onChange={e => changeNewSpendingNameCounter(e)}

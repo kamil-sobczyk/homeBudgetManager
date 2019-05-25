@@ -19,7 +19,7 @@ export class ShoppingClient {
   @observable count: number = 0;
   @observable date: Date = new Date();
   @observable category: CategoryType = 'bill';
-  @observable categoryName: SelectValue = { label: '', value: '' };
+  @observable categoryName: SelectValue = { label: 'Car Exploatation', value: 'car' };
 
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
