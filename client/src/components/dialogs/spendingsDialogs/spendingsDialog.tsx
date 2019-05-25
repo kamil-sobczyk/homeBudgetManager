@@ -16,6 +16,7 @@ import { Button } from '@rmwc/button';
 import { TableContainer } from './spendingsTable/tableContainer';
 import { CostsCounter } from './spendingsTable/costsCounter';
 import { Legend } from './spendingsTable/legend/legend';
+import { IconButton } from '@rmwc/icon-button';
 
 interface SpendingsDialogProps {
   setVisibleDialog: (dialog?: string) => string;
@@ -42,6 +43,12 @@ export const SpendingsDialog = observer(
         <CostsCounter costs={costs} />
       </DialogContent>
       <DialogActions>
+        <Button
+          color='primary'
+          icon='bar_chart'
+          onClick={() => setVisibleDialog('ChartDialog')}
+        />
+
         <Button onClick={() => setVisibleDialog()} color='primary'>
           Close
         </Button>

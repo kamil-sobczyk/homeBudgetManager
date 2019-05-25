@@ -1,10 +1,8 @@
-import { CategoryType } from './../../interfaces';
+import { CategoryType, Item } from './../../interfaces';
 import { Store } from '../rootStore';
 import { Cost } from '../../interfaces';
 
 import { sortItemsByName } from '../../reorderFunctions';
-
-import { Item } from '../../interfaces';
 
 import { observable } from 'mobx';
 
