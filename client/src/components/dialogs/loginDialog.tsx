@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import GoogleLogin from 'react-google-login';
 
 import { Dialog, DialogTitle } from '@rmwc/dialog';
 
@@ -36,8 +36,8 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     return (
       <Dialog
         open={visibleDialog === 'LoginDialog'}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
+        aria-labelledby='Google login'
+        aria-describedby='Login with google'
       >
         <DialogTitle>LOGIN WITH GOOGLE ACCOUNT</DialogTitle>
         <StyledLoginContainer

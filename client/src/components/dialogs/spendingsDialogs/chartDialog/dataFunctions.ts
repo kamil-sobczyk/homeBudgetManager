@@ -1,13 +1,29 @@
-import { CategoryType } from './../../../../lib/interfaces';
-import { Cost } from '../../../../lib/interfaces';
+import { CategoryType, Cost } from './../../../../lib/interfaces';
+
+type Month =
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December';
 
 interface MonthSpendings {
+  name: Month;
   bills: number;
   shopping: number;
+  car: number;
+  health: number;
   total?: number;
 }
 
-const months = [
+const months: Month[] = [
   'January',
   'February',
   'March',
@@ -57,7 +73,7 @@ const getMonthCostCount = (
 };
 
 export const splitCosts = (costs: Cost[]): [] => {
-  let monthSpendings: any = [];
+  let monthSpendings: MonthSpendings[] = [];
   months.forEach((month, index) =>
     monthSpendings.push({
       name: month,
@@ -69,13 +85,13 @@ export const splitCosts = (costs: Cost[]): [] => {
   );
 
   monthSpendings.forEach(
-    (month: MonthSpendings, index: number) =>
+    (month: MonthSpendings, index: number): number =>
       (month.total = month.bills + month.shopping)
   );
 
-  const monthsWithSpendings = monthSpendings.filter(
+  const monthsWithSpendings: MonthSpendings[] = monthSpendings.filter(
     (month: MonthSpendings) => month.total !== 0
   );
 
-  return monthsWithSpendings;
+  return monthsWithSpendings as [];
 };
