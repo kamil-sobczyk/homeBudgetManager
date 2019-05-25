@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import styled from 'styled-components';
-
 import { observer } from 'mobx-react';
 
 import { Button } from '@rmwc/button';
@@ -33,7 +31,7 @@ export const AddOtherDialog = observer(
     return (
       <Dialog open={visibleDialog === 'AddOtherDialog'}>
         <StyledDialogTitle>Add other</StyledDialogTitle>
-        <StyledSelect
+        <Select
           label='Spending type'
           onChange={(e: React.FormEvent<any>) => changeNewSpendingName(e)}
           options={selectValues}
@@ -59,6 +57,3 @@ export const AddOtherDialog = observer(
   }
 );
 
-const StyledSelect = styled(Select)`
-  /* height: 100px; */
-`;
