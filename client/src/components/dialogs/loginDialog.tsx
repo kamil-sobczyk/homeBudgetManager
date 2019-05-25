@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import GoogleLogin from 'react-google-login';
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
 import { Dialog, DialogTitle } from '@rmwc/dialog';
 
@@ -29,7 +29,7 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
       }
     };
 
-    const responseGoogleFailure = (response: any) => {
+    const responseGoogleFailure = (response: GoogleLogin) => {
       console.log('failure', response);
     };
 

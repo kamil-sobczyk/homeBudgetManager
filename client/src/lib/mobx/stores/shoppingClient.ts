@@ -40,7 +40,7 @@ export class ShoppingClient {
     this.store.visibilityClient.setVisibleDialog();
   };
 
-  changeNewSpendingName = (event: React.FormEvent<any>): void => {
+  changeNewSpendingName = (event: React.FormEvent): void => {
     const target = event.target as HTMLInputElement;
     let chosenValue: CategoryType;
 
