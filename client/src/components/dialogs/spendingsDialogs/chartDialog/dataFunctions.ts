@@ -38,7 +38,7 @@ const months: Month[] = [
   'December'
 ];
 
-const monthNumbers = months.map((month, index) =>
+const monthNumbers: string[] = months.map((month, index) =>
   ('0' + (index + 1)).slice(-2)
 );
 
@@ -49,7 +49,7 @@ const getMonthCostCount = (
 ): number => {
   let sumOfCosts: number = 0;
 
-  costs.forEach(cost => {
+  costs.forEach((cost: Cost) => {
     if (cost.category === 'bill' && category === 'bill') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
