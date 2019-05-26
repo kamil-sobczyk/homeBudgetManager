@@ -16,6 +16,7 @@ export class ShoppingClient {
   @observable count: number = 0;
   @observable date: Date = new Date();
   @observable category: CategoryType = 'bill';
+  @observable info: string = '';
 
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
@@ -54,7 +55,7 @@ export class ShoppingClient {
 
   };
 
-  changeNewSpendingNameCounter = (
+  changeNewSpendingCounter = (
     event: React.FormEvent<EventTarget>
   ): void => {
     const target = event.target as HTMLInputElement;
@@ -65,6 +66,14 @@ export class ShoppingClient {
       target.value = '0';
       this.count = 0;
     }
+  };
+
+  changeNewSpendingInfo = (
+    event: React.FormEvent<EventTarget>
+  ): void => {
+    const target = event.target as HTMLInputElement;
+
+   this.info = target.value;
   };
 
   finishShopping = (): void => {

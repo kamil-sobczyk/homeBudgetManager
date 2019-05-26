@@ -13,7 +13,7 @@ import { StyledDialogTitle } from './spendingsDialog';
 import { observable } from 'mobx';
 
 interface FinishShoppingDialogProps {
-  changeNewSpendingNameCounter: (event: React.FormEvent<EventTarget>) => void;
+  changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
   setVisibleDialog: (dialog?: string) => string;
   visibleDialog: string;
@@ -29,7 +29,7 @@ export class FinishShoppingDialog extends React.Component<
 
   render() {
     const {
-      changeNewSpendingNameCounter,
+      changeNewSpendingCounter,
       finishShopping,
       setVisibleDialog,
       visibleDialog
@@ -50,7 +50,7 @@ export class FinishShoppingDialog extends React.Component<
           <TextField
             label='Amount'
             defaultValue={String(0)}
-            onChange={e => changeNewSpendingNameCounter(e)}
+            onChange={e => changeNewSpendingCounter(e)}
             type='number'
             required
           />
