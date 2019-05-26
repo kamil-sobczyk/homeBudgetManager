@@ -33,7 +33,8 @@ export class ShoppingClient {
           minute: '2-digit'
         })
       ),
-      category: this.category
+      category: this.category,
+     info: this.info.length > 0 ? this.info : undefined
     };
 
     this.store.costs.unshift(billCost);

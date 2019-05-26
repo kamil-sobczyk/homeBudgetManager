@@ -21,6 +21,7 @@ export interface Cost {
   chosenItems: string[];
   date: string;
   category: CategoryType;
+  info?: string | undefined;
 }
 
 export interface StoreProps {
