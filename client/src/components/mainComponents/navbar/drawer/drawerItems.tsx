@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { List, ListItem } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
+
+import { GoogleLogout } from 'react-google-login';
+
 const drawerItems = [
   {
     action: 'AddItemDialog',
@@ -54,7 +57,19 @@ export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
             <StyledDrawerEmptyItem />
           </StyledDrawerItemContainer>
         ))}
+        <StyledDrawerItemContainer>
+
+        <ListItem>
+        <GoogleLogout
+        clientId='21462024369-kc67gih727cs3gctmvfe5iede4t9sdqe.apps.googleusercontent.com'
+        buttonText="Logout"
+        onLogoutSuccess={()=> console.log("logged out")}
+        // onLogoutFailure={()=> console.log('failed')}
+      />
+      </ListItem>
+      </StyledDrawerItemContainer>
       </List>
+
     );
   }
 }
