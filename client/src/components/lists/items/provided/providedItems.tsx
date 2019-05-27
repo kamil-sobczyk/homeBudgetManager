@@ -21,6 +21,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   render() {
     const { provided, setVisibleDialog, items, setActiveItem } = this.props;
 
+    console.log(items);
+
     return (
       <List innerRef={provided.innerRef}>
         {items.map((item, index) => (

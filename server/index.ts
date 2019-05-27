@@ -2,227 +2,55 @@ const store = require("./store");
 const mongo = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017";
 const mongoose = require("mongoose");
+const userSchema = require('./data/models/user')
 
-mongoose
-  .connect(url, (err, db) => {
-    if (err) {
-      console.log('Err', err)
-    } else {
-      console.log("MongoDB connected…");
-      const collection = db.collection('users')
-      
-    }
-  })
-  .catch(err => console.log(err));
+mongoose.connect(url);
 
-// mongo.connect(url, (err, client) => {
-//   if (err) {
-//     console.error(err)
-//     return
-//   } else {
-//     const db = client.db('users')
-//     const collection = db.collection('102234771401894238200')
-//     collection.insertOne({
-//       items: [
-//         {
-//           name: "Bread",
-//           info: "Buy in Lidl",
-//           id: "sdfsdfsadfsdfdsf",
-//           checked: false
-//         },
-//         {
-//           name: "Cola",
-//           info: "",
-//           id: "gfvfsddwed",
-//           checked: false
-//         },
-//         {
-//           name: "Milk",
-//           info: "Buy in Tesco",
-//           id: "324rijdsojfddsaoid",
-//           checked: false
-//         },
-//         {
-//           name: "Beer",
-//           info: "",
-//           id: "fdswefi343fdsdf",
-//           checked: false
-//         },
-//         {
-//           name: "Bananas",
-//           info: "10pcs",
-//           id: "fdswefi3ddddddddddd",
-//           checked: false
-//         }
-//       ],
-//       selected: [
-//         {
-//           name: "Ham",
-//           info: "In slices",
-//           id: "43rpijdskjfna",
-//           checked: false
-//         },
-//         {
-//           name: "Rice",
-//           info: "",
-//           id: "e3rijfisdnc.kas3",
-//           checked: false
-//         },
-//         {
-//           name: "Potatoes",
-//           info: "Buy in Tesco",
-//           id: "43ifpjsdljnfew33",
-//           checked: false
-//         },
-//         {
-//           name: "Aples",
-//           info: "3kg",
-//           id: "ekflkdsdsaljd",
-//           checked: false
-//         },
-//         {
-//           name: "Beef",
-//           info: "1kg",
-//           id: "frefp43ifjdsfs",
-//           checked: false
-//         }
-//       ],
-//       costs: [
-//         {
-//           chosenItems: [],
-//           count: 1,
-//           date: "24.06.2019, 15:01",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["Potatoes"],
-//           count: 3,
-//           date: "24.06.2019, 14:57",
-//           category: "shopping"
-//         },
-//         {
-//           chosenItems: ["sds"],
-//           count: 2,
-//           date: "24.06.2019, 14:57",
-//           category: "health"
-//         },
-//         {
-//           chosenItems: ["Aples"],
-//           count: 3,
-//           date: "24.06.2019, 14:57",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["sds"],
-//           count: 2,
-//           date: "24.06.2019, 14:59",
-//           category: "shopping"
-//         },
-//         {
-//           chosenItems: ["Rice"],
-//           count: 1,
-//           date: "24.06.2019, 14:57",
-//           category: "car"
-//         },
-//         {
-//           chosenItems: [],
-//           count: 3,
-//           date: "24.06.2019, 14:57",
-//           category: "bill"
-//         },
+const db = mongoose.connection;
+const users = db.collection("users");
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+  console.log("mongo connected");
+});
 
-//         {
-//           chosenItems: [],
-//           count: 1,
-//           date: "24.05.2019, 15:01",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["Potatoes"],
-//           count: 3,
-//           date: "24.05.2019, 14:57",
-//           category: "car"
-//         },
-//         {
-//           chosenItems: ["sds"],
-//           count: 2,
-//           date: "24.05.2019, 14:57",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["Aples"],
-//           count: 3,
-//           date: "24.05.2019, 14:57",
-//           category: "health"
-//         },
-//         {
-//           chosenItems: ["sds"],
-//           count: 2,
-//           date: "24.05.2019, 14:59",
-//           category: "shopping"
-//         },
-//         {
-//           chosenItems: ["Rice"],
-//           count: 1,
-//           date: "24.05.2019, 14:57",
-//           category: "health"
-//         },
-//         {
-//           chosenItems: [],
-//           count: 3,
-//           date: "24.05.2019, 14:57",
-//           category: "bill"
-//         },
+  const User = mongoose.model("User", userSchema);
 
-//         {
-//           chosenItems: [],
-//           count: 1,
-//           date: "24.04.2019, 15:01",
-//           category: "shopping"
-//         },
-//         {
-//           chosenItems: ["Potatoes"],
-//           count: 3,
-//           date: "24.04.2019, 14:57",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["sds"],
-//           count: 2,
-//           date: "24.04.2019, 14:57",
-//           category: "shopping"
-//         },
-//         {
-//           chosenItems: ["Aples"],
-//           count: 3,
-//           date: "24.04.2019, 14:57",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["sds"],
-//           count: 2,
-//           date: "24.04.2019, 14:59",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: ["Rice"],
-//           count: 1,
-//           date: "24.04.2019, 14:57",
-//           category: "bill"
-//         },
-//         {
-//           chosenItems: [],
-//           count: 3,
-//           date: "24.04.2019, 14:57",
-//           category: "shopping"
-//         }
-//       ]
-//     }, (err, result) => {
-// // console.log('result', JSON.stringify(result.ops));
-//     })
-//   }
+  const me = new User({
+    id: "102234771401894238200",
+    items: [
+      {
+        name: "Bread",
+        info: "Buy in Lidl",
+        id: "sdfsdfsadfsdfdsf",
+        checked: false
+      }
+    ],
+    selected: [
+      {
+        name: "Aples",
+        info: "3kg",
+        id: "ekflkdsdsaljd",
+        checked: false
+      }
+    ],
+    costs: [
+      {
+        chosenItems: ["Potatoes"],
+        count: 3,
+        date: "24.06.2019, 14:57",
+        category: "shopping"
+      }
+    ]
+  });
 
-// })
+  users.insertOne(me).then(res => {
+    // console.log(res)
+    return res;
+  });
+
+  module.exports = {User};
+
+
 
 const appRouter = app => {
   app
@@ -230,12 +58,21 @@ const appRouter = app => {
     .get((req, res) => {
       sortItemsByName(req.headers.id);
 
-      mongoose
-        .connect(url)
-        .then(() => console.log("MongoDB connected…"))
-        .catch(err => console.log(err));
 
-      res.status(200).send(store[req.headers.id].items);
+
+User.find({id: req.headers.id}, async (err, resp) => {
+// console.log(resp[0]);
+await res.status(200).send(store[resp[0]].items);
+await console.log(resp[0]);
+
+})
+
+
+        // object of all the users
+
+ 
+      // res.status(200).send(store[req.headers.id].items);
+      // res.status(200).send(store[req.headers.id].items);
     })
     .post((req, res) => {
       store[req.headers.id].items.push(req.body.item);
