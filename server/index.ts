@@ -1,29 +1,5 @@
 const store = require('./store');
 
-const userService = require("./users/user.service");
-
-
-const authenticate = (req, res, next) => {
-  userService
-    .authenticate(req.body)
-    .then(user => {
-      console.log(user);
-      user
-        ? res.json(user)
-        : res.status(400).json({
-            message: "Username or passghghgghghghghword is incorrect"
-          });
-    })
-    .catch(err => next(err));
-};
-
-const getAll = (req, res, next) => {
-  userService
-    .getAll()
-    .then(users => res.json(users))
-    .catch(err => next(err));
-};
-
 const sortItemsByName = id =>
   store[id].items.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -37,8 +13,6 @@ const sortSelectedByCheckedValue = id => {
 };
 
 const appRouter = app => {
-  app.get("/", getAll);
-  app.post("/authenticate", authenticate);
   app
     .route("/store/items")
     .get((req, res) => {
