@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const routes = require("./index.ts");
 const app = express();
 const cors = require("cors");
+const fastify = require('fastify')({  logger: true})
+
 
 const store = require('./store');
 
