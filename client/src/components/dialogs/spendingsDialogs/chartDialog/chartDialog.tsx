@@ -13,7 +13,7 @@ import { Chart } from './chart';
 interface ChartDialogProps {
   costs: Cost[];
   visibleDialog: string;
-  setVisibleDialog: () => string;
+  setVisibleDialog: () => void;
   getCosts: () => void;
 }
 

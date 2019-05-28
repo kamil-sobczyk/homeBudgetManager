@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 interface LoginDialogProps {
   visibleDialog: string;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   setUser: (token: string, id: string) => void;
 }
 

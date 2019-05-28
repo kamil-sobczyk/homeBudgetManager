@@ -15,7 +15,7 @@ import { observable } from 'mobx';
 interface FinishShoppingDialogProps {
   changeNewSpendingNameCounter: (event: React.FormEvent<EventTarget>) => void;
   finishShopping: () => void;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   count: number;
 }

@@ -10,7 +10,7 @@ import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 import { ProvidedItemsDraggable } from './providedItemsDraggable';
 
 interface ProvidedItemsProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   items: Item[];
   provided: DroppableProvided;

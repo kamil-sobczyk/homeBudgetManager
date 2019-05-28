@@ -36,7 +36,7 @@ const drawerItems = [
 ];
 
 interface DrawerItemsProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
 }
 
 export class DrawerItems extends React.Component<DrawerItemsProps, {}> {

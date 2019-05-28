@@ -13,8 +13,16 @@ export class VisibityClient {
   @observable showDrawer: boolean = false;
   @observable visibleDialog = 'LoginDialog';
 
-  setVisibleDialog = (dialog?: string): string =>
-    !dialog ? (this.visibleDialog = '') : (this.visibleDialog = dialog);
+  setVisibleDialog = (dialog?: string): void => {
+    if (!dialog) {
+      this.visibleDialog = '';
+    } else if (dialog === 'EditItemDialog') {
+      this.store.itemMenagerClient.setOldItem();
+      this.visibleDialog = dialog;
+    } else {
+      this.visibleDialog = dialog;
+    }
+  };
 
   toggleShowDrawer = (): boolean => (this.showDrawer = !this.showDrawer);
 

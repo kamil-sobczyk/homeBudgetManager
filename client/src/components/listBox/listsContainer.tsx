@@ -19,7 +19,7 @@ interface ListsContainerProps {
   onDragEnd: (result: DropResult) => void;
   setActiveItem: (list: ListType, index: number) => void;
   deleteItem: (name: string) => Item[];
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   selected: Item[];
   items: Item[];

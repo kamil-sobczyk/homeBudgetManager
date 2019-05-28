@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 interface NavbarSectionLeftProps {
   toggleShowDrawer: () => boolean;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
 }
 
 export class NavbarSectionLeft extends React.Component<

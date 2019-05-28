@@ -12,7 +12,7 @@ import { NavbarSectionRight } from './navbarSections/navbarSectionRight';
 
 interface NavbarProps {
   toggleShowDrawer: () => boolean;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   showDrawer: boolean;
 }
 

@@ -7,7 +7,7 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface FailDialogProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
 }
 

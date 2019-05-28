@@ -22,7 +22,7 @@ import { StyledEditButton } from '../../items/moreMenu';
 interface ProvidedSelectedDraggableProps {
   toggleCheckItems: (list: ListType, index: number) => any;
   setActiveItem: (list: ListType, index: number) => void;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   selected: Item[];
   providedDraggable: DraggableProvided;
   item: Item;

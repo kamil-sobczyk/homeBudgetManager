@@ -10,10 +10,9 @@ import { TextField } from '@rmwc/textfield';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface EditDialogProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
-  setOldItem: () => void;
   visibleDialog: string;
   name?: string;
   info?: string;
@@ -25,10 +24,6 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable info?: string = this.props.info;
   @observable isNameChangeInitialized: boolean = false;
   @observable isInfoChangeInitialized: boolean = false;
-
-  componentDidMount = () => {
-    this.props.setOldItem();
-  };
 
   confirm = (): void => {
     const { onChangeName, onChangeInfo, name, setVisibleDialog } = this.props;

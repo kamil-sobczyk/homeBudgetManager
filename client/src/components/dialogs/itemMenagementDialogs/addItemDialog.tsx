@@ -13,7 +13,7 @@ import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 interface AddItemDialogProps {
   addItem: () => void;
   changeNewItem: (event: React.FormEvent<EventTarget>) => void;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   items: Item[];
   selected: Item[];

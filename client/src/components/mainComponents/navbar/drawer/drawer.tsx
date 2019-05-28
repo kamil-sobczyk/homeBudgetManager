@@ -8,7 +8,7 @@ import { DrawerItems } from './drawerItems';
 
 interface DrawerBarProps {
   toggleShowDrawer: () => boolean;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   showDrawer: boolean;
 }
 

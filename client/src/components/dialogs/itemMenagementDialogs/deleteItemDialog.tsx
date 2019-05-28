@@ -9,7 +9,7 @@ import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface DeleteItemDialogProps {
   deleteItem: (name: string) => Item[];
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   items: Item[];
   index: number;
