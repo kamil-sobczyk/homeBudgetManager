@@ -14,6 +14,9 @@ const appRouter = app => {
       res.users = UserModel;
       next();
     });
+    db.on("close", () => {
+      connection.removeAllListeners();
+    });
   });
 
   app
@@ -36,9 +39,10 @@ const appRouter = app => {
           me.save(err => {
             if (err) return handleError(err);
           });
+          res.status(200).send(me.items);
+        } else {
+          res.status(200).send(resp.items);
         }
-
-        res.status(200).send(sortItems(resp.items));
       });
     })
     .post((req, res) => {
@@ -58,9 +62,49 @@ const appRouter = app => {
         });
     })
     .put((req, res) => {
-      const { index, newItem } = req.body;
+      const users = res.users;
+      const { oldItem, newItem } = req.body;
 
-      store[req.headers.id].items[index] = newItem;
+      console.log("new", newItem);
+      console.log("old", oldItem);
+
+      // users
+      // .updateOne(
+      //   { usr: req.headers.id },
+      //   { $pull: { items: { name: req.body.name } } }
+      // )
+      // .exec((err, resp) => {
+      //   if (err) {
+      //     console.log("error ", err);
+      //     return;
+      //   }
+      // });
+
+  /*    users
+        .updateOne(
+          { usr: req.headers.id },
+          {
+            $set: {
+              items: {
+                d: {
+                  name: newItem.name,
+                  info: newItem.info,
+                  id: newItem.id,
+                  checked: newItem.checked
+                }
+              }
+            }
+          }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            return;
+          }
+        });   */
+
+      // store[req.headers.id].items[index] = newItem;
+      // store[req.headers.id].items[index] = newItem;
       res.status(200).json(store[req.headers.id].items);
     })
     .delete((req, res) => {
@@ -99,11 +143,10 @@ const appRouter = app => {
           me.save(err => {
             if (err) return handleError(err);
           });
+          res.status(200).send(me.selected);
+        } else {
+          res.status(200).send(resp.selected);
         }
-
-        console.log("selected", resp.selected);
-
-        res.status(200).send(resp.selected);
       });
 
       sortSelectedByCheckedValue(req.headers.id);
