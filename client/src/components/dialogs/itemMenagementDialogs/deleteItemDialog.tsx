@@ -8,7 +8,7 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface DeleteItemDialogProps {
-  deleteItem: (index: number) => void;
+  deleteItem: (name: string) => Item[];
   setVisibleDialog: (dialog?: string) => string;
   visibleDialog: string;
   items: Item[];
@@ -37,7 +37,7 @@ export const DeleteItemDialog = observer(
         <Button onClick={() => setVisibleDialog()} color='primary'>
           No
         </Button>
-        <Button onClick={() => deleteItem(index)} color='primary' autoFocus>
+        <Button onClick={() => deleteItem(items[index].name)} color='primary' autoFocus>
           Yes
         </Button>
       </DialogActions>

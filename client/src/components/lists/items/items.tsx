@@ -15,7 +15,7 @@ import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 interface ItemsProps {
   getItems: () => void;
-  deleteItem: (index: number) => void;
+  deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => string;
   setActiveItem: (list: ListType, index: number) => void;
   items: Item[];

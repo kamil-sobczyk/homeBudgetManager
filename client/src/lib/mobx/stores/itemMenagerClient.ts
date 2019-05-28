@@ -50,7 +50,7 @@ export class ItemMenagerClient {
         checked: false,
         id: String(Date.now()),
         info: target.value,
-        name: this.newItem.name,
+        name: this.newItem.name
       };
       return;
     } else if (target.name === 'name') {
@@ -58,7 +58,7 @@ export class ItemMenagerClient {
         checked: false,
         id: String(Date.now()),
         info: this.newItem.info,
-        name: target.value,
+        name: target.value
       };
     }
   };
@@ -108,11 +108,11 @@ export class ItemMenagerClient {
     }
   };
 
-  deleteItem = (index: number): Item[] => {
+  deleteItem = (name: string): Item[] => {
     this.store.items = this.store.items.filter(
-      (item: Item, itemIndex: number) => itemIndex !== index
+      (item: Item) => item.name !== name
     );
-    this.store.apiClient.deleteItemOnServer(index);
+    this.store.apiClient.deleteItemOnServer(name);
     this.store.visibilityClient.setVisibleDialog();
     return this.store.items;
   };
