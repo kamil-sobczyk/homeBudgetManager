@@ -1,78 +1,39 @@
 const store = require("./store");
 const mongo = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017";
+const url = "mongodb://localhost:27017/shop";
 const mongoose = require("mongoose");
-const userSchema = require('./data/models/user')
+const userSchema = require("./data/models/user");
 
-mongoose.connect(url);
+/**/
 
-const db = mongoose.connection;
-const users = db.collection("users");
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("mongo connected");
-});
-
-  const User = mongoose.model("User", userSchema);
-
-  const me = new User({
-    id: "102234771401894238200",
-    items: [
-      {
-        name: "Bread",
-        info: "Buy in Lidl",
-        id: "sdfsdfsadfsdfdsf",
-        checked: false
-      }
-    ],
-    selected: [
-      {
-        name: "Aples",
-        info: "3kg",
-        id: "ekflkdsdsaljd",
-        checked: false
-      }
-    ],
-    costs: [
-      {
-        chosenItems: ["Potatoes"],
-        count: 3,
-        date: "24.06.2019, 14:57",
-        category: "shopping"
-      }
-    ]
-  });
-
-  users.insertOne(me).then(res => {
-    // console.log(res)
-    return res;
-  });
-
-  module.exports = {User};
-
-
+//module.exports = {User};
 
 const appRouter = app => {
+  app.all("/*", (req, res, next) => {
+    mongoose.connect(url, { useNewUrlParser: true });
+    const db = mongoose.connection;
+    const UserModel = mongoose.model("users", userSchema);
+    db.on("error", console.error.bind(console, "connection error:"));
+    db.once("open", () => {
+      res.users = UserModel;
+      next();
+    });
+  });
+
   app
     .route("/store/items")
     .get((req, res) => {
+      const users = res.users;
+
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+        res.status(200).send(resp.items);
+      });
+
       sortItemsByName(req.headers.id);
-
-
-
-User.find({id: req.headers.id}, async (err, resp) => {
-// console.log(resp[0]);
-await res.status(200).send(store[resp[0]].items);
-await console.log(resp[0]);
-
-})
-
-
-        // object of all the users
-
- 
-      // res.status(200).send(store[req.headers.id].items);
-      // res.status(200).send(store[req.headers.id].items);
     })
     .post((req, res) => {
       store[req.headers.id].items.push(req.body.item);

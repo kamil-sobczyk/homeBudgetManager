@@ -1,7 +1,7 @@
 require("rootpath")();
 const express = require("express");
 const bodyParser = require("body-parser");
-const routes = require("./index.ts");
+const routes = require("./index.js");
 const app = express();
 const cors = require("cors");
 const fastify = require('fastify')({  logger: true})
