@@ -1,5 +1,5 @@
 import { Store } from '../rootStore';
-import { Cost, ActiveItem, ListType } from '../../interfaces';
+import { ActiveItem, ListType } from '../../interfaces';
 
 import { sortItemsByName } from '../../reorderFunctions';
 
@@ -14,6 +14,7 @@ export class ItemMenagerClient {
 
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
   @observable newItem: Item = { name: '', info: '', id: '', checked: false };
+  @observable oldItem: Item = { name: '', info: '', id: '', checked: false };
 
   @computed get currentList(): Item[] | undefined {
     switch (this.activeItem.list) {
@@ -42,6 +43,13 @@ export class ItemMenagerClient {
     return undefined;
   }
 
+  setOldItem = (): void => {
+    this.oldItem =
+      this.activeItem.list === 'items'
+        ? this.store.items[this.activeItem.index]
+        : this.store.selected[this.activeItem.index];
+  };
+
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
 
@@ -65,11 +73,12 @@ export class ItemMenagerClient {
 
   updateCurrentItemName = (name: string): void => {
     const { list, index } = this.activeItem;
+
     if (this.currentList && this.currentList[index]) {
       this.currentList[index].name = name;
       this.store.apiClient.editItemOnServer(
         list,
-        index,
+        this.oldItem,
         this.currentList[index]
       );
     }
@@ -77,11 +86,12 @@ export class ItemMenagerClient {
 
   updateCurrentItemInfo = (info: string): void => {
     const { list, index } = this.activeItem;
+
     if (this.currentList && this.currentList[index]) {
       this.currentList[this.activeItem.index].info = info;
       this.store.apiClient.editItemOnServer(
         list,
-        index,
+        this.oldItem,
         this.currentList[index]
       );
     }
@@ -117,15 +127,16 @@ export class ItemMenagerClient {
     return this.store.items;
   };
 
-  editItem = (newItem: Item, list: ListType, index: number): void => {
-    if (list === 'items') {
-      this.store.items[index] = newItem;
-    } else if (list === 'selected') {
-      this.store.selected[index] = newItem;
-    } else return;
+  // editItem = (newItem: Item, list: ListType, index: number): void => {
+  //   if (list === 'items') {
+  //     this.store.items[index] = newItem;
+  //   } else if (list === 'selected') {
+  //     this.store.selected[index] = newItem;
+  //   } else return;
 
-    this.store.apiClient.editItemOnServer(list, index, newItem);
-  };
+  //   console.log('api!');
+  //   this.store.apiClient.editItemOnServer(list, index, newItem);
+  // };
 
   toggleCheckItems = (list: ListType, index: number): void => {
     this.setActiveItem(list, index);

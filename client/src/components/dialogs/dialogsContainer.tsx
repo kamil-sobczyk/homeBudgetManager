@@ -54,6 +54,7 @@ export const DialogsContainer = observer(
           info={itemMenagerClient.currentItemInfo}
           onChangeName={itemMenagerClient.updateCurrentItemName}
           onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
+          setOldItem={itemMenagerClient.setOldItem}
         />
       )}
 

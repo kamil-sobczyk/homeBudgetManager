@@ -68,14 +68,14 @@ export class ApiClient {
 
   editItemOnServer = async (
     list: ListType,
-    index: number,
+    oldItem: Item,
     newItem: Item
   ): Promise<void> => {
     await axios({
       method: 'put',
       url: server + 'store/' + list,
       headers: this.headers,
-      data: { index, newItem }
+      data: { oldItem, newItem }
     });
   };
 
