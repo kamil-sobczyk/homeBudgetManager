@@ -46,10 +46,8 @@ export class ItemMenagerClient {
   setOldItem = (): void => {
     this.oldItem =
       this.activeItem.list === 'items'
-        ? this.store.items[this.activeItem.index]
-        : this.store.selected[this.activeItem.index];
-
-        console.log('old',JSON.stringify(this.oldItem))
+        ? Object.assign({}, this.store.items[this.activeItem.index])
+        : Object.assign({}, this.store.selected[this.activeItem.index]);
   };
 
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
@@ -121,8 +119,12 @@ export class ItemMenagerClient {
     return this.store.items;
   };
 
-  editItem = (): void => {
-    this.store.apiClient.editItemOnServer(this.activeItem.list, this.oldItem, this.newItem);
+  editItem = (newItem: Item): void => {
+    this.store.apiClient.editItemOnServer(
+      this.activeItem.list,
+      this.oldItem,
+      newItem
+    );
   };
 
   toggleCheckItems = (list: ListType, index: number): void => {

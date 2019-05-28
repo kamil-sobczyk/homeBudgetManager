@@ -4,17 +4,18 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
 import { Button } from '@rmwc/button';
-import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
+import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { Item } from '../../../lib/interfaces';
 
 interface EditDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
   setOldItem: () => void;
-  editItem: () => void;
+  editItem: (newItem: Item) => void;
   visibleDialog: string;
   name?: string;
   info?: string;
@@ -28,7 +29,13 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable isInfoChangeInitialized: boolean = false;
 
   confirm = (): void => {
-    const { onChangeName, onChangeInfo, name, setVisibleDialog, editItem } = this.props;
+    const {
+      onChangeName,
+      onChangeInfo,
+      name,
+      setVisibleDialog,
+      editItem
+    } = this.props;
 
     if (!this.isInfoChangeInitialized && !this.isNameChangeInitialized) {
       setVisibleDialog();
@@ -52,8 +59,13 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
 
         return;
       }
-    } 
-    editItem();
+    }
+    editItem({
+      name: this.name ? this.name : '',
+      info: this.info ? this.info : '',
+      id: String(new Date()),
+      checked: false
+    });
   };
 
   private updateName = (e: React.FormEvent<HTMLInputElement>): void => {
