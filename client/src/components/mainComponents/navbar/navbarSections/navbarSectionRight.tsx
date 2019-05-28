@@ -3,7 +3,7 @@ import * as React from 'react';
 import { TopAppBarSection, TopAppBarActionItem } from '@rmwc/top-app-bar';
 
 interface NavbarSectionRightProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
 }
 
 const navbarSectionRightItems = [

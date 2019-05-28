@@ -19,7 +19,7 @@ import { Legend } from './spendingsTable/legend/legend';
 import { IconButton } from '@rmwc/icon-button';
 
 interface SpendingsDialogProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   getCosts: () => void;
   costs: Cost[];

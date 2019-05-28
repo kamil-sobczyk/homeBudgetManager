@@ -10,7 +10,7 @@ import { TextField } from '@rmwc/textfield';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
 interface EditDialogProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
   visibleDialog: string;
@@ -46,8 +46,8 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
         onChangeInfo(this.info ? this.info : '');
         setVisibleDialog();
       } else {
-        setVisibleDialog("FailDialog");
-  
+        setVisibleDialog('FailDialog');
+
         return;
       }
     } else return;

@@ -10,10 +10,10 @@ export const Legend = () => (
     Shopping
     <ColoredIcon color='blue' />
     Bills
-    <ColoredIcon color='red' />
-    Car
     <ColoredIcon color='green' />
     Health
+    <ColoredIcon color='red' />
+    Car
   </StyledLegendContainer>
 );
 

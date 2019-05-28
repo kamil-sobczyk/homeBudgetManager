@@ -15,7 +15,7 @@ interface SelectedProps {
   getSelected: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   selected: Item[];
 }
 

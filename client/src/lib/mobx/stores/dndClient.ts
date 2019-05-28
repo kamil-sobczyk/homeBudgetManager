@@ -10,6 +10,7 @@ export class DnDClient {
   constructor(store: Store) {
     this.store = store;
   }
+
   getDndList = (id: string): Item[] => {
     if (id === 'droppable2') {
       return this.store.items;
@@ -17,6 +18,7 @@ export class DnDClient {
       return this.store.selected;
     }
   };
+
   reorderList = (list: string, reorderedList: Item[]): void => {
     if (list === 'droppable') {
       this.store.selected = reorderedList;
@@ -24,6 +26,7 @@ export class DnDClient {
       this.store.items = reorderedList;
     }
   };
+  
   onDragEnd = (result: DropResult): void => {
     const { source, destination } = result;
     const { reorderItemsOnServer } = this.store.apiClient;

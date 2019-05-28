@@ -15,8 +15,8 @@ interface AddOtherDialogProps {
   addNewSpending: () => void;
   changeNewSpendingName: (e: React.FormEvent) => void;
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
-  changeNewSpendingInfo: (event: React.FormEvent<EventTarget>) => void;
-  setVisibleDialog: (dialog?: string) => string;
+  changeNewSpendingInfo: (a: any) => any
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   count: number;
 }

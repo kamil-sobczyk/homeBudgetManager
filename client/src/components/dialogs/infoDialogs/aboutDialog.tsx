@@ -26,7 +26,7 @@ const aboutDialogButtons = [
 ];
 
 interface AboutDialogProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
 }
 

@@ -11,7 +11,7 @@ import { List } from '../../items/provided/providedItems';
 interface ProvidedSelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   selected: Item[];
   provided: DroppableProvided;
 }
@@ -30,6 +30,8 @@ export class ProvidedSelected extends React.Component<
       setVisibleDialog
     } = this.props;
 
+
+    console.log(selected);
     return (
       <List
         innerRef={provided.innerRef}

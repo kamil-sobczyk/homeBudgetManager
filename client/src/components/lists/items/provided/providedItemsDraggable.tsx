@@ -19,7 +19,7 @@ import { DraggableProvided } from 'react-beautiful-dnd';
 import { MoreMenu } from '../moreMenu';
 
 interface ProvidedItemsDraggableProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   providedDraggable2: DraggableProvided;
   item: Item;

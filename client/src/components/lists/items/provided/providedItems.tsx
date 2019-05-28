@@ -10,7 +10,7 @@ import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 import { ProvidedItemsDraggable } from './providedItemsDraggable';
 
 interface ProvidedItemsProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   items: Item[];
   provided: DroppableProvided;
@@ -20,7 +20,7 @@ interface ProvidedItemsProps {
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   render() {
     const { provided, setVisibleDialog, items, setActiveItem } = this.props;
-
+    
     return (
       <List innerRef={provided.innerRef}>
         {items.map((item, index) => (

@@ -37,8 +37,8 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
   };
   render() {
     const { costs } = this.props;
-
     let displayedCosts: Cost[] = costs;
+
     if (costs.length < 1) {
       displayedCosts = [
         {
@@ -98,7 +98,7 @@ const StyledDataTableHeadCell = styled(DataTableHeadCell)`
 `;
 
 const StyledDataTable = styled(DataTable)`
-  width: 400px;
-  height: 500px;
+  width: 500px;
+  height: 600px;
   overflow: hidden;
 `;

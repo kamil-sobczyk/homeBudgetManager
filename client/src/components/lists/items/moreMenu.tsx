@@ -9,7 +9,7 @@ import { IconButton } from '@rmwc/icon-button';
 import { ListType } from '../../../lib/interfaces';
 
 interface MoreMenuProps {
-  setVisibleDialog: (dialog?: string) => string;
+  setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   index: number;
 }
