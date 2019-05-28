@@ -13,6 +13,8 @@ interface EditDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
+  setOldItem: () => void;
+  editItem: () => void;
   visibleDialog: string;
   name?: string;
   info?: string;
@@ -26,7 +28,7 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
   @observable isInfoChangeInitialized: boolean = false;
 
   confirm = (): void => {
-    const { onChangeName, onChangeInfo, name, setVisibleDialog } = this.props;
+    const { onChangeName, onChangeInfo, name, setVisibleDialog, editItem } = this.props;
 
     if (!this.isInfoChangeInitialized && !this.isNameChangeInitialized) {
       setVisibleDialog();
@@ -50,7 +52,8 @@ export class EditDialog extends React.Component<EditDialogProps, {}> {
 
         return;
       }
-    } else return;
+    } 
+    editItem();
   };
 
   private updateName = (e: React.FormEvent<HTMLInputElement>): void => {

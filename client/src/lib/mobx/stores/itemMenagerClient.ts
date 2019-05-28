@@ -48,6 +48,8 @@ export class ItemMenagerClient {
       this.activeItem.list === 'items'
         ? this.store.items[this.activeItem.index]
         : this.store.selected[this.activeItem.index];
+
+        console.log('old',JSON.stringify(this.oldItem))
   };
 
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
@@ -76,11 +78,6 @@ export class ItemMenagerClient {
 
     if (this.currentList && this.currentList[index]) {
       this.currentList[index].name = name;
-      this.store.apiClient.editItemOnServer(
-        list,
-        this.oldItem,
-        this.currentList[index]
-      );
     }
   };
 
@@ -89,15 +86,11 @@ export class ItemMenagerClient {
 
     if (this.currentList && this.currentList[index]) {
       this.currentList[this.activeItem.index].info = info;
-      this.store.apiClient.editItemOnServer(
-        list,
-        this.oldItem,
-        this.currentList[index]
-      );
     }
   };
 
   @action setActiveItem = (list: ListType, index: number): void => {
+    this.setOldItem();
     this.activeItem.index = index;
     this.activeItem.list = list;
   };
@@ -124,19 +117,13 @@ export class ItemMenagerClient {
     );
     this.store.apiClient.deleteItemOnServer(name);
     this.store.visibilityClient.setVisibleDialog();
+
     return this.store.items;
   };
 
-  // editItem = (newItem: Item, list: ListType, index: number): void => {
-  //   if (list === 'items') {
-  //     this.store.items[index] = newItem;
-  //   } else if (list === 'selected') {
-  //     this.store.selected[index] = newItem;
-  //   } else return;
-
-  //   console.log('api!');
-  //   this.store.apiClient.editItemOnServer(list, index, newItem);
-  // };
+  editItem = (): void => {
+    this.store.apiClient.editItemOnServer(this.activeItem.list, this.oldItem, this.newItem);
+  };
 
   toggleCheckItems = (list: ListType, index: number): void => {
     this.setActiveItem(list, index);
@@ -145,6 +132,7 @@ export class ItemMenagerClient {
     } else if (list === 'selected') {
       this.store.selected[index].checked = !this.store.selected[index].checked;
     } else return;
+
     this.store.apiClient.checkItemOnServer(list, index);
   };
 
