@@ -38,12 +38,8 @@ const appRouter = app => {
           });
         }
 
-        console.log("items", resp.items);
-
         res.status(200).send(sortItems(resp.items));
       });
-
-      // sortItemsByName(req.headers.id);
     })
     .post((req, res) => {
       const users = res.users;
@@ -68,17 +64,19 @@ const appRouter = app => {
       res.status(200).json(store[req.headers.id].items);
     })
     .delete((req, res) => {
-      store[req.headers.id].items.splice(req.body.index, 1);
       const users = res.users;
-      // users.findOneAndRemove({ usr: req.headers.id }).exec((err, resp) => {
-      //   if (err) {
-      //     console.log("error ", err);
-      //     return;
-      //   }
-      //   res.status(200);
-      // });
 
-      res.status(200).json(store[req.headers.id].items);
+      users
+        .updateOne(
+          { usr: req.headers.id },
+          { $pull: { items: { name: req.body.name } } }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            return;
+          }
+        });
     });
 
   app
