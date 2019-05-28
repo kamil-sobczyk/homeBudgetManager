@@ -1,12 +1,8 @@
 const store = require("./store");
-const mongo = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017/shop";
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
 
-/**/
-
-//module.exports = {User};
+const url = "mongodb://localhost:27017/shop";
 
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
@@ -30,16 +26,40 @@ const appRouter = app => {
           console.log("error ", err);
           return;
         }
-        res.status(200).send(resp.items);
+        if (!resp) {
+          const me = new users({
+            usr: req.headers.id,
+            items: [],
+            selected: [],
+            costs: []
+          });
+          me.save(err => {
+            if (err) return handleError(err);
+          });
+        }
+
+        console.log("items", resp.items);
+
+        res.status(200).send(sortItems(resp.items));
       });
 
-      sortItemsByName(req.headers.id);
+      // sortItemsByName(req.headers.id);
     })
     .post((req, res) => {
-      store[req.headers.id].items.push(req.body.item);
+      const users = res.users;
 
-      sortItemsByName(req.headers.id);
-      res.status(200).send(store[req.headers.id].items);
+      users
+        .findOneAndUpdate(
+          { usr: req.headers.id },
+          { $push: { items: req.body.item } },
+          { useFindAndModify: false }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            return;
+          }
+        });
     })
     .put((req, res) => {
       const { index, newItem } = req.body;
@@ -49,14 +69,46 @@ const appRouter = app => {
     })
     .delete((req, res) => {
       store[req.headers.id].items.splice(req.body.index, 1);
+      const users = res.users;
+      // users.findOneAndRemove({ usr: req.headers.id }).exec((err, resp) => {
+      //   if (err) {
+      //     console.log("error ", err);
+      //     return;
+      //   }
+      //   res.status(200);
+      // });
+
       res.status(200).json(store[req.headers.id].items);
     });
 
   app
     .route("/store/selected")
     .get((req, res) => {
+      const users = res.users;
+
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+        if (!resp) {
+          const me = new users({
+            usr: req.headers.id,
+            items: [],
+            selected: [],
+            costs: []
+          });
+          me.save(err => {
+            if (err) return handleError(err);
+          });
+        }
+
+        console.log("selected", resp.selected);
+
+        res.status(200).send(resp.selected);
+      });
+
       sortSelectedByCheckedValue(req.headers.id);
-      res.status(200).json(store[req.headers.id].selected);
     })
     .put((req, res) => {
       const { index, newItem } = req.body;
@@ -76,7 +128,16 @@ const appRouter = app => {
   app
     .route("/store/costs")
     .get((req, res) => {
-      res.status(200).json(store[req.headers.id].costs);
+      const users = res.users;
+
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          res.status(500);
+          return;
+        }
+        res.status(200).send(resp.costs);
+      });
     })
     .post((req, res) => {
       store[req.headers.id].costs.unshift(req.body.cost);
@@ -95,6 +156,8 @@ const appRouter = app => {
 };
 
 module.exports = appRouter;
+
+const sortItems = items => items.sort((a, b) => a.name.localeCompare(b.name));
 
 const sortItemsByName = id =>
   store[id].items.sort((a, b) => a.name.localeCompare(b.name));
