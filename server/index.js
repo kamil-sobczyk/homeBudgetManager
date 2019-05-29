@@ -176,8 +176,26 @@ const appRouter = app => {
       });
     })
     .post((req, res) => {
-      store[req.headers.id].costs.unshift(req.body.cost);
-      res.status(200).json(store[req.headers.id].costs);
+      const users = res.users;
+      const { cost } = req.body.cost;
+
+      users.updateOne(
+        { usr: req.headers.id },
+        {
+          $push: {
+            costs: {
+              $each: [cost],
+              $position: 0
+            }
+          }
+        },
+        (err, data) => {
+          if (err) {
+            console.log("error ", err);
+            return;
+          }
+        }
+      );
     });
 
   app.put("/store", (req, res) => {
