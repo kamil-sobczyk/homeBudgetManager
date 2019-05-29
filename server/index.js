@@ -179,20 +179,16 @@ const appRouter = app => {
     .post((req, res) => {
       const users = res.users;
 
-      console.log('cost', req.body.cost)
-
       users
         .findOneAndUpdate(
           { usr: req.headers.id },
-          { '$push': { costs: {'$each': [req.body.cost], '$position': 0} } },
+          { $push: { costs: { $each: [req.body.cost], $position: 0 } } },
           { useFindAndModify: false }
         )
         .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
             return;
-          } else {
-            console.log('resp',resp);
           }
         });
     });
