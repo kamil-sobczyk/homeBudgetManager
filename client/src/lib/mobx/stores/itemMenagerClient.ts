@@ -120,6 +120,7 @@ export class ItemMenagerClient {
   };
 
   editItem = (newItem: Item): void => {
+    console.log(JSON.stringify(this.oldItem))
     this.store.apiClient.editItemOnServer(
       this.activeItem.list,
       this.oldItem,
