@@ -100,12 +100,12 @@ export class ApiClient {
     });
   };
 
-  checkItemOnServer = async (list: ListType, index: number): Promise<void> => {
+  checkItemOnServer = async (item: Item): Promise<void> => {
     await axios({
       method: 'put',
       url: server + 'store/checked',
       headers: this.headers,
-      data: { list, index }
+      data: { item }
     });
   };
 

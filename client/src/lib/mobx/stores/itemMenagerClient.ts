@@ -130,13 +130,10 @@ export class ItemMenagerClient {
 
   toggleCheckItems = (list: ListType, index: number): void => {
     this.setActiveItem(list, index);
-    if (list === 'items') {
-      this.store.items[index].checked = !this.store.items[index].checked;
-    } else if (list === 'selected') {
       this.store.selected[index].checked = !this.store.selected[index].checked;
-    } else return;
+    
 
-    this.store.apiClient.checkItemOnServer(list, index);
+    this.store.apiClient.checkItemOnServer(this.store.selected[index]);
   };
 
   reorderItems = (items: Item[], selected: Item[]): void => {
