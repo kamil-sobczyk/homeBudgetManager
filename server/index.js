@@ -1,7 +1,6 @@
 const store = require("./store");
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
-const functions = require("./data/functions");
 
 const url = "mongodb://localhost:27017/shop";
 const newUserProfile = id => {
@@ -127,10 +126,27 @@ const appRouter = app => {
       });
     })
     .put((req, res) => {
-      const { index, newItem } = req.body;
+      const users = res.users;
+      const { oldItem, newItem } = req.body;
 
-      store[req.headers.id].selected[index] = newItem;
-      res.status(200).json(store[req.headers.id].selected);
+      let newSelected = [];
+
+      users.findOne({ usr: req.headers.id }, (err, data) => {
+        // console.log(data);
+        for (let i = 0; i < data.selected.length; i++) {
+          if (data.selected[i].name !== oldItem.name){
+            newSelected.push(data.selected[i]);
+          }
+          if (data.selected[i].name === oldItem.name) {
+            const item = {name: '', info: '', checked: false, id: ''}
+            console.log(data.selected[i].name)
+            item.name = newItem.name;
+            data.selected[i].info = newItem.info;
+            data.save();
+          }
+    
+        }
+      });
     });
 
   app.put("/store/checked", (req, res) => {
