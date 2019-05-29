@@ -129,24 +129,21 @@ const appRouter = app => {
       const users = res.users;
       const { oldItem, newItem } = req.body;
 
-      let newSelected = [];
-
-      users.findOne({ usr: req.headers.id }, (err, data) => {
-        // console.log(data);
-        for (let i = 0; i < data.selected.length; i++) {
-          if (data.selected[i].name !== oldItem.name){
-            newSelected.push(data.selected[i]);
+      users.updateOne(
+        { "selected.name": oldItem.name },
+        {
+          $set: {
+            "selected.$.name": newItem.name,
+            "selected.$.info": newItem.info
           }
-          if (data.selected[i].name === oldItem.name) {
-            const item = {name: '', info: '', checked: false, id: ''}
-            console.log(data.selected[i].name)
-            item.name = newItem.name;
-            data.selected[i].info = newItem.info;
-            data.save();
+        },
+        (err, data) => {
+          if (err) {
+            console.log("error ", err);
+            return;
           }
-    
         }
-      });
+      );
     });
 
   app.put("/store/checked", (req, res) => {
