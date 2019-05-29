@@ -67,26 +67,21 @@ const appRouter = app => {
       const users = res.users;
       const { oldItem, newItem } = req.body;
 
-      users
-        .updateOne(
-          { usr: req.headers.id },
-          { $pull: { items: { name: oldItem.name } } }
-        )
-        .exec((err, resp) => {
+      users.updateOne(
+        { "items.name": oldItem.name },
+        {
+          $set: {
+            "items.$.name": newItem.name,
+            "items.$.info": newItem.info
+          }
+        },
+        (err, data) => {
           if (err) {
             console.log("error ", err);
             return;
           }
-        });
-
-      users
-        .updateOne({ usr: req.headers.id }, { $push: { items: newItem } })
-        .exec((err, resp) => {
-          if (err) {
-            console.log("error ", err);
-            return;
-          }
-        });
+        }
+      );
     })
     .delete((req, res) => {
       const users = res.users;
