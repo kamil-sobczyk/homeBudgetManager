@@ -3,7 +3,14 @@ const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
 
 const url = "mongodb://localhost:27017/shop";
-
+const newUserProfile = id => {
+  return {
+    usr: id,
+    items: [],
+    selected: [],
+    costs: []
+  };
+};
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
     mongoose.connect(url, { useNewUrlParser: true });
@@ -30,18 +37,13 @@ const appRouter = app => {
           return;
         }
         if (!resp) {
-          const me = new users({
-            usr: req.headers.id,
-            items: [],
-            selected: [],
-            costs: []
-          });
-          me.save(err => {
+          const newUser = new users(newUserProfile(req.headers.id));
+          newUser.save(err => {
             if (err) return handleError(err);
           });
-          res.status(200).send(me.items);
+          res.status(200).send(newUser.items);
         } else {
-          res.status(200).send(resp.items);
+          res.status(200).send(sortItemsByName(resp.items));
         }
       });
     })
@@ -65,9 +67,6 @@ const appRouter = app => {
       const users = res.users;
       const { oldItem, newItem } = req.body;
 
-      console.log("new", newItem);
-      console.log("old", oldItem);
-
       users
         .updateOne(
           { usr: req.headers.id },
@@ -88,10 +87,6 @@ const appRouter = app => {
             return;
           }
         });
-
-      // store[req.headers.id].items[index] = newItem;
-      // store[req.headers.id].items[index] = newItem;
-      res.status(200).json(store[req.headers.id].items);
     })
     .delete((req, res) => {
       const users = res.users;
@@ -120,16 +115,11 @@ const appRouter = app => {
           return;
         }
         if (!resp) {
-          const me = new users({
-            usr: req.headers.id,
-            items: [],
-            selected: [],
-            costs: []
-          });
-          me.save(err => {
+          const newUser = new users(newUserProfile(req.headers.id));
+          newUser.save(err => {
             if (err) return handleError(err);
           });
-          res.status(200).send(me.selected);
+          res.status(200).send(newUser.selected);
         } else {
           res.status(200).send(resp.selected);
         }
@@ -173,21 +163,71 @@ const appRouter = app => {
 
   app.put("/store", (req, res) => {
     const { items, selected } = req.body;
+    const users = res.users;
 
-    if (items !== store[req.headers.id].items)
-      store[req.headers.id].items = items;
-    if (selected !== store[req.headers.id].selected)
-      store[req.headers.id].selected = selected;
-    res.status(200).json(store[req.headers.id]);
+    users
+    .findOneAndUpdate(
+      { usr: req.headers.id },
+      { $pull: { items: {} } },
+      { useFindAndModify: false }
+    )
+    .exec((err, resp) => {
+      if (err) {
+        console.log("error ", err);
+        return;
+      }
+    });
+
+    users
+    .findOneAndUpdate(
+      { usr: req.headers.id },
+      { $push: { items } },
+      { useFindAndModify: false }
+    )
+    .exec((err, resp) => {
+      if (err) {
+        console.log("error ", err);
+        return;
+      }
+    });
+
+    users
+    .findOneAndUpdate(
+      { usr: req.headers.id },
+      { $pull: { selected: {} } },
+      { useFindAndModify: false }
+    )
+    .exec((err, resp) => {
+      if (err) {
+        console.log("error ", err);
+        return;
+      }
+    });
+
+    users
+    .findOneAndUpdate(
+      { usr: req.headers.id },
+      { $push: { selected } },
+      { useFindAndModify: false }
+    )
+    .exec((err, resp) => {
+      if (err) {
+        console.log("error ", err);
+        return;
+      }
+    });
+
+    // if (items !== store[req.headers.id].items)
+    //   store[req.headers.id].items = items;
+    // if (selected !== store[req.headers.id].selected)
+    //   store[req.headers.id].selected = selected;
+    // res.status(200).json(store[req.headers.id]);
   });
 };
 
 module.exports = appRouter;
 
-const sortItems = items => items.sort((a, b) => a.name.localeCompare(b.name));
-
-const sortItemsByName = id =>
-  store[id].items.sort((a, b) => a.name.localeCompare(b.name));
+const sortItemsByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
 
 const sortSelectedByCheckedValue = id => {
   let checkedItems = [];
