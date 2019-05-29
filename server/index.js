@@ -68,44 +68,21 @@ const appRouter = app => {
       console.log("new", newItem);
       console.log("old", oldItem);
 
-      // users
-      // .updateOne(
-      //   { usr: req.headers.id },
-      //   { $pull: { items: { name: req.body.name } } }
-      // )
-      // .exec((err, resp) => {
-      //   if (err) {
-      //     console.log("error ", err);
-      //     return;
-      //   }
-      // });
-
-  /*    users
-        .updateOne(
-          { usr: req.headers.id },
-          {
-            $set: {
-              items: {
-                d: {
-                  name: newItem.name,
-                  info: newItem.info,
-                  id: newItem.id,
-                  checked: newItem.checked
-                }
-              }
-            }
-          }
-        )
-        .exec((err, resp) => {
-          if (err) {
-            console.log("error ", err);
-            return;
-          }
-        });   */
+      users
+      .findOneAndUpdate(
+        { usr: req.headers.id, name: oldItem.name },
+        { newItem },
+      )
+      .exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+      });
 
       // store[req.headers.id].items[index] = newItem;
       // store[req.headers.id].items[index] = newItem;
-      res.status(200).json(store[req.headers.id].items);
+      // res.status(200).json(store[req.headers.id].items);
     })
     .delete((req, res) => {
       const users = res.users;
