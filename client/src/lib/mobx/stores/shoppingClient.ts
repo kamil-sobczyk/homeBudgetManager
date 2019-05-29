@@ -21,7 +21,6 @@ export class ShoppingClient {
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
     this.store.apiClient.addCostOnServer(cost);
-
   };
 
   addNewSpending = () => {
@@ -35,7 +34,7 @@ export class ShoppingClient {
         })
       ),
       category: this.category,
-     info: this.info.length > 0 ? this.info : undefined
+      info: this.info.length > 0 ? this.info : undefined
     };
 
     this.store.costs.unshift(billCost);
@@ -47,39 +46,41 @@ export class ShoppingClient {
     const target = event.target as HTMLInputElement;
     let chosenValue: CategoryType;
 
-    if (target.value === "Bill") chosenValue = 'bill';
-    else if (target.value === 'Health care') chosenValue = 'health';
-    else if (target.value === 'Car exploatation') chosenValue = 'car';
-    else chosenValue = 'bill';
-    
+    if (target.value === 'Bill') {
+      chosenValue = 'bill';
+    } else if (target.value === 'Health care') {
+      chosenValue = 'health';
+    } else if (target.value === 'Car exploatation') {
+      chosenValue = 'car';
+    } else {
+      chosenValue = 'bill';
+    }
+
     this.chosenItems[0] = chosenValue;
     this.category = chosenValue;
-
   };
 
-  changeNewSpendingCounter = (
-    event: React.FormEvent<EventTarget>
-  ): void => {
+  changeNewSpendingCounter = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
 
-    if (parseInt(target.value) > 0) {
-      this.count = parseInt(target.value);
+    if (parseInt(target.value, 10) > 0) {
+      this.count = parseInt(target.value, 10);
     } else {
       target.value = '0';
       this.count = 0;
     }
   };
 
-  changeNewSpendingInfo = (
-    event: React.FormEvent<EventTarget>
-  ): void => {
+  changeNewSpendingInfo = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
 
-   this.info = target.value;
+    this.info = target.value;
   };
 
   finishShopping = (): void => {
-    if (this.count < 1) return;
+    if (this.count < 1) {
+      return;
+    }
 
     const newSelected: Item[] = [];
     let newItems: Item[] = [];
@@ -90,7 +91,9 @@ export class ShoppingClient {
       if (item.checked) {
         newItems.push(item);
         chosenItems.push(item.name);
-      } else newSelected.push(item);
+      } else {
+        newSelected.push(item);
+      }
     });
 
     const cost: Cost = {
