@@ -68,7 +68,7 @@ const appRouter = app => {
       const { oldItem, newItem } = req.body;
 
       users.updateOne(
-        { "items.name": oldItem.name },
+        { usr: req.headers.id, "items.name": oldItem.name },
         {
           $set: {
             "items.$.name": newItem.name,
@@ -125,7 +125,7 @@ const appRouter = app => {
       const { oldItem, newItem } = req.body;
 
       users.updateOne(
-        { "selected.name": oldItem.name },
+        { usr: req.headers.id, "selected.name": oldItem.name },
         {
           $set: {
             "selected.$.name": newItem.name,
