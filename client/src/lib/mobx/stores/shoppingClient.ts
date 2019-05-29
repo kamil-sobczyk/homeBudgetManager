@@ -21,6 +21,7 @@ export class ShoppingClient {
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
     this.store.apiClient.addCostOnServer(cost);
+
   };
 
   addNewSpending = () => {

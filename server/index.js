@@ -23,6 +23,7 @@ const appRouter = app => {
     });
     db.on("close", () => {
       connection.removeAllListeners();
+      connection.close();
     });
   });
 
@@ -177,25 +178,23 @@ const appRouter = app => {
     })
     .post((req, res) => {
       const users = res.users;
-      const { cost } = req.body.cost;
 
-      users.updateOne(
-        { usr: req.headers.id },
-        {
-          $push: {
-            costs: {
-              $each: [cost],
-              $position: 0
-            }
-          }
-        },
-        (err, data) => {
+      console.log('cost', req.body.cost)
+
+      users
+        .findOneAndUpdate(
+          { usr: req.headers.id },
+          { $push: { costs: req.body.cost } },
+          { useFindAndModify: false }
+        )
+        .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
             return;
+          } else {
+            console.log('resp',resp);
           }
-        }
-      );
+        });
     });
 
   app.put("/store", (req, res) => {
