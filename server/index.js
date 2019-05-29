@@ -1,6 +1,7 @@
 const store = require("./store");
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
+const functions = require("./data/functions");
 
 const url = "mongodb://localhost:27017/shop";
 const newUserProfile = id => {
@@ -43,7 +44,7 @@ const appRouter = app => {
           });
           res.status(200).send(newUser.items);
         } else {
-          res.status(200).send(sortItemsByName(resp.items));
+          res.status(200).send(sortByName(resp.items));
         }
       });
     })
@@ -121,11 +122,9 @@ const appRouter = app => {
           });
           res.status(200).send(newUser.selected);
         } else {
-          res.status(200).send(resp.selected);
+          res.status(200).send(sortByCheckedValue(resp.selected));
         }
       });
-
-      sortSelectedByCheckedValue(req.headers.id);
     })
     .put((req, res) => {
       const { index, newItem } = req.body;
@@ -166,74 +165,68 @@ const appRouter = app => {
     const users = res.users;
 
     users
-    .findOneAndUpdate(
-      { usr: req.headers.id },
-      { $pull: { items: {} } },
-      { useFindAndModify: false }
-    )
-    .exec((err, resp) => {
-      if (err) {
-        console.log("error ", err);
-        return;
-      }
-    });
+      .findOneAndUpdate(
+        { usr: req.headers.id },
+        { $pull: { items: {} } },
+        { useFindAndModify: false }
+      )
+      .exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+      });
 
     users
-    .findOneAndUpdate(
-      { usr: req.headers.id },
-      { $push: { items } },
-      { useFindAndModify: false }
-    )
-    .exec((err, resp) => {
-      if (err) {
-        console.log("error ", err);
-        return;
-      }
-    });
+      .findOneAndUpdate(
+        { usr: req.headers.id },
+        { $push: { items } },
+        { useFindAndModify: false }
+      )
+      .exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+      });
 
     users
-    .findOneAndUpdate(
-      { usr: req.headers.id },
-      { $pull: { selected: {} } },
-      { useFindAndModify: false }
-    )
-    .exec((err, resp) => {
-      if (err) {
-        console.log("error ", err);
-        return;
-      }
-    });
+      .findOneAndUpdate(
+        { usr: req.headers.id },
+        { $pull: { selected: {} } },
+        { useFindAndModify: false }
+      )
+      .exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+      });
 
     users
-    .findOneAndUpdate(
-      { usr: req.headers.id },
-      { $push: { selected } },
-      { useFindAndModify: false }
-    )
-    .exec((err, resp) => {
-      if (err) {
-        console.log("error ", err);
-        return;
-      }
-    });
-
-    // if (items !== store[req.headers.id].items)
-    //   store[req.headers.id].items = items;
-    // if (selected !== store[req.headers.id].selected)
-    //   store[req.headers.id].selected = selected;
-    // res.status(200).json(store[req.headers.id]);
+      .findOneAndUpdate(
+        { usr: req.headers.id },
+        { $push: { selected } },
+        { useFindAndModify: false }
+      )
+      .exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+      });
   });
 };
 
 module.exports = appRouter;
 
-const sortItemsByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
+const sortByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
 
-const sortSelectedByCheckedValue = id => {
+const sortByCheckedValue = items => {
   let checkedItems = [];
   let uncheckedItems = [];
-  store[id].selected.forEach(item =>
+  items.forEach(item =>
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
-  store[id].selected = [...checkedItems, ...uncheckedItems];
+  return [...checkedItems, ...uncheckedItems];
 };
