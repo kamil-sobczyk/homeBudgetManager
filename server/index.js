@@ -142,11 +142,23 @@ const appRouter = app => {
     });
 
   app.put("/store/checked", (req, res) => {
-    const { index } = req.body;
-    if (store[req.headers.id].selected[index]) {
-      store[req.headers.id].selected[index].checked = !store[req.headers.id]
-        .selected[index].checked;
-    }
+    const users = res.users;
+    const { item } = req.body;
+
+    users.updateOne(
+      { usr: req.headers.id, "selected.name": item.name },
+      {
+        $set: {
+          "selected.$.checked": item.checked
+        }
+      },
+      (err, data) => {
+        if (err) {
+          console.log("error ", err);
+          return;
+        }
+      }
+    );
   });
 
   app
