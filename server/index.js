@@ -184,7 +184,7 @@ const appRouter = app => {
       users
         .findOneAndUpdate(
           { usr: req.headers.id },
-          { $push: { costs: req.body.cost } },
+          { '$push': { costs: {'$each': [req.body.cost], '$position': 0} } },
           { useFindAndModify: false }
         )
         .exec((err, resp) => {
