@@ -13,17 +13,31 @@ const newUserProfile = id => {
 };
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
-    mongoose.connect(url, { useNewUrlParser: true });
+    mongoose.connect(url, {
+      useNewUrlParser: true
+    });
     const db = mongoose.connection;
     const UserModel = mongoose.model("users", userSchema);
     db.on("error", console.error.bind(console, "connection error:"));
     db.once("open", () => {
       res.users = UserModel;
+      res.db = db;
       next();
     });
     db.on("close", () => {
-      connection.removeAllListeners();
-      connection.close();
+      mongoose.disconnect();
+      db.removeAllListeners();
+    });
+    db.on("disconnected", () => {
+      console.log("Mongoose default connection is disconnected");
+    });
+    process.on("SIGINT", () => {
+      db.close(() => {
+        console.log(
+          "Mongoose default connection is disconnected due to application termination"
+        );
+        process.exit(0);
+      });
     });
   });
 
@@ -32,9 +46,10 @@ const appRouter = app => {
     .get((req, res) => {
       const users = res.users;
 
-      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+      users.findOne({ usr: req.headers.id }).exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
         if (!resp) {
@@ -48,7 +63,7 @@ const appRouter = app => {
         }
       });
     })
-    .post((req, res) => {
+    .post((req, res, next) => {
       const users = res.users;
 
       users
@@ -57,12 +72,15 @@ const appRouter = app => {
           { $push: { items: req.body.item } },
           { useFindAndModify: false }
         )
-        .exec((err, resp) => {
+        .exec(async (err, resp) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         });
+
+      res.status(200).send({});
     })
     .put((req, res) => {
       const users = res.users;
@@ -79,10 +97,12 @@ const appRouter = app => {
         (err, data) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         }
       );
+      res.status(200).send({});
     })
     .delete((req, res) => {
       const users = res.users;
@@ -92,12 +112,14 @@ const appRouter = app => {
           { usr: req.headers.id },
           { $pull: { items: { name: req.body.name } } }
         )
-        .exec((err, resp) => {
+        .exec(async (err, resp) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         });
+      res.status(200).send({});
     });
 
   app
@@ -105,9 +127,10 @@ const appRouter = app => {
     .get((req, res) => {
       const users = res.users;
 
-      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+      users.findOne({ usr: req.headers.id }).exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
         if (!resp) {
@@ -136,10 +159,12 @@ const appRouter = app => {
         (err, data) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         }
       );
+      res.status(200).send({});
     });
 
   app.put("/store/checked", (req, res) => {
@@ -156,10 +181,12 @@ const appRouter = app => {
       (err, data) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       }
     );
+    res.status(200).send({});
   });
 
   app
@@ -167,34 +194,32 @@ const appRouter = app => {
     .get((req, res) => {
       const users = res.users;
 
-      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+      users.findOne({ usr: req.headers.id }).exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
           return;
         }
-        res.status(200).send(resp.costs);
+        await res.status(200).send(resp.costs);
       });
     })
     .post((req, res) => {
       const users = res.users;
 
-      console.log('cost', req.body.cost)
-
       users
         .findOneAndUpdate(
           { usr: req.headers.id },
-          { '$push': { costs: {'$each': [req.body.cost], '$position': 0} } },
+          { $push: { costs: { $each: [req.body.cost], $position: 0 } } },
           { useFindAndModify: false }
         )
-        .exec((err, resp) => {
+        .exec(async (err, resp) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
-          } else {
-            console.log('resp',resp);
           }
         });
+      res.status(200).send({});
     });
 
   app.put("/store", (req, res) => {
@@ -207,9 +232,10 @@ const appRouter = app => {
         { $pull: { items: {} } },
         { useFindAndModify: false }
       )
-      .exec((err, resp) => {
+      .exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
@@ -220,9 +246,10 @@ const appRouter = app => {
         { $push: { items } },
         { useFindAndModify: false }
       )
-      .exec((err, resp) => {
+      .exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
@@ -233,9 +260,10 @@ const appRouter = app => {
         { $pull: { selected: {} } },
         { useFindAndModify: false }
       )
-      .exec((err, resp) => {
+      .exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
@@ -246,12 +274,14 @@ const appRouter = app => {
         { $push: { selected } },
         { useFindAndModify: false }
       )
-      .exec((err, resp) => {
+      .exec(async (err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
+    res.status(200).send({});
   });
 };
 
