@@ -30,8 +30,6 @@ export class ProvidedSelected extends React.Component<
       setVisibleDialog
     } = this.props;
 
-
-    console.log(selected);
     return (
       <List
         innerRef={provided.innerRef}
