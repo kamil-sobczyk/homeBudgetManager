@@ -37,7 +37,7 @@ export class App extends React.Component<{}, {}> {
       visibleDialog
     } = this.store.visibilityClient;
 
-    if (localStorage.id) {
+    if (sessionStorage.id) {
       return (
         <Provider store={this.store}>
           <Container>

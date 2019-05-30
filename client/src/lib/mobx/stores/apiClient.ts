@@ -21,15 +21,15 @@ export class ApiClient {
   }
 
   @observable headers: Headers = {
-    token: localStorage.googleToken || '',
-    id: localStorage.id || ''
+    token: sessionStorage.googleToken || '',
+    id: sessionStorage.id || ''
   };
 
   setUser = (token: string, id: string): void => {
     
-    if (!localStorage.id) {
-      localStorage.googleToken = token;
-      localStorage.id = id;
+    if (!sessionStorage.id) {
+      sessionStorage.googleToken = token;
+      sessionStorage.id = id;
     } else {
       this.headers.token = token;
       this.headers.id = id;
