@@ -39,6 +39,7 @@ const appRouter = app => {
         process.exit(0);
       });
     });
+    process.setMaxListeners(0);
   });
 
   app
@@ -46,7 +47,7 @@ const appRouter = app => {
     .get((req, res) => {
       const users = res.users;
 
-      users.findOne({ usr: req.headers.id }).exec(async (err, resp) => {
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
@@ -72,7 +73,7 @@ const appRouter = app => {
           { $push: { items: req.body.item } },
           { useFindAndModify: false }
         )
-        .exec(async (err, resp) => {
+        .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
             res.status(500);
@@ -112,7 +113,7 @@ const appRouter = app => {
           { usr: req.headers.id },
           { $pull: { items: { name: req.body.name } } }
         )
-        .exec(async (err, resp) => {
+        .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
             res.status(500);
@@ -127,7 +128,7 @@ const appRouter = app => {
     .get((req, res) => {
       const users = res.users;
 
-      users.findOne({ usr: req.headers.id }).exec(async (err, resp) => {
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
@@ -194,13 +195,13 @@ const appRouter = app => {
     .get((req, res) => {
       const users = res.users;
 
-      users.findOne({ usr: req.headers.id }).exec(async (err, resp) => {
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
           return;
         }
-        await res.status(200).send(resp.costs);
+        res.status(200).send(resp.costs);
       });
     })
     .post((req, res) => {
@@ -212,7 +213,7 @@ const appRouter = app => {
           { $push: { costs: { $each: [req.body.cost], $position: 0 } } },
           { useFindAndModify: false }
         )
-        .exec(async (err, resp) => {
+        .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
             res.status(500);
@@ -232,7 +233,7 @@ const appRouter = app => {
         { $pull: { items: {} } },
         { useFindAndModify: false }
       )
-      .exec(async (err, resp) => {
+      .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
@@ -246,7 +247,7 @@ const appRouter = app => {
         { $push: { items } },
         { useFindAndModify: false }
       )
-      .exec(async (err, resp) => {
+      .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
@@ -260,7 +261,7 @@ const appRouter = app => {
         { $pull: { selected: {} } },
         { useFindAndModify: false }
       )
-      .exec(async (err, resp) => {
+      .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
@@ -274,7 +275,7 @@ const appRouter = app => {
         { $push: { selected } },
         { useFindAndModify: false }
       )
-      .exec(async (err, resp) => {
+      .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
           res.status(500);
