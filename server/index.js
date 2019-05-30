@@ -1,4 +1,3 @@
-const store = require("./store");
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
 
@@ -11,6 +10,7 @@ const newUserProfile = id => {
     costs: []
   };
 };
+
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
     mongoose.connect(url, {

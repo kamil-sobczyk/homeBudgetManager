@@ -4,10 +4,6 @@ const bodyParser = require("body-parser");
 const routes = require("./index.js");
 const app = express();
 const cors = require("cors");
-const fastify = require('fastify')({  logger: true})
-
-
-const store = require('./store');
 
 const PORT = 8080;
 const HOST = "localhost";
@@ -16,13 +12,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use((req, res, next) => {
-  if (!store[req.headers.id]) {
-    store[req.headers.id] = {
-      items:[],
-      selected:[],
-      costs: []
-    }
-  }
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
