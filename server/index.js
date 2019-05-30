@@ -2,14 +2,6 @@ const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
 
 const url = "mongodb://localhost:27017/shop";
-const newUserProfile = id => {
-  return {
-    usr: id,
-    items: [],
-    selected: [],
-    costs: []
-  };
-};
 
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
@@ -297,4 +289,13 @@ const sortByCheckedValue = items => {
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
   return [...checkedItems, ...uncheckedItems];
+};
+
+const newUserProfile = id => {
+  return {
+    usr: id,
+    items: [],
+    selected: [],
+    costs: []
+  };
 };
