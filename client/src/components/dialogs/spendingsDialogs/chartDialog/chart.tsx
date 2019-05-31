@@ -17,6 +17,24 @@ import {
 import { splitCosts } from './dataFunctions';
 import styled from 'styled-components';
 
+const chartLegendBars = [
+  {
+    color: 'blue',
+    key: 'bills'
+  },
+  {
+    color: 'black',
+    key: 'shopping'
+  },
+  {
+    color: 'green',
+    key: 'health'
+  },
+  {
+    color: 'red',
+    key: 'car'
+  }
+];
 
 interface ChartProps {
   costs: Cost[];
@@ -40,10 +58,9 @@ export class Chart extends React.Component<ChartProps, {}> {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey='bills' fill='blue' />
-        <Bar dataKey='shopping' fill='black' />
-        <Bar dataKey='health' fill='green' />
-        <Bar dataKey='car' fill='red' />
+        {chartLegendBars.map(item => (
+          <Bar dataKey={item.key} fill={item.color} />
+        ))}
       </StyledBarChart>
     );
   }
