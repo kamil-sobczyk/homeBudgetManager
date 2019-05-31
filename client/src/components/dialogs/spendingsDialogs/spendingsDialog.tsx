@@ -63,4 +63,6 @@ export const StyledDialogTitle = styled(DialogTitle)`
 `;
 
 const StyledDialog = styled(Dialog)`
-height: 100vh`
+height: 100vh;
+padding-bottom: 15px;
+`

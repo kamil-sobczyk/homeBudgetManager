@@ -50,7 +50,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
       ];
     }
     return (
-      <DataTable stickyRows={1}>
+      <StyledDataTable stickyRows={1}>
         <DataTableContent>
           <DataTableHead>
             <DataTableRow>
@@ -80,22 +80,20 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             ))}
           </DataTableBody>
         </DataTableContent>
-      </DataTable>
+      </StyledDataTable>
     );
   }
 }
 
 const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
-  /* display: flex; */
-  /* flex-grow: 3; */
-/*  
-  width: 20%; */
 `;
 
 const StyledDataTableHeadCell = styled(DataTableHeadCell)`
   text-align: center;
-  /* width: 20%; */
-
 `;
+
+const StyledDataTable = styled(DataTable)`
+margin: 10px 0 0 -10px;
+`
 
