@@ -67,7 +67,7 @@ export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
     <StyledTypography use='subtitle1'>This month you spent:</StyledTypography>
     {costCounterItems.map(item => (
       <>
-        <ColoredIcon color={item.color} />
+        <ColoredIcon color={item.color} key={item.color} />
         {countCosts(costs, item.text) + ' zł'}
       </>
     ))}

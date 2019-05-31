@@ -59,7 +59,7 @@ export class Chart extends React.Component<ChartProps, {}> {
         <Tooltip />
         <Legend />
         {chartLegendBars.map(item => (
-          <Bar dataKey={item.key} fill={item.color} />
+          <Bar dataKey={item.key} fill={item.color} key={item.key} />
         ))}
       </StyledBarChart>
     );

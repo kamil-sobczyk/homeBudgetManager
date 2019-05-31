@@ -27,7 +27,7 @@ export const Legend = () => (
   <StyledLegendContainer>
     {legendItems.map(item => (
       <>
-        <ColoredIcon color={item.color} />
+        <ColoredIcon color={item.color} key={item.color}/>
         {item.text}{' '}
       </>
     ))}
