@@ -8,7 +8,7 @@ import { observable } from 'mobx';
 const localhost = 'http://localhost:8080/';
 const herokuApp = 'https://shopping-1111.herokuapp.com/';
 const devil = 'http://superzbieracz.pl/'
-const server = localhost;
+const server = devil;
 
 interface Headers {
   token: string;
