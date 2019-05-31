@@ -44,8 +44,8 @@ interface CostsCounterProps {
 }
 
 export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
-  <StyledTypography use='subtitle1'>
-    This month you spent:
+  <>
+    <StyledTypography use='subtitle1'>This month you spent:</StyledTypography>
     <ColoredIcon color='black' />
     {countCosts(costs, 'shopping') + ' zł'}
     <ColoredIcon color='blue' />
@@ -54,7 +54,7 @@ export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
     {countCosts(costs, 'health') + ' zł'}
     <ColoredIcon color='red' />
     {countCosts(costs, 'car') + ' zł'}
-  </StyledTypography>
+  </>
 ));
 
 const StyledTypography = styled(Typography)`
