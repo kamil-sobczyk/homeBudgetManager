@@ -23,11 +23,18 @@ interface TableContainerProps {
 }
 
 const getRowColor = (category: CategoryType) => {
-  if (category === 'shopping') return 'black';
-  else if (category === 'bill') return 'blue';
-  else if (category === 'health') return 'green';
-  else if (category === 'car') return 'red';
-  else return 'yellow';
+  switch (category) {
+    case 'shopping':
+      return 'black';
+    case 'bill':
+      return 'black';
+    case 'health':
+      return 'black';
+    case 'car':
+      return 'black';
+    default:
+      return 'yellow';
+  }
 };
 
 @observer
@@ -87,6 +94,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
 
 const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
+  border: 1px solid grey;
 `;
 
 const StyledDataTableHeadCell = styled(DataTableHeadCell)`
@@ -94,6 +102,5 @@ const StyledDataTableHeadCell = styled(DataTableHeadCell)`
 `;
 
 const StyledDataTable = styled(DataTable)`
-margin: 10px 0 0 -10px;
-`
-
+  margin: 10px 0 0 -10px;
+`;
