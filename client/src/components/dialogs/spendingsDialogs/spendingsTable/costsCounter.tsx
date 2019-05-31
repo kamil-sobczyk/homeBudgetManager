@@ -39,6 +39,25 @@ const countCosts = (costs: Cost[], category: string) => {
   return sumOfCosts;
 };
 
+const costCounterItems = [
+  {
+    color: 'black',
+    text: 'shopping'
+  },
+  {
+    color: 'blue',
+    text: 'bill'
+  },
+  {
+    color: 'green',
+    text: 'health'
+  },
+  {
+    color: 'red',
+    text: 'car'
+  }
+];
+
 interface CostsCounterProps {
   costs: Cost[];
 }
@@ -46,14 +65,12 @@ interface CostsCounterProps {
 export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
   <>
     <StyledTypography use='subtitle1'>This month you spent:</StyledTypography>
-    <ColoredIcon color='black' />
-    {countCosts(costs, 'shopping') + ' zł'}
-    <ColoredIcon color='blue' />
-    {countCosts(costs, 'bill') + ' zł'}
-    <ColoredIcon color='green' />
-    {countCosts(costs, 'health') + ' zł'}
-    <ColoredIcon color='red' />
-    {countCosts(costs, 'car') + ' zł'}
+    {costCounterItems.map(item => (
+      <>
+        <ColoredIcon color={item.color} />
+        {countCosts(costs, item.text) + ' zł'}
+      </>
+    ))}
   </>
 ));
 
