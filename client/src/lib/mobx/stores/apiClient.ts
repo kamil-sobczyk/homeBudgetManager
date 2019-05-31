@@ -1,14 +1,11 @@
 import axios from 'axios';
 
+import { server } from '../../../../config.ts'
+
 import { Store } from '../rootStore';
 
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
-
-const localhost = 'http://localhost:8080/';
-const herokuApp = 'https://shopping-1111.herokuapp.com/';
-const devil = 'http://superzbieracz.pl/'
-const server = devil;
 
 interface Headers {
   token: string;
