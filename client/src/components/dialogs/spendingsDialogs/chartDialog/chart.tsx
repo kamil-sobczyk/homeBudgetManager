@@ -15,6 +15,8 @@ import {
 } from 'recharts';
 
 import { splitCosts } from './dataFunctions';
+import styled from 'styled-components';
+
 
 interface ChartProps {
   costs: Cost[];
@@ -27,18 +29,26 @@ export class Chart extends React.Component<ChartProps, {}> {
     this.props.getCosts();
   };
   render() {
-      return (
-          <BarChart width={530} height={250} data={splitCosts(this.props.costs)}>
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey='bills' fill='blue' />
-            <Bar dataKey='shopping' fill='black' />
-            <Bar dataKey='health' fill='green' />
-            <Bar dataKey='car' fill='red' />
-          </BarChart>
+    return (
+      <StyledBarChart
+        width={335}
+        height={250}
+        data={splitCosts(this.props.costs)}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='name' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey='bills' fill='blue' />
+        <Bar dataKey='shopping' fill='black' />
+        <Bar dataKey='health' fill='green' />
+        <Bar dataKey='car' fill='red' />
+      </StyledBarChart>
     );
   }
 }
+
+const StyledBarChart = styled(BarChart)`
+  margin-left: -40px;
+`;
