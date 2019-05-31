@@ -4,16 +4,33 @@ import styled from 'styled-components';
 
 import { ColoredIcon } from './coloredIcon';
 
+const legendItems = [
+  {
+    color: 'black',
+    text: 'Shopping'
+  },
+  {
+    color: 'blue',
+    text: 'Bills'
+  },
+  {
+    color: 'green',
+    text: 'Health'
+  },
+  {
+    color: 'red',
+    text: 'Car'
+  }
+];
+
 export const Legend = () => (
   <StyledLegendContainer>
-    <ColoredIcon color='black' />
-    Shopping
-    <ColoredIcon color='blue' />
-    Bills
-    <ColoredIcon color='green' />
-    Health
-    <ColoredIcon color='red' />
-    Car
+    {legendItems.map(item => (
+      <>
+        <ColoredIcon color={item.color} />
+        {item.text}{' '}
+      </>
+    ))}
   </StyledLegendContainer>
 );
 
