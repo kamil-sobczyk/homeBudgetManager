@@ -50,13 +50,13 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
       ];
     }
     return (
-      <StyledDataTable stickyRows={1}>
-        <StyledDataTableContent>
+      <DataTable stickyRows={1}>
+        <DataTableContent>
           <DataTableHead>
             <DataTableRow>
               <StyledDataTableHeadCell>Items</StyledDataTableHeadCell>
               <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
-              <StyledDataTableHeadCell alignEnd>Cost</StyledDataTableHeadCell>
+              <StyledDataTableHeadCell>Cost</StyledDataTableHeadCell>
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
@@ -79,26 +79,23 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
               </DataTableRow>
             ))}
           </DataTableBody>
-        </StyledDataTableContent>
-      </StyledDataTable>
+        </DataTableContent>
+      </DataTable>
     );
   }
 }
 
-const StyledDataTableContent = styled(DataTableContent)`
-  width: 100%;
-`;
-
 const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
+  /* display: flex; */
+  /* flex-grow: 3; */
+/*  
+  width: 20%; */
 `;
 
 const StyledDataTableHeadCell = styled(DataTableHeadCell)`
   text-align: center;
+  /* width: 20%; */
+
 `;
 
-const StyledDataTable = styled(DataTable)`
-  width: 500px;
-  height: 600px;
-  overflow: hidden;
-`;

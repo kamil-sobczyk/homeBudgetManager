@@ -18,6 +18,7 @@ export const Legend = () => (
 );
 
 const StyledLegendContainer = styled.div`
+margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: baseline;
