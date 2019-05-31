@@ -2,10 +2,10 @@ require("rootpath")();
 const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./index.js");
+const { port } = require('./config');
 const app = express();
 const cors = require("cors");
 
-const PORT = 8080;
 const HOST = "localhost";
 
 app.use(bodyParser.json());
@@ -22,5 +22,5 @@ app.use((req, res, next) => {
 
 routes(app);
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+app.listen(port, HOST);
+console.log(`Running on http://${HOST}:${port}`);

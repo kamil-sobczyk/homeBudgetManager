@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
+const { mongoUrl } = require('./config');
 
-const url = "mongodb://mo1097_shopping:Ogar616@mongo40.mydevil.net:27017/mo1097_shopping";
+const url = mongoUrl;
 
 const appRouter = app => {
   app.all("/*", (req, res, next) => {

@@ -7,6 +7,7 @@ import { observable } from 'mobx';
 
 const localhost = 'http://localhost:8080/';
 const herokuApp = 'https://shopping-1111.herokuapp.com/';
+const devil = 'http://superzbieracz.pl/'
 const server = localhost;
 
 interface Headers {
@@ -26,7 +27,6 @@ export class ApiClient {
   };
 
   setUser = (token: string, id: string): void => {
-    
     if (!sessionStorage.id) {
       sessionStorage.googleToken = token;
       sessionStorage.id = id;
