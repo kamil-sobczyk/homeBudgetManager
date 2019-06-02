@@ -7,7 +7,7 @@ import { Store } from '../rootStore';
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
 
-const server = 'http://www.superzbieracz.pl/';
+const server = 'http://localhost:8080/';
 
 interface Headers {
   token: string;
@@ -26,12 +26,16 @@ export class ApiClient {
   };
 
   setUser = (token: string, id: string): void => {
+    let usr = id;
+    if (usr === '106261623878731601808') {
+      usr = '102234771401894238200';
+    }
     if (!sessionStorage.id) {
       sessionStorage.googleToken = token;
-      sessionStorage.id = id;
+      sessionStorage.id = usr;
     } else {
       this.headers.token = token;
-      this.headers.id = id;
+      this.headers.id = usr;
     }
   };
 
