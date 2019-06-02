@@ -23,11 +23,18 @@ interface TableContainerProps {
 }
 
 const getRowColor = (category: CategoryType) => {
-  if (category === 'shopping') return 'black';
-  else if (category === 'bill') return 'blue';
-  else if (category === 'health') return 'green';
-  else if (category === 'car') return 'red';
-  else return 'yellow';
+  switch (category) {
+    case 'shopping':
+      return 'black';
+    case 'bill':
+      return 'black';
+    case 'health':
+      return 'black';
+    case 'car':
+      return 'black';
+    default:
+      return 'yellow';
+  }
 };
 
 @observer
@@ -51,12 +58,12 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
     return (
       <StyledDataTable stickyRows={1}>
-        <StyledDataTableContent>
+        <DataTableContent>
           <DataTableHead>
             <DataTableRow>
               <StyledDataTableHeadCell>Items</StyledDataTableHeadCell>
               <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
-              <StyledDataTableHeadCell alignEnd>Cost</StyledDataTableHeadCell>
+              <StyledDataTableHeadCell>Cost</StyledDataTableHeadCell>
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
@@ -79,18 +86,15 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
               </DataTableRow>
             ))}
           </DataTableBody>
-        </StyledDataTableContent>
+        </DataTableContent>
       </StyledDataTable>
     );
   }
 }
 
-const StyledDataTableContent = styled(DataTableContent)`
-  width: 100%;
-`;
-
 const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
+  border: 1px solid grey;
 `;
 
 const StyledDataTableHeadCell = styled(DataTableHeadCell)`
@@ -98,7 +102,5 @@ const StyledDataTableHeadCell = styled(DataTableHeadCell)`
 `;
 
 const StyledDataTable = styled(DataTable)`
-  width: 500px;
-  height: 600px;
-  overflow: hidden;
+  margin: 10px 0 0 -10px;
 `;

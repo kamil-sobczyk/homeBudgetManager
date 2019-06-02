@@ -23,10 +23,8 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     } = this.props;
 
     const responseGoogle = (response: any) => {
-      if (response.profileObj) {
         setUser(response.accessToken, response.googleId);
         setVisibleDialog();
-      }
     };
 
     const responseGoogleFailure = (response: GoogleLogin) => {

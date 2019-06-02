@@ -1,13 +1,11 @@
 import axios from 'axios';
 
+import { server } from '../../../../config.ts'
+
 import { Store } from '../rootStore';
 
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
-
-const localhost = 'http://localhost:8080/';
-const herokuApp = 'https://shopping-1111.herokuapp.com/';
-const server = localhost;
 
 interface Headers {
   token: string;
@@ -21,15 +19,14 @@ export class ApiClient {
   }
 
   @observable headers: Headers = {
-    token: localStorage.googleToken || '',
-    id: localStorage.id || ''
+    token: sessionStorage.googleToken || '',
+    id: sessionStorage.id || ''
   };
 
   setUser = (token: string, id: string): void => {
-    
-    if (!localStorage.id) {
-      localStorage.googleToken = token;
-      localStorage.id = id;
+    if (!sessionStorage.id) {
+      sessionStorage.googleToken = token;
+      sessionStorage.id = id;
     } else {
       this.headers.token = token;
       this.headers.id = id;

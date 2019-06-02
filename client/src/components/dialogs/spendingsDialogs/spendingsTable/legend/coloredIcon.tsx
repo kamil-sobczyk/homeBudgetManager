@@ -23,5 +23,5 @@ export const ColoredIcon = (props: ColoredIconProps) => (
 );
 
 const StyledColorIcon = styled(Icon)`
-  margin: 0 5px 0 25px;
+  margin: 0 5px 2px 25px;
 `;

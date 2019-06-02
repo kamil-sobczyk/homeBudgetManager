@@ -1,30 +1,38 @@
-const store = require("./store");
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
+const { mongoUrl } = require('./config');
 
-const url = "mongodb://localhost:27017/shop";
-const newUserProfile = id => {
-  return {
-    usr: id,
-    items: [],
-    selected: [],
-    costs: []
-  };
-};
+const url = mongoUrl;
+
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
-    mongoose.connect(url, { useNewUrlParser: true });
+    mongoose.connect(url, {
+      useNewUrlParser: true
+    });
     const db = mongoose.connection;
     const UserModel = mongoose.model("users", userSchema);
     db.on("error", console.error.bind(console, "connection error:"));
     db.once("open", () => {
       res.users = UserModel;
+      res.db = db;
       next();
     });
     db.on("close", () => {
-      connection.removeAllListeners();
-      connection.close();
+      mongoose.disconnect();
+      db.removeAllListeners();
     });
+    db.on("disconnected", () => {
+      console.log("Mongoose default connection is disconnected");
+    });
+    process.on("SIGINT", () => {
+      db.close(() => {
+        console.log(
+          "Mongoose default connection is disconnected due to application termination"
+        );
+        process.exit(0);
+      });
+    });
+    process.setMaxListeners(0);
   });
 
   app
@@ -35,6 +43,7 @@ const appRouter = app => {
       users.findOne({ usr: req.headers.id }).exec((err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
         if (!resp) {
@@ -48,7 +57,7 @@ const appRouter = app => {
         }
       });
     })
-    .post((req, res) => {
+    .post((req, res, next) => {
       const users = res.users;
 
       users
@@ -60,9 +69,12 @@ const appRouter = app => {
         .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         });
+
+      res.status(200).send({});
     })
     .put((req, res) => {
       const users = res.users;
@@ -79,10 +91,12 @@ const appRouter = app => {
         (err, data) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         }
       );
+      res.status(200).send({});
     })
     .delete((req, res) => {
       const users = res.users;
@@ -95,9 +109,11 @@ const appRouter = app => {
         .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         });
+      res.status(200).send({});
     });
 
   app
@@ -108,6 +124,7 @@ const appRouter = app => {
       users.findOne({ usr: req.headers.id }).exec((err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
         if (!resp) {
@@ -136,10 +153,12 @@ const appRouter = app => {
         (err, data) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         }
       );
+      res.status(200).send({});
     });
 
   app.put("/store/checked", (req, res) => {
@@ -156,10 +175,12 @@ const appRouter = app => {
       (err, data) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       }
     );
+    res.status(200).send({});
   });
 
   app
@@ -188,9 +209,11 @@ const appRouter = app => {
         .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
+            res.status(500);
             return;
           }
         });
+      res.status(200).send({});
     });
 
   app.put("/store", (req, res) => {
@@ -206,6 +229,7 @@ const appRouter = app => {
       .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
@@ -219,6 +243,7 @@ const appRouter = app => {
       .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
@@ -232,6 +257,7 @@ const appRouter = app => {
       .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
@@ -245,9 +271,11 @@ const appRouter = app => {
       .exec((err, resp) => {
         if (err) {
           console.log("error ", err);
+          res.status(500);
           return;
         }
       });
+    res.status(200).send({});
   });
 };
 
@@ -262,4 +290,13 @@ const sortByCheckedValue = items => {
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
   return [...checkedItems, ...uncheckedItems];
+};
+
+const newUserProfile = id => {
+  return {
+    usr: id,
+    items: [],
+    selected: [],
+    costs: []
+  };
 };

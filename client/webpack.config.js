@@ -18,6 +18,7 @@ if (env !== 'preproduction') {
   plugins.push(
     ...[
       new HtmlWebpackPlugin({
+        favicon: './src/lib/assets/favicon.ico',
         inject: true,
         templateParameters: {
           userlane: env === 'production',

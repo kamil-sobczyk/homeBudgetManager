@@ -1,0 +1,14 @@
+
+{
+  "short_name": "HBM",
+  "name": "Home Budget Menager",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "type": "image/ico",
+      "sizes": "192x192"
+    }
+  ],
+  "display": "standalone",
+  "orientation": "portrait"
+}

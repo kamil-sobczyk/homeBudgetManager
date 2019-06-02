@@ -16,7 +16,6 @@ import { Button } from '@rmwc/button';
 import { TableContainer } from './spendingsTable/tableContainer';
 import { CostsCounter } from './spendingsTable/costsCounter';
 import { Legend } from './spendingsTable/legend/legend';
-import { IconButton } from '@rmwc/icon-button';
 
 interface SpendingsDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -32,7 +31,7 @@ export const SpendingsDialog = observer(
     setVisibleDialog,
     visibleDialog
   }: SpendingsDialogProps) => (
-    <Dialog
+    <StyledDialog
       open={visibleDialog === 'SpendingsDialog'}
       aria-label='shopping-you-made'
     >
@@ -53,7 +52,7 @@ export const SpendingsDialog = observer(
           Close
         </Button>
       </DialogActions>
-    </Dialog>
+    </StyledDialog>
   )
 );
 
@@ -62,3 +61,8 @@ export const StyledDialogTitle = styled(DialogTitle)`
   justify-content: center;
   margin-top: 20px;
 `;
+
+const StyledDialog = styled(Dialog)`
+height: 100vh;
+padding-bottom: 15px;
+`
