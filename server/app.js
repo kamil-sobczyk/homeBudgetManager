@@ -2,10 +2,11 @@ require("rootpath")();
 const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./index.js");
-const { port } = require('./config');
+// const { port } = require('./config');
 const app = express();
 const cors = require("cors");
 
+const port = 8080;
 const HOST = "localhost";
 
 app.use(bodyParser.json());
