@@ -22,7 +22,7 @@ export class NavbarSectionLeft extends React.Component<
       <TopAppBarSection alignStart>
         <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
         <StyledTopAppBarTitle onClick={() => setVisibleDialog('AboutDialog')}>
-          Home Budget Menager
+          Budget Menager
         </StyledTopAppBarTitle>
       </TopAppBarSection>
     );
