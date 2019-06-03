@@ -25,9 +25,6 @@ const countCosts = (costs: Cost[], category: CategoryType) => {
     dateNow = `0${dateNow}`;
   }
 
-  console.log(JSON.stringify(costs));
-  console.log(JSON.stringify(dateNow));
-
   if (costs.length > 0) {
     monthCosts = costs.filter(
       cost => cost.date[3] === dateNow[3] && cost.date[4] === dateNow[4]
