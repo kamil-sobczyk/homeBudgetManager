@@ -6,9 +6,11 @@ import { ColoredIcon } from './coloredIcon';
 
 type LegendColor = 'black' | 'blue' | 'green' | 'red';
 
+type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car';
+
 interface LegendItem {
   color: LegendColor;
-  text: string;
+  text: LegendText;
 }
 
 const legendItems: LegendItem[] = [
@@ -34,7 +36,7 @@ export const Legend = () => (
   <StyledLegendContainer>
     {legendItems.map((item: LegendItem) => (
       <>
-        <ColoredIcon color={item.color} key={item.color}/>
+        <ColoredIcon color={item.color} key={item.color} />
         {item.text}
       </>
     ))}
