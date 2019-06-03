@@ -14,12 +14,19 @@ import { ColoredIcon } from './legend/coloredIcon';
 const countCosts = (costs: Cost[], category: CategoryType) => {
   let sumOfCosts: number = 0;
   let monthCosts: Cost[] = [];
-  const dateNow = String(
+  let dateNow = String(
     new Date().toLocaleDateString('pl-PL', {
       hour: '2-digit',
       minute: '2-digit'
     })
   );
+
+  if (dateNow.length < 17) {
+    dateNow = `0${dateNow}`;
+  }
+
+  console.log(JSON.stringify(costs));
+  console.log(JSON.stringify(dateNow));
 
   if (costs.length > 0) {
     monthCosts = costs.filter(
