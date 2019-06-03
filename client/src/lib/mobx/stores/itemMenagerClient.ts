@@ -93,7 +93,7 @@ export class ItemMenagerClient {
     this.activeItem.list = list;
   };
 
-  addItem = (): void => {
+  AddShoppingItem = (): void => {
     const { setVisibleDialog } = this.store.visibilityClient;
 
     const allNames = [...this.store.selected, ...this.store.items].map(
@@ -103,7 +103,7 @@ export class ItemMenagerClient {
     if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
       setVisibleDialog();
-      this.store.apiClient.addItemOnServer(this.newItem);
+      this.store.apiClient.AddShoppingItemOnServer(this.newItem);
     } else {
       setVisibleDialog('FailDialog');
     }

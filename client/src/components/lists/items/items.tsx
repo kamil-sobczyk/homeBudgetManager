@@ -32,8 +32,8 @@ export class Items extends React.Component<ItemsProps, {}> {
     return (
       <StyledContainer>
         <StyledButtonsContainer>
-          <StyledAddItemIconButton
-            onClick={() => setVisibleDialog('AddItemDialog')}
+          <StyledAddShoppingItemIconButton
+            onClick={() => setVisibleDialog('AddShoppingItemDialog')}
             icon={{ icon: 'add_circle', size: 'xlarge' }}
           />
         </StyledButtonsContainer>
@@ -58,7 +58,7 @@ export const StyledContainer = styled.div`
   margin: 5px;
 `;
 
-const StyledAddItemIconButton = styled(IconButton)`
+const StyledAddShoppingItemIconButton = styled(IconButton)`
   color: #4cad4f;
   padding: 0;
 `;

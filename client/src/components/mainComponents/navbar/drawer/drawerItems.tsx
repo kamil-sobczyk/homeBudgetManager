@@ -10,7 +10,7 @@ import { GoogleLogout } from 'react-google-login';
 
 const drawerItems = [
   {
-    action: 'AddItemDialog',
+    action: 'AddShoppingItemDialog',
     icon: 'add_circle',
     iconColor: '#00bf02',
     title: "Add new Item"

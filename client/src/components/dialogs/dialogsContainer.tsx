@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { AddItemDialog } from './itemMenagementDialogs/addItemDialog';
+import { AddShoppingItemDialog } from './itemMenagementDialogs/addShoppingItemDialog';
 import { EditDialog } from './itemMenagementDialogs/editItemDialog';
 import { DeleteItemDialog } from './itemMenagementDialogs/deleteItemDialog';
 import { SpendingsDialog } from './spendingsDialogs/spendingsDialog';
@@ -39,11 +39,11 @@ export const DialogsContainer = observer(
     CalendarClient
   }: DialogsContainerProps) => (
     <>
-      {visibleDialog === 'AddItemDialog' && (
-        <AddItemDialog
+      {visibleDialog === 'AddShoppingItemDialog' && (
+        <AddShoppingItemDialog
           items={items}
           selected={selected}
-          addItem={itemMenagerClient.addItem}
+          AddShoppingItem={itemMenagerClient.AddShoppingItem}
           changeNewItem={itemMenagerClient.changeNewItem}
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
@@ -123,8 +123,7 @@ export const DialogsContainer = observer(
           visibleDialog={visibleDialog}
         />
       )}
-      {(visibleDialog === 'CalendarDialog' ||
-        visibleDialog === 'CalendarDialog+') && (
+      {visibleDialog.includes('Calendar') && (
         <CalendarDialog
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}

@@ -10,8 +10,8 @@ import { Item } from '../../../lib/interfaces';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
-interface AddItemDialogProps {
-  addItem: () => void;
+interface AddShoppingItemDialogProps {
+  AddShoppingItem: () => void;
   changeNewItem: (event: React.FormEvent<EventTarget>) => void;
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
@@ -19,14 +19,14 @@ interface AddItemDialogProps {
   selected: Item[];
 }
 
-export const AddItemDialog = observer(
+export const AddShoppingItemDialog = observer(
   ({
     changeNewItem,
-    addItem,
+    AddShoppingItem,
     setVisibleDialog,
     visibleDialog
-  }: AddItemDialogProps) => (
-    <Dialog open={visibleDialog === 'AddItemDialog'}>
+  }: AddShoppingItemDialogProps) => (
+    <Dialog open={visibleDialog === 'AddShoppingItemDialog'}>
       <StyledDialogTitle>Add a new product</StyledDialogTitle>
       <TextField
         defaultValue={''}
@@ -44,7 +44,7 @@ export const AddItemDialog = observer(
         <Button color='primary' onClick={() => setVisibleDialog()}>
           Cancel
         </Button>
-        <Button color='primary' onClick={addItem}>
+        <Button color='primary' onClick={AddShoppingItem}>
           Add
         </Button>
       </DialogActions>

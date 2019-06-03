@@ -37,10 +37,11 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       showFailSnackbar,
       setDatePicked
     } = this.props;
+
     return (
       <>
         <Dialog
-          open={visibleDialog === 'CalendarDialog'}
+          open={visibleDialog.includes('Calendar')}
           aria-labelledby='CalendarDialog'
           aria-describedby='CalendarDialog'
         >

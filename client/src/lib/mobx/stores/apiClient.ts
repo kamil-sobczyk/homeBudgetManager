@@ -110,7 +110,7 @@ export class ApiClient {
     });
   };
 
-  addItemOnServer = async (item: Item): Promise<void> => {
+  AddShoppingItemOnServer = async (item: Item): Promise<void> => {
     await axios({
       method: 'post',
       url: server + 'store/items',
