@@ -13,6 +13,8 @@ import { FailSnackbar } from './snackbar';
 interface CallendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
+  showFailSnackbar: boolean;
+  toggleShowFailSnackbar : () => boolean;
 }
 
 @observer
@@ -36,12 +38,12 @@ export class CallendarDialog extends React.Component<CallendarDialogProps, {}> {
   handleClickMore = () => {
     if (this.state.datePicked === '') {
       console.log('fail')
-      this.setState({showSnackbar: true})
+      this.props.toggleShowFailSnackbar();
     }
   }
 
   render() {
-    const { setVisibleDialog, visibleDialog } = this.props;
+    const { setVisibleDialog, visibleDialog, showFailSnackbar } = this.props;
     return (
       <>
       <Dialog
@@ -65,7 +67,7 @@ export class CallendarDialog extends React.Component<CallendarDialogProps, {}> {
           </Button>
         </DialogActions>
       </Dialog>
-      <FailSnackbar showSnackbar={this.state.showSnackbar}/>
+      <FailSnackbar showSnackbar={showFailSnackbar}/>
       </>
     );
   }

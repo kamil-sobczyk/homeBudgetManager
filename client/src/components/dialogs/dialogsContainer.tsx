@@ -124,6 +124,8 @@ export const DialogsContainer = observer(
         <CallendarDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
+          showFailSnackbar={visibilityClient.showFailSnackbar}
+          toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
         />
       )}
     </>

@@ -7,6 +7,7 @@ import { VisibityClient } from './stores/visibilityClient';
 import { DnDClient } from './stores/dndClient';
 import { ItemMenagerClient } from './stores/itemMenagerClient';
 import { ShoppingClient } from './stores/shoppingClient';
+import { CallendarClient } from './stores/callendarClient';
 
 export class Store {
   constructor() {
@@ -15,6 +16,7 @@ export class Store {
     this.dndClient = new DnDClient(this);
     this.itemMenagerClient = new ItemMenagerClient(this);
     this.shoppingClient = new ShoppingClient(this);
+    this.callendarClient = new CallendarClient(this);
   }
 
   apiClient: ApiClient;
@@ -22,6 +24,7 @@ export class Store {
   dndClient: DnDClient;
   itemMenagerClient: ItemMenagerClient;
   shoppingClient: ShoppingClient;
+  callendarClient: CallendarClient;
 
   @observable items: Item[] = [];
   @observable selected: Item[] = [];

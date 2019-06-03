@@ -11,6 +11,7 @@ export class VisibityClient {
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
   @observable showDrawer: boolean = false;
+  @observable showFailSnackbar = false;
   @observable visibleDialog = 'CallendarDialog';
 
   setVisibleDialog = (dialog?: string): void => {
@@ -23,6 +24,9 @@ export class VisibityClient {
       this.visibleDialog = dialog;
     }
   };
+
+  toggleShowFailSnackbar = (): boolean =>
+    (this.showFailSnackbar = !this.showFailSnackbar);
 
   toggleShowDrawer = (): boolean => (this.showDrawer = !this.showDrawer);
 
