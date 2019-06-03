@@ -1,14 +1,11 @@
 import axios from 'axios';
 
-// import { server } from '../../../../config.ts'
+import { server } from '../../../../config.ts'
 
 import { Store } from '../rootStore';
 
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
-
-// const server = 'http://localhost:8080/';
-const server = 'http://www.superzbieracz.pl/';
 
 interface Headers {
   token: string;
