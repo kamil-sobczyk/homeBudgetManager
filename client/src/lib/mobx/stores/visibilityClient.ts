@@ -8,7 +8,6 @@ export class VisibityClient {
   }
 
   @observable showItems: boolean = true;
-  @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
   @observable showDrawer: boolean = false;
   @observable showFailSnackbar = false;

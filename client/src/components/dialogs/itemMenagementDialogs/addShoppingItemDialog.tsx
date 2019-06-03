@@ -26,7 +26,7 @@ export const AddShoppingItemDialog = observer(
     setVisibleDialog,
     visibleDialog
   }: AddShoppingItemDialogProps) => (
-    <Dialog open={visibleDialog === 'AddShoppingItemDialog'}>
+    <Dialog open={visibleDialog.includes('AddShoppingItemDialog')}>
       <StyledDialogTitle>Add a new product</StyledDialogTitle>
       <TextField
         defaultValue={''}

@@ -14,7 +14,7 @@ interface FailDialogProps {
 export const FailDialog = observer(
   ({ setVisibleDialog, visibleDialog }: FailDialogProps) => (
     <Dialog
-      open={visibleDialog === 'FailDialog'}
+      open={visibleDialog.includes('Fail')}
       aria-labelledby='FailDialog'
       aria-describedby='FailDialog'
     >
@@ -25,7 +25,7 @@ export const FailDialog = observer(
         This product is on your list already or it has no name.
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
+        <Button onClick={() => setVisibleDialog('AddShoppingItemDialog')} color='primary' autoFocus>
           OK
         </Button>
       </DialogActions>

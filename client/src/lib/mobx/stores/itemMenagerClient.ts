@@ -105,7 +105,7 @@ export class ItemMenagerClient {
       setVisibleDialog();
       this.store.apiClient.AddShoppingItemOnServer(this.newItem);
     } else {
-      setVisibleDialog('FailDialog');
+      setVisibleDialog('AddShoppingItemDialogFail');
     }
   };
 

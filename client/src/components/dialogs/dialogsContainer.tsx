@@ -111,7 +111,7 @@ export const DialogsContainer = observer(
           changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
         />
       )}
-      {visibleDialog === 'FailDialog' && (
+      {visibleDialog.includes('Fail') && (
         <FailDialog
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
