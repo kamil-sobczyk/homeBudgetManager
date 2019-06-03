@@ -3,12 +3,15 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Cost } from '../../../../lib/interfaces';
+
+import { Cost, CategoryType } from '../../../../lib/interfaces';
+import { LegendColor } from './legend/legend';
 
 import { Typography } from '@rmwc/typography';
+
 import { ColoredIcon } from './legend/coloredIcon';
 
-const countCosts = (costs: Cost[], category: string) => {
+const countCosts = (costs: Cost[], category: CategoryType) => {
   let sumOfCosts: number = 0;
   let monthCosts: Cost[] = [];
   const dateNow = String(
@@ -39,22 +42,27 @@ const countCosts = (costs: Cost[], category: string) => {
   return sumOfCosts;
 };
 
-const costCounterItems = [
+interface CostCounterItem {
+  color: LegendColor;
+  category: CategoryType;
+}
+
+const costCounterItems: CostCounterItem[] = [
   {
     color: 'black',
-    text: 'shopping'
+    category: 'shopping'
   },
   {
     color: 'blue',
-    text: 'bill'
+    category: 'bill'
   },
   {
     color: 'green',
-    text: 'health'
+    category: 'health'
   },
   {
     color: 'red',
-    text: 'car'
+    category: 'car'
   }
 ];
 
@@ -65,10 +73,10 @@ interface CostsCounterProps {
 export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
   <>
     <StyledTypography use='subtitle1'>This month you spent:</StyledTypography>
-    {costCounterItems.map(item => (
+    {costCounterItems.map((item: CostCounterItem) => (
       <>
         <ColoredIcon color={item.color} key={item.color} />
-        {countCosts(costs, item.text) + ' zł'}
+        {countCosts(costs, item.category) + ' zł'}
       </>
     ))}
   </>

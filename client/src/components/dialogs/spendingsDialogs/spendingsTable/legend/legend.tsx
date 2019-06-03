@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { ColoredIcon } from './coloredIcon';
 
-type LegendColor = 'black' | 'blue' | 'green' | 'red';
+export type LegendColor = 'black' | 'blue' | 'green' | 'red';
 
 type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car';
 
