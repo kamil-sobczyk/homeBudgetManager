@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
 const { mongoUrl } = require("./config");
-const fn = require('./functions');
+const fn = require("./functions");
 
 const url = mongoUrl;
 
