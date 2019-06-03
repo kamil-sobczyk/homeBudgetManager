@@ -13,7 +13,7 @@ import { FailDialog } from './infoDialogs/failDialog';
 import { AddOtherDialog } from './spendingsDialogs/addOtherDialog';
 import { AboutDialog } from './infoDialogs/aboutDialog';
 import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
-import { CallendarDialog } from './callendarDialog/callendarDialog';
+import { CalendarDialog } from './calendarDialog/calendarDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -23,7 +23,7 @@ interface DialogsContainerProps {
   itemMenagerClient: Store['itemMenagerClient'];
   apiClient: Store['apiClient'];
   shoppingClient: Store['shoppingClient'];
-  callendarClient: Store['callendarClient'];
+  CalendarClient: Store['CalendarClient'];
 }
 
 export const DialogsContainer = observer(
@@ -35,7 +35,7 @@ export const DialogsContainer = observer(
     itemMenagerClient,
     apiClient,
     shoppingClient,
-    callendarClient
+    CalendarClient
   }: DialogsContainerProps) => (
     <>
       {visibilityClient.visibleDialog === 'AddItemDialog' && (
@@ -122,14 +122,14 @@ export const DialogsContainer = observer(
           visibleDialog={visibilityClient.visibleDialog}
         />
       )}
-      {visibilityClient.visibleDialog === 'CallendarDialog' && (
-        <CallendarDialog
+      {visibilityClient.visibleDialog === 'CalendarDialog' && (
+        <CalendarDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
           showFailSnackbar={visibilityClient.showFailSnackbar}
           toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
-          datePicked={callendarClient.datePicked}
-          setDatePicked={callendarClient.setDatePicked}
+          datePicked={CalendarClient.datePicked}
+          setDatePicked={CalendarClient.setDatePicked}
         />
       )}
     </>

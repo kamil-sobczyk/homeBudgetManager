@@ -1,7 +1,7 @@
 import { Store } from '../rootStore';
 import { observable } from 'mobx';
 
-export class CallendarClient {
+export class CalendarClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;

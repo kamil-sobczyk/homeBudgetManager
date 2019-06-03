@@ -12,7 +12,7 @@ export class VisibityClient {
   @observable showMoreMenu: boolean = false;
   @observable showDrawer: boolean = false;
   @observable showFailSnackbar = false;
-  @observable visibleDialog = 'SpendingsDialog';
+  @observable visibleDialog = 'CalendarDialog';
 
   setVisibleDialog = (dialog?: string): void => {
     if (!dialog) {

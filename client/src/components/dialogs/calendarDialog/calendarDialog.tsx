@@ -10,7 +10,7 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 
-interface CallendarDialogProps {
+interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   showFailSnackbar: boolean;
@@ -20,13 +20,13 @@ interface CallendarDialogProps {
 }
 
 @observer
-export class CallendarDialog extends React.Component<CallendarDialogProps, {}> {
+export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   handleClickMore = () => {
-    const { datePicked, toggleShowFailSnackbar } = this.props;
+    const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
     if (datePicked === '') {
       toggleShowFailSnackbar();
     } else {
-      console.log('succ')
+      setVisibleDialog('CalendarDialog+')
     }
   };
 
@@ -40,11 +40,11 @@ export class CallendarDialog extends React.Component<CallendarDialogProps, {}> {
     return (
       <>
         <Dialog
-          open={visibleDialog === 'CallendarDialog'}
-          aria-labelledby='CallendarDialog'
-          aria-describedby='CallendarDialog'
+          open={visibleDialog === 'CalendarDialog'}
+          aria-labelledby='CalendarDialog'
+          aria-describedby='CalendarDialog'
         >
-          <StyledDialogTitle>Callendar</StyledDialogTitle>
+          <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
             <Calendar
               // value={new Date()}
