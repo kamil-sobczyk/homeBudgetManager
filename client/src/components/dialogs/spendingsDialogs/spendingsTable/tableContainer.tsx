@@ -30,6 +30,14 @@ const getRowColor = (category: CategoryType) => {
   else return 'yellow';
 };
 
+export const generateRandomString = () =>
+  Math.random()
+    .toString(36)
+    .substring(2, 15) +
+  Math.random()
+    .toString(36)
+    .substring(2, 15);
+
 @observer
 export class TableContainer extends React.Component<TableContainerProps, {}> {
   componentDidMount = () => {
@@ -62,7 +70,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
           <DataTableBody>
             {displayedCosts.map((cost: Cost) => (
               <DataTableRow
-                key={cost.date}
+                key={generateRandomString()}
                 style={{ color: getRowColor(cost.category) }}
               >
                 <StyledDataTableCell>
