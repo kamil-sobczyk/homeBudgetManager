@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
 const { mongoUrl } = require("./config");
+const fn = require('./functions');
 
 const url = mongoUrl;
 
@@ -47,13 +48,13 @@ const appRouter = app => {
           return;
         }
         if (!resp) {
-          const newUser = new users(newUserProfile(req.headers.id));
+          const newUser = new users(fn.newUserProfile(req.headers.id));
           newUser.save(err => {
             if (err) return handleError(err);
           });
           res.status(200).send(newUser.items);
         } else {
-          res.status(200).send(sortByName(resp.items));
+          res.status(200).send(fn.sortByName(resp.items));
         }
       });
     })
@@ -128,13 +129,13 @@ const appRouter = app => {
           return;
         }
         if (!resp) {
-          const newUser = new users(newUserProfile(req.headers.id));
+          const newUser = new users(fn.newUserProfile(req.headers.id));
           newUser.save(err => {
             if (err) return handleError(err);
           });
           res.status(200).send(newUser.selected);
         } else {
-          res.status(200).send(sortByCheckedValue(resp.selected));
+          res.status(200).send(fn.sortByCheckedValue(resp.selected));
         }
       });
     })
@@ -195,7 +196,7 @@ const appRouter = app => {
           return;
         }
 
-        res.status(200).send(sortCosts(resp.costs));
+        res.status(200).send(fn.sortCosts(resp.costs));
       });
     })
     .post((req, res) => {
@@ -281,75 +282,3 @@ const appRouter = app => {
 };
 
 module.exports = appRouter;
-
-const sortByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
-
-const sortCosts = costs => {
-  let sortedCosts = costs;
-
-  sortedCosts.forEach(cost => (cost.date = cost.date.replace(/\D/g, "")));
-
-  sortedCosts = sortedCosts.sort((a, b) => a.date.localeCompare(b.date)).reverse();
-
-  sortedCosts.forEach(cost => (cost.date = adjustDate(cost.date)));
-
-  return sortedCosts;
-};
-
-const sortByCheckedValue = items => {
-  let checkedItems = [];
-  let uncheckedItems = [];
-  items.forEach(item =>
-    item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
-  );
-  return [...checkedItems, ...uncheckedItems];
-};
-
-const newUserProfile = id => {
-  return {
-    usr: id,
-    items: [],
-    selected: [],
-    costs: []
-  };
-};
-
-const adjustDate = date => {
-  if (date.lenght === 10) {
-    return (
-      date[0] +
-      date[1] +
-      "." +
-      date[2] +
-      date[3] +
-      "." +
-      date[4] +
-      date[5] +
-      ", " +
-      date[6] +
-      date[7] +
-      ":" +
-      date[8] +
-      date[9]
-    );
-  } else {
-    return (
-      "0" +
-      date[0] +
-      "." +
-      date[1] +
-      date[2] +
-      "." +
-      date[3] +
-      date[4] +
-      date[5] +
-      date[6] +
-      ", " +
-      date[7] +
-      date[8] +
-      ":" +
-      date[9] +
-      date[10]
-    );
-  }
-};
