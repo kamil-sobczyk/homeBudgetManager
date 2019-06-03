@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const userSchema = require("./data/models/user");
-const { mongoUrl } = require('./config');
+const { mongoUrl } = require("./config");
 
 const url = mongoUrl;
 
@@ -194,7 +194,8 @@ const appRouter = app => {
           res.status(500);
           return;
         }
-        res.status(200).send(resp.costs);
+
+        res.status(200).send(sortCosts(resp.costs));
       });
     })
     .post((req, res) => {
@@ -203,7 +204,7 @@ const appRouter = app => {
       users
         .findOneAndUpdate(
           { usr: req.headers.id },
-          { $push: { costs: { $each: [req.body.cost], $position: 0 } } },
+          { $push: { costs: req.body.cost } },
           { useFindAndModify: false }
         )
         .exec((err, resp) => {
@@ -283,6 +284,18 @@ module.exports = appRouter;
 
 const sortByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
 
+const sortCosts = costs => {
+  let sortedCosts = costs;
+
+  sortedCosts.forEach(cost => (cost.date = cost.date.replace(/\D/g, "")));
+
+  sortedCosts = sortedCosts.sort((a, b) => a.date.localeCompare(b.date)).reverse();
+
+  sortedCosts.forEach(cost => (cost.date = adjustDate(cost.date)));
+
+  return sortedCosts;
+};
+
 const sortByCheckedValue = items => {
   let checkedItems = [];
   let uncheckedItems = [];
@@ -299,4 +312,44 @@ const newUserProfile = id => {
     selected: [],
     costs: []
   };
+};
+
+const adjustDate = date => {
+  if (date.lenght === 10) {
+    return (
+      date[0] +
+      date[1] +
+      "." +
+      date[2] +
+      date[3] +
+      "." +
+      date[4] +
+      date[5] +
+      ", " +
+      date[6] +
+      date[7] +
+      ":" +
+      date[8] +
+      date[9]
+    );
+  } else {
+    return (
+      "0" +
+      date[0] +
+      "." +
+      date[1] +
+      date[2] +
+      "." +
+      date[3] +
+      date[4] +
+      date[5] +
+      date[6] +
+      ", " +
+      date[7] +
+      date[8] +
+      ":" +
+      date[9] +
+      date[10]
+    );
+  }
 };
