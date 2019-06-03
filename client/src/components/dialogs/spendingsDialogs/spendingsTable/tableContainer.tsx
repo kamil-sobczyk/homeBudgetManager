@@ -69,7 +69,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
                   {cost.category === 'shopping'
                     ? cost.chosenItems.join(', ')
                     : cost.info
-                    ? cost.chosenItems[0] + ' (' + cost.info + ')'
+                    ? `${cost.chosenItems[0]} (${cost.info})`
                     : cost.chosenItems[0]}
                 </StyledDataTableCell>
                 <StyledDataTableCell>{cost.date}</StyledDataTableCell>
