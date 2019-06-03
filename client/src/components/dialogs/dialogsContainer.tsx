@@ -131,6 +131,8 @@ export const DialogsContainer = observer(
           toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
           datePicked={CalendarClient.datePicked}
           setDatePicked={CalendarClient.setDatePicked}
+          getCosts={apiClient.getCosts}
+          costs={costs}
         />
       )}
     </>

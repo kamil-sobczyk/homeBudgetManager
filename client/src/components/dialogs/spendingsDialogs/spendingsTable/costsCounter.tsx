@@ -46,11 +46,6 @@ const countCosts = (costs: Cost[], category: CategoryType) => {
   return sumOfCosts;
 };
 
-interface CostCounterItem {
-  color: LegendColor;
-  category: CategoryType;
-}
-
 const costCounterItems: CostCounterItem[] = [
   {
     color: 'black',
@@ -70,21 +65,37 @@ const costCounterItems: CostCounterItem[] = [
   }
 ];
 
-interface CostsCounterProps {
-  costs: Cost[];
+interface CostCounterItem {
+  color: LegendColor;
+  category: CategoryType;
 }
 
-export const CostsCounter = observer(({ costs }: CostsCounterProps) => (
-  <>
-    <StyledTypography use='subtitle1'>This month you spent:</StyledTypography>
-    {costCounterItems.map((item: CostCounterItem) => (
+type CostCounterTime = string | Date;
+
+interface CostsCounterProps {
+  costs: Cost[];
+  time: CostCounterTime;
+}
+
+export class CostsCounter extends React.Component<CostsCounterProps, {}> {
+  render() {
+    const { costs, time } = this.props;
+ 
+    return (
       <>
-        <ColoredIcon color={item.color} key={item.color} />
-        {countCosts(costs, item.category) + ' zł'}
+        <StyledTypography use='subtitle1'>
+          {time === 'month' ? 'This month' : time} you spent:
+        </StyledTypography>
+        {costCounterItems.map((item: CostCounterItem) => (
+          <>
+            <ColoredIcon color={item.color} key={item.color} />
+            {countCosts(costs, item.category) + ' zł'}
+          </>
+        ))}
       </>
-    ))}
-  </>
-));
+    );
+  }
+}
 
 const StyledTypography = styled(Typography)`
   display: flex;

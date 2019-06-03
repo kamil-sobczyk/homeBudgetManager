@@ -39,7 +39,7 @@ export const SpendingsDialog = observer(
       <Legend />
       <DialogContent>
         <TableContainer getCosts={getCosts} costs={costs} />
-        <CostsCounter costs={costs} />
+        <CostsCounter costs={costs} time='month' />
       </DialogContent>
       <DialogActions>
         <Button
@@ -62,7 +62,7 @@ export const StyledDialogTitle = styled(DialogTitle)`
   margin-top: 20px;
 `;
 
-const StyledDialog = styled(Dialog)`
-height: 100vh;
-padding-bottom: 15px;
-`
+export const StyledDialog = styled(Dialog)`
+  height: 100vh;
+  padding-bottom: 15px;
+`;

@@ -9,6 +9,8 @@ import { Button } from '@rmwc/button';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
+import { Cost } from '../../../lib/interfaces';
+import { CalendarDialogDay } from './calendarDialogDay';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -17,6 +19,8 @@ interface CalendarDialogProps {
   toggleShowFailSnackbar: () => boolean;
   datePicked: string | Date;
   setDatePicked: (date: Date) => string;
+  getCosts: () => void;
+  costs: Cost[];
 }
 
 @observer
@@ -26,7 +30,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     if (datePicked === '') {
       toggleShowFailSnackbar();
     } else {
-      setVisibleDialog('CalendarDialog+')
+      setVisibleDialog('CalendarDialogDay');
     }
   };
 
@@ -35,7 +39,10 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       setVisibleDialog,
       visibleDialog,
       showFailSnackbar,
-      setDatePicked
+      setDatePicked,
+      datePicked,
+      getCosts,
+      costs
     } = this.props;
 
     return (
@@ -66,6 +73,17 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           </DialogActions>
         </Dialog>
         <FailSnackbar showSnackbar={showFailSnackbar} />
+        {visibleDialog.includes('Day') && (
+          <CalendarDialogDay
+            setVisibleDialog={setVisibleDialog}
+            visibleDialog={visibleDialog}
+            showFailSnackbar={showFailSnackbar}
+            datePicked={datePicked}
+            setDatePicked={setDatePicked}
+            getCosts={getCosts}
+            costs={costs}
+          />
+        )}
       </>
     );
   }
