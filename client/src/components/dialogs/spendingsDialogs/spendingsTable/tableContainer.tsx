@@ -23,19 +23,11 @@ interface TableContainerProps {
 }
 
 const getRowColor = (category: CategoryType) => {
-  console.log(category)
-  switch (category) {
-    case 'shopping':
-      return 'black';
-    case 'bill':
-      return 'black';
-    case 'health':
-      return 'black';
-    case 'car':
-      return 'black';
-    default:
-      return 'yellow';
-  }
+  if (category === 'shopping') return 'black';
+  else if (category === 'bill') return 'blue';
+  else if (category === 'health') return 'green';
+  else if (category === 'car') return 'red';
+  else return 'yellow';
 };
 
 @observer
