@@ -15,7 +15,8 @@ export const ListBox = observer(({ store }: StoreProps) => {
     itemMenagerClient,
     apiClient,
     shoppingClient,
-    dndClient
+    dndClient,
+    callendarClient
   } = store;
   return (
     <>
@@ -41,6 +42,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         itemMenagerClient={itemMenagerClient}
         apiClient={apiClient}
         shoppingClient={shoppingClient}
+        callendarClient={callendarClient}
       />
     </>
   );

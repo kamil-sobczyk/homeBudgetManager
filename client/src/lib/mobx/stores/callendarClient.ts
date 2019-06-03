@@ -1,4 +1,5 @@
 import { Store } from '../rootStore';
+import { observable } from 'mobx';
 
 export class CallendarClient {
   store: Store;
@@ -6,5 +7,11 @@ export class CallendarClient {
     this.store = store;
   }
 
-  
+  @observable datePicked: string | Date = '';
+
+  setDatePicked = (date: Date) =>
+    (this.datePicked = date.toLocaleDateString('pl-PL', {
+      hour: '2-digit',
+      minute: '2-digit'
+    }));
 }

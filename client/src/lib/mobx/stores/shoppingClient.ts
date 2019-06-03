@@ -40,6 +40,8 @@ export class ShoppingClient {
     this.store.costs.unshift(billCost);
     this.store.apiClient.addCostOnServer(billCost);
     this.store.visibilityClient.setVisibleDialog();
+
+    console.log(billCost)
   };
 
   changeNewSpendingName = (event: React.FormEvent): void => {

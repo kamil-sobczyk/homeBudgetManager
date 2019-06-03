@@ -23,6 +23,7 @@ interface DialogsContainerProps {
   itemMenagerClient: Store['itemMenagerClient'];
   apiClient: Store['apiClient'];
   shoppingClient: Store['shoppingClient'];
+  callendarClient: Store['callendarClient'];
 }
 
 export const DialogsContainer = observer(
@@ -33,7 +34,8 @@ export const DialogsContainer = observer(
     visibilityClient,
     itemMenagerClient,
     apiClient,
-    shoppingClient
+    shoppingClient,
+    callendarClient
   }: DialogsContainerProps) => (
     <>
       {visibilityClient.visibleDialog === 'AddItemDialog' && (
@@ -126,6 +128,8 @@ export const DialogsContainer = observer(
           visibleDialog={visibilityClient.visibleDialog}
           showFailSnackbar={visibilityClient.showFailSnackbar}
           toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
+          datePicked={callendarClient.datePicked}
+          setDatePicked={callendarClient.setDatePicked}
         />
       )}
     </>
