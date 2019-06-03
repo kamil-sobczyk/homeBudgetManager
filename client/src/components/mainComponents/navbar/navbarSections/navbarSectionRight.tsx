@@ -9,7 +9,7 @@ interface NavbarSectionRightProps {
 const navbarSectionRightItems = [
   {
     icon: 'today',
-    action: ''
+    action: 'CallendarDialog'
   },
   {
     icon: 'bar_chart',

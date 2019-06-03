@@ -11,7 +11,7 @@ export class VisibityClient {
   @observable showFailDialog: boolean = false;
   @observable showMoreMenu: boolean = false;
   @observable showDrawer: boolean = false;
-  @observable visibleDialog = 'LoginDialog';
+  @observable visibleDialog = 'CallendarDialog';
 
   setVisibleDialog = (dialog?: string): void => {
     if (!dialog) {

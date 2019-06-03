@@ -13,6 +13,7 @@ import { FailDialog } from './infoDialogs/failDialog';
 import { AddOtherDialog } from './spendingsDialogs/addOtherDialog';
 import { AboutDialog } from './infoDialogs/aboutDialog';
 import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
+import { CallendarDialog } from './callendarDialog/callendarDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -115,6 +116,12 @@ export const DialogsContainer = observer(
       )}
       {visibilityClient.visibleDialog === 'AboutDialog' && (
         <AboutDialog
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+        />
+      )}
+      {visibilityClient.visibleDialog === 'CallendarDialog' && (
+        <CallendarDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
         />
