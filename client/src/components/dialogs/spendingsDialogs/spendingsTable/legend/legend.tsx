@@ -4,7 +4,14 @@ import styled from 'styled-components';
 
 import { ColoredIcon } from './coloredIcon';
 
-const legendItems = [
+type LegendColor = 'black' | 'blue' | 'green' | 'red';
+
+interface LegendItem {
+  color: LegendColor;
+  text: string;
+}
+
+const legendItems: LegendItem[] = [
   {
     color: 'black',
     text: 'Shopping'
@@ -25,10 +32,10 @@ const legendItems = [
 
 export const Legend = () => (
   <StyledLegendContainer>
-    {legendItems.map(item => (
+    {legendItems.map((item: LegendItem) => (
       <>
         <ColoredIcon color={item.color} key={item.color}/>
-        {item.text}{' '}
+        {item.text}
       </>
     ))}
   </StyledLegendContainer>
