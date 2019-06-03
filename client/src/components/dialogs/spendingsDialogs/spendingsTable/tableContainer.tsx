@@ -23,6 +23,7 @@ interface TableContainerProps {
 }
 
 const getRowColor = (category: CategoryType) => {
+  console.log(category)
   switch (category) {
     case 'shopping':
       return 'black';
@@ -67,9 +68,9 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
-            {displayedCosts.map((cost: Cost, index: number) => (
+            {displayedCosts.map((cost: Cost) => (
               <DataTableRow
-                key={index}
+                key={cost.date}
                 style={{ color: getRowColor(cost.category) }}
               >
                 <StyledDataTableCell>
