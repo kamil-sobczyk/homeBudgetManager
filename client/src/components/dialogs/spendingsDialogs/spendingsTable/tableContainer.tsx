@@ -94,7 +94,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
 
 const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
-  border: 1px solid grey;
+  border-top: 1px solid grey;
 `;
 
 const StyledDataTableHeadCell = styled(DataTableHeadCell)`
