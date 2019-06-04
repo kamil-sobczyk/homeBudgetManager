@@ -44,9 +44,9 @@ export const Legend = () => (
 );
 
 const StyledLegendContainer = styled.div`
-  margin: 10px 0 0 -30px;
   display: flex;
   justify-content: center;
   align-items: baseline;
+  margin-top: 5px;
   height: 20px;
 `;

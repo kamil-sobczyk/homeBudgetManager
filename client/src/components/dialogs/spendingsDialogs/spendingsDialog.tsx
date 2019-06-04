@@ -39,8 +39,8 @@ export const SpendingsDialog = observer(
       <Legend />
       <DialogContent>
         <TableContainer getCosts={getCosts} costs={costs} />
-        <CostsCounter costs={costs} time='month' />
       </DialogContent>
+      <CostsCounter costs={costs} time='month' />
       <DialogActions>
         <Button
           color='primary'

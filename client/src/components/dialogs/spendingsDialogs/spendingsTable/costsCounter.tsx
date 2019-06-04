@@ -97,12 +97,14 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
         <StyledTypography use='subtitle1'>
           {time === 'month' ? 'This month' : time} you spent:
         </StyledTypography>
-        {costCounterItems.map((item: CostCounterItem) => (
-          <IconContainer key={item.color}>
-            <ColoredIcon color={item.color} />
-            {countCosts(costs, item.category, time) + ' zł'}
-          </IconContainer>
-        ))}
+        <StyledCounterContainer>
+          {costCounterItems.map((item: CostCounterItem) => (
+            <div key={item.color}>
+              <ColoredIcon color={item.color} />
+              {countCosts(costs, item.category, time) + ' zł'}
+            </div>
+          ))}
+        </StyledCounterContainer>
       </>
     );
   }
@@ -111,9 +113,9 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
 const StyledTypography = styled(Typography)`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 `;
 
-const IconContainer = styled.div`
-  display: inline-block;
+const StyledCounterContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
