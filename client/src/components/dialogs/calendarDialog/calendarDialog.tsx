@@ -33,9 +33,13 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     this.props.getCosts();
   };
 
-  handleClickMore = () => {
-    const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
-    if (datePicked === '') {
+  handleClickMore = (date: Date) => {
+    const { datePicked, toggleShowFailSnackbar, setVisibleDialog, setDatePicked } = this.props;
+
+
+    setDatePicked(date);
+
+    if (String(date) === '') {
       toggleShowFailSnackbar();
     } else {
       setVisibleDialog('CalendarDialogDay');
@@ -51,8 +55,6 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       datePicked,
       costs
     } = this.props;
-
-    console.log(JSON.stringify(costs));
 
     let daysWithExpenses = costs
       .filter(cost => cost.date.slice(3, 5) === getDateNow().slice(3, 5))
@@ -72,7 +74,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
             <Calendar
-              onClickDay={(value: Date) => setDatePicked(value)}
+              onClickDay={(value: Date) => this.handleClickMore(value)}
               tileContent={({ date, view }) =>
                 view === 'month' &&
                 daysWithExpenses.indexOf(date.getDate()) > -1 ? (
@@ -82,9 +84,9 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClickMore} color='primary'>
+       {/*     <Button onClick={this.handleClickMore} color='primary'>
               More
-            </Button>
+            </Button> */}
             <Button
               onClick={() => setVisibleDialog()}
               color='primary'
