@@ -8,6 +8,8 @@ import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { observable } from 'mobx';
+import { CategoryType } from '../../../lib/interfaces';
 
 const selectValues = ['Shopping', 'Bill', 'Car exploatation', 'Health care'];
 
@@ -16,11 +18,14 @@ interface AddDayCostDialogProps {
   changeNewSpendingName: (e: React.FormEvent) => void;
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
   changeNewSpendingInfo: (a: any) => any;
+  changeShoppingItems: (event: React.FormEvent<EventTarget>) => void;
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   count: number;
+  category: CategoryType;
 }
 
+@observer
 export class AddDayCostDialog extends React.Component<
   AddDayCostDialogProps,
   {}
@@ -31,10 +36,12 @@ export class AddDayCostDialog extends React.Component<
       changeNewSpendingName,
       changeNewSpendingCounter,
       changeNewSpendingInfo,
+      changeShoppingItems,
       setVisibleDialog,
-      visibleDialog
+      visibleDialog,
+      category
     } = this.props;
-    
+
     return (
       <Dialog open={visibleDialog.includes('AddDayCostDialog')}>
         <StyledDialogTitle>Add cost</StyledDialogTitle>
@@ -51,13 +58,22 @@ export class AddDayCostDialog extends React.Component<
           type='number'
           required
         />
-        <TextField
-          label='Short info'
-          onChange={e => changeNewSpendingInfo(e)}
-          type='text'
-        />
+        {category === 'shopping' && (
+          <TextField
+            label={`You bought (use commas)`}
+            onChange={e => changeShoppingItems(e)}
+            type='text'
+          />
+        )}
+        {category !== 'shopping' && (
+          <TextField
+            label='Short info'
+            onChange={e => changeNewSpendingInfo(e)}
+            type='text'
+          />
+        )}
         <DialogActions>
-          <Button color='primary' onClick={() => setVisibleDialog()}>
+          <Button color='primary' onClick={() => setVisibleDialog('CalendarDialogDay')}>
             Cancel
           </Button>
           <Button color='primary' onClick={addNewSpending}>

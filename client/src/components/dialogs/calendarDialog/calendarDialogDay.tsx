@@ -77,7 +77,7 @@ export class CalendarDialogDay extends React.Component<
             icon='add'
             onClick={() => setVisibleDialog('CalendarAddDayCostDialog')}
           />
-          <Button onClick={() => setVisibleDialog()} color='primary'>
+          <Button onClick={() => setVisibleDialog('Calendar')} color='primary'>
             Close
           </Button>
         </DialogActions>

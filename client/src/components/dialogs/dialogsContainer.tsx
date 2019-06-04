@@ -144,7 +144,9 @@ export const DialogsContainer = observer(
           changeNewSpendingName={shoppingClient.changeNewSpendingName}
           changeNewSpendingCounter={shoppingClient.changeNewSpendingCounter}
           changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
+          changeShoppingItems={shoppingClient.changeShoppingItems}
           count={shoppingClient.count}
+          category={shoppingClient.category}
         />
       )}
     </>

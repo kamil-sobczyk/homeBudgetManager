@@ -24,15 +24,19 @@ export class ShoppingClient {
   };
 
   addNewSpending = () => {
+    let date: string = String(
+      new Date().toLocaleDateString('pl-PL', {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    );
+    if (this.category === 'shopping') {
+      date = String(this.store.CalendarClient.datePicked);
+    }
     const billCost: Cost = {
       chosenItems: this.chosenItems,
       count: this.count,
-      date: String(
-        new Date().toLocaleDateString('pl-PL', {
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-      ),
+      date: date,
       category: this.category,
       info: this.info.length > 0 ? this.info : undefined
     };
@@ -40,6 +44,12 @@ export class ShoppingClient {
     this.store.costs.unshift(billCost);
     this.store.apiClient.addCostOnServer(billCost);
     this.store.visibilityClient.setVisibleDialog();
+  };
+
+  changeShoppingItems = (event: React.FormEvent<EventTarget>): void => {
+    const target = event.target as HTMLInputElement;
+
+    this.chosenItems = target.value.split(',');
   };
 
   changeNewSpendingName = (event: React.FormEvent): void => {
@@ -53,7 +63,7 @@ export class ShoppingClient {
     } else if (target.value === 'Car exploatation') {
       chosenValue = 'car';
     } else {
-      chosenValue = 'bill';
+      chosenValue = 'shopping';
     }
 
     this.chosenItems[0] = chosenValue;
