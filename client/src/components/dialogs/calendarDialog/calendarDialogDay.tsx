@@ -52,7 +52,7 @@ export class CalendarDialogDay extends React.Component<
     } = this.props;
     let dayString: string;
 
-    if (String(datePicked).length < 17) {
+    if (String(datePicked)[2] !== '.') {
       dayString = `0${String(datePicked)}`.slice(0, 10);
     } else dayString = String(datePicked).slice(0, 10);
 
