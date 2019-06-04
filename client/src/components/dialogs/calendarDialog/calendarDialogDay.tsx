@@ -2,16 +2,18 @@ import * as React from 'react';
 
 import { Cost } from '../../../lib/interfaces';
 
-import { DialogActions, DialogContent } from '@rmwc/dialog';
+import { DialogActions } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
 import { CostsCounter } from '../spendingsDialogs/spendingsTable/costsCounter';
 import {
   StyledDialogTitle,
-  StyledDialog
+  StyledDialog,
+  StyledDialogContent
 } from '../spendingsDialogs/spendingsDialog';
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
+
 
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -52,9 +54,9 @@ export class CalendarDialogDay extends React.Component<
       >
         <StyledDialogTitle>Spendings you made {dayString}</StyledDialogTitle>
         <Legend />
-        <DialogContent>
+        <StyledDialogContent>
           <TableContainer costs={dayCosts} />
-        </DialogContent>
+        </StyledDialogContent>
         <CostsCounter costs={dayCosts} time={dayString} />
         <DialogActions>
           <Button
@@ -70,3 +72,4 @@ export class CalendarDialogDay extends React.Component<
     );
   }
 }
+
