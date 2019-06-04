@@ -35,16 +35,24 @@ export class CalendarDialogDay extends React.Component<
   CalendarDialogDayProps,
   {}
 > {
+  componentDidMount = () => {
+    this.props.getCosts();
+  };
+
   render() {
     const {
-      getCosts,
       costs,
       setVisibleDialog,
       visibleDialog,
       datePicked,
       setDatePicked
     } = this.props;
-    const dayString = String(datePicked).slice(0, 10);
+    let dayString: string;
+
+    if (String(datePicked).length < 17) {
+      dayString = `0${String(datePicked)}`.slice(0, 10);
+    } else dayString = String(datePicked).slice(0, 10);
+
     const dayCosts = costs.filter((cost: Cost) =>
       cost.date.includes(dayString)
     );
