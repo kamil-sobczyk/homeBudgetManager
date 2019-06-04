@@ -1,17 +1,57 @@
 const sortByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
 
 const sortCosts = costs => {
-  let sortedCosts = costs;
+  let newCosts = costs;
 
-  sortedCosts.forEach(cost => (cost.date = cost.date.replace(/\D/g, "")));
+  newCosts.forEach(cost => {
+    if (cost.date[2] !== ".") {
+      cost.date = `0${cost.date}`;
+    }
+  });
 
-  sortedCosts = sortedCosts
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .reverse();
+  newCosts.forEach(cost => {
+    cost.date = cost.date.replace(/\./g, "/");
+    cost.date = cost.date.replace(/\,/g, "");
+  });
 
-  sortedCosts.forEach(cost => (cost.date = adjustDate(cost.date)));
+  const dates = [];
 
-  return sortedCosts;
+  newCosts.forEach(cost => dates.push(cost.date));
+
+  const replaceAll = (find, replace, str) =>
+    str.replace(new RegExp(find, "g"), replace);
+
+  dates.sort((a, b) => {
+    var aa =
+        a
+          .substring(0, 10)
+          .split("/")
+          .reverse()
+          .join() + replaceAll(":", "", a.substring(11, 20)),
+      bb =
+        b
+          .substring(0, 10)
+          .split("/")
+          .reverse()
+          .join() + replaceAll(":", "", b.substring(11, 20));
+
+    return aa < bb ? -1 : aa > bb ? 1 : 0;
+  });
+
+  dates.reverse();
+
+  const displayedCosts = [];
+
+  dates.forEach(date => {
+    for (let cost of newCosts) {
+      if (cost.date === date && !displayedCosts.includes(cost)) {
+        displayedCosts.push(cost);
+        break;
+      }
+    }
+  });
+
+  return displayedCosts;
 };
 
 const sortByCheckedValue = items => {
@@ -30,46 +70,6 @@ const newUserProfile = id => {
     selected: [],
     costs: []
   };
-};
-
-const adjustDate = date => {
-  if (date.lenght === 10) {
-    return (
-      date[0] +
-      date[1] +
-      "." +
-      date[2] +
-      date[3] +
-      "." +
-      date[4] +
-      date[5] +
-      ", " +
-      date[6] +
-      date[7] +
-      ":" +
-      date[8] +
-      date[9]
-    );
-  } else {
-    return (
-      "0" +
-      date[0] +
-      "." +
-      date[1] +
-      date[2] +
-      "." +
-      date[3] +
-      date[4] +
-      date[5] +
-      date[6] +
-      ", " +
-      date[7] +
-      date[8] +
-      ":" +
-      date[9] +
-      date[10]
-    );
-  }
 };
 
 module.exports = { sortByName, sortCosts, sortByCheckedValue, newUserProfile };
