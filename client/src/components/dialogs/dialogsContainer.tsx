@@ -82,7 +82,7 @@ export const DialogsContainer = observer(
         />
       )}
 
-      {visibleDialog === 'ChartDialog' && (
+      {visibleDialog.includes('ChartDialog') && (
         <ChartDialog
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}

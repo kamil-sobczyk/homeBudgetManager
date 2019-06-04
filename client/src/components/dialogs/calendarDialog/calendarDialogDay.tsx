@@ -69,16 +69,14 @@ export class CalendarDialogDay extends React.Component<
         <Legend />
         <DialogContent>
           <TableContainer costs={dayCosts} />
-
           <CostsCounter costs={dayCosts} time={dayString} />
         </DialogContent>
         <DialogActions>
           <Button
             color='primary'
-            icon='bar_chart'
+            icon='add'
             onClick={() => setVisibleDialog('ChartDialog')}
           />
-
           <Button onClick={() => setVisibleDialog()} color='primary'>
             Close
           </Button>
