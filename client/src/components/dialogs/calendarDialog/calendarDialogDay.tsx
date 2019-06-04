@@ -50,9 +50,12 @@ export class CalendarDialogDay extends React.Component<
       datePicked,
       setDatePicked
     } = this.props;
-    let dayString: string = String(datePicked)
-      .slice(0, 10)
-      .replace(/\./g, '/');
+    let dayString: string = String(datePicked).replace(/\./g, '/');
+
+    if (dayString[1] === '/') {
+      dayString = `0${dayString}`;
+    }
+    dayString = dayString.slice(0, 10);
 
     const dayCosts = costs.filter((cost: Cost) =>
       cost.date.includes(dayString)
