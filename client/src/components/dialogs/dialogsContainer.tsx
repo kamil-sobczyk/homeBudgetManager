@@ -14,6 +14,7 @@ import { AddOtherDialog } from './spendingsDialogs/addOtherDialog';
 import { AboutDialog } from './infoDialogs/aboutDialog';
 import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
 import { CalendarDialog } from './calendarDialog/calendarDialog';
+import { AddDayCostDialog } from './calendarDialog/addDayCostDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -133,6 +134,17 @@ export const DialogsContainer = observer(
           setDatePicked={CalendarClient.setDatePicked}
           getCosts={apiClient.getCosts}
           costs={costs}
+        />
+      )}
+      {visibleDialog.includes('CalendarAddDayCostDialog') && (
+        <AddDayCostDialog
+          setVisibleDialog={setVisibleDialog}
+          visibleDialog={visibleDialog}
+          addNewSpending={shoppingClient.addNewSpending}
+          changeNewSpendingName={shoppingClient.changeNewSpendingName}
+          changeNewSpendingCounter={shoppingClient.changeNewSpendingCounter}
+          changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
+          count={shoppingClient.count}
         />
       )}
     </>

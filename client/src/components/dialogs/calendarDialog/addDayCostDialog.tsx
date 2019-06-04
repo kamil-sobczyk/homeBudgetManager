@@ -9,30 +9,35 @@ import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
-const selectValues = ['Bill', 'Car exploatation', 'Health care'];
+const selectValues = ['Shopping', 'Bill', 'Car exploatation', 'Health care'];
 
 interface AddDayCostDialogProps {
   addNewSpending: () => void;
   changeNewSpendingName: (e: React.FormEvent) => void;
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
-  changeNewSpendingInfo: (a: any) => any
+  changeNewSpendingInfo: (a: any) => any;
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   count: number;
 }
 
-export const AddDayCostDialog = observer(
-  ({
-    addNewSpending,
-    changeNewSpendingName,
-    changeNewSpendingCounter,
-    changeNewSpendingInfo,
-    setVisibleDialog,
-    visibleDialog
-  }: AddDayCostDialogProps) => {
+export class AddDayCostDialog extends React.Component<
+  AddDayCostDialogProps,
+  {}
+> {
+  render() {
+    const {
+      addNewSpending,
+      changeNewSpendingName,
+      changeNewSpendingCounter,
+      changeNewSpendingInfo,
+      setVisibleDialog,
+      visibleDialog
+    } = this.props;
+    
     return (
-      <Dialog open={visibleDialog === 'AddOtherDialog'}>
-        <StyledDialogTitle>Add other</StyledDialogTitle>
+      <Dialog open={visibleDialog.includes('AddDayCostDialog')}>
+        <StyledDialogTitle>Add cost</StyledDialogTitle>
         <Select
           label='Spending type'
           onChange={e => changeNewSpendingName(e)}
@@ -47,11 +52,10 @@ export const AddDayCostDialog = observer(
           required
         />
         <TextField
-        label='Short info'
-        // defaultValue={String(0)}
-        onChange={e => changeNewSpendingInfo(e)}
-        type='text'
-      />
+          label='Short info'
+          onChange={e => changeNewSpendingInfo(e)}
+          type='text'
+        />
         <DialogActions>
           <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
@@ -63,5 +67,4 @@ export const AddDayCostDialog = observer(
       </Dialog>
     );
   }
-);
-
+}

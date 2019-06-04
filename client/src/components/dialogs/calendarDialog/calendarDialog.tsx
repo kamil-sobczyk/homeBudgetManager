@@ -11,6 +11,7 @@ import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { Cost } from '../../../lib/interfaces';
 import { CalendarDialogDay } from './calendarDialogDay';
+import { AddDayCostDialog } from './addDayCostDialog';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
