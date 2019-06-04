@@ -80,17 +80,23 @@ interface CostsCounterProps {
 export class CostsCounter extends React.Component<CostsCounterProps, {}> {
   render() {
     const { costs, time } = this.props;
- 
+
     return (
       <>
         <StyledTypography use='subtitle1'>
           {time === 'month' ? 'This month' : time} you spent:
         </StyledTypography>
         {costCounterItems.map((item: CostCounterItem) => (
-          <>
-            <ColoredIcon color={item.color} key={item.color} />
+          <IconContainer
+            key={Math.random()
+              .toString(36)
+              .substring(7)}
+          >
+            <ColoredIcon
+              color={item.color}
+            />
             {countCosts(costs, item.category) + ' zł'}
-          </>
+          </IconContainer>
         ))}
       </>
     );
@@ -101,4 +107,8 @@ const StyledTypography = styled(Typography)`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+`;
+
+const IconContainer = styled.div`
+  display: inline-block;
 `;

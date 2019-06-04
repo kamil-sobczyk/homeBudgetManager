@@ -35,10 +35,10 @@ const legendItems: LegendItem[] = [
 export const Legend = () => (
   <StyledLegendContainer>
     {legendItems.map((item: LegendItem) => (
-      <>
+      <div key={Math.random().toString(36).substring(7)}>
         <ColoredIcon color={item.color} key={item.color} />
         {item.text}
-      </>
+      </div>
     ))}
   </StyledLegendContainer>
 );
