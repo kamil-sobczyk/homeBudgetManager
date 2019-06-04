@@ -7,7 +7,7 @@ import { Cost } from '../../../../lib/interfaces';
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
-import { StyledDialogTitle } from '../spendingsDialog';
+import { StyledDialogTitle, StyledDialogContent } from '../spendingsDialog';
 import { Chart } from './chart';
 
 interface ChartDialogProps {
@@ -29,9 +29,9 @@ export class ChartDialog extends React.Component<ChartDialogProps, {}> {
         aria-describedby='Chart with all spendings'
       >
         <StyledDialogTitle>Your spendings</StyledDialogTitle>
-        <DialogContent>
+        <StyledDialogContent>
           <Chart costs={costs} getCosts={getCosts} />
-        </DialogContent>
+        </StyledDialogContent>
         <DialogActions>
           <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
             OK

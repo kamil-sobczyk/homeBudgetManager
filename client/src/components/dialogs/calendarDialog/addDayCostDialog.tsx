@@ -30,6 +30,13 @@ export class AddDayCostDialog extends React.Component<
   AddDayCostDialogProps,
   {}
 > {
+  addNewSpending = () => {
+    const { addNewSpending, setVisibleDialog } = this.props;
+
+    addNewSpending();
+    setVisibleDialog('CalendarDialog');
+
+  };
   render() {
     const {
       addNewSpending,
@@ -80,7 +87,7 @@ export class AddDayCostDialog extends React.Component<
           >
             Cancel
           </Button>
-          <Button color='primary' onClick={addNewSpending}>
+          <Button color='primary' onClick={this.addNewSpending}>
             Add
           </Button>
         </DialogActions>
