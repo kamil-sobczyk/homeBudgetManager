@@ -20,6 +20,7 @@ import {
   StyledDialogTitle,
   StyledDialog
 } from '../spendingsDialogs/spendingsDialog';
+import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -27,7 +28,7 @@ interface CalendarDialogDayProps {
   showFailSnackbar: boolean;
   datePicked: string | Date;
   setDatePicked: (date: Date) => string;
-  getCosts: () => void;
+  getCosts?: () => void;
   costs: Cost[];
 }
 
@@ -36,7 +37,9 @@ export class CalendarDialogDay extends React.Component<
   {}
 > {
   componentDidMount = () => {
-    this.props.getCosts();
+    if (this.props.getCosts) {
+      this.props.getCosts();
+    }
   };
 
   render() {
@@ -62,10 +65,10 @@ export class CalendarDialogDay extends React.Component<
         open={visibleDialog.includes('Day')}
         aria-label='shopping-you-made'
       >
-        <StyledDialogTitle>Spendings you made</StyledDialogTitle>
+        <StyledDialogTitle>Spendings you made {dayString}</StyledDialogTitle>
         <Legend />
         <DialogContent>
-          {/*  <TableContainer getCosts={getCosts} costs={costs} />  */}
+          <TableContainer costs={dayCosts} />
 
           <CostsCounter costs={dayCosts} time={dayString} />
         </DialogContent>

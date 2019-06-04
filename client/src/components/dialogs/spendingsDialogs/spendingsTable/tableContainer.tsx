@@ -18,7 +18,7 @@ import {
 import '@rmwc/data-table/data-table.css';
 
 interface TableContainerProps {
-  getCosts: () => void;
+  getCosts?: () => void;
   costs: Cost[];
 }
 
@@ -41,7 +41,9 @@ export const generateRandomString = () =>
 @observer
 export class TableContainer extends React.Component<TableContainerProps, {}> {
   componentDidMount = () => {
-    this.props.getCosts();
+    if (this.props.getCosts) {
+      this.props.getCosts();
+    }
   };
   render() {
     const { costs } = this.props;
