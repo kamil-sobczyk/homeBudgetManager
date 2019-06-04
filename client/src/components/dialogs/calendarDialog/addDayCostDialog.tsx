@@ -63,6 +63,7 @@ export class AddDayCostDialog extends React.Component<
             label={`You bought (use commas)`}
             onChange={e => changeShoppingItems(e)}
             type='text'
+            required
           />
         )}
         {category !== 'shopping' && (
@@ -73,7 +74,10 @@ export class AddDayCostDialog extends React.Component<
           />
         )}
         <DialogActions>
-          <Button color='primary' onClick={() => setVisibleDialog('CalendarDialogDay')}>
+          <Button
+            color='primary'
+            onClick={() => setVisibleDialog('CalendarDialogDay')}
+          >
             Cancel
           </Button>
           <Button color='primary' onClick={addNewSpending}>
