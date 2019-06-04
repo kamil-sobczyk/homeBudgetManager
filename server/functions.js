@@ -48,6 +48,12 @@ const sortCosts = costs => {
     }
   });
 
+  displayedCosts.forEach(cost => {
+    if (cost.date.slice(11) === "00:00") {
+      cost.date = cost.date.slice(0, 10);
+    }
+  });
+
   return displayedCosts;
 };
 
