@@ -88,9 +88,7 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
         </StyledTypography>
         {costCounterItems.map((item: CostCounterItem) => (
           <IconContainer
-            key={Math.random()
-              .toString(36)
-              .substring(7)}
+            key={item.color}
           >
             <ColoredIcon
               color={item.color}
