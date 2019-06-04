@@ -2,15 +2,8 @@ import * as React from 'react';
 
 import { Cost } from '../../../lib/interfaces';
 
-import {
-  Dialog,
-  DialogActions,
-  DialogTitle,
-  DialogContent
-} from '@rmwc/dialog';
+import { DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-
-import { Legend } from 'recharts';
 
 import { CostsCounter } from '../spendingsDialogs/spendingsTable/costsCounter';
 import {
@@ -18,13 +11,13 @@ import {
   StyledDialog
 } from '../spendingsDialogs/spendingsDialog';
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
+import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
 
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   showFailSnackbar: boolean;
   datePicked: string | Date;
-  setDatePicked: (date: Date) => string;
   getCosts?: () => void;
   costs: Cost[];
 }
@@ -40,13 +33,7 @@ export class CalendarDialogDay extends React.Component<
   };
 
   render() {
-    const {
-      costs,
-      setVisibleDialog,
-      visibleDialog,
-      datePicked,
-      setDatePicked
-    } = this.props;
+    const { costs, setVisibleDialog, visibleDialog, datePicked } = this.props;
     let dayString: string = String(datePicked).replace(/\./g, '/');
 
     if (dayString[1] === '/') {
@@ -67,8 +54,8 @@ export class CalendarDialogDay extends React.Component<
         <Legend />
         <DialogContent>
           <TableContainer costs={dayCosts} />
-          <CostsCounter costs={dayCosts} time={dayString} />
         </DialogContent>
+        <CostsCounter costs={dayCosts} time={dayString} />
         <DialogActions>
           <Button
             color='primary'

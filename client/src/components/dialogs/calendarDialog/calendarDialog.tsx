@@ -77,7 +77,6 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             visibleDialog={visibleDialog}
             showFailSnackbar={showFailSnackbar}
             datePicked={datePicked}
-            setDatePicked={setDatePicked}
             getCosts={getCosts}
             costs={costs}
           />

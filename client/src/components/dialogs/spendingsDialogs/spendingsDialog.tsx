@@ -47,7 +47,6 @@ export const SpendingsDialog = observer(
           icon='bar_chart'
           onClick={() => setVisibleDialog('ChartDialog')}
         />
-
         <Button onClick={() => setVisibleDialog()} color='primary'>
           Close
         </Button>
