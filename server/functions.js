@@ -7,9 +7,6 @@ const sortCosts = costs => {
     if (cost.date[2] !== ".") {
       cost.date = `0${cost.date}`;
     }
-  });
-
-  newCosts.forEach(cost => {
     cost.date = cost.date.replace(/\./g, "/");
     cost.date = cost.date.replace(/\,/g, "");
   });
