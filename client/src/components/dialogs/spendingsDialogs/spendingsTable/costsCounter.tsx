@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { observer } from 'mobx-react';
-
 import { Cost, CategoryType } from '../../../../lib/interfaces';
 import { LegendColor } from './legend/legend';
 
@@ -11,27 +9,40 @@ import { Typography } from '@rmwc/typography';
 
 import { ColoredIcon } from './legend/coloredIcon';
 
-const countCosts = (costs: Cost[], category: CategoryType) => {
+const countCosts = (
+  costs: Cost[],
+  category: CategoryType,
+  time: CostCounterTime
+) => {
   let sumOfCosts: number = 0;
-  let monthCosts: Cost[] = [];
-  let dateNow = String(
-    new Date().toLocaleDateString('pl-PL', {
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  );
+  let chosenCosts: Cost[] = costs;
 
-  if (dateNow.length < 17) {
-    dateNow = `0${dateNow}`;
+  if (time === 'month') {
+    let dateNow = String(
+      new Date().toLocaleDateString('pl-PL', {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    ).replace(/\./g, '/');
+
+    if (dateNow[2] !== '/') {
+      dateNow = `0${dateNow}`;
+    }
+    dateNow = `${dateNow.slice(0, 10)}${dateNow.slice(11)}`;
+
+    if (costs.length > 0) {
+      costs.forEach(cost => {
+        cost.date = cost.date.replace(/\./g, '/');
+        cost.date = cost.date.replace(/\,/g, '');
+      });
+
+      chosenCosts = costs.filter(
+        cost => cost.date[3] === dateNow[3] && cost.date[4] === dateNow[4]
+      );
+    }
   }
 
-  if (costs.length > 0) {
-    monthCosts = costs.filter(
-      cost => cost.date[3] === dateNow[3] && cost.date[4] === dateNow[4]
-    );
-  }
-
-  monthCosts.forEach((cost: Cost) => {
+  chosenCosts.forEach((cost: Cost) => {
     if (category === 'shopping' && cost.category === 'shopping') {
       sumOfCosts += cost.count;
     } else if (category === 'bill' && cost.category === 'bill') {
@@ -87,13 +98,9 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
           {time === 'month' ? 'This month' : time} you spent:
         </StyledTypography>
         {costCounterItems.map((item: CostCounterItem) => (
-          <IconContainer
-            key={item.color}
-          >
-            <ColoredIcon
-              color={item.color}
-            />
-            {countCosts(costs, item.category) + ' zł'}
+          <IconContainer key={item.color}>
+            <ColoredIcon color={item.color} />
+            {countCosts(costs, item.category, time) + ' zł'}
           </IconContainer>
         ))}
       </>

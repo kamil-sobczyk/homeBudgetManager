@@ -86,13 +86,3 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     );
   }
 }
-
-
-// console.log(new Date('04.06.2019, 09:36'));
-
-let dateString = "'04.06.2019, 09:36'";
-// dateString = dateString.substr(3, 2)+"/"+dateString.substr(0, 2)+"."+dateString.substr(6, 4);
-dateString = dateString.substr(6, 4)+"."+dateString.substr(3, 2)+"."+dateString.substr(0, 2);
-const date = new Date(dateString);
-
-console.log(date);
