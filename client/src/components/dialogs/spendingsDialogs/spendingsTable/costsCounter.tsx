@@ -3,11 +3,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { Cost, CategoryType } from '../../../../lib/interfaces';
-import { LegendColor } from './legend/legend';
 
 import { Typography } from '@rmwc/typography';
 
 import { ColoredIcon } from './legend/coloredIcon';
+import { LegendColor } from './legend/legend';
 
 const countCosts = (
   costs: Cost[],
@@ -37,7 +37,7 @@ const countCosts = (
       });
 
       chosenCosts = costs.filter(
-        cost => cost.date[3] === dateNow[3] && cost.date[4] === dateNow[4]
+        cost => cost.date.slice(3, 5) === dateNow.slice(3, 5)
       );
     }
   }
