@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { Cost } from '../../../lib/interfaces';
+
 import { observer } from 'mobx-react';
 
 import Calendar from 'react-calendar';
@@ -9,9 +11,7 @@ import { Button } from '@rmwc/button';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
-import { Cost } from '../../../lib/interfaces';
 import { CalendarDialogDay } from './calendarDialogDay';
-import { AddDayCostDialog } from './addDayCostDialog';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -55,10 +55,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
         >
           <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
-            <Calendar
-              // value={new Date()}
-              onClickDay={(value: Date) => setDatePicked(value)}
-            />
+            <Calendar onClickDay={(value: Date) => setDatePicked(value)} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClickMore} color='primary'>
@@ -89,3 +86,13 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     );
   }
 }
+
+
+// console.log(new Date('04.06.2019, 09:36'));
+
+let dateString = "'04.06.2019, 09:36'";
+// dateString = dateString.substr(3, 2)+"/"+dateString.substr(0, 2)+"."+dateString.substr(6, 4);
+dateString = dateString.substr(6, 4)+"."+dateString.substr(3, 2)+"."+dateString.substr(0, 2);
+const date = new Date(dateString);
+
+console.log(date);
