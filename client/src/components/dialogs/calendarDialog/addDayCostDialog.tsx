@@ -39,7 +39,6 @@ export class AddDayCostDialog extends React.Component<
   };
   render() {
     const {
-      addNewSpending,
       changeNewSpendingName,
       changeNewSpendingCounter,
       changeNewSpendingInfo,

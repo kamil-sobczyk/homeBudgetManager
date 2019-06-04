@@ -12,6 +12,7 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
+import styled from 'styled-components';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -46,6 +47,8 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       costs
     } = this.props;
 
+    const arr = [2, 3]
+
     return (
       <>
         <Dialog
@@ -55,7 +58,10 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
         >
           <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
-            <Calendar onClickDay={(value: Date) => setDatePicked(value)} />
+            <Calendar
+              onClickDay={(value: Date) => setDatePicked(value)}
+              tileContent={({ date, view }) => view === 'month' && arr.indexOf(date.getDate()) > -1 ? <StyledBadge/> : null}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClickMore} color='primary'>
@@ -85,3 +91,10 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     );
   }
 }
+
+const StyledBadge = styled.div`
+width: 5px;
+height: 5px;
+border-radius: 5px;
+background: blue;
+`
