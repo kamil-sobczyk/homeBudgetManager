@@ -30,8 +30,8 @@ export class ShoppingClient {
         minute: '2-digit'
       })
     );
-    if (this.category === 'shopping') {
-      date = String(this.store.CalendarClient.datePicked);
+    if (this.store.calendarClient.datePicked.length > 0) {
+      date = String(this.store.calendarClient.datePicked);
     }
     const billCost: Cost = {
       chosenItems: this.chosenItems,
@@ -42,6 +42,7 @@ export class ShoppingClient {
     };
 
     this.store.costs.unshift(billCost);
+    this.store.calendarClient.datePicked = '';
     this.store.apiClient.addCostOnServer(billCost);
     this.store.visibilityClient.setVisibleDialog();
   };

@@ -16,7 +16,7 @@ export class Store {
     this.dndClient = new DnDClient(this);
     this.itemMenagerClient = new ItemMenagerClient(this);
     this.shoppingClient = new ShoppingClient(this);
-    this.CalendarClient = new CalendarClient(this);
+    this.calendarClient = new CalendarClient(this);
   }
 
   apiClient: ApiClient;
@@ -24,7 +24,7 @@ export class Store {
   dndClient: DnDClient;
   itemMenagerClient: ItemMenagerClient;
   shoppingClient: ShoppingClient;
-  CalendarClient: CalendarClient;
+  calendarClient: CalendarClient;
 
   @observable items: Item[] = [];
   @observable selected: Item[] = [];

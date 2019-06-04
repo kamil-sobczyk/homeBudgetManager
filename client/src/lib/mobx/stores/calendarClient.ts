@@ -7,11 +7,13 @@ export class CalendarClient {
     this.store = store;
   }
 
-  @observable datePicked: string | Date = '';
+  @observable datePicked: string = '';
 
   setDatePicked = (date: Date) =>
-    (this.datePicked = date.toLocaleDateString('pl-PL', {
-      hour: '2-digit',
-      minute: '2-digit'
-    }));
+    (this.datePicked = String(
+      date.toLocaleDateString('pl-PL', {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    ));
 }
