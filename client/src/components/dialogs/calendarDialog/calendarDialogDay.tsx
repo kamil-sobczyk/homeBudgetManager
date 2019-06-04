@@ -20,7 +20,6 @@ interface CalendarDialogDayProps {
   visibleDialog: string;
   showFailSnackbar: boolean;
   datePicked: string | Date;
-  getCosts?: () => void;
   costs: Cost[];
 }
 
@@ -28,11 +27,6 @@ export class CalendarDialogDay extends React.Component<
   CalendarDialogDayProps,
   {}
 > {
-  componentDidMount = () => {
-    if (this.props.getCosts) {
-      this.props.getCosts();
-    }
-  };
 
   render() {
     const { costs, setVisibleDialog, visibleDialog, datePicked } = this.props;

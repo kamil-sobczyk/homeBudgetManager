@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { CategoryType } from '../../../lib/interfaces';
+
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
-import { observable } from 'mobx';
-import { CategoryType } from '../../../lib/interfaces';
 
 const selectValues = ['Shopping', 'Bill', 'Car exploatation', 'Health care'];
 

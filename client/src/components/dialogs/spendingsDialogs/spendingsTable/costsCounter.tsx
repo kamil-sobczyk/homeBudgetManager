@@ -9,7 +9,7 @@ import { Typography } from '@rmwc/typography';
 import { ColoredIcon } from './legend/coloredIcon';
 import { LegendColor } from './legend/legend';
 
-const getDateNow = () => {
+export const getDateNow = () => {
   let dateNow = String(
     new Date().toLocaleDateString('pl-PL', {
       hour: '2-digit',

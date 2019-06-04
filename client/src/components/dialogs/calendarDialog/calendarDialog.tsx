@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { Cost } from '../../../lib/interfaces';
 
 import { observer } from 'mobx-react';
@@ -12,7 +14,7 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
-import styled from 'styled-components';
+import { getDateNow } from '../spendingsDialogs/spendingsTable/costsCounter';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -27,6 +29,10 @@ interface CalendarDialogProps {
 
 @observer
 export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
+  componentDidMount = () => {
+    this.props.getCosts();
+  };
+
   handleClickMore = () => {
     const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
     if (datePicked === '') {
@@ -43,11 +49,18 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       showFailSnackbar,
       setDatePicked,
       datePicked,
-      getCosts,
       costs
     } = this.props;
 
-    const arr = [2, 3]
+    console.log(JSON.stringify(costs));
+
+    let daysWithExpenses = costs
+      .filter(cost => cost.date.slice(3, 5) === getDateNow().slice(3, 5))
+      .map(cost => parseInt(cost.date.slice(0, 2)));
+
+    daysWithExpenses = daysWithExpenses.filter(
+      (day, i) => daysWithExpenses.indexOf(day) === i
+    );
 
     return (
       <>
@@ -60,7 +73,12 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <DialogContent>
             <Calendar
               onClickDay={(value: Date) => setDatePicked(value)}
-              tileContent={({ date, view }) => view === 'month' && arr.indexOf(date.getDate()) > -1 ? <StyledBadge/> : null}
+              tileContent={({ date, view }) =>
+                view === 'month' &&
+                daysWithExpenses.indexOf(date.getDate()) > -1 ? (
+                  <StyledBadge />
+                ) : null
+              }
             />
           </DialogContent>
           <DialogActions>
@@ -83,7 +101,6 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             visibleDialog={visibleDialog}
             showFailSnackbar={showFailSnackbar}
             datePicked={datePicked}
-            getCosts={getCosts}
             costs={costs}
           />
         )}
@@ -93,8 +110,8 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
 }
 
 const StyledBadge = styled.div`
-width: 5px;
-height: 5px;
-border-radius: 5px;
-background: blue;
-`
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background: blue;
+`;
