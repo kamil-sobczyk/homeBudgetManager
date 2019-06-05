@@ -134,6 +134,8 @@ export const DialogsContainer = observer(
           setDatePicked={calendarClient.setDatePicked}
           getCosts={apiClient.getCosts}
           costs={costs}
+          getCalendarViewDate={calendarClient.getCalendarViewDate}
+          calendarViewDate={calendarClient.calendarViewDate}
         />
       )}
       {visibleDialog.includes('CalendarAddDayCostDialog') && (

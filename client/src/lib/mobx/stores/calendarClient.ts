@@ -8,6 +8,8 @@ export class CalendarClient {
   }
 
   @observable datePicked: string = '';
+  @observable calendarViewDate: string = '';
+  @observable daysWithExpenses: number[] = [];
 
   setDatePicked = (date: Date): string =>
     (this.datePicked = String(
@@ -16,4 +18,22 @@ export class CalendarClient {
         minute: '2-digit'
       })
     ));
+
+  getCalendarViewDate = (activeStartDate: Date, view: string): void => {
+    let calendarViewDate = String(activeStartDate.toLocaleDateString());
+    if (calendarViewDate[1] === '/') {
+      calendarViewDate = `0${calendarViewDate}`;
+    }
+    if (calendarViewDate[4] === '/') {
+      calendarViewDate = `${calendarViewDate.slice(
+        0,
+        3
+      )}0${calendarViewDate.slice(3)}`;
+    }
+
+    this.calendarViewDate = `${calendarViewDate.substr(
+      3,
+      2
+    )}/${calendarViewDate.substr(0, 2)}/${calendarViewDate.substr(6, 4)}`;
+  };
 }

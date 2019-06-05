@@ -14,7 +14,6 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
-import { getDateNow } from '../spendingsDialogs/spendingsTable/costsCounter';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -23,6 +22,8 @@ interface CalendarDialogProps {
   toggleShowFailSnackbar: () => boolean;
   datePicked: string | Date;
   setDatePicked: (date: Date) => string;
+  getCalendarViewDate: (activeStartDate: Date, view: string) => void;
+  calendarViewDate: string;
   getCosts: () => void;
   costs: Cost[];
 }
@@ -30,7 +31,10 @@ interface CalendarDialogProps {
 @observer
 export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   componentDidMount = () => {
-    this.props.getCosts();
+    const { getCosts, getCalendarViewDate } = this.props;
+
+    getCosts();
+    getCalendarViewDate(new Date(), 'month');
   };
 
   handleClickMore = () => {
@@ -49,16 +53,20 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       showFailSnackbar,
       setDatePicked,
       datePicked,
+      getCalendarViewDate,
+      calendarViewDate,
       costs
     } = this.props;
+  
+    let daysWithExpenses: number[] = costs
+    .filter(
+      cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5)
+    )
+    .map(cost => parseInt(cost.date.slice(0, 2)));
 
-    let daysWithExpenses = costs
-      .filter(cost => cost.date.slice(3, 5) === getDateNow().slice(3, 5))
-      .map(cost => parseInt(cost.date.slice(0, 2)));
-
-    daysWithExpenses = daysWithExpenses.filter(
-      (day, i) => daysWithExpenses.indexOf(day) === i
-    );
+  daysWithExpenses = daysWithExpenses.filter(
+    (day, index) => daysWithExpenses.indexOf(day) === index
+  );
 
     return (
       <>
@@ -71,6 +79,9 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <DialogContent>
             <Calendar
               onClickDay={(value: Date) => setDatePicked(value)}
+              onActiveDateChange={({ activeStartDate, view }) =>
+                getCalendarViewDate(activeStartDate, view)
+              }
               tileContent={({ date, view }) =>
                 view === 'month' &&
                 daysWithExpenses.indexOf(date.getDate()) > -1 ? (
