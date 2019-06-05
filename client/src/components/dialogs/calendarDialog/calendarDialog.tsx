@@ -33,13 +33,9 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     this.props.getCosts();
   };
 
-  handleClickMore = (date: Date) => {
-    const { datePicked, toggleShowFailSnackbar, setVisibleDialog, setDatePicked } = this.props;
-
-
-    setDatePicked(date);
-
-    if (String(date) === '') {
+  handleClickMore = () => {
+    const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
+    if (datePicked === '') {
       toggleShowFailSnackbar();
     } else {
       setVisibleDialog('CalendarDialogDay');
@@ -74,7 +70,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
             <Calendar
-              onClickDay={(value: Date) => this.handleClickMore(value)}
+              onClickDay={(value: Date) => setDatePicked(value)}
               tileContent={({ date, view }) =>
                 view === 'month' &&
                 daysWithExpenses.indexOf(date.getDate()) > -1 ? (
@@ -84,9 +80,9 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             />
           </DialogContent>
           <DialogActions>
-       {/*     <Button onClick={this.handleClickMore} color='primary'>
+            <Button onClick={this.handleClickMore} color='primary'>
               More
-            </Button> */}
+            </Button>
             <Button
               onClick={() => setVisibleDialog()}
               color='primary'
