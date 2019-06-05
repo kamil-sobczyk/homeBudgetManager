@@ -45,11 +45,23 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
       this.props.getCosts();
     }
   };
-  render() {
-    const { costs } = this.props;
-    let displayedCosts: Cost[] = costs;
 
-    if (costs.length < 1) {
+  getCostItems = (cost: Cost) =>
+    cost.category === 'shopping'
+      ? cost.chosenItems.length > 0
+        ? cost.chosenItems.join(', ')
+        : ' - - - '
+      : cost.info
+      ? cost.chosenItems.length > 0 && `${cost.chosenItems[0]} (${cost.info})`
+      : cost.chosenItems.length > 0
+      ? cost.chosenItems[0]
+      : ' - - - ';
+
+  render() {
+
+    let displayedCosts: Cost[] = this.props.costs;
+
+    if (displayedCosts.length < 1) {
       displayedCosts = [
         {
           count: 0,
@@ -59,12 +71,13 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         }
       ];
     }
+
     return (
       <StyledDataTable stickyRows={1}>
         <DataTableContent>
           <DataTableHead>
             <DataTableRow>
-              <StyledDataTableHeadCell>Items</StyledDataTableHeadCell>
+              <StyledDataTableHeadCell>Item(s)</StyledDataTableHeadCell>
               <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
               <StyledDataTableHeadCell>Cost</StyledDataTableHeadCell>
             </DataTableRow>
@@ -76,15 +89,11 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
                 style={{ color: getRowColor(cost.category) }}
               >
                 <StyledDataTableCell>
-                  {cost.category === 'shopping'
-                    ? cost.chosenItems.join(', ')
-                    : cost.info
-                    ? `${cost.chosenItems[0]} (${cost.info})`
-                    : cost.chosenItems[0]}
+                  {this.getCostItems(cost)}
                 </StyledDataTableCell>
                 <StyledDataTableCell>{cost.date}</StyledDataTableCell>
                 <StyledDataTableCell alignEnd>
-                  {cost.count + 'zł'}
+                  {`${cost.count}zł`}
                 </StyledDataTableCell>
               </DataTableRow>
             ))}

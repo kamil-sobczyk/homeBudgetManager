@@ -50,7 +50,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   };
 
   countBadges = (date: Date, view: string) => {
-    const { calendarViewDate, getCalendarViewDate, costs } = this.props;
+    const { calendarViewDate, getCalendarViewDate } = this.props;
 
     if (view === 'month') {
       if (
