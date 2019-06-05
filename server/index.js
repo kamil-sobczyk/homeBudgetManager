@@ -7,18 +7,7 @@ const url = mongoUrl;
 
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin: *",
-   
-    );
-    res.setHeader(
-      "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "X-Requested-With,content-type"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", true);
+  
     mongoose.connect(url, {
       useNewUrlParser: true
     });
