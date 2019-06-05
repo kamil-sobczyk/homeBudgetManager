@@ -14,6 +14,7 @@ import { Button } from '@rmwc/button';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
+import { observable } from 'mobx';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -22,7 +23,7 @@ interface CalendarDialogProps {
   toggleShowFailSnackbar: () => boolean;
   datePicked: string | Date;
   setDatePicked: (date: Date) => string;
-  getCalendarViewDate: (activeStartDate: Date, view: string) => void;
+  getCalendarViewDate: (activeStartDate: Date) => string;
   calendarViewDate: string;
   getCosts: () => void;
   costs: Cost[];
@@ -30,11 +31,13 @@ interface CalendarDialogProps {
 
 @observer
 export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
+  @observable daysVisible: string[] = [];
+
   componentDidMount = () => {
     const { getCosts, getCalendarViewDate } = this.props;
 
     getCosts();
-    getCalendarViewDate(new Date(), 'month');
+    getCalendarViewDate(new Date());
   };
 
   handleClickMore = () => {
@@ -46,10 +49,29 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     }
   };
 
-  countBadges = (date: Date, view: string, daysWithExpenses: number[]) => {
-    return view === 'month' && daysWithExpenses.indexOf(date.getDate()) > -1 ? (
-      <StyledBadge />
-    ) : null;
+  countBadges = (date: Date, view: string) => {
+    const { calendarViewDate, getCalendarViewDate, costs } = this.props;
+
+    if (view === 'month') {
+      if (
+        this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
+        calendarViewDate[4] === getCalendarViewDate(date)[4]
+      ) {
+        return <StyledBadge />;
+      } else return null;
+    } else return null;
+  };
+
+  countDaysWithExpenses = () => {
+    const { calendarViewDate, costs } = this.props;
+
+    let daysWithExpenses: number[] = costs
+      .filter(cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5))
+      .map(cost => parseInt(cost.date.slice(0, 2)));
+
+    return daysWithExpenses.filter(
+      (day, index) => daysWithExpenses.indexOf(day) === index
+    );
   };
 
   render() {
@@ -60,17 +82,8 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       setDatePicked,
       datePicked,
       getCalendarViewDate,
-      calendarViewDate,
       costs
     } = this.props;
-
-    let daysWithExpenses: number[] = costs
-      .filter(cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5))
-      .map(cost => parseInt(cost.date.slice(0, 2)));
-
-    daysWithExpenses = daysWithExpenses.filter(
-      (day, index) => daysWithExpenses.indexOf(day) === index
-    );
 
     return (
       <>
@@ -83,12 +96,10 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <DialogContent>
             <Calendar
               onClickDay={(value: Date) => setDatePicked(value)}
-              onActiveDateChange={({ activeStartDate, view }) =>
-                getCalendarViewDate(activeStartDate, view)
+              onActiveDateChange={({ activeStartDate }) =>
+                getCalendarViewDate(activeStartDate)
               }
-              tileContent={({ date, view }) =>
-                this.countBadges(date, view, daysWithExpenses)
-              }
+              tileContent={({ date, view }) => this.countBadges(date, view)}
             />
           </DialogContent>
           <DialogActions>

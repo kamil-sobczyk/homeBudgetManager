@@ -19,8 +19,8 @@ export class CalendarClient {
       })
     ));
 
-  getCalendarViewDate = (activeStartDate: Date, view: string): void => {
-    let calendarViewDate = String(activeStartDate.toLocaleDateString());
+  getCalendarViewDate = (date: Date): string => {
+    let calendarViewDate = String(date.toLocaleDateString());
     if (calendarViewDate[1] === '/') {
       calendarViewDate = `0${calendarViewDate}`;
     }
@@ -35,5 +35,7 @@ export class CalendarClient {
       3,
       2
     )}/${calendarViewDate.substr(0, 2)}/${calendarViewDate.substr(6, 4)}`;
+
+    return this.calendarViewDate;
   };
 }
