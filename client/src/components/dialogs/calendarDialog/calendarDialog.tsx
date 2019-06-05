@@ -46,6 +46,12 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     }
   };
 
+  countBadges = (date: Date, view: string, daysWithExpenses: number[]) => {
+    return view === 'month' && daysWithExpenses.indexOf(date.getDate()) > -1 ? (
+      <StyledBadge />
+    ) : null;
+  };
+
   render() {
     const {
       setVisibleDialog,
@@ -57,16 +63,14 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       calendarViewDate,
       costs
     } = this.props;
-  
-    let daysWithExpenses: number[] = costs
-    .filter(
-      cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5)
-    )
-    .map(cost => parseInt(cost.date.slice(0, 2)));
 
-  daysWithExpenses = daysWithExpenses.filter(
-    (day, index) => daysWithExpenses.indexOf(day) === index
-  );
+    let daysWithExpenses: number[] = costs
+      .filter(cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5))
+      .map(cost => parseInt(cost.date.slice(0, 2)));
+
+    daysWithExpenses = daysWithExpenses.filter(
+      (day, index) => daysWithExpenses.indexOf(day) === index
+    );
 
     return (
       <>
@@ -83,10 +87,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
                 getCalendarViewDate(activeStartDate, view)
               }
               tileContent={({ date, view }) =>
-                view === 'month' &&
-                daysWithExpenses.indexOf(date.getDate()) > -1 ? (
-                  <StyledBadge />
-                ) : null
+                this.countBadges(date, view, daysWithExpenses)
               }
             />
           </DialogContent>

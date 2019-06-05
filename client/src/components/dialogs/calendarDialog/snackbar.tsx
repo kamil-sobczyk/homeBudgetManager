@@ -16,7 +16,6 @@ export class FailSnackbar extends React.Component<FailSnackbarProps, {}> {
         action={
           <SnackbarAction
             label='Close'
-            onClick={() => console.log('Click Me')}
           />
         }
       />
