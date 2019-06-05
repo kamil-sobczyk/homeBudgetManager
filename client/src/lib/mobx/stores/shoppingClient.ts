@@ -61,7 +61,7 @@ export class ShoppingClient {
       chosenValue = 'bill';
     } else if (target.value === 'Health care') {
       chosenValue = 'health';
-    } else if (target.value === 'Car exploatation') {
+    } else if (target.value === 'Car exploitation') {
       chosenValue = 'car';
     } else {
       chosenValue = 'shopping';

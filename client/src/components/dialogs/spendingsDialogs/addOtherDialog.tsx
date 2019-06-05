@@ -9,7 +9,7 @@ import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from './spendingsDialog';
 
-const selectValues = ['Bill', 'Car exploatation', 'Health care'];
+const selectValues = ['Bill', 'Car exploitation', 'Health care'];
 
 interface AddOtherDialogProps {
   addNewSpending: () => void;

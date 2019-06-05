@@ -11,7 +11,7 @@ import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
-const selectValues = ['Shopping', 'Bill', 'Car exploatation', 'Health care'];
+const selectValues = ['Shopping', 'Bill', 'Car exploitation', 'Health care'];
 
 interface AddDayCostDialogProps {
   addNewSpending: () => void;
