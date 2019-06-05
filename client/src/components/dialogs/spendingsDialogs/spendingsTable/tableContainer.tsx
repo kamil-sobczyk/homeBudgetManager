@@ -46,7 +46,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
   };
 
-  getCostItems = (cost: Cost) =>
+  getCostItems = (cost: Cost): string | false =>
     cost.category === 'shopping'
       ? cost.chosenItems.length > 0
         ? cost.chosenItems.join(', ')
