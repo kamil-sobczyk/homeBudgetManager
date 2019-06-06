@@ -19,7 +19,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
       <>
         <StyledDrawer modal open={showDrawer} onClose={toggleShowDrawer}>
           <DrawerHeader>
-            <DrawerTitle>Budget Menager</DrawerTitle>
+            <DrawerTitle>Budget Manager</DrawerTitle>
           </DrawerHeader>
           <DrawerContent>
             <DrawerItems setVisibleDialog={setVisibleDialog} />

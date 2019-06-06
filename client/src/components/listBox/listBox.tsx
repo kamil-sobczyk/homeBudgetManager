@@ -12,7 +12,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
     items,
     selected,
     visibilityClient,
-    itemMenagerClient,
+    itemManagerClient,
     apiClient,
     shoppingClient,
     dndClient,
@@ -26,10 +26,10 @@ export const ListBox = observer(({ store }: StoreProps) => {
         items={items}
         selected={selected}
         toggleShowItems={visibilityClient.toggleShowItems}
-        toggleCheckItems={itemMenagerClient.toggleCheckItems}
+        toggleCheckItems={itemManagerClient.toggleCheckItems}
         showItems={visibilityClient.showItems}
-        setActiveItem={itemMenagerClient.setActiveItem}
-        deleteItem={itemMenagerClient.deleteItem}
+        setActiveItem={itemManagerClient.setActiveItem}
+        deleteItem={itemManagerClient.deleteItem}
         onDragEnd={dndClient.onDragEnd}
         setVisibleDialog={visibilityClient.setVisibleDialog}
         visibleDialog={visibilityClient.visibleDialog}
@@ -39,7 +39,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         items={items}
         selected={selected}
         visibilityClient={visibilityClient}
-        itemMenagerClient={itemMenagerClient}
+        itemManagerClient={itemManagerClient}
         apiClient={apiClient}
         shoppingClient={shoppingClient}
         calendarClient={calendarClient}

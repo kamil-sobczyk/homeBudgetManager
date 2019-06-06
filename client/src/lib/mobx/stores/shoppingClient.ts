@@ -124,7 +124,7 @@ export class ShoppingClient {
 
     this.addCost(cost);
     sortItemsByName(newItems);
-    this.store.itemMenagerClient.reorderItems(newItems, newSelected);
+    this.store.itemManagerClient.reorderItems(newItems, newSelected);
 
     this.store.visibilityClient.setVisibleDialog();
   };

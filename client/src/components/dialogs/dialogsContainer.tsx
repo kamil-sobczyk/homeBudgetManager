@@ -21,7 +21,7 @@ interface DialogsContainerProps {
   selected: Item[];
   costs: Cost[];
   visibilityClient: Store['visibilityClient'];
-  itemMenagerClient: Store['itemMenagerClient'];
+  itemManagerClient: Store['itemManagerClient'];
   apiClient: Store['apiClient'];
   shoppingClient: Store['shoppingClient'];
   calendarClient: Store['calendarClient'];
@@ -34,7 +34,7 @@ export const DialogsContainer = observer(
     selected,
     visibilityClient,
     visibilityClient: { visibleDialog, setVisibleDialog },
-    itemMenagerClient,
+    itemManagerClient,
     apiClient,
     shoppingClient,
     calendarClient
@@ -44,8 +44,8 @@ export const DialogsContainer = observer(
         <AddShoppingItemDialog
           items={items}
           selected={selected}
-          AddShoppingItem={itemMenagerClient.AddShoppingItem}
-          changeNewItem={itemMenagerClient.changeNewItem}
+          AddShoppingItem={itemManagerClient.AddShoppingItem}
+          changeNewItem={itemManagerClient.changeNewItem}
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
         />
@@ -55,12 +55,12 @@ export const DialogsContainer = observer(
         <EditDialog
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
-          name={itemMenagerClient.currentItemName}
-          info={itemMenagerClient.currentItemInfo}
-          onChangeName={itemMenagerClient.updateCurrentItemName}
-          onChangeInfo={itemMenagerClient.updateCurrentItemInfo}
-          setOldItem={itemMenagerClient.setOldItem}
-          editItem={itemMenagerClient.editItem}
+          name={itemManagerClient.currentItemName}
+          info={itemManagerClient.currentItemInfo}
+          onChangeName={itemManagerClient.updateCurrentItemName}
+          onChangeInfo={itemManagerClient.updateCurrentItemInfo}
+          setOldItem={itemManagerClient.setOldItem}
+          editItem={itemManagerClient.editItem}
         />
       )}
 
@@ -69,8 +69,8 @@ export const DialogsContainer = observer(
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           items={items}
-          deleteItem={itemMenagerClient.deleteItem}
-          index={itemMenagerClient.activeItem.index}
+          deleteItem={itemManagerClient.deleteItem}
+          index={itemManagerClient.activeItem.index}
         />
       )}
 

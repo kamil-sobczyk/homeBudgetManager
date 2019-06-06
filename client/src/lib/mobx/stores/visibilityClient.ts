@@ -17,7 +17,7 @@ export class VisibityClient {
     if (!dialog) {
       this.visibleDialog = '';
     } else if (dialog === 'EditItemDialog') {
-      this.store.itemMenagerClient.setOldItem();
+      this.store.itemManagerClient.setOldItem();
       this.visibleDialog = dialog;
     } else {
       this.visibleDialog = dialog;

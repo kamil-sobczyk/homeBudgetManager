@@ -37,7 +37,7 @@ export const AboutDialog = observer(
       aria-labelledby='about'
       aria-describedby='about'
     >
-      <StyledDialogTitle>Home Budget Menager</StyledDialogTitle>
+      <StyledDialogTitle>Home Budget Manager</StyledDialogTitle>
       <DialogContent>
         Coded by Kamil Sobczyk 2019
         <br />

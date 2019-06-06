@@ -14,7 +14,7 @@ export class Store {
     this.apiClient = new ApiClient(this);
     this.visibilityClient = new VisibityClient(this);
     this.dndClient = new DnDClient(this);
-    this.itemMenagerClient = new ItemManagerClient(this);
+    this.itemManagerClient = new ItemManagerClient(this);
     this.shoppingClient = new ShoppingClient(this);
     this.calendarClient = new CalendarClient(this);
   }
@@ -22,7 +22,7 @@ export class Store {
   apiClient: ApiClient;
   visibilityClient: VisibityClient;
   dndClient: DnDClient;
-  itemMenagerClient: ItemManagerClient;
+  itemManagerClient: ItemManagerClient;
   shoppingClient: ShoppingClient;
   calendarClient: CalendarClient;
 
