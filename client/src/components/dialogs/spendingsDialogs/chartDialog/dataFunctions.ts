@@ -20,6 +20,7 @@ interface MonthSpendings {
   shopping: number;
   car: number;
   health: number;
+  others: number;
   total?: number;
 }
 
@@ -49,6 +50,8 @@ const getMonthCostCount = (
 ): number => {
   let sumOfCosts: number = 0;
 
+  console.log(JSON.stringify(costs))
+
   costs.forEach((cost: Cost) => {
     if (cost.category === 'bill' && category === 'bill') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
@@ -66,6 +69,10 @@ const getMonthCostCount = (
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
       }
+    } else if (cost.category === 'other' && category === 'other') {
+      if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
+        sumOfCosts += cost.count;
+      }
     }
   });
 
@@ -80,13 +87,14 @@ export const splitCosts = (costs: Cost[]): [] => {
       bills: getMonthCostCount(costs, monthNumbers[index], 'bill'),
       shopping: getMonthCostCount(costs, monthNumbers[index], 'shopping'),
       car: getMonthCostCount(costs, monthNumbers[index], 'car'),
-      health: getMonthCostCount(costs, monthNumbers[index], 'health')
+      health: getMonthCostCount(costs, monthNumbers[index], 'health'),
+      others: getMonthCostCount(costs, monthNumbers[index], 'other')
     })
   );
 
   monthSpendings.forEach(
     (month: MonthSpendings): number =>
-      (month.total = month.bills + month.shopping)
+      (month.total = month.bills + month.shopping + month.car + month.health + month.others)
   );
 
   const monthsWithSpendings: MonthSpendings[] = monthSpendings.filter(
