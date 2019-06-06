@@ -11,7 +11,7 @@ import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
-export const selectValues = ['Shopping', 'Bill', 'Car exploitation', 'Health care'];
+export const selectValues = ['Shopping', 'Bill', 'Car exploitation', 'Health care', 'Other'];
 
 interface AddDayCostDialogProps {
   addNewSpending: () => void;
@@ -59,7 +59,7 @@ export class AddDayCostDialog extends React.Component<
         />
         <TextField
           label='Cost'
-          defaultValue={String(0)}
+          defaultValue={''}
           onChange={e => changeNewSpendingCounter(e)}
           type='number'
           required

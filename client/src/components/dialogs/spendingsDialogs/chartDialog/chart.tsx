@@ -33,7 +33,8 @@ const chartLegendBars = [
   {
     color: 'red',
     key: 'car'
-  }
+  },
+  { color: 'grey', key: 'other' }
 ];
 
 interface ChartProps {
