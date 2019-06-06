@@ -1,19 +1,9 @@
 const sortByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
 
 const sortCosts = costs => {
-  let newCosts = costs;
-
-  newCosts.forEach(cost => {
-    if (cost.date[2] !== ".") {
-      cost.date = `0${cost.date}`;
-    }
-    cost.date = cost.date.replace(/\./g, "/");
-    cost.date = cost.date.replace(/\,/g, "");
-  });
-
   const dates = [];
 
-  newCosts.forEach(cost => dates.push(cost.date));
+  costs.forEach(cost => dates.push(cost.date));
 
   const replaceAll = (find, replace, str) =>
     str.replace(new RegExp(find, "g"), replace);
@@ -40,7 +30,7 @@ const sortCosts = costs => {
   const displayedCosts = [];
 
   dates.forEach(date => {
-    for (let cost of newCosts) {
+    for (let cost of costs) {
       if (cost.date === date && !displayedCosts.includes(cost)) {
         displayedCosts.push(cost);
         break;
