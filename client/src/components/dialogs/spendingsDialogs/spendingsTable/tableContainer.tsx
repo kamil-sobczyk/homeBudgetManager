@@ -87,6 +87,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
               <DataTableRow
                 key={generateRandomString()}
                 style={{ color: getRowColor(cost.category) }}
+                onClick={()=>console.log('clicked')}
               >
                 <StyledDataTableCell>
                   {this.getCostItems(cost)}
