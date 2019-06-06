@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import { ColoredIcon } from './coloredIcon';
 
-export type LegendColor = 'black' | 'blue' | 'green' | 'red';
+export type LegendColor = 'black' | 'blue' | 'green' | 'red' | 'grey';
 
-type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car';
+type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car' | 'Others';
 
 interface LegendItem {
   color: LegendColor;
@@ -29,24 +29,32 @@ const legendItems: LegendItem[] = [
   {
     color: 'red',
     text: 'Car'
+  },
+  {
+    color: 'grey',
+    text: 'Others'
   }
 ];
 
 export const Legend = () => (
   <StyledLegendContainer>
     {legendItems.map((item: LegendItem) => (
-      <div key={item.color}>
+      <StyledIconContainer key={item.color}>
         <ColoredIcon color={item.color} key={item.color} />
         {item.text}
-      </div>
+      </StyledIconContainer>
     ))}
   </StyledLegendContainer>
 );
 
 const StyledLegendContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: baseline;
-  margin-top: 5px;
+  margin: 5px 25px 0 0;
   height: 20px;
+
+`;
+
+const StyledIconContainer = styled.div`
+  padding: 0;
+  padding-left: -10px;
 `;
