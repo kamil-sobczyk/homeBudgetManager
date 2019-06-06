@@ -13,8 +13,10 @@ import { FailDialog } from './infoDialogs/failDialog';
 import { AddOtherDialog } from './spendingsDialogs/addOtherDialog';
 import { AboutDialog } from './infoDialogs/aboutDialog';
 import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
-import { CalendarDialog } from './calendarDialog/calendarDialog';
-import { AddDayCostDialog } from './calendarDialog/addDayCostDialog';
+import { CalendarDialog } from './calendarDialogs/calendarDialog';
+import { AddDayCostDialog } from './calendarDialogs/addDayCostDialog';
+import { CostManagerDialog } from './costManagementDialogs/costManagerDialog';
+import { DeleteCostDialog } from './costManagementDialogs/deleteCostDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -80,6 +82,7 @@ export const DialogsContainer = observer(
           costs={costs}
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
+          setChosenCost={shoppingClient.setChosenCost}
         />
       )}
 
@@ -136,6 +139,7 @@ export const DialogsContainer = observer(
           costs={costs}
           getCalendarViewDate={calendarClient.getCalendarViewDate}
           calendarViewDate={calendarClient.calendarViewDate}
+          setChosenCost={shoppingClient.setChosenCost}
         />
       )}
       {visibleDialog.includes('CalendarAddDayCostDialog') && (
@@ -149,6 +153,23 @@ export const DialogsContainer = observer(
           changeShoppingItems={shoppingClient.changeShoppingItems}
           count={shoppingClient.count}
           category={shoppingClient.category}
+        />
+      )}
+      {visibleDialog.includes('CostManager') && (
+        <CostManagerDialog
+          cost={[shoppingClient.chosenCost]}
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+          setChosenCost={shoppingClient.setChosenCost}
+          prevVisibleDialog={visibilityClient.prevVisibleDialog}
+        />
+      )}
+      {visibleDialog.includes('DeleteCostDialog') && (
+        <DeleteCostDialog
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+          cost={shoppingClient.chosenCost}
+          prevVisibleDialog={visibilityClient.prevVisibleDialog}
         />
       )}
     </>

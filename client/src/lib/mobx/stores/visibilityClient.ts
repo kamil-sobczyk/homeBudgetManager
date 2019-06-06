@@ -12,16 +12,22 @@ export class VisibityClient {
   @observable showDrawer: boolean = false;
   @observable showFailSnackbar = false;
   @observable visibleDialog = 'SpendingsDialog';
+  @observable prevVisibleDialog = '';
 
   setVisibleDialog = (dialog?: string): void => {
+    this.prevVisibleDialog = this.visibleDialog;
+    
     if (!dialog) {
       this.visibleDialog = '';
-    } else if (dialog === 'EditItemDialog') {
+      return;
+    }
+    if (dialog === 'EditItemDialog') {
       this.store.itemManagerClient.setOldItem();
       this.visibleDialog = dialog;
     } else {
       this.visibleDialog = dialog;
     }
+   
   };
 
   toggleShowFailSnackbar = (): boolean =>

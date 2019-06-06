@@ -27,6 +27,7 @@ interface CalendarDialogProps {
   calendarViewDate: string;
   getCosts: () => void;
   costs: Cost[];
+  setChosenCost: (cost: Cost) => Cost;
 }
 
 @observer
@@ -82,7 +83,8 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       setDatePicked,
       datePicked,
       getCalendarViewDate,
-      costs
+      costs,
+      setChosenCost
     } = this.props;
 
     return (
@@ -123,6 +125,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             showFailSnackbar={showFailSnackbar}
             datePicked={datePicked}
             costs={costs}
+            setChosenCost={setChosenCost}
           />
         )}
       </>

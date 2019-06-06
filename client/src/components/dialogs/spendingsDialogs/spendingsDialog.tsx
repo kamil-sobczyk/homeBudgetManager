@@ -22,6 +22,7 @@ interface SpendingsDialogProps {
   visibleDialog: string;
   getCosts: () => void;
   costs: Cost[];
+  setChosenCost: (cost: Cost) => Cost;
 }
 
 export const SpendingsDialog = observer(
@@ -29,7 +30,8 @@ export const SpendingsDialog = observer(
     getCosts,
     costs,
     setVisibleDialog,
-    visibleDialog
+    visibleDialog,
+    setChosenCost
   }: SpendingsDialogProps) => (
     <StyledDialog
       open={visibleDialog === 'SpendingsDialog'}
@@ -38,7 +40,13 @@ export const SpendingsDialog = observer(
       <StyledDialogTitle>Spendings you made</StyledDialogTitle>
       <Legend />
       <StyledDialogContent>
-        <TableContainer getCosts={getCosts} costs={costs} />
+        <TableContainer
+          getCosts={getCosts}
+          costs={costs}
+          setVisibleDialog={setVisibleDialog}
+          visibleDialog={visibleDialog}
+          setChosenCost={setChosenCost}
+        />
       </StyledDialogContent>
       <CostsCounter costs={costs} time='month' />
       <DialogActions>
@@ -67,5 +75,5 @@ export const StyledDialog = styled(Dialog)`
 `;
 
 export const StyledDialogContent = styled(DialogContent)`
-margin: 0 auto;
-`
+  margin: 0 auto;
+`;

@@ -14,9 +14,9 @@ import {
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
 
-
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;
+  setChosenCost: (cost: Cost) => Cost;
   visibleDialog: string;
   showFailSnackbar: boolean;
   datePicked: string | Date;
@@ -27,9 +27,14 @@ export class CalendarDialogDay extends React.Component<
   CalendarDialogDayProps,
   {}
 > {
-
   render() {
-    const { costs, setVisibleDialog, visibleDialog, datePicked } = this.props;
+    const {
+      costs,
+      setVisibleDialog,
+      visibleDialog,
+      datePicked,
+      setChosenCost
+    } = this.props;
     let dayString: string = String(datePicked).replace(/\./g, '/');
 
     if (dayString[1] === '/') {
@@ -49,7 +54,12 @@ export class CalendarDialogDay extends React.Component<
         <StyledDialogTitle>Spendings you made {dayString}</StyledDialogTitle>
         <Legend />
         <StyledDialogContent>
-          <TableContainer costs={dayCosts} />
+          <TableContainer
+            costs={dayCosts}
+            setVisibleDialog={setVisibleDialog}
+            visibleDialog={visibleDialog}
+            setChosenCost={setChosenCost}
+          />
         </StyledDialogContent>
         <CostsCounter costs={dayCosts} time={dayString} />
         <DialogActions>
@@ -66,4 +76,3 @@ export class CalendarDialogDay extends React.Component<
     );
   }
 }
-

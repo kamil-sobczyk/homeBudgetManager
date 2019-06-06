@@ -17,11 +17,6 @@ import {
 } from '@rmwc/data-table';
 import '@rmwc/data-table/data-table.css';
 
-interface TableContainerProps {
-  getCosts?: () => void;
-  costs: Cost[];
-}
-
 const getRowColor = (category: CategoryType) => {
   if (category === 'shopping') return 'black';
   else if (category === 'bill') return 'blue';
@@ -37,6 +32,14 @@ export const generateRandomString = () =>
   Math.random()
     .toString(36)
     .substring(2, 15);
+
+interface TableContainerProps {
+  getCosts?: () => void;
+  costs: Cost[];
+  setVisibleDialog: (dialog?: string) => void;
+  visibleDialog: string;
+  setChosenCost: (cost: Cost) => Cost;
+}
 
 @observer
 export class TableContainer extends React.Component<TableContainerProps, {}> {
@@ -57,9 +60,14 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
       ? cost.chosenItems[0]
       : ' - - - ';
 
-      handleCostClick = (cost: Cost) => {
-        console.log(JSON.stringify(cost));
-      }
+  handleCostClick = (cost: Cost) => {
+    const { setVisibleDialog, visibleDialog, setChosenCost } = this.props;
+
+    setVisibleDialog(`${visibleDialog}CostManager`);
+    setChosenCost(cost);
+
+    console.log(JSON.stringify(cost));
+  };
 
   render() {
     let displayedCosts: Cost[] = this.props.costs;

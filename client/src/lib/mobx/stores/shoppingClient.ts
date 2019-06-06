@@ -17,6 +17,14 @@ export class ShoppingClient {
   @observable date: Date = new Date();
   @observable category: CategoryType = 'bill';
   @observable info: string = '';
+  @observable chosenCost: Cost = {
+    count: 0,
+    chosenItems: [],
+    date: '',
+    category: 'bill'
+  };
+
+  setChosenCost = (cost: Cost): Cost => (this.chosenCost = cost);
 
   addCost = (cost: Cost): void => {
     this.store.costs.unshift(cost);
