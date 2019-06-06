@@ -49,8 +49,6 @@ export class ShoppingClient {
       info: this.info.length > 0 ? this.info : undefined
     };
 
-    console.log(billCost)
-
     this.store.costs.unshift(billCost);
     this.store.calendarClient.datePicked = '';
     this.store.apiClient.addCostOnServer(billCost);
@@ -77,7 +75,6 @@ export class ShoppingClient {
 
   changeShoppingItems = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
-    console.log(target.value);
 
     this.chosenItems = target.value.split(',');
   };

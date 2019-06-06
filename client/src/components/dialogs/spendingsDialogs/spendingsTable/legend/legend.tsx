@@ -6,7 +6,7 @@ import { ColoredIcon } from './coloredIcon';
 
 export type LegendColor = 'black' | 'blue' | 'green' | 'red' | 'grey';
 
-type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car' | 'Others';
+type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car' | 'other';
 
 interface LegendItem {
   color: LegendColor;
@@ -32,7 +32,7 @@ const legendItems: LegendItem[] = [
   },
   {
     color: 'grey',
-    text: 'Others'
+    text: 'other'
   }
 ];
 
