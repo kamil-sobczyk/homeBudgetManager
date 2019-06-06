@@ -45,8 +45,11 @@ export class ShoppingClient {
       chosenItems: this.chosenItems,
       count: this.count,
       date: date,
-      category: this.category,
-      info: this.info.length > 0 ? this.info : undefined
+      category:
+        this.category === this.chosenCost.category
+          ? this.category
+          : this.chosenCost.category,
+      info: this.info.length > 0 ? this.info : this.chosenCost.info
     };
 
     this.store.costs.unshift(billCost);
@@ -57,14 +60,22 @@ export class ShoppingClient {
 
   editCost = (): void => {
     const editedCost: Cost = {
-      chosenItems: this.chosenItems,
-      count: this.count,
-      date: this.store.calendarClient.datePicked,   /////////////////////////////////
-      category: this.category,
-      info: this.info.length > 0 ? this.info : undefined
+      chosenItems: this.chosenItems.length
+        ? this.chosenItems
+        : this.chosenCost.chosenItems,
+      count: this.count > 0 ? this.count : this.chosenCost.count,
+      date:
+        String(this.store.calendarClient.datePicked).length > 0
+          ? this.store.calendarClient.datePicked
+          : this.chosenCost.date,
+      category:
+        this.category === this.chosenCost.category
+          ? this.category
+          : this.chosenCost.category,
+      info: this.info.length > 0 ? this.info : this.chosenCost.info
     };
-    console.log(JSON.stringify(editedCost))
-  }
+    console.log(JSON.stringify(editedCost));
+  };
 
   changeShoppingItems = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
