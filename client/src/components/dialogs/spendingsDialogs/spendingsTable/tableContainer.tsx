@@ -22,6 +22,7 @@ const getRowColor = (category: CategoryType) => {
   else if (category === 'bill') return 'blue';
   else if (category === 'health') return 'green';
   else if (category === 'car') return 'red';
+  else if (category === 'other') return 'grey';
   else return 'yellow';
 };
 

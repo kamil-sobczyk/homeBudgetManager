@@ -1,6 +1,6 @@
 import { Store } from './mobx/rootStore';
 
-export type CategoryType = 'shopping' | 'bill' | 'health' | 'car';
+export type CategoryType = 'shopping' | 'bill' | 'health' | 'car' | 'other';
 
 export interface Item {
   name: string;

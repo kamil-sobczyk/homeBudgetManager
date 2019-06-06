@@ -9,7 +9,7 @@ import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from './spendingsDialog';
 
-const selectValues = ['Bill', 'Car exploitation', 'Health care'];
+const selectValues = ['Bill', 'Car exploitation', 'Health care', 'Other'];
 
 interface AddOtherDialogProps {
   addNewSpending: () => void;
@@ -41,14 +41,13 @@ export const AddOtherDialog = observer(
         />
         <TextField
           label='Cost'
-          defaultValue={String(0)}
+          defaultValue={''}
           onChange={e => changeNewSpendingCounter(e)}
           type='number'
           required
         />
         <TextField
         label='Short info'
-        // defaultValue={String(0)}
         onChange={e => changeNewSpendingInfo(e)}
         type='text'
       />

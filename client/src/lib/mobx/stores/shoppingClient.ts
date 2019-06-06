@@ -45,12 +45,11 @@ export class ShoppingClient {
       chosenItems: this.chosenItems,
       count: this.count,
       date: date,
-      category:
-        this.category === this.chosenCost.category
-          ? this.category
-          : this.chosenCost.category,
-      info: this.info.length > 0 ? this.info : this.chosenCost.info
+      category: this.category,
+      info: this.info.length > 0 ? this.info : undefined
     };
+
+    console.log(billCost)
 
     this.store.costs.unshift(billCost);
     this.store.calendarClient.datePicked = '';
@@ -93,8 +92,10 @@ export class ShoppingClient {
       chosenValue = 'health';
     } else if (target.value === 'Car exploitation') {
       chosenValue = 'car';
+    } else if (target.value === 'Other'){
+      chosenValue = 'other';
     } else {
-      chosenValue = 'shopping';
+      chosenValue = 'shopping'
     }
 
     this.chosenItems[0] = chosenValue;

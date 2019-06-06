@@ -55,6 +55,8 @@ const countCosts = (
       sumOfCosts += cost.count;
     } else if (category === 'health' && cost.category === 'health') {
       sumOfCosts += cost.count;
+    } else if (category === 'other' && cost.category === 'other') {
+      sumOfCosts += cost.count;
     }
   });
 
@@ -77,6 +79,10 @@ const costCounterItems: CostCounterItem[] = [
   {
     color: 'red',
     category: 'car'
+  },
+  {
+    color: 'grey',
+    category: 'other'
   }
 ];
 
