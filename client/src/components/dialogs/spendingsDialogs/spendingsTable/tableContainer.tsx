@@ -65,8 +65,6 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
 
     setVisibleDialog(`${visibleDialog}CostManager`);
     setChosenCost(cost);
-
-    console.log(JSON.stringify(cost));
   };
 
   render() {

@@ -14,6 +14,15 @@ import {
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
 
+const parseDate = (datePicked: Date | string) => {
+  let dayString: string = String(datePicked).replace(/\./g, '/');
+
+  if (dayString[1] === '/') {
+    dayString = `0${dayString}`;
+  }
+  return dayString.slice(0, 10);
+};
+
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;
   setChosenCost: (cost: Cost) => Cost;
@@ -35,12 +44,8 @@ export class CalendarDialogDay extends React.Component<
       datePicked,
       setChosenCost
     } = this.props;
-    let dayString: string = String(datePicked).replace(/\./g, '/');
 
-    if (dayString[1] === '/') {
-      dayString = `0${dayString}`;
-    }
-    dayString = dayString.slice(0, 10);
+    const dayString = parseDate(datePicked);
 
     const dayCosts = costs.filter((cost: Cost) =>
       cost.date.includes(dayString)

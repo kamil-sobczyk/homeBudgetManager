@@ -55,11 +55,11 @@ export class ShoppingClient {
     this.store.visibilityClient.setVisibleDialog();
   };
 
-  editCost = (cost: Cost): void => {
+  editCost = (): void => {
     const editedCost: Cost = {
       chosenItems: this.chosenItems,
       count: this.count,
-      date: String(this.date),   /////////////////////////////////
+      date: this.store.calendarClient.datePicked,   /////////////////////////////////
       category: this.category,
       info: this.info.length > 0 ? this.info : undefined
     };
