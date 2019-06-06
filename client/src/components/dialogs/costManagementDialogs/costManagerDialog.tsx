@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { Cost } from '../../../lib/interfaces';
+
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions } from '@rmwc/dialog';
-import { TextField } from '@rmwc/textfield';
 
 import {
   StyledDialogTitle,
   StyledDialogContent
 } from '../spendingsDialogs/spendingsDialog';
-import { Item, Cost } from '../../../lib/interfaces';
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 
 interface CostManagerDialogProps {
@@ -51,7 +51,7 @@ export class CostManagerDialog extends React.Component<
             color='primary'
             onClick={() =>
               setVisibleDialog(
-                prevVisibleDialog !== 'DeleteCostDialog'
+                prevVisibleDialog !== ('DeleteCostDialog' && 'EditCostDialog')
                   ? prevVisibleDialog
                   : ''
               )
@@ -59,7 +59,10 @@ export class CostManagerDialog extends React.Component<
           >
             Cancel
           </Button>
-          <Button color='primary' onClick={() => null}>
+          <Button
+            color='primary'
+            onClick={() => setVisibleDialog('EditCostDialog')}
+          >
             Edit
           </Button>
           <Button

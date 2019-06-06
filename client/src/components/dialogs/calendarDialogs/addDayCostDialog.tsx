@@ -11,13 +11,13 @@ import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 
-const selectValues = ['Shopping', 'Bill', 'Car exploitation', 'Health care'];
+export const selectValues = ['Shopping', 'Bill', 'Car exploitation', 'Health care'];
 
 interface AddDayCostDialogProps {
   addNewSpending: () => void;
-  changeNewSpendingName: (e: React.FormEvent) => void;
+  changeNewSpendingCategory: (e: React.FormEvent) => void;
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
-  changeNewSpendingInfo: (a: any) => any;
+  changeNewSpendingInfo: (event: React.FormEvent<EventTarget>) => void;
   changeShoppingItems: (event: React.FormEvent<EventTarget>) => void;
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
@@ -30,7 +30,7 @@ export class AddDayCostDialog extends React.Component<
   AddDayCostDialogProps,
   {}
 > {
-  addNewSpending = () => {
+  confirm = () => {
     const { addNewSpending, setVisibleDialog } = this.props;
 
     addNewSpending();
@@ -39,7 +39,7 @@ export class AddDayCostDialog extends React.Component<
   };
   render() {
     const {
-      changeNewSpendingName,
+      changeNewSpendingCategory,
       changeNewSpendingCounter,
       changeNewSpendingInfo,
       changeShoppingItems,
@@ -52,8 +52,8 @@ export class AddDayCostDialog extends React.Component<
       <Dialog open={visibleDialog.includes('AddDayCostDialog')}>
         <StyledDialogTitle>Add cost</StyledDialogTitle>
         <Select
-          label='Spending type'
-          onChange={e => changeNewSpendingName(e)}
+          label='Category'
+          onChange={e => changeNewSpendingCategory(e)}
           options={selectValues}
           required
         />
@@ -86,7 +86,7 @@ export class AddDayCostDialog extends React.Component<
           >
             Cancel
           </Button>
-          <Button color='primary' onClick={this.addNewSpending}>
+          <Button color='primary' onClick={this.confirm}>
             Add
           </Button>
         </DialogActions>

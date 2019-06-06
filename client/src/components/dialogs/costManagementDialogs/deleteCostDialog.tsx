@@ -7,7 +7,6 @@ import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import {
   StyledDialogTitle,
-  StyledDialogContent
 } from '../spendingsDialogs/spendingsDialog';
 import styled from 'styled-components';
 

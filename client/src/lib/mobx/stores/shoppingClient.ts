@@ -55,13 +55,25 @@ export class ShoppingClient {
     this.store.visibilityClient.setVisibleDialog();
   };
 
+  editCost = (cost: Cost): void => {
+    const editedCost: Cost = {
+      chosenItems: this.chosenItems,
+      count: this.count,
+      date: String(this.date),   /////////////////////////////////
+      category: this.category,
+      info: this.info.length > 0 ? this.info : undefined
+    };
+    console.log(JSON.stringify(editedCost))
+  }
+
   changeShoppingItems = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
+    console.log(target.value);
 
     this.chosenItems = target.value.split(',');
   };
 
-  changeNewSpendingName = (event: React.FormEvent): void => {
+  changeNewSpendingCategory = (event: React.FormEvent): void => {
     const target = event.target as HTMLInputElement;
     let chosenValue: CategoryType;
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 
 import { AddShoppingItemDialog } from './itemManagementDialogs/addShoppingItemDialog';
-import { EditDialog } from './itemManagementDialogs/editItemDialog';
+import { EditItemDialog } from './itemManagementDialogs/editItemDialog';
 import { DeleteItemDialog } from './itemManagementDialogs/deleteItemDialog';
 import { SpendingsDialog } from './spendingsDialogs/spendingsDialog';
 import { FinishShoppingDialog } from './spendingsDialogs/finishShoppingDialog';
@@ -17,6 +17,7 @@ import { CalendarDialog } from './calendarDialogs/calendarDialog';
 import { AddDayCostDialog } from './calendarDialogs/addDayCostDialog';
 import { CostManagerDialog } from './costManagementDialogs/costManagerDialog';
 import { DeleteCostDialog } from './costManagementDialogs/deleteCostDialog';
+import { EditCostDialog } from './costManagementDialogs/editCostDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -54,7 +55,7 @@ export const DialogsContainer = observer(
       )}
 
       {visibleDialog === 'EditItemDialog' && (
-        <EditDialog
+        <EditItemDialog
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           name={itemManagerClient.currentItemName}
@@ -109,7 +110,7 @@ export const DialogsContainer = observer(
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           addNewSpending={shoppingClient.addNewSpending}
-          changeNewSpendingName={shoppingClient.changeNewSpendingName}
+          changeNewSpendingCategory={shoppingClient.changeNewSpendingCategory}
           changeNewSpendingCounter={shoppingClient.changeNewSpendingCounter}
           count={shoppingClient.count}
           changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
@@ -147,7 +148,7 @@ export const DialogsContainer = observer(
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           addNewSpending={shoppingClient.addNewSpending}
-          changeNewSpendingName={shoppingClient.changeNewSpendingName}
+          changeNewSpendingCategory={shoppingClient.changeNewSpendingCategory}
           changeNewSpendingCounter={shoppingClient.changeNewSpendingCounter}
           changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
           changeShoppingItems={shoppingClient.changeShoppingItems}
@@ -169,6 +170,20 @@ export const DialogsContainer = observer(
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
           cost={shoppingClient.chosenCost}
+          prevVisibleDialog={visibilityClient.prevVisibleDialog}
+        />
+      )}
+      {visibleDialog.includes('EditCostDialog') && (
+        <EditCostDialog
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+          cost={shoppingClient.chosenCost}
+          changeNewSpendingCategory={shoppingClient.changeNewSpendingCategory}
+          changeNewSpendingCounter={shoppingClient.changeNewSpendingCounter}
+          changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
+          changeShoppingItems={shoppingClient.changeShoppingItems}
+          category={shoppingClient.category}
+          editCost={shoppingClient.editCost}
           prevVisibleDialog={visibilityClient.prevVisibleDialog}
         />
       )}

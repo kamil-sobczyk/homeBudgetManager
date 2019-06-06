@@ -10,7 +10,7 @@ import { TextField } from '@rmwc/textfield';
 import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
 import { Item } from '../../../lib/interfaces';
 
-interface EditDialogProps {
+interface EditItemDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   onChangeName: (name: string) => void;
   onChangeInfo: (info: string) => void;
@@ -22,7 +22,7 @@ interface EditDialogProps {
 }
 
 @observer
-export class EditDialog extends React.Component<EditDialogProps, {}> {
+export class EditItemDialog extends React.Component<EditItemDialogProps, {}> {
   @observable name?: string = this.props.name;
   @observable info?: string = this.props.info;
   @observable isNameChangeInitialized: boolean = false;
