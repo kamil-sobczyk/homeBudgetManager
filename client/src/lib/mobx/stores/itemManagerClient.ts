@@ -6,7 +6,7 @@ import { sortItemsByName } from '../../reorderFunctions';
 import { Item } from '../../interfaces';
 import { observable, action, computed } from 'mobx';
 
-export class ItemMenagerClient {
+export class ItemManagerClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;

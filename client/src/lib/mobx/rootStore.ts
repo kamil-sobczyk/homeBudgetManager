@@ -5,7 +5,7 @@ import { Item, Cost } from '../interfaces';
 import { ApiClient } from './stores/apiClient';
 import { VisibityClient } from './stores/visibilityClient';
 import { DnDClient } from './stores/dndClient';
-import { ItemMenagerClient } from './stores/itemMenagerClient';
+import { ItemManagerClient } from './stores/itemManagerClient';
 import { ShoppingClient } from './stores/shoppingClient';
 import { CalendarClient } from './stores/calendarClient';
 
@@ -14,7 +14,7 @@ export class Store {
     this.apiClient = new ApiClient(this);
     this.visibilityClient = new VisibityClient(this);
     this.dndClient = new DnDClient(this);
-    this.itemMenagerClient = new ItemMenagerClient(this);
+    this.itemMenagerClient = new ItemManagerClient(this);
     this.shoppingClient = new ShoppingClient(this);
     this.calendarClient = new CalendarClient(this);
   }
@@ -22,7 +22,7 @@ export class Store {
   apiClient: ApiClient;
   visibilityClient: VisibityClient;
   dndClient: DnDClient;
-  itemMenagerClient: ItemMenagerClient;
+  itemMenagerClient: ItemManagerClient;
   shoppingClient: ShoppingClient;
   calendarClient: CalendarClient;
 

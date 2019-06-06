@@ -57,8 +57,11 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
       ? cost.chosenItems[0]
       : ' - - - ';
 
-  render() {
+      handleCostClick = (cost: Cost) => {
+        console.log(JSON.stringify(cost));
+      }
 
+  render() {
     let displayedCosts: Cost[] = this.props.costs;
 
     if (displayedCosts.length < 1) {
@@ -67,7 +70,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
           count: 0,
           chosenItems: [' - - - - - - '],
           date: ' - - - - - - ',
-          category: 'bill'
+          category: 'shopping'
         }
       ];
     }
@@ -84,10 +87,10 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
           </DataTableHead>
           <DataTableBody>
             {displayedCosts.map((cost: Cost) => (
-              <DataTableRow
+              <StyledDataTableRow
                 key={generateRandomString()}
                 style={{ color: getRowColor(cost.category) }}
-                onClick={()=>console.log('clicked')}
+                onClick={() => this.handleCostClick(cost)}
               >
                 <StyledDataTableCell>
                   {this.getCostItems(cost)}
@@ -96,7 +99,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
                 <StyledDataTableCell alignEnd>
                   {`${cost.count}zł`}
                 </StyledDataTableCell>
-              </DataTableRow>
+              </StyledDataTableRow>
             ))}
           </DataTableBody>
         </DataTableContent>
@@ -116,4 +119,8 @@ const StyledDataTableHeadCell = styled(DataTableHeadCell)`
 
 const StyledDataTable = styled(DataTable)`
   margin: 10px 0 0 -10px;
+`;
+
+const StyledDataTableRow = styled(DataTableRow)`
+  cursor: pointer;
 `;

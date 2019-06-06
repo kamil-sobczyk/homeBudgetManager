@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { server } from '../../../../config'
+import { server } from '../../../../config';
 
 import { Store } from '../rootStore';
 

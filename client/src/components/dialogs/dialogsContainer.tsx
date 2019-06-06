@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { AddShoppingItemDialog } from './itemMenagementDialogs/addShoppingItemDialog';
-import { EditDialog } from './itemMenagementDialogs/editItemDialog';
-import { DeleteItemDialog } from './itemMenagementDialogs/deleteItemDialog';
+import { AddShoppingItemDialog } from './itemManagementDialogs/addShoppingItemDialog';
+import { EditDialog } from './itemManagementDialogs/editItemDialog';
+import { DeleteItemDialog } from './itemManagementDialogs/deleteItemDialog';
 import { SpendingsDialog } from './spendingsDialogs/spendingsDialog';
 import { FinishShoppingDialog } from './spendingsDialogs/finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
