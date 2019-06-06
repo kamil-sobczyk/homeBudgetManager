@@ -74,7 +74,6 @@ export class ShoppingClient {
           : this.chosenCost.category,
       info: this.info.length > 0 ? this.info : this.chosenCost.info
     };
-    console.log(JSON.stringify(editedCost));
   };
 
   changeShoppingItems = (event: React.FormEvent<EventTarget>): void => {

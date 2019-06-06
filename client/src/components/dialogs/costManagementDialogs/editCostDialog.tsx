@@ -92,7 +92,6 @@ export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
     const {
       visibleDialog,
       changeNewSpendingCategory,
-      changeNewSpendingCounter,
       changeNewSpendingInfo,
       changeShoppingItems,
       getCalendarViewDate,
@@ -101,8 +100,6 @@ export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
       cost,
       count
     } = this.props;
-
-    console.log(JSON.stringify(cost));
 
     return (
       <Dialog open={visibleDialog.includes('EditCostDialog')}>
