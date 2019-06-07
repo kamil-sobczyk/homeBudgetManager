@@ -4,6 +4,7 @@ import { ActiveItem, ListType } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { Item } from '../../interfaces';
+
 import { observable, action, computed } from 'mobx';
 
 export class ItemManagerClient {
@@ -129,8 +130,7 @@ export class ItemManagerClient {
 
   toggleCheckItems = (list: ListType, index: number): void => {
     this.setActiveItem(list, index);
-      this.store.selected[index].checked = !this.store.selected[index].checked;
-    
+    this.store.selected[index].checked = !this.store.selected[index].checked;
 
     this.store.apiClient.checkItemOnServer(this.store.selected[index]);
   };

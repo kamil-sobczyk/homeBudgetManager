@@ -60,7 +60,9 @@ export class ApiClient {
       method: 'get',
       url: server + 'store/costs',
       headers: this.headers
-    }).then(costs => (this.store.costs = sortCosts(costs.data).reverse() as Cost[]));
+    }).then(
+      costs => (this.store.costs = sortCosts(costs.data).reverse() as Cost[])
+    );
 
   deleteItemOnServer = async (name: string): Promise<void> => {
     await axios({
