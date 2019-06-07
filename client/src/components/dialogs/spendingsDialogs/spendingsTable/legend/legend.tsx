@@ -39,7 +39,7 @@ const legendItems: LegendItem[] = [
 export const Legend = () => (
   <StyledLegendContainer>
     {legendItems.map((item: LegendItem) => (
-      <div>
+      <div key={item.color}>
         <StyledIconContainer key={item.color}>
           <ColoredIcon color={item.color} key={item.color} />
         </StyledIconContainer>
@@ -49,7 +49,7 @@ export const Legend = () => (
   </StyledLegendContainer>
 );
 
-const StyledLegendContainer = styled.div`
+export const StyledLegendContainer = styled.div`
   display: flex;
   justify-content: space-around;
 `;
@@ -59,6 +59,6 @@ const StyledIconContainer = styled.div`
   align-content: center;
   margin-bottom: 5px;
 `;
-const StyledDescriptionContainer = styled.div`
+export const StyledDescriptionContainer = styled.div`
   text-align: center;
 `;

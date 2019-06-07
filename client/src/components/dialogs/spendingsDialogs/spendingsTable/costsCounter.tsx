@@ -7,7 +7,7 @@ import { Cost, CategoryType } from '../../../../lib/interfaces';
 import { Typography } from '@rmwc/typography';
 
 import { ColoredIcon } from './legend/coloredIcon';
-import { LegendColor } from './legend/legend';
+import { LegendColor, StyledLegendContainer } from './legend/legend';
 
 export const getDateNow = () => {
   let dateNow = String(
@@ -107,14 +107,16 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
         <StyledTypography use='subtitle1'>
           {time === 'month' ? 'This month' : time} you spent:
         </StyledTypography>
-        <StyledCounterContainer>
+        <StyledLegendContainer>
           {costCounterItems.map((item: CostCounterItem) => (
             <div key={item.color}>
               <ColoredIcon color={item.color} />
-              {countCosts(costs, item.category, time) + ' zł'}
+              <StyledCountContainer>
+                {countCosts(costs, item.category, time) + ' zł'}
+              </StyledCountContainer>
             </div>
           ))}
-        </StyledCounterContainer>
+        </StyledLegendContainer>
       </>
     );
   }
@@ -125,7 +127,7 @@ const StyledTypography = styled(Typography)`
   justify-content: center;
 `;
 
-const StyledCounterContainer = styled.div`
-  display: flex;
-  justify-content: center;
+const StyledCountContainer = styled.div`
+  margin-left: 5px;
+  display: inline-block;
 `;
