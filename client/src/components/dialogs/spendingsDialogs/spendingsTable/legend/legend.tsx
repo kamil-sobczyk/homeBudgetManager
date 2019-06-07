@@ -6,7 +6,7 @@ import { ColoredIcon } from './coloredIcon';
 
 export type LegendColor = 'black' | 'blue' | 'green' | 'red' | 'grey';
 
-type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car' | 'other';
+type LegendText = 'Shopping' | 'Bills' | 'Health' | 'Car' | 'Other';
 
 interface LegendItem {
   color: LegendColor;
@@ -32,29 +32,33 @@ const legendItems: LegendItem[] = [
   },
   {
     color: 'grey',
-    text: 'other'
+    text: 'Other'
   }
 ];
 
 export const Legend = () => (
   <StyledLegendContainer>
     {legendItems.map((item: LegendItem) => (
-      <StyledIconContainer key={item.color}>
-        <ColoredIcon color={item.color} key={item.color} />
-        {item.text}
-      </StyledIconContainer>
+      <div>
+        <StyledIconContainer key={item.color}>
+          <ColoredIcon color={item.color} key={item.color} />
+        </StyledIconContainer>
+        <StyledDescriptionContainer>{item.text}</StyledDescriptionContainer>
+      </div>
     ))}
   </StyledLegendContainer>
 );
 
 const StyledLegendContainer = styled.div`
   display: flex;
-  margin: 5px 25px 0 0;
-  height: 20px;
-
+  justify-content: space-around;
 `;
 
 const StyledIconContainer = styled.div`
-  padding: 0;
-  padding-left: -10px;
+  display: flex;
+  align-content: center;
+  margin-bottom: 5px;
+`;
+const StyledDescriptionContainer = styled.div`
+  text-align: center;
 `;

@@ -83,7 +83,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
 
     return (
-      <StyledDataTable stickyRows={1}>
+      <DataTable stickyRows={1}>
         <DataTableContent>
           <DataTableHead>
             <DataTableRow>
@@ -110,7 +110,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
             ))}
           </DataTableBody>
         </DataTableContent>
-      </StyledDataTable>
+      </DataTable>
     );
   }
 }
@@ -122,10 +122,6 @@ const StyledDataTableCell = styled(DataTableCell)`
 
 const StyledDataTableHeadCell = styled(DataTableHeadCell)`
   text-align: center;
-`;
-
-const StyledDataTable = styled(DataTable)`
-  margin: 10px 0 0 -10px;
 `;
 
 const StyledDataTableRow = styled(DataTableRow)`

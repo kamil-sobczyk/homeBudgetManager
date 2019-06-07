@@ -66,14 +66,16 @@ export const SpendingsDialog = observer(
 export const StyledDialogTitle = styled(DialogTitle)`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 export const StyledDialog = styled(Dialog)`
   height: 100vh;
-  padding-bottom: 15px;
+  display: flex;
+  justify-content: center;
 `;
 
 export const StyledDialogContent = styled(DialogContent)`
-  margin: 0 auto;
+   display: flex;
+  justify-content: center;
 `;
