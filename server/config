@@ -2,10 +2,11 @@ const dotenv = require('dotenv');
 
 const mongoLocal = "mongodb://localhost:27017/shop";
 const mongoExt = "mongodb://mo1097_hbm:Ogar616@mongo40.mydevil.net:27017/mo1097_hbm"
+const mongoTest = "mongodb://mo1097_test:Ogar616@mongo40.mydevil.net:27017/mo1097_test"
 
 dotenv.config();
 
 module.exports = {
   port: process.env.PORT,
-  mongoUrl: mongoExt
+  mongoUrl: mongoTest
 };
