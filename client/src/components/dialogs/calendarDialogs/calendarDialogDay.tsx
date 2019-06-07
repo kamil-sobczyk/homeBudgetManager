@@ -14,13 +14,12 @@ import {
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
 
-const parseDate = (datePicked: Date | string) => {
-  let dayString: string = String(datePicked).replace(/\./g, '/');
-
-  if (dayString[1] === '/') {
-    dayString = `0${dayString}`;
-  }
-  return dayString.slice(0, 10);
+const fixDate = (date: string | Date) => {
+  let fixedDate = String(date);
+  return `${fixedDate.slice(0, 2)}.${fixedDate.slice(
+    3,
+    5
+  )}.${fixedDate.slice(6)}`;
 };
 
 interface CalendarDialogDayProps {
@@ -45,7 +44,7 @@ export class CalendarDialogDay extends React.Component<
       setChosenCost
     } = this.props;
 
-    const dayString = parseDate(datePicked);
+    const dayString = fixDate(datePicked);
 
     const dayCosts = costs.filter((cost: Cost) =>
       cost.date.includes(dayString)
@@ -56,7 +55,7 @@ export class CalendarDialogDay extends React.Component<
         open={visibleDialog.includes('Day')}
         aria-label='shopping-you-made'
       >
-        <StyledDialogTitle>Spendings you made {dayString}</StyledDialogTitle>
+        <StyledDialogTitle>Spendings you made {datePicked}</StyledDialogTitle>
         <Legend />
         <StyledDialogContent>
           <TableContainer
@@ -66,7 +65,7 @@ export class CalendarDialogDay extends React.Component<
             setChosenCost={setChosenCost}
           />
         </StyledDialogContent>
-        <CostsCounter costs={dayCosts} time={dayString} />
+        <CostsCounter costs={dayCosts} time={datePicked} />
         <DialogActions>
           <Button
             color='primary'
