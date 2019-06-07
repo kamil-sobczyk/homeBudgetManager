@@ -50,7 +50,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     }
   };
 
-  countBadges = (date: Date, view: string) => {
+  countTileStyle = (date: Date, view: string) => {
     const { calendarViewDate, getCalendarViewDate } = this.props;
 
     if (view === 'month') {
@@ -58,7 +58,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
         this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
         calendarViewDate[4] === getCalendarViewDate(date)[4]
       ) {
-        return <StyledBadge />;
+        return 'active';
       } else return null;
     } else return null;
   };
@@ -96,12 +96,14 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
         >
           <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
-            <Calendar
+            <StyledCalendar
               onClickDay={(value: Date) => setDatePicked(value)}
               onActiveDateChange={({ activeStartDate }) =>
                 getCalendarViewDate(activeStartDate)
               }
-              tileContent={({ date, view }) => this.countBadges(date, view)}
+              tileClassName={({ date, view }) =>
+                this.countTileStyle(date, view)
+              }
             />
           </DialogContent>
           <DialogActions>
@@ -133,9 +135,9 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   }
 }
 
-const StyledBadge = styled.div`
-  width: 5px;
-  height: 5px;
-  border-radius: 5px;
-  background: blue;
+const StyledCalendar = styled(Calendar)`
+  ${'.active'} {
+    background-color: rgba(220, 220, 220, 0.5);
+    border-radius: 20%;
+  }
 `;
