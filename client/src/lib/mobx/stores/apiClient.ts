@@ -7,6 +7,10 @@ import { Store } from '../rootStore';
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
 
+const sortCosts = (costs: Cost[]): Cost[] => {
+  return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));
+};
+
 interface Headers {
   token: string;
   id: string;
@@ -56,7 +60,7 @@ export class ApiClient {
       method: 'get',
       url: server + 'store/costs',
       headers: this.headers
-    }).then(costs => (this.store.costs = costs.data as Cost[]));
+    }).then(costs => (this.store.costs = sortCosts(costs.data).reverse() as Cost[]));
 
   deleteItemOnServer = async (name: string): Promise<void> => {
     await axios({
