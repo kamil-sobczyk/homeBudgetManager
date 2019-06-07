@@ -5,6 +5,7 @@ const routes = require("./index.js");
 const { port } = require("./config");
 const app = express();
 const cors = require('cors');
+const localPort = 8080;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,4 +13,5 @@ app.use(bodyParser.json());
 
 routes(app);
 
-app.listen(port);
+app.listen(localPort)
+console.log('server runnig locally on port ',localPort)
