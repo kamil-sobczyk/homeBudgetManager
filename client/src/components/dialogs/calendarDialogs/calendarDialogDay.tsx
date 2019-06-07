@@ -14,14 +14,6 @@ import {
 import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
 import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
 
-const fixDate = (date: string | Date) => {
-  let fixedDate = String(date);
-  return `${fixedDate.slice(0, 2)}.${fixedDate.slice(
-    3,
-    5
-  )}.${fixedDate.slice(6)}`;
-};
-
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;
   setChosenCost: (cost: Cost) => Cost;
@@ -44,10 +36,8 @@ export class CalendarDialogDay extends React.Component<
       setChosenCost
     } = this.props;
 
-    const dayString = fixDate(datePicked);
-
     const dayCosts = costs.filter((cost: Cost) =>
-      cost.date.includes(dayString)
+      cost.date.includes(String(datePicked))
     );
 
     return (
