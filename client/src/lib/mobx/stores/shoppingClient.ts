@@ -5,6 +5,14 @@ import { Cost } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { observable } from 'mobx';
+import { getDateNow } from '../../../components/dialogs/spendingsDialogs/spendingsTable/costsCounter';
+
+const fixDate = (date: string | Date) => {
+  let fixedDate = String(date);
+  return `${fixedDate.slice(0, 2)}/${fixedDate.slice(3, 5)}/${fixedDate.slice(
+    6
+  )}`;
+};
 
 export class ShoppingClient {
   store: Store;
@@ -32,12 +40,10 @@ export class ShoppingClient {
   };
 
   addNewSpending = () => {
-    let date: string = String(
-      new Date().toLocaleDateString('pl-PL', {
-        hour: '2-digit',
-        minute: '2-digit'
-      })
-    );
+    let date: string = new Date().toLocaleDateString('pl-PL', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
     if (this.store.calendarClient.datePicked.length > 0) {
       date = String(this.store.calendarClient.datePicked);
     }
@@ -89,10 +95,10 @@ export class ShoppingClient {
       chosenValue = 'health';
     } else if (target.value === 'Car exploitation') {
       chosenValue = 'car';
-    } else if (target.value === 'Other'){
+    } else if (target.value === 'Other') {
       chosenValue = 'other';
     } else {
-      chosenValue = 'shopping'
+      chosenValue = 'shopping';
     }
 
     this.chosenItems[0] = chosenValue;
@@ -138,12 +144,7 @@ export class ShoppingClient {
     const cost: Cost = {
       chosenItems: this.chosenItems,
       count: this.count,
-      date: String(
-        new Date().toLocaleDateString('pl-PL', {
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-      ),
+      date: getDateNow(),
       category: 'shopping'
     };
     cost.count = Math.round(this.count);
