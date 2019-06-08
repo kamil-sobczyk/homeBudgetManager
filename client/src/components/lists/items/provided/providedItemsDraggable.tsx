@@ -32,7 +32,13 @@ export class ProvidedItemsDraggable extends React.Component<
   {}
 > {
   render() {
-    const { setVisibleDialog, providedDraggable2, item, index, setActiveItem } = this.props;
+    const {
+      setVisibleDialog,
+      providedDraggable2,
+      item,
+      index,
+      setActiveItem
+    } = this.props;
 
     return (
       <>
@@ -42,15 +48,18 @@ export class ProvidedItemsDraggable extends React.Component<
           {...providedDraggable2.dragHandleProps}
         >
           <StyledItem key={index}>
+            <MoreMenu
+              index={index}
+              setVisibleDialog={setVisibleDialog}
+              setActiveItem={setActiveItem}
+            />
             <StyledTextContainer>
               <ListItemText>
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
-              <MoreMenu index={index} setVisibleDialog={setVisibleDialog}        setActiveItem={setActiveItem} />
             </StyledTextContainer>
           </StyledItem>
-
           <ListDivider />
         </div>
         {providedDraggable2.placeholder}
@@ -61,7 +70,7 @@ export class ProvidedItemsDraggable extends React.Component<
 
 export const StyledItem = styled(ListItem)`
   min-height: 75px;
-  margin: 2px
+  margin: 2px;
 `;
 
 export const StyledTextContainer = styled.div`
