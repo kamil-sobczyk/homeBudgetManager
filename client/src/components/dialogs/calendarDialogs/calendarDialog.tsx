@@ -18,16 +18,16 @@ import { observable } from 'mobx';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
-  visibleDialog: string;
-  showFailSnackbar: boolean;
   toggleShowFailSnackbar: () => boolean;
-  datePicked: string | Date;
   setDatePicked: (date: Date) => string;
   getCalendarViewDate: (activeStartDate: Date) => string;
-  calendarViewDate: string;
-  getCosts: () => void;
-  costs: Cost[];
   setChosenCost: (cost: Cost) => Cost;
+  getCosts: () => void;
+  visibleDialog: string;
+  showFailSnackbar: boolean;
+  datePicked: string | Date;
+  calendarViewDate: string;
+  costs: Cost[];
 }
 
 @observer

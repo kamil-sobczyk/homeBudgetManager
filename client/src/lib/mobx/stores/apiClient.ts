@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-// import { server } from '../../../../config';
+import { server } from '../../../../config';
 
 import { Store } from '../rootStore';
 
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
 
-const server = 'http://www.superzbieracz.pl/';
+// const server = 'http://www.superzbieracz.pl/';
 
 const sortCosts = (costs: Cost[]): Cost[] => {
+  console.log(costs);
   return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));
 };
 

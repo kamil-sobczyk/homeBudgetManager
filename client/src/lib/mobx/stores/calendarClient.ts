@@ -12,41 +12,19 @@ export class CalendarClient {
   @observable daysWithExpenses: number[] = [];
 
   setDatePicked = (date: Date): string => {
-    let dayString = String(
-      date.toLocaleDateString('pl-PL', {
-        hour: '2-digit',
-        minute: '2-digit'
-      })
-    ).replace(/\./g, '/');
+    let dayString: string = String(date.toLocaleString('en-GB')).slice(0, 10);
 
-    if (dayString[1] === '/') {
-      dayString = `0${dayString}`;
-    }
-
-    if (dayString[4] === '/') {
-      dayString = `${dayString.slice(0, 3)}0${dayString.slice(3)}`;
-    }
-    this.datePicked = dayString.slice(0, 10);
+    this.datePicked = dayString;
     return dayString;
   };
 
   getCalendarViewDate = (date: Date): string => {
-    let calendarViewDate = String(date.toLocaleDateString());
-    if (calendarViewDate[1] === '/') {
-      calendarViewDate = `0${calendarViewDate}`;
-    }
-    if (calendarViewDate[4] === '/') {
-      calendarViewDate = `${calendarViewDate.slice(
-        0,
-        3
-      )}0${calendarViewDate.slice(3)}`;
-    }
+    let calendarViewDate: string = String(date.toLocaleString('en-GB')).slice(
+      0,
+      10
+    );
 
-    this.calendarViewDate = `${calendarViewDate.substr(
-      3,
-      2
-    )}/${calendarViewDate.substr(0, 2)}/${calendarViewDate.substr(6, 4)}`;
-
+    this.calendarViewDate = calendarViewDate;
     return this.calendarViewDate;
   };
 }

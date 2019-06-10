@@ -7,13 +7,6 @@ import { sortItemsByName } from '../../reorderFunctions';
 import { observable } from 'mobx';
 import { getDateNow } from '../../../components/dialogs/spendingsDialogs/spendingsTable/costsCounter';
 
-const fixDate = (date: string | Date) => {
-  let fixedDate = String(date);
-  return `${fixedDate.slice(0, 2)}/${fixedDate.slice(3, 5)}/${fixedDate.slice(
-    6
-  )}`;
-};
-
 export class ShoppingClient {
   store: Store;
   constructor(store: Store) {
@@ -40,10 +33,8 @@ export class ShoppingClient {
   };
 
   addNewSpending = () => {
-    let date: string = new Date().toLocaleDateString('pl-PL', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    let date: string = String(new Date().toLocaleString('en-GB')).slice(0, 10);
+
     if (this.store.calendarClient.datePicked.length > 0) {
       date = String(this.store.calendarClient.datePicked);
     }
