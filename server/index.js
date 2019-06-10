@@ -7,7 +7,6 @@ const url = mongoUrl;
 
 const appRouter = app => {
   app.all("/*", (req, res, next) => {
-  
     mongoose.connect(url, {
       useNewUrlParser: true
     });
@@ -209,6 +208,25 @@ const appRouter = app => {
           { $push: { costs: req.body.cost } },
           { useFindAndModify: false }
         )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            res.status(500);
+            return;
+          }
+        });
+      res.status(200).send({});
+    })
+    .delete((req, res) => {
+      const users = res.users;
+      const { cost } = req.body;
+
+      console.log(cost)
+  
+      users
+        .deleteOne({
+          count: cost.count,
+        })
         .exec((err, resp) => {
           if (err) {
             console.log("error ", err);

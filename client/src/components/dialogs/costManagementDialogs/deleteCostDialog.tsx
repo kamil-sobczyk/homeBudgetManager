@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Item, Cost } from '../../../lib/interfaces';
+import { Cost } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
@@ -12,6 +12,7 @@ import styled from 'styled-components';
 
 interface DeleteCostDialogProps {
   setVisibleDialog: (dialog?: string) => void;
+  deleteCost: (cost: Cost) => void;
   visibleDialog: string;
   cost: Cost;
   prevVisibleDialog: string;
@@ -22,7 +23,8 @@ export const DeleteCostDialog = observer(
     cost,
     visibleDialog,
     setVisibleDialog,
-    prevVisibleDialog
+    prevVisibleDialog,
+    deleteCost
   }: DeleteCostDialogProps) => (
     <Dialog
       open={visibleDialog === 'DeleteCostDialog'}
@@ -41,7 +43,7 @@ export const DeleteCostDialog = observer(
         >
           No
         </Button>
-        <Button onClick={() => null} color='primary' autoFocus>
+        <Button onClick={() => deleteCost(cost)} color='primary' autoFocus>
           Yes
         </Button>
       </DialogActions>

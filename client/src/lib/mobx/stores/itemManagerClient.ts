@@ -104,7 +104,7 @@ export class ItemManagerClient {
     if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
       setVisibleDialog();
-      this.store.apiClient.AddShoppingItemOnServer(this.newItem);
+      this.store.apiClient.addShoppingItemOnServer(this.newItem);
     } else {
       setVisibleDialog('AddShoppingItemDialogFail');
     }

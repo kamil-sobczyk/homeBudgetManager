@@ -10,7 +10,6 @@ import { observable } from 'mobx';
 // const server = 'http://www.superzbieracz.pl/';
 
 const sortCosts = (costs: Cost[]): Cost[] => {
-  console.log(costs);
   return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));
 };
 
@@ -119,7 +118,7 @@ export class ApiClient {
     });
   };
 
-  AddShoppingItemOnServer = async (item: Item): Promise<void> => {
+  addShoppingItemOnServer = async (item: Item): Promise<void> => {
     await axios({
       method: 'post',
       url: server + 'store/items',
@@ -127,4 +126,13 @@ export class ApiClient {
       data: { item }
     });
   };
+
+  deleteCostOnServer = async (cost: Cost): Promise<void> => {
+    await axios({
+      method: 'delete',
+      url: server + 'store/costs',
+      headers: this.headers,
+      data: { cost }
+    })
+  }
 }

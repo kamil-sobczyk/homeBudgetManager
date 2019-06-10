@@ -5,6 +5,7 @@ import { StoreProps } from '../../lib/interfaces';
 
 import { ListsContainer } from './listsContainer';
 import { DialogsContainer } from '../dialogs/dialogsContainer';
+import { CostManagerClient } from '../../lib/mobx/stores/costManagerClient';
 
 export const ListBox = observer(({ store }: StoreProps) => {
   const {
@@ -16,7 +17,8 @@ export const ListBox = observer(({ store }: StoreProps) => {
     apiClient,
     shoppingClient,
     dndClient,
-    calendarClient
+    calendarClient,
+    costManagerClient
   } = store;
   return (
     <>
@@ -43,6 +45,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         apiClient={apiClient}
         shoppingClient={shoppingClient}
         calendarClient={calendarClient}
+        costManagerClient={costManagerClient}
       />
     </>
   );

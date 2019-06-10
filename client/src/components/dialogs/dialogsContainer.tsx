@@ -28,6 +28,7 @@ interface DialogsContainerProps {
   apiClient: Store['apiClient'];
   shoppingClient: Store['shoppingClient'];
   calendarClient: Store['calendarClient'];
+  costManagerClient: Store['costManagerClient'];
 }
 
 export const DialogsContainer = observer(
@@ -40,7 +41,8 @@ export const DialogsContainer = observer(
     itemManagerClient,
     apiClient,
     shoppingClient,
-    calendarClient
+    calendarClient,
+    costManagerClient
   }: DialogsContainerProps) => (
     <>
       {visibleDialog === 'AddShoppingItemDialog' && (
@@ -171,6 +173,7 @@ export const DialogsContainer = observer(
           visibleDialog={visibilityClient.visibleDialog}
           cost={shoppingClient.chosenCost}
           prevVisibleDialog={visibilityClient.prevVisibleDialog}
+          deleteCost={costManagerClient.deleteCost}
         />
       )}
       {visibleDialog.includes('EditCostDialog') && (
