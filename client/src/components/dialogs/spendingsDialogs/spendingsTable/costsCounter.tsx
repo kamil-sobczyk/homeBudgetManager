@@ -9,21 +9,8 @@ import { Typography } from '@rmwc/typography';
 import { ColoredIcon } from './legend/coloredIcon';
 import { LegendColor, StyledLegendContainer } from './legend/legend';
 
-export const getDateNow = () => {
-  let dateNow = String(
-    new Date().toLocaleDateString('pl-PL', {
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  ).replace(/\./g, '/');
-
-  if (dateNow[2] !== '/') {
-    dateNow = `0${dateNow}`;
-  }
-  dateNow = `${dateNow.slice(0, 10)}${dateNow.slice(11)}`;
-
-  return dateNow;
-};
+export const getDateNow = () =>
+  String(new Date().toLocaleString('en-GB')).slice(0, 17);
 
 const countCosts = (
   costs: Cost[],
@@ -35,11 +22,6 @@ const countCosts = (
 
   if (time === 'month') {
     if (costs.length > 0) {
-      costs.forEach(cost => {
-        cost.date = cost.date.replace(/\./g, '/');
-        cost.date = cost.date.replace(/\,/g, '');
-      });
-
       chosenCosts = costs.filter(
         cost => cost.date.slice(3, 5) === getDateNow().slice(3, 5)
       );
