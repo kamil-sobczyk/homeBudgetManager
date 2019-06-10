@@ -197,7 +197,7 @@ const appRouter = app => {
           return;
         }
 
-        res.status(200).send(fn.sortCosts(resp.costs));
+        res.status(200).send(resp.costs);
       });
     })
     .post((req, res) => {
