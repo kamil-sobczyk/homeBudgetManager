@@ -74,6 +74,11 @@ export class ProvidedSelectedDraggable extends React.Component<
                 onClick={e => this.toggleEditItem(e)}
               />
             </StyledTextContainer>
+            <StyledEditButton
+              icon='edit'
+              aria-label='Edit item'
+              onClick={e => this.toggleEditItem(e)}
+            />
           </StyledItem>
           <ListDivider />
         </div>
