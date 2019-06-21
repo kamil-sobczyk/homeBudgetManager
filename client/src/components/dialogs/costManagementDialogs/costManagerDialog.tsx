@@ -51,7 +51,7 @@ export class CostManagerDialog extends React.Component<
             color='primary'
             onClick={() =>
               setVisibleDialog(
-                prevVisibleDialog !== ('DeleteCostDialog' && 'EditCostDialog')
+                prevVisibleDialog !== ('DeleteCostDialog' || 'EditCostDialog')
                   ? prevVisibleDialog
                   : ''
               )

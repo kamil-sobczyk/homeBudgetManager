@@ -8,5 +8,6 @@ export class CostManagerClient {
   }
   deleteCost = (cost: Cost): void => {
       this.store.apiClient.deleteCostOnServer(cost);
+      this.store.visibilityClient.setVisibleDialog();
   };
 }

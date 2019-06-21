@@ -74,6 +74,7 @@ export const StyledItem = styled(ListItem)`
 
 export const StyledTextContainer = styled.div`
   min-width: 250px;
+  max-width: 50vw;
   display: flex;
   justify-content: space-between;
 `;

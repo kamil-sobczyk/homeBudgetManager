@@ -16,19 +16,15 @@ interface LoginDialogProps {
 @observer
 export class LoginDialog extends React.Component<LoginDialogProps, {}> {
   render() {
-    const {
-      visibleDialog,
-      setVisibleDialog,
-      setUser,
-    } = this.props;
+    const { visibleDialog, setVisibleDialog, setUser } = this.props;
 
     const responseGoogle = (response: any) => {
-        setUser(response.accessToken, response.googleId);
-        setVisibleDialog();
+      setUser(response.accessToken, response.googleId);
+      setVisibleDialog();
     };
 
     const responseGoogleFailure = (response: GoogleLogin) => {
-      console.log('failure', response);
+      alert(`Fail to log in! ${response}`);
     };
 
     return (

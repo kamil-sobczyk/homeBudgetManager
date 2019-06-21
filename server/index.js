@@ -220,13 +220,21 @@ const appRouter = app => {
     .delete((req, res) => {
       const users = res.users;
       const { cost } = req.body;
-
-      console.log(cost)
-  
+ 
       users
-        .deleteOne({
-          count: cost.count,
-        })
+        .updateOne(
+          { usr: req.headers.id },
+          {
+            $pull: {
+              costs: {
+                count: cost.count,
+                date: cost.date,
+                category: cost.category,
+                chosenItems: cost.chosenItems
+              }
+            }
+          }
+        )
         .exec((err, resp) => {
           if (err) {
             console.log("error ", err);
