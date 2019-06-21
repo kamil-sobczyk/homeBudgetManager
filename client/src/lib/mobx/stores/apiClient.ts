@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import { server } from '../../../../config';
+// import { server } from '../../../../config';
 
 import { Store } from '../rootStore';
 
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
 
-// const server = 'http://www.superzbieracz.pl/';
+const server = 'http://www.superzbieracz.pl/';
 
 const sortCosts = (costs: Cost[]): Cost[] => {
   return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));
@@ -25,8 +25,8 @@ export class ApiClient {
   }
 
   @observable headers: Headers = {
-    token: sessionStorage.googleToken || '',
-    id: sessionStorage.id || ''
+    token: localStorage.googleToken || '',
+    id: localStorage.id || ''
   };
 
   setUser = (token: string, id: string): void => {
@@ -34,9 +34,9 @@ export class ApiClient {
     if (usr === '106261623878731601808') {
       usr = '102234771401894238200';
     }
-    if (!sessionStorage.id) {
-      sessionStorage.googleToken = token;
-      sessionStorage.id = usr;
+    if (!localStorage.id) {
+      localStorage.googleToken = token;
+      localStorage.id = usr;
     } else {
       this.headers.token = token;
       this.headers.id = usr;
