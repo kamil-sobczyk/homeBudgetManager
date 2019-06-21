@@ -71,6 +71,7 @@ export const ListsContainer = observer(
 const StyledListContainer = styled.div`
   display: flex;
   justify-content: center;
+  max-width: 100vh;
 `;
 
 export const StyledButtonsContainer = styled.div`
