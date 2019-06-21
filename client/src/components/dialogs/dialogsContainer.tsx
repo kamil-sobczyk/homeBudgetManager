@@ -18,6 +18,7 @@ import { AddDayCostDialog } from './calendarDialogs/addDayCostDialog';
 import { CostManagerDialog } from './costManagementDialogs/costManagerDialog';
 import { DeleteCostDialog } from './costManagementDialogs/deleteCostDialog';
 import { EditCostDialog } from './costManagementDialogs/editCostDialog';
+import { LogoutDialog } from './loggingDialogs/logoutDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -32,6 +33,7 @@ interface DialogsContainerProps {
 }
 
 export const DialogsContainer = observer(
+// tslint:disable-next-line: cyclomatic-complexity
   ({
     costs,
     items,
@@ -192,6 +194,12 @@ export const DialogsContainer = observer(
           setDatePicked={calendarClient.setDatePicked}
           datePicked={calendarClient.datePicked}
           count={shoppingClient.count}
+        />
+      )}
+      {visibleDialog.includes('LogoutDialog') && (
+        <LogoutDialog
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
         />
       )}
     </>

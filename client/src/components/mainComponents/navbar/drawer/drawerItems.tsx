@@ -5,33 +5,36 @@ import styled from 'styled-components';
 import { List, ListItem } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
-
-import { GoogleLogout } from 'react-google-login';
-
 const drawerItems = [
   {
     action: 'AddShoppingItemDialog',
     icon: 'add_circle',
     iconColor: '#00bf02',
-    title: "Add new Item"
+    title: 'Add new Item'
   },
   {
     action: 'AddOtherDialog',
     icon: 'note_add',
     iconColor: '#0400ff',
-    title: "Add new bill"
+    title: 'Add new bill'
   },
   {
     action: 'SpendingsDialog',
     icon: 'shopping_cart',
     iconColor: '#0d49aa',
-    title: "Show spendings"
+    title: 'Show spendings'
   },
   {
     action: 'AboutDialog',
     icon: 'info',
     iconColor: '#adad00',
-    title: "About"
+    title: 'About'
+  },
+  {
+    action: 'LogoutDialog',
+    icon: 'exit_to_app',
+    iconColor: 'red',
+    title: 'Logout'
   }
 ];
 
@@ -58,7 +61,6 @@ export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
           </StyledDrawerItemContainer>
         ))}
       </List>
-
     );
   }
 }

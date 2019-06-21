@@ -27,7 +27,6 @@ export class VisibityClient {
     } else {
       this.visibleDialog = dialog;
     }
-   
   };
 
   toggleShowFailSnackbar = (): boolean =>

@@ -34,13 +34,12 @@ export class ApiClient {
     if (usr === '106261623878731601808') {
       usr = '102234771401894238200';
     }
-    if (!localStorage.id) {
-      localStorage.googleToken = token;
-      localStorage.id = usr;
-    } else {
-      this.headers.token = token;
-      this.headers.id = usr;
-    }
+
+    localStorage.googleToken = token;
+    localStorage.id = usr;
+
+    this.headers.token = token;
+    this.headers.id = usr;
   };
 
   getItems = async (): Promise<Item[]> =>
@@ -133,6 +132,6 @@ export class ApiClient {
       url: server + 'store/costs',
       headers: this.headers,
       data: { cost }
-    })
-  }
+    });
+  };
 }
