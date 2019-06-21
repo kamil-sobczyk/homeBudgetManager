@@ -12,7 +12,6 @@ import {
   ListItemSecondaryText,
   ListDivider
 } from '@rmwc/list';
-import '@material/ripple/dist/mdc.ripple.css';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
 
@@ -74,7 +73,7 @@ export const StyledItem = styled(ListItem)`
 `;
 
 export const StyledTextContainer = styled.div`
-  min-width: 300px;
+  min-width: 250px;
   display: flex;
   justify-content: space-between;
 `;
