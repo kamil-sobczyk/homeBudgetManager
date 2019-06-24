@@ -7,7 +7,7 @@ import { Store } from '../rootStore';
 import { Item, ListType, Cost } from '../../interfaces';
 import { observable } from 'mobx';
 
-const server = 'http://localhost:8080/';
+const server = 'http://localhost:8081/';
 
 const sortCosts = (costs: Cost[]): Cost[] => {
   return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));
@@ -132,6 +132,15 @@ export class ApiClient {
       url: server + 'store/costs',
       headers: this.headers,
       data: { cost }
+    });
+  };
+
+  editCostOnServer = async (oldCost: Cost, newCost: Cost): Promise<void> => {
+    await axios({
+      method: 'put',
+      url: server + 'store/costs',
+      headers: this.headers,
+      data: { oldCost, newCost }
     });
   };
 }

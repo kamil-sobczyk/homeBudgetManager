@@ -220,7 +220,7 @@ const appRouter = app => {
     .delete((req, res) => {
       const users = res.users;
       const { cost } = req.body;
- 
+
       users
         .updateOne(
           { usr: req.headers.id },
@@ -242,6 +242,52 @@ const appRouter = app => {
             return;
           }
         });
+      res.status(200).send({});
+    })
+    .put((req, res) => {
+      const users = res.users;
+      const { oldCost, newCost } = req.body;
+      console.log(req.body);
+
+      users
+        .updateOne(
+          { usr: req.headers.id },
+          {
+            $pull: {
+              costs: {
+                count: oldCost.count,
+                date: oldCost.date,
+                category: oldCost.category,
+                chosenItems: oldCost.chosenItems
+              }
+            }
+          }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            res.status(500);
+            return;
+          }
+        });
+
+      users
+        .updateOne(
+          { usr: req.headers.id },
+          {
+            $push: {
+              costs: newCost
+            }
+          }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            res.status(500);
+            return;
+          }
+        });
+
       res.status(200).send({});
     });
 

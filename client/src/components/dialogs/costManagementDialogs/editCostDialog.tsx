@@ -21,7 +21,7 @@ interface EditCostDialogProps {
   setDatePicked: (date: Date) => string;
   getCalendarViewDate: (activeStartDate: Date) => string;
   setVisibleDialog: (dialog?: string) => void;
-  editCost: () => void;
+  editCost: (oldCost: Cost) => void;
   datePicked: string | Date;
   prevVisibleDialog: string;
   visibleDialog: string;
@@ -72,10 +72,10 @@ export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
     if (action === 'cancel') {
       this.modifyingCost = false;
     } else {
-      editCost();
+      editCost(cost);
       this.modifyingCost = false;
     }
-    setVisibleDialog(prevVisibleDialog);
+    setVisibleDialog();
   };
 
   onChangeCost = (event: React.FormEvent<EventTarget>): void => {

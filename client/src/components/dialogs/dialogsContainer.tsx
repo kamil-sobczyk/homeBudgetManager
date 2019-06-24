@@ -33,7 +33,7 @@ interface DialogsContainerProps {
 }
 
 export const DialogsContainer = observer(
-// tslint:disable-next-line: cyclomatic-complexity
+  // tslint:disable-next-line: cyclomatic-complexity
   ({
     costs,
     items,
@@ -188,7 +188,7 @@ export const DialogsContainer = observer(
           changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
           changeShoppingItems={shoppingClient.changeShoppingItems}
           category={shoppingClient.category}
-          editCost={shoppingClient.editCost}
+          editCost={costManagerClient.editCost}
           prevVisibleDialog={visibilityClient.prevVisibleDialog}
           getCalendarViewDate={calendarClient.getCalendarViewDate}
           setDatePicked={calendarClient.setDatePicked}
