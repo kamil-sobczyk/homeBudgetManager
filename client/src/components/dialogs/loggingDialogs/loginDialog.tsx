@@ -24,7 +24,7 @@ export class LoginDialog extends React.Component<LoginDialogProps, {}> {
     };
 
     const responseGoogleFailure = (response: GoogleLogin) => {
-      alert(`Fail to log in! ${response}`);
+      alert(`Fail to log in! ${JSON.stringify(response)}`);
     };
 
     return (
