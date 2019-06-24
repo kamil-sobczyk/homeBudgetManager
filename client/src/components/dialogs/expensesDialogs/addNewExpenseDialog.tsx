@@ -11,17 +11,17 @@ import { StyledDialogTitle } from './spendingsDialog';
 
 const selectValues = ['Bill', 'Car exploitation', 'Health care', 'Other'];
 
-interface AddOtherDialogProps {
+interface AddNewExpenseDialogProps {
   addNewSpending: () => void;
   changeNewSpendingCategory: (e: React.FormEvent) => void;
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
-  changeNewSpendingInfo: (a: any) => any
+  changeNewSpendingInfo: (a: any) => any;
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   count: number;
 }
 
-export const AddOtherDialog = observer(
+export const AddNewExpenseDialog = observer(
   ({
     addNewSpending,
     changeNewSpendingCategory,
@@ -29,9 +29,9 @@ export const AddOtherDialog = observer(
     changeNewSpendingInfo,
     setVisibleDialog,
     visibleDialog
-  }: AddOtherDialogProps) => {
+  }: AddNewExpenseDialogProps) => {
     return (
-      <Dialog open={visibleDialog === 'AddOtherDialog'}>
+      <Dialog open={visibleDialog === 'AddNewExpenseDialog'}>
         <StyledDialogTitle>Add other</StyledDialogTitle>
         <Select
           label='Spending type'
@@ -47,10 +47,10 @@ export const AddOtherDialog = observer(
           required
         />
         <TextField
-        label='Short info'
-        onChange={e => changeNewSpendingInfo(e)}
-        type='text'
-      />
+          label='Short info'
+          onChange={e => changeNewSpendingInfo(e)}
+          type='text'
+        />
         <DialogActions>
           <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
@@ -63,4 +63,3 @@ export const AddOtherDialog = observer(
     );
   }
 );
-

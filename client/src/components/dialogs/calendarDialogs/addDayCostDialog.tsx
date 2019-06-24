@@ -9,9 +9,15 @@ import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
-import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 
-export const selectValues = ['Shopping', 'Bill', 'Car exploitation', 'Health care', 'Other'];
+export const selectValues = [
+  'Shopping',
+  'Bill',
+  'Car exploitation',
+  'Health care',
+  'Other'
+];
 
 interface AddDayCostDialogProps {
   addNewSpending: () => void;
@@ -35,7 +41,6 @@ export class AddDayCostDialog extends React.Component<
 
     addNewSpending();
     setVisibleDialog('CalendarDialog');
-
   };
   render() {
     const {

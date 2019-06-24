@@ -5,14 +5,14 @@ import { Cost } from '../../../lib/interfaces';
 import { DialogActions } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
-import { CostsCounter } from '../spendingsDialogs/spendingsTable/costsCounter';
+import { CostsCounter } from '../expensesDialogs/spendingsTable/costsCounter';
 import {
   StyledDialogTitle,
   StyledDialog,
   StyledDialogContent
-} from '../spendingsDialogs/spendingsDialog';
-import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
-import { Legend } from '../spendingsDialogs/spendingsTable/legend/legend';
+} from '../expensesDialogs/spendingsDialog';
+import { TableContainer } from '../expensesDialogs/spendingsTable/tableContainer';
+import { Legend } from '../expensesDialogs/spendingsTable/legend/legend';
 
 interface CalendarDialogDayProps {
   setVisibleDialog: (dialog?: string) => void;

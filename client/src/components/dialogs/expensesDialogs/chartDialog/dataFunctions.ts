@@ -1,4 +1,4 @@
-import { CategoryType, Cost } from './../../../../lib/interfaces';
+import { CategoryType, Cost } from '../../../../lib/interfaces';
 
 type Month =
   | 'January'
@@ -92,7 +92,8 @@ export const splitCosts = (costs: Cost[]): [] => {
 
   monthSpendings.forEach(
     (month: MonthSpendings): number =>
-      (month.total = month.bills + month.shopping + month.car + month.health + month.other)
+      (month.total =
+        month.bills + month.shopping + month.car + month.health + month.other)
   );
 
   const monthsWithSpendings: MonthSpendings[] = monthSpendings.filter(

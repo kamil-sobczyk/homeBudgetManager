@@ -8,7 +8,7 @@ import { TextField } from '@rmwc/textfield';
 
 import { Item } from '../../../lib/interfaces';
 
-import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 
 interface AddShoppingItemDialogProps {
   AddShoppingItem: () => void;

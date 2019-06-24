@@ -5,14 +5,14 @@ import { observer } from 'mobx-react';
 import { AddShoppingItemDialog } from './itemManagementDialogs/addShoppingItemDialog';
 import { EditItemDialog } from './itemManagementDialogs/editItemDialog';
 import { DeleteItemDialog } from './itemManagementDialogs/deleteItemDialog';
-import { SpendingsDialog } from './spendingsDialogs/spendingsDialog';
-import { FinishShoppingDialog } from './spendingsDialogs/finishShoppingDialog';
+import { SpendingsDialog } from './expensesDialogs/spendingsDialog';
+import { FinishShoppingDialog } from './expensesDialogs/finishShoppingDialog';
 import { Cost, Item } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './infoDialogs/failDialog';
-import { AddOtherDialog } from './spendingsDialogs/addOtherDialog';
+import { AddNewExpenseDialog } from './expensesDialogs/addNewExpenseDialog';
 import { AboutDialog } from './infoDialogs/aboutDialog';
-import { ChartDialog } from './spendingsDialogs/chartDialog/chartDialog';
+import { ChartDialog } from './expensesDialogs/chartDialog/chartDialog';
 import { CalendarDialog } from './calendarDialogs/calendarDialog';
 import { AddDayCostDialog } from './calendarDialogs/addDayCostDialog';
 import { CostManagerDialog } from './costManagementDialogs/costManagerDialog';
@@ -109,8 +109,8 @@ export const DialogsContainer = observer(
           count={shoppingClient.count}
         />
       )}
-      {visibleDialog === 'AddOtherDialog' && (
-        <AddOtherDialog
+      {visibleDialog === 'AddNewExpenseDialog' && (
+        <AddNewExpenseDialog
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           addNewSpending={shoppingClient.addNewSpending}

@@ -6,7 +6,7 @@ import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import { IconButton } from '@rmwc/icon-button';
 
-import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 
 const aboutDialogButtons = [

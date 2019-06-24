@@ -5,7 +5,7 @@ import { Cost } from '../../interfaces';
 import { sortItemsByName } from '../../reorderFunctions';
 
 import { observable } from 'mobx';
-import { getDateNow } from '../../../components/dialogs/spendingsDialogs/spendingsTable/costsCounter';
+import { getDateNow } from '../../../components/dialogs/expensesDialogs/spendingsTable/costsCounter';
 
 export class ShoppingClient {
   store: Store;

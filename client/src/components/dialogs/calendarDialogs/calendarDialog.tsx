@@ -11,7 +11,7 @@ import Calendar from 'react-calendar';
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 
-import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
 import { observable } from 'mobx';

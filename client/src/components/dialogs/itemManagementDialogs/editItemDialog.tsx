@@ -7,7 +7,7 @@ import { Button } from '@rmwc/button';
 import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
-import { StyledDialogTitle } from '../spendingsDialogs/spendingsDialog';
+import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { Item } from '../../../lib/interfaces';
 
 interface EditItemDialogProps {

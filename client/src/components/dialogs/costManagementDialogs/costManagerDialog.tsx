@@ -10,8 +10,8 @@ import { Dialog, DialogActions } from '@rmwc/dialog';
 import {
   StyledDialogTitle,
   StyledDialogContent
-} from '../spendingsDialogs/spendingsDialog';
-import { TableContainer } from '../spendingsDialogs/spendingsTable/tableContainer';
+} from '../expensesDialogs/spendingsDialog';
+import { TableContainer } from '../expensesDialogs/spendingsTable/tableContainer';
 
 interface CostManagerDialogProps {
   cost: Cost[];
