@@ -1,4 +1,4 @@
-import { CategoryType, Cost } from '../../../../lib/interfaces';
+import { CostCategoryType, Cost } from '../../../../lib/interfaces';
 
 type Month =
   | 'January'
@@ -46,7 +46,7 @@ const monthNumbers: string[] = months.map((month, index) =>
 const getMonthCostCount = (
   costs: Cost[],
   month: string,
-  category: CategoryType
+  category: CostCategoryType
 ): number => {
   let sumOfCosts: number = 0;
 

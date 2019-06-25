@@ -19,6 +19,7 @@ import { CostManagerDialog } from './costManagementDialogs/costManagerDialog';
 import { DeleteCostDialog } from './costManagementDialogs/deleteCostDialog';
 import { EditCostDialog } from './costManagementDialogs/editCostDialog';
 import { LogoutDialog } from './loggingDialogs/logoutDialog';
+import { IncomesDialog } from './incomesDialogs/incomesDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -200,6 +201,12 @@ export const DialogsContainer = observer(
         <LogoutDialog
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
+        />
+      )}
+      {visibleDialog.includes('IncomesDialog') && (
+        <IncomesDialog
+          visibleDialog={visibilityClient.visibleDialog}
+          setVisibleDialog={visibilityClient.setVisibleDialog}
         />
       )}
     </>

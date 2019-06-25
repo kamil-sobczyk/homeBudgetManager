@@ -8,7 +8,7 @@ import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
-import { Cost, CategoryType } from '../../../lib/interfaces';
+import { Cost, CostCategoryType } from '../../../lib/interfaces';
 import { selectValues } from '../calendarDialogs/addDayCostDialog';
 import { observable } from 'mobx';
 import Calendar from 'react-calendar';
@@ -25,7 +25,7 @@ interface EditCostDialogProps {
   datePicked: string | Date;
   prevVisibleDialog: string;
   visibleDialog: string;
-  category: CategoryType;
+  category: CostCategoryType;
   cost: Cost;
   count: number;
 }

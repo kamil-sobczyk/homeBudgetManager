@@ -8,6 +8,10 @@ interface NavbarSectionRightProps {
 
 const navbarSectionRightItems = [
   {
+    icon: 'save_alt',
+    action: 'IncomesDialog'
+  },
+  {
     icon: 'today',
     action: 'CalendarDialog'
   },

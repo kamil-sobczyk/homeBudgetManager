@@ -1,6 +1,12 @@
 import { Store } from './mobx/rootStore';
 
-export type CategoryType = 'shopping' | 'bill' | 'health' | 'car' | 'other';
+export type CostCategoryType = 'shopping' | 'bill' | 'health' | 'car' | 'other';
+export type IncomeCategoryType =
+  | 'salary'
+  | 'gift'
+  | 'other'
+  | 'tax return'
+  | 'social benefit';
 
 export interface Item {
   name: string;
@@ -20,7 +26,14 @@ export interface Cost {
   count: number;
   chosenItems: string[];
   date: string;
-  category: CategoryType;
+  category: CostCategoryType;
+  info?: string | undefined;
+}
+
+export interface Income {
+  count: number;
+  category: IncomeCategoryType;
+  date: string;
   info?: string | undefined;
 }
 

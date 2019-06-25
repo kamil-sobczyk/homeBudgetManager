@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { CategoryType } from '../../../lib/interfaces';
+import { CostCategoryType } from '../../../lib/interfaces';
 
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions } from '@rmwc/dialog';
@@ -28,7 +28,7 @@ interface AddDayCostDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   count: number;
-  category: CategoryType;
+  category: CostCategoryType;
 }
 
 @observer

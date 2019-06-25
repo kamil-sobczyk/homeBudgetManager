@@ -1,4 +1,4 @@
-import { CategoryType, Item } from './../../interfaces';
+import { CostCategoryType, Item } from './../../interfaces';
 import { Store } from '../rootStore';
 import { Cost } from '../../interfaces';
 
@@ -16,7 +16,7 @@ export class ShoppingClient {
   @observable chosenItems: string[] = [];
   @observable count: number = 0;
   @observable date: Date = new Date();
-  @observable category: CategoryType = 'bill';
+  @observable category: CostCategoryType = 'bill';
   @observable info: string = '';
   @observable chosenCost: Cost = {
     count: 0,
@@ -60,7 +60,7 @@ export class ShoppingClient {
 
   changeNewSpendingCategory = (event: React.FormEvent): void => {
     const target = event.target as HTMLInputElement;
-    let chosenValue: CategoryType;
+    let chosenValue: CostCategoryType;
 
     if (target.value === 'Bill') {
       chosenValue = 'bill';

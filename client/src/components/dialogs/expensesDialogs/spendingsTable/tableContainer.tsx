@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
 
-import { Cost, CategoryType } from '../../../../lib/interfaces';
+import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 
 import {
   DataTable,
@@ -17,7 +17,7 @@ import {
 } from '@rmwc/data-table';
 import '@rmwc/data-table/data-table.css';
 
-const getRowColor = (category: CategoryType) => {
+const getRowColor = (category: CostCategoryType) => {
   if (category === 'shopping') return 'black';
   else if (category === 'bill') return 'blue';
   else if (category === 'health') return 'green';

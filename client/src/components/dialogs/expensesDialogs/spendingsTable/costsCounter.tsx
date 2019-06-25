@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { Cost, CategoryType } from '../../../../lib/interfaces';
+import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 
 import { Typography } from '@rmwc/typography';
 
@@ -14,7 +14,7 @@ export const getDateNow = () =>
 
 const countCosts = (
   costs: Cost[],
-  category: CategoryType,
+  category: CostCategoryType,
   time: CostCounterTime
 ) => {
   let sumOfCosts: number = 0;
@@ -70,7 +70,7 @@ const costCounterItems: CostCounterItem[] = [
 
 interface CostCounterItem {
   color: LegendColor;
-  category: CategoryType;
+  category: CostCategoryType;
 }
 
 type CostCounterTime = string | Date;
