@@ -247,7 +247,6 @@ const appRouter = app => {
     .put((req, res) => {
       const users = res.users;
       const { oldCost, newCost } = req.body;
-      console.log(req.body);
 
       users
         .updateOne(
