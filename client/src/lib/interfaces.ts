@@ -1,6 +1,7 @@
 import { Store } from './mobx/rootStore';
 
 export type CostCategoryType = 'shopping' | 'bill' | 'health' | 'car' | 'other';
+
 export type IncomeCategoryType =
   | 'salary'
   | 'gift'
@@ -34,7 +35,6 @@ export interface Income {
   count: number;
   category: IncomeCategoryType;
   date: string;
-  info?: string | undefined;
 }
 
 export interface StoreProps {

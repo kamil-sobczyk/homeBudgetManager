@@ -115,19 +115,19 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
   }
 }
 
-const StyledDataTableCell = styled(DataTableCell)`
+export const StyledDataTableCell = styled(DataTableCell)`
   text-align: center;
 `;
 
-const StyledDataTableHeadCell = styled(DataTableHeadCell)`
+export const StyledDataTableHeadCell = styled(DataTableHeadCell)`
   text-align: center;
 `;
 
-const StyledDataTableRow = styled(DataTableRow)`
+export const StyledDataTableRow = styled(DataTableRow)`
   cursor: pointer;
   border-top: 1px solid lightgrey;
 `;
 
-const StyledDataTable = styled(DataTable)`
+export const StyledDataTable = styled(DataTable)`
   border: 1px solid lightgrey;
 `;

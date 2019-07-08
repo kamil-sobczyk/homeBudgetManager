@@ -19,6 +19,7 @@ export class VisibityClient {
     
     if (!dialog) {
       this.visibleDialog = '';
+      
       return;
     }
     if (dialog === 'EditItemDialog') {
