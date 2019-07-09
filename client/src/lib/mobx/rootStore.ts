@@ -9,6 +9,7 @@ import { ItemManagerClient } from './stores/itemManagerClient';
 import { ShoppingClient } from './stores/shoppingClient';
 import { CalendarClient } from './stores/calendarClient';
 import { CostManagerClient } from './stores/costManagerClient';
+import {IncomesManagerClient} from './stores/incomesManagerClient';
 
 export class Store {
   constructor() {
@@ -19,6 +20,7 @@ export class Store {
     this.shoppingClient = new ShoppingClient(this);
     this.calendarClient = new CalendarClient(this);
     this.costManagerClient = new CostManagerClient(this);
+    this.incomesManagerClient = new IncomesManagerClient(this);
   }
 
   apiClient: ApiClient;
@@ -28,6 +30,7 @@ export class Store {
   shoppingClient: ShoppingClient;
   calendarClient: CalendarClient;
   costManagerClient: CostManagerClient;
+  incomesManagerClient: IncomesManagerClient;
 
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
