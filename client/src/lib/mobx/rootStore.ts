@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-import { Item, Cost } from '../interfaces';
+import { Item, Cost, Income } from '../interfaces';
 
 import { ApiClient } from './stores/apiClient';
 import { VisibityClient } from './stores/visibilityClient';
@@ -9,9 +9,18 @@ import { ItemManagerClient } from './stores/itemManagerClient';
 import { ShoppingClient } from './stores/shoppingClient';
 import { CalendarClient } from './stores/calendarClient';
 import { CostManagerClient } from './stores/costManagerClient';
-import {IncomesManagerClient} from './stores/incomesManagerClient';
+import { IncomesManagerClient } from './stores/incomesManagerClient';
 
 export class Store {
+  apiClient: ApiClient;
+  visibilityClient: VisibityClient;
+  dndClient: DnDClient;
+  itemManagerClient: ItemManagerClient;
+  shoppingClient: ShoppingClient;
+  calendarClient: CalendarClient;
+  costManagerClient: CostManagerClient;
+  incomesManagerClient: IncomesManagerClient;
+
   constructor() {
     this.apiClient = new ApiClient(this);
     this.visibilityClient = new VisibityClient(this);
@@ -23,16 +32,8 @@ export class Store {
     this.incomesManagerClient = new IncomesManagerClient(this);
   }
 
-  apiClient: ApiClient;
-  visibilityClient: VisibityClient;
-  dndClient: DnDClient;
-  itemManagerClient: ItemManagerClient;
-  shoppingClient: ShoppingClient;
-  calendarClient: CalendarClient;
-  costManagerClient: CostManagerClient;
-  incomesManagerClient: IncomesManagerClient;
-
   @observable items: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = [];
+  @observable incomes: Income[] = [];
 }

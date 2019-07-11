@@ -28,13 +28,14 @@ export interface Cost {
   chosenItems: string[];
   date: string;
   category: CostCategoryType;
-  info?: string | undefined;
+  info?: string;
 }
 
 export interface Income {
   count: number;
   category: IncomeCategoryType;
   date: string;
+  info?: string;
 }
 
 export interface StoreProps {

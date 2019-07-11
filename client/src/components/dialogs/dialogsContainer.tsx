@@ -32,6 +32,7 @@ interface DialogsContainerProps {
   shoppingClient: Store['shoppingClient'];
   calendarClient: Store['calendarClient'];
   costManagerClient: Store['costManagerClient'];
+  incomesManagerClient: Store['incomesManagerClient'];
 }
 
 export const DialogsContainer = observer(
@@ -46,7 +47,8 @@ export const DialogsContainer = observer(
     apiClient,
     shoppingClient,
     calendarClient,
-    costManagerClient
+    costManagerClient,
+    incomesManagerClient
   }: DialogsContainerProps) => (
     <>
       {visibleDialog === 'AddShoppingItemDialog' && (
@@ -211,16 +213,16 @@ export const DialogsContainer = observer(
         />
       )}
 
-    {visibleDialog.includes("AddNewIncomeDialog") && (
-      <AddNewIncomeDialog
-      addNewIncome={() => null}
-      changeNewIncomeCategory={() => null}
-      changeNewIncomeCounter={() => null}
-      changeNewIncomeInfo={() => null}
-      setVisibleDialog={() => null}
-      visibleDialog={visibilityClient.visibleDialog}
-      />
-    )}
+      {visibleDialog.includes('AddNewIncomeDialog') && (
+        <AddNewIncomeDialog
+          addNewIncome={incomesManagerClient.addNewIncome}
+          changeNewIncomeCategory={incomesManagerClient.changeIncomeCategory}
+          changeNewIncomeCounter={incomesManagerClient.changeIncomeCount}
+          changeNewIncomeInfo={incomesManagerClient.changeIncomeInfo}
+          setVisibleDialog={setVisibleDialog}
+          visibleDialog={visibleDialog}
+        />
+      )}
     </>
   )
 );

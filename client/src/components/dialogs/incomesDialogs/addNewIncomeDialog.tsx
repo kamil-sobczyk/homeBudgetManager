@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { IncomeCategoryType } from '../../../lib/interfaces';
-
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
@@ -21,7 +19,7 @@ export const selectValues = [
 
 interface AddNewIncomeDialogProps {
   addNewIncome: () => void;
-  changeNewIncomeCategory: (e: React.FormEvent) => void;
+  changeNewIncomeCategory: (event: React.FormEvent) => void;
   changeNewIncomeCounter: (event: React.FormEvent<EventTarget>) => void;
   changeNewIncomeInfo: (event: React.FormEvent<EventTarget>) => void;
   setVisibleDialog: (dialog?: string) => void;
@@ -64,6 +62,13 @@ export class AddNewIncomeDialog extends React.Component<
           type='number'
           required
         />
+        <TextField
+        label='Date'
+        defaultValue={''}
+        onChange={e => changeNewIncomeCounter(e)}
+        type='number'
+        required
+      />
 
         <TextField
           label='Short info'
@@ -74,7 +79,7 @@ export class AddNewIncomeDialog extends React.Component<
         <DialogActions>
           <Button
             color='primary'
-            onClick={() => setVisibleDialog('InComesDialog')}
+            onClick={() => setVisibleDialog('IncomesDialog')}
           >
             Cancel
           </Button>
