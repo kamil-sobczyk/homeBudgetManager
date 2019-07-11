@@ -21,6 +21,7 @@ import { EditCostDialog } from './costManagementDialogs/editCostDialog';
 import { LogoutDialog } from './loggingDialogs/logoutDialog';
 import { IncomesDialog } from './incomesDialogs/incomesDialog';
 import { AddNewIncomeDialog } from './incomesDialogs/addNewIncomeDialog';
+import { IncomesCallendarDialog } from './incomesDialogs/incomesCallendar';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -210,6 +211,21 @@ export const DialogsContainer = observer(
         <IncomesDialog
           visibleDialog={visibilityClient.visibleDialog}
           setVisibleDialog={visibilityClient.setVisibleDialog}
+        />
+      )}
+      {visibleDialog.includes('IncomesCalendarDialog') && (
+        <IncomesCallendarDialog
+        setVisibleDialog={setVisibleDialog}
+        visibleDialog={visibleDialog}
+        showFailSnackbar={visibilityClient.showFailSnackbar}
+        toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
+        datePicked={calendarClient.datePicked}
+        getCosts={apiClient.getCosts}
+        costs={costs}
+        getCalendarViewDate={calendarClient.getCalendarViewDate}
+        setDatePicked={calendarClient.setDatePicked}
+        calendarViewDate={calendarClient.calendarViewDate}
+        setChosenCost={shoppingClient.setChosenCost}
         />
       )}
 

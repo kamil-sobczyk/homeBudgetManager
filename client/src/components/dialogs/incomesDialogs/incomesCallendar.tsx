@@ -16,10 +16,10 @@ import { FailSnackbar } from '../calendarDialogs/snackbar';
 
 import { observable } from 'mobx';
 
-interface IncomeCallendarDialogProps{
+interface IncomesCallendarDialogProps{
   setVisibleDialog: (dialog?: string) => void;
   toggleShowFailSnackbar: () => boolean;
-  setDatePicked: (date: Date) => string;
+  setDatePicked: (date?: Date) => string;
   getCalendarViewDate: (activeStartDate: Date) => string;
   setChosenCost: (cost: Cost) => Cost;
   getCosts: () => void;
@@ -31,12 +31,13 @@ interface IncomeCallendarDialogProps{
 }
 
 @observer
-export class IncomeCallendarDialog extends React.Component<IncomeCallendarDialogProps, {}> {
+export class IncomesCallendarDialog extends React.Component<IncomesCallendarDialogProps, {}> {
   @observable daysVisible: string[] = [];
 
   componentDidMount = () => {
-    const { getCosts, getCalendarViewDate } = this.props;
+    const { getCosts, getCalendarViewDate, setDatePicked } = this.props;
 
+    setDatePicked()
     getCosts();
     getCalendarViewDate(new Date());
   };
@@ -90,7 +91,7 @@ export class IncomeCallendarDialog extends React.Component<IncomeCallendarDialog
     return (
       <>
         <Dialog
-          open={visibleDialog.includes('IncomesCalendar')}
+          open={visibleDialog.includes('IncomesCalendarDialog')}
           aria-labelledby='IncomesCalendar'
           aria-describedby='IncomesCalendar'
         >

@@ -11,11 +11,17 @@ export class CalendarClient {
   @observable calendarViewDate: string = '';
   @observable daysWithExpenses: number[] = [];
 
-  setDatePicked = (date: Date): string => {
-    let dayString: string = String(date.toLocaleString('en-GB')).slice(0, 10);
+  setDatePicked = (date?: Date): string => {
+    if(date){
+      let dayString: string = String(date.toLocaleString('en-GB')).slice(0, 10);
 
-    this.datePicked = dayString;
-    return dayString;
+      this.datePicked = dayString;
+      return dayString;
+    } else {
+      this.datePicked = '';
+      return '';
+    }
+
   };
 
   getCalendarViewDate = (date: Date): string => {

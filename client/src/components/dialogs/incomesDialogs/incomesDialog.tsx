@@ -31,7 +31,7 @@ export const IncomesDialog = observer(
         <Button
           color='primary'
           icon='add'
-          onClick={() => setVisibleDialog('AddNewIncomeDialog')}
+          onClick={() => setVisibleDialog('IncomesCalendarDialog')}
         />
         <Button onClick={() => setVisibleDialog()} color='primary'>
           Close

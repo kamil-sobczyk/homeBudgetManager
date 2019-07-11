@@ -63,14 +63,6 @@ export class AddNewIncomeDialog extends React.Component<
           required
         />
         <TextField
-        label='Date'
-        defaultValue={''}
-        onChange={e => changeNewIncomeCounter(e)}
-        type='number'
-        required
-      />
-
-        <TextField
           label='Short info'
           onChange={e => changeNewIncomeInfo(e)}
           type='text'
