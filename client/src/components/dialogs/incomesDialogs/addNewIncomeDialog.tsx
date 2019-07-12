@@ -31,19 +31,14 @@ export class AddNewIncomeDialog extends React.Component<
   AddNewIncomeDialogProps,
   {}
 > {
-  confirm = () => {
-    const { addNewIncome, setVisibleDialog } = this.props;
-
-    addNewIncome();
-    setVisibleDialog('CalendarDialog');
-  };
   render() {
     const {
       changeNewIncomeCategory,
       changeNewIncomeCounter,
       changeNewIncomeInfo,
       setVisibleDialog,
-      visibleDialog
+      visibleDialog,
+      addNewIncome
     } = this.props;
 
     return (
@@ -75,7 +70,7 @@ export class AddNewIncomeDialog extends React.Component<
           >
             Cancel
           </Button>
-          <Button color='primary' onClick={this.confirm}>
+          <Button color='primary' onClick={() => addNewIncome()}>
             Add
           </Button>
         </DialogActions>

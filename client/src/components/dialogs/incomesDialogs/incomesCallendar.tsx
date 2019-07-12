@@ -38,11 +38,10 @@ export class IncomesCallendarDialog extends React.Component<IncomesCallendarDial
     const { getCosts, getCalendarViewDate, setDatePicked } = this.props;
 
     setDatePicked()
-    getCosts();
     getCalendarViewDate(new Date());
   };
 
-  handleClickMore = () => {
+  handleClickPickDate = () => {
     const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
     if (datePicked === '') {
       toggleShowFailSnackbar();
@@ -108,7 +107,7 @@ export class IncomesCallendarDialog extends React.Component<IncomesCallendarDial
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClickMore} color='primary'>
+            <Button onClick={this.handleClickPickDate} color='primary'>
               Pick Date
             </Button>
             <Button

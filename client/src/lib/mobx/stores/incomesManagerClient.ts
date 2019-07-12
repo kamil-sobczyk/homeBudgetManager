@@ -16,17 +16,16 @@ export class IncomesManagerClient {
     this.newIncome.category = target.value as IncomeCategoryType;
   };
 
-  changeIncomeDate = (date: string) => {
-    this.newIncome.date = date;
-  };
-
-  changeIncomeCount = (event: React.FormEvent<EventTarget>) => {
+  changeIncomeCount = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
     this.newIncome.count = parseInt(target.value);
   };
 
   addNewIncome = (): void => {
+    this.store.visibilityClient.setVisibleDialog('IncomesCalendarDialog');
+    this.newIncome.date = this.store.calendarClient.datePicked;
     this.store.incomes.push(this.newIncome);
+
     // this.store.apiClient.addNewIncome(this.newIncome)
   };
 

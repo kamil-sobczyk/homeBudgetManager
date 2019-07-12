@@ -62,7 +62,6 @@ export const DialogsContainer = observer(
           visibleDialog={visibleDialog}
         />
       )}
-
       {visibleDialog === 'EditItemDialog' && (
         <EditItemDialog
           setVisibleDialog={setVisibleDialog}
@@ -75,7 +74,6 @@ export const DialogsContainer = observer(
           editItem={itemManagerClient.editItem}
         />
       )}
-
       {visibleDialog === 'DeleteItemDialog' && (
         <DeleteItemDialog
           setVisibleDialog={setVisibleDialog}
@@ -85,7 +83,6 @@ export const DialogsContainer = observer(
           index={itemManagerClient.activeItem.index}
         />
       )}
-
       {visibleDialog === 'SpendingsDialog' && (
         <SpendingsDialog
           getCosts={apiClient.getCosts}
@@ -95,7 +92,6 @@ export const DialogsContainer = observer(
           setChosenCost={shoppingClient.setChosenCost}
         />
       )}
-
       {visibleDialog.includes('ChartDialog') && (
         <ChartDialog
           setVisibleDialog={setVisibleDialog}
@@ -104,7 +100,6 @@ export const DialogsContainer = observer(
           costs={costs}
         />
       )}
-
       {visibleDialog === 'FinishShoppingDialog' && (
         <FinishShoppingDialog
           setVisibleDialog={setVisibleDialog}
@@ -215,20 +210,19 @@ export const DialogsContainer = observer(
       )}
       {visibleDialog.includes('IncomesCalendarDialog') && (
         <IncomesCallendarDialog
-        setVisibleDialog={setVisibleDialog}
-        visibleDialog={visibleDialog}
-        showFailSnackbar={visibilityClient.showFailSnackbar}
-        toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
-        datePicked={calendarClient.datePicked}
-        getCosts={apiClient.getCosts}
-        costs={costs}
-        getCalendarViewDate={calendarClient.getCalendarViewDate}
-        setDatePicked={calendarClient.setDatePicked}
-        calendarViewDate={calendarClient.calendarViewDate}
-        setChosenCost={shoppingClient.setChosenCost}
+          setVisibleDialog={setVisibleDialog}
+          visibleDialog={visibleDialog}
+          showFailSnackbar={visibilityClient.showFailSnackbar}
+          toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
+          datePicked={calendarClient.datePicked}
+          getCosts={apiClient.getCosts}
+          costs={costs}
+          getCalendarViewDate={calendarClient.getCalendarViewDate}
+          setDatePicked={calendarClient.setDatePicked}
+          calendarViewDate={calendarClient.calendarViewDate}
+          setChosenCost={shoppingClient.setChosenCost}
         />
       )}
-
       {visibleDialog.includes('AddNewIncomeDialog') && (
         <AddNewIncomeDialog
           addNewIncome={incomesManagerClient.addNewIncome}
