@@ -58,7 +58,7 @@ const appRouter = app => {
         }
       });
     })
-    .post((req, res, next) => {
+    .post((req, res) => {
       const users = res.users;
 
       users
@@ -351,6 +351,41 @@ const appRouter = app => {
       });
     res.status(200).send({});
   });
+
+  app
+    .route("/store/incomes")
+    .get((req, res) => {
+      const users = res.users;
+
+      users.findOne({ usr: req.headers.id }).exec((err, resp) => {
+        if (err) {
+          console.log("error ", err);
+          res.status(500);
+          return;
+        }
+
+        res.status(200).send(resp.incomes);
+      });
+    })
+    .post((req, res) => {
+      const users = res.users;
+
+      users
+        .findOneAndUpdate(
+          { usr: req.headers.id },
+          { $push: { incomes: req.body.income } },
+          { useFindAndModify: false }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            res.status(500);
+            return;
+          }
+        });
+      console.log(req.body.income);
+      res.status(200).send({});
+    });
 };
 
 module.exports = appRouter;
