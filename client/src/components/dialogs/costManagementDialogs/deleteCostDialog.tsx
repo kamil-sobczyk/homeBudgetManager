@@ -26,10 +26,10 @@ export const DeleteCostDialog = observer(
   }: DeleteCostDialogProps) => (
     <Dialog
       open={visibleDialog === 'DeleteCostDialog'}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
+      aria-labelledby='delete-dialog-title'
+      aria-describedby='delete-dialog-description'
     >
-      <StyledDialogTitle>Deleting cost</StyledDialogTitle>
+      <StyledDialogTitle>Deleting</StyledDialogTitle>
       <StyledDeleteDialogContent>
         Are you sure want to delete cost added {cost.date} - {cost.chosenItems}{' '}
         from your list of expenses?

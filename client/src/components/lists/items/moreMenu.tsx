@@ -50,7 +50,7 @@ const StyledSimpleMenu = styled(SimpleMenu)`
   min-width: 20px;
 `;
 
-const StyledDeleteButton = styled(IconButton)`
+export const StyledDeleteButton = styled(IconButton)`
   color: red;
 `;
 

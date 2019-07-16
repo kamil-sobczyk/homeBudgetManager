@@ -9,6 +9,8 @@ export class IncomesManagerClient {
     this.store = store;
   }
 
+  private readonly initialIncome: Income = { category: 'gift', date: '', count: 0 };
+
   @observable newIncome: Income = { category: 'gift', date: '', count: 0 };
 
   changeIncomeCategory = (event: React.FormEvent): void => {
@@ -22,11 +24,11 @@ export class IncomesManagerClient {
   };
 
   addNewIncome = (): void => {
-    this.store.visibilityClient.setVisibleDialog('IncomesCalendarDialog');
+    this.store.visibilityClient.setVisibleDialog('IncomesDialog');
     this.newIncome.date = this.store.calendarClient.datePicked;
     this.store.incomes.push(this.newIncome);
-
-    // this.store.apiClient.addNewIncome(this.newIncome)
+    this.store.apiClient.addNewIncome(this.newIncome)
+    this.newIncome = this.initialIncome;
   };
 
   changeIncomeInfo = (event: React.FormEvent<EventTarget>): void => {

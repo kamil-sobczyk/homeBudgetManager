@@ -383,7 +383,32 @@ const appRouter = app => {
             return;
           }
         });
-      console.log(req.body.income);
+      res.status(200).send({});
+    })
+    .delete((req, res) => {
+      const users = res.users;
+      const { income } = req.body;
+
+      users
+        .updateOne(
+          { usr: req.headers.id },
+          {
+            $pull: {
+              incomes: {
+                count: income.count,
+                date: income.date,
+                category: income.category
+              }
+            }
+          }
+        )
+        .exec((err, resp) => {
+          if (err) {
+            console.log("error ", err);
+            res.status(500);
+            return;
+          }
+        });
       res.status(200).send({});
     });
 };

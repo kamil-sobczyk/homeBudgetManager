@@ -7,7 +7,7 @@ import { EditItemDialog } from './itemManagementDialogs/editItemDialog';
 import { DeleteItemDialog } from './itemManagementDialogs/deleteItemDialog';
 import { SpendingsDialog } from './expensesDialogs/spendingsDialog';
 import { FinishShoppingDialog } from './expensesDialogs/finishShoppingDialog';
-import { Cost, Item } from '../../lib/interfaces';
+import { Cost, Item, Income } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './infoDialogs/failDialog';
 import { AddNewExpenseDialog } from './expensesDialogs/addNewExpenseDialog';
@@ -27,6 +27,7 @@ interface DialogsContainerProps {
   items: Item[];
   selected: Item[];
   costs: Cost[];
+  incomes: Income[];
   visibilityClient: Store['visibilityClient'];
   itemManagerClient: Store['itemManagerClient'];
   apiClient: Store['apiClient'];
@@ -41,6 +42,7 @@ export const DialogsContainer = observer(
   ({
     costs,
     items,
+    incomes,
     selected,
     visibilityClient,
     visibilityClient: { visibleDialog, setVisibleDialog },
@@ -206,6 +208,8 @@ export const DialogsContainer = observer(
         <IncomesDialog
           visibleDialog={visibilityClient.visibleDialog}
           setVisibleDialog={visibilityClient.setVisibleDialog}
+          getIncomes={apiClient.getIncomes}
+          incomes={incomes}
         />
       )}
       {visibleDialog.includes('IncomesCalendarDialog') && (
@@ -215,7 +219,7 @@ export const DialogsContainer = observer(
           showFailSnackbar={visibilityClient.showFailSnackbar}
           toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
           datePicked={calendarClient.datePicked}
-          getCosts={apiClient.getCosts}
+          incomes={incomes}
           costs={costs}
           getCalendarViewDate={calendarClient.getCalendarViewDate}
           setDatePicked={calendarClient.setDatePicked}

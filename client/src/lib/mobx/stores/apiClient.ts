@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { Store } from '../rootStore';
 
-import { Item, ListType, Cost } from '../../interfaces';
+import { Item, ListType, Cost, Income } from '../../interfaces';
 import { observable } from 'mobx';
 
 const server = 'http://localhost:8081/';
@@ -64,6 +64,13 @@ export class ApiClient {
     }).then(
       costs => (this.store.costs = sortCosts(costs.data).reverse() as Cost[])
     );
+
+  getIncomes = async (): Promise<Income[]> =>
+    await axios({
+      method: 'get',
+      url: server + 'store/incomes',
+      headers: this.headers
+    }).then(incomes => (this.store.incomes = incomes.data as Income[]));
 
   deleteItemOnServer = async (name: string): Promise<void> => {
     await axios({
@@ -143,4 +150,22 @@ export class ApiClient {
       data: { oldCost, newCost }
     });
   };
+
+  addNewIncome = async (income: Income): Promise<void> => {
+    await axios({
+      method: 'post',
+      url: server + 'store/incomes',
+      headers: this.headers,
+      data: { income }
+    });
+  };
+
+  deleteIncome = async (income: Income): Promise<void> => {
+    await axios({
+      method: 'delete',
+      url: server + 'store/incomes',
+      headers: this.headers,
+      data: { income }
+    });
+  }
 }

@@ -58,7 +58,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
         this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
         calendarViewDate[4] === getCalendarViewDate(date)[4]
       ) {
-        return 'active';
+        return 'cost';
       } else return null;
     } else return null;
   };
@@ -135,9 +135,13 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   }
 }
 
-const StyledCalendar = styled(Calendar)`
-  ${'.active'} {
-    background-color: rgba(220, 220, 220, 0.5);
+export const StyledCalendar = styled(Calendar)`
+  ${'.cost'} {
+    background-color: rgba(220, 220, 220, .5);
+    border-radius: 20%;
+  }
+  ${'.income'} {
+    background-color: rgba(124, 252, 0, .5);
     border-radius: 20%;
   }
 `;

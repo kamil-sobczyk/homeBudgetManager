@@ -10,7 +10,14 @@ import {
 } from '@rmwc/data-table';
 import '@rmwc/data-table/data-table.css';
 import { Income } from '../../../lib/interfaces';
-import { StyledDataTable, StyledDataTableHeadCell, StyledDataTableRow, StyledDataTableCell } from '../expensesDialogs/spendingsTable/tableContainer';
+import {
+  StyledDataTable,
+  StyledDataTableHeadCell,
+  StyledDataTableRow,
+  StyledDataTableCell
+} from '../expensesDialogs/spendingsTable/tableContainer';
+import { Icon } from '@rmwc/icon';
+import { StyledDeleteButton } from '../../lists/items/moreMenu';
 
 export const generateRandomString = () =>
   Math.random()
@@ -21,13 +28,17 @@ export const generateRandomString = () =>
     .substring(2, 15);
 
 interface IncomesTableProps {
-  // getIncomes?: () => void;
+  getIncomes: () => void;
+  incomes: Income[];
   // setVisibleDialog: (dialog?: string) => void;
   // visibleDialog: string;
 }
 
 @observer
 export class IncomesTable extends React.Component<IncomesTableProps, {}> {
+  componentDidMount = () => {
+    this.props.getIncomes();
+  };
   // componentDidMount = () => {
   //   if (this.props.getIncomes) {
   //     this.props.getIncomes();
@@ -52,39 +63,28 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
   };
 
   render() {
-    const incomes: Income[] = [
-      { count: 22, category: 'salary', date: '01/02/2018' },
-      { count: 32, category: 'gift', date: '02/03/2018' }
-    ];
-    // let displayedCosts: Cost[] = this.props.costs;
-
-    // if (displayedCosts.length < 1) {
-    //   displayedCosts = [
-    //     {
-    //       count: 0,
-    //       chosenItems: [' - - - - - - '],
-    //       date: ' - - - - - - ',
-    //       category: 'shopping'
-    //     }
-    //   ];
-    // }
-
     return (
       <StyledDataTable stickyRows={1}>
         <DataTableContent>
           <DataTableHead>
             <DataTableRow>
-              <StyledDataTableHeadCell>Inocme</StyledDataTableHeadCell>
+              <StyledDataTableHeadCell>Income</StyledDataTableHeadCell>
               <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
               <StyledDataTableHeadCell>Value</StyledDataTableHeadCell>
             </DataTableRow>
           </DataTableHead>
           <DataTableBody>
-            {incomes.map((income: Income, index: number) => (
+            {this.props.incomes.map((income: Income, index: number) => (
               <StyledDataTableRow key={index}>
                 <StyledDataTableCell>{income.category}</StyledDataTableCell>
                 <StyledDataTableCell>{income.date}</StyledDataTableCell>
-                <StyledDataTableCell alignEnd>{income.count}zł</StyledDataTableCell>
+                <StyledDataTableCell alignEnd>
+                  {income.count}zł
+                </StyledDataTableCell>
+                <td>
+                <StyledDeleteButton icon='delete' onClick={() => null} />
+                </td>
+           
               </StyledDataTableRow>
             ))}
           </DataTableBody>

@@ -11,6 +11,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
   const {
     costs,
     items,
+    incomes,
     selected,
     visibilityClient,
     itemManagerClient,
@@ -40,6 +41,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
       <DialogsContainer
         costs={costs}
         items={items}
+        incomes={incomes}
         selected={selected}
         visibilityClient={visibilityClient}
         itemManagerClient={itemManagerClient}
