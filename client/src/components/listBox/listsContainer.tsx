@@ -72,7 +72,7 @@ const StyledListContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  max-width: 100vh;
+  max-width: 100vw;
 `;
 
 export const StyledButtonsContainer = styled.div`

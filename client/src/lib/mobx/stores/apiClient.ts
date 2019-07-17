@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-// import { server } from '../../../../config';
+import { server } from '../../../../config';
 
 import { Store } from '../rootStore';
 
 import { Item, ListType, Cost, Income } from '../../interfaces';
 import { observable } from 'mobx';
 
-const server = 'http://localhost:8081/';
+// const server = 'http://localhost:8081/';
 
 const sortCosts = (costs: Cost[]): Cost[] => {
   return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));

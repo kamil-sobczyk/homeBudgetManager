@@ -51,5 +51,6 @@ export class NavbarSectionRight extends React.Component<
 }
 
 const StyledTopBarItem = styled(TopAppBarActionItem)`
-  margin-right: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 `;

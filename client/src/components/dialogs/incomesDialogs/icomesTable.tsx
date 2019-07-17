@@ -20,7 +20,6 @@ import {
 } from '../expensesDialogs/spendingsTable/tableContainer';
 import { StyledDeleteButton } from '../../lists/items/moreMenu';
 
-
 interface IncomesTableProps {
   deleteIncome: (income: Income) => void;
   setActiveIncome: (income: Income) => void;
