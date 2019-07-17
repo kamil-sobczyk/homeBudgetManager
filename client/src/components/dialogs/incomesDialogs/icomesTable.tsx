@@ -28,9 +28,11 @@ export const generateRandomString = () =>
     .substring(2, 15);
 
 interface IncomesTableProps {
+  deleteIncome: (income: Income) => void;
+  setActiveIncome: (income: Income) => void;
   getIncomes: () => void;
   incomes: Income[];
-  // setVisibleDialog: (dialog?: string) => void;
+  setVisibleDialog: (dialog?: string) => void;
   // visibleDialog: string;
 }
 
@@ -39,27 +41,12 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
   componentDidMount = () => {
     this.props.getIncomes();
   };
-  // componentDidMount = () => {
-  //   if (this.props.getIncomes) {
-  //     this.props.getIncomes();
-  //   }
-  // };
 
-  //   getCostItems = (cost: Cost): string | false =>
-  //     cost.category === 'shopping'
-  //       ? cost.chosenItems.length > 0
-  //         ? cost.chosenItems.join(', ')
-  //         : ' - - - '
-  //       : cost.info
-  //       ? cost.chosenItems.length > 0 && `${cost.chosenItems[0]} (${cost.info})`
-  //       : cost.chosenItems.length > 0
-  //       ? cost.chosenItems[0]
-  //       : ' - - - ';
-
-  handleIncomeClick = (income: Income) => {
-    // const { setVisibleDialog, visibleDialog, setChosenCost } = this.props;
-    // setVisibleDialog(`${visibleDialog}CostManager`);
-    // setChosenCost(cost);
+  handleDeleteIncome = (income: Income) => {
+    const { setVisibleDialog, setActiveIncome } = this.props;
+    
+    setVisibleDialog('DeleteIncomeDialog');
+    setActiveIncome(income);
   };
 
   render() {
@@ -82,9 +69,11 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
                   {income.count}zł
                 </StyledDataTableCell>
                 <td>
-                <StyledDeleteButton icon='delete' onClick={() => null} />
+                  <StyledDeleteButton
+                    icon='delete'
+                    onClick={() => this.handleDeleteIncome(income)}
+                  />
                 </td>
-           
               </StyledDataTableRow>
             ))}
           </DataTableBody>

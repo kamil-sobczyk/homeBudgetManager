@@ -22,6 +22,7 @@ import { LogoutDialog } from './loggingDialogs/logoutDialog';
 import { IncomesDialog } from './incomesDialogs/incomesDialog';
 import { AddNewIncomeDialog } from './incomesDialogs/addNewIncomeDialog';
 import { IncomesCallendarDialog } from './incomesDialogs/incomesCallendar';
+import { DeleteIncomeDialog } from './incomesDialogs/deleteIncomeDialog';
 
 interface DialogsContainerProps {
   items: Item[];
@@ -210,6 +211,8 @@ export const DialogsContainer = observer(
           setVisibleDialog={visibilityClient.setVisibleDialog}
           getIncomes={apiClient.getIncomes}
           incomes={incomes}
+          deleteIncome={apiClient.deleteIncome}
+          setActiveIncome={incomesManagerClient.setActiveIncome}
         />
       )}
       {visibleDialog.includes('IncomesCalendarDialog') && (
@@ -235,6 +238,14 @@ export const DialogsContainer = observer(
           changeNewIncomeInfo={incomesManagerClient.changeIncomeInfo}
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
+        />
+      )}
+      {visibleDialog.includes('DeleteIncomeDialog') && (
+        <DeleteIncomeDialog
+        income={incomesManagerClient.activeIncome}
+        setVisibleDialog={visibilityClient.setVisibleDialog}
+        visibleDialog ={visibilityClient.visibleDialog}
+        deleteIncome={incomesManagerClient.deleteIncome}
         />
       )}
     </>
