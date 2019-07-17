@@ -21,7 +21,6 @@ export class CalendarClient {
       this.datePicked = '';
       return '';
     }
-
   };
 
   getCalendarViewDate = (date: Date): string => {

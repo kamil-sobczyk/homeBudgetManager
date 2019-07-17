@@ -77,5 +77,6 @@ export const StyledDialog = styled(Dialog)`
 export const StyledDialogContent = styled(DialogContent)`
   display: flex;
   justify-content: center;
+  text-align: center;
   padding: 10px 15px 10px 15px
 `;

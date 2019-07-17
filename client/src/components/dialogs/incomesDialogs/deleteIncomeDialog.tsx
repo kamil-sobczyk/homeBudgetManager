@@ -5,7 +5,7 @@ import { Item, Income } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
-import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
+import { StyledDialogTitle, StyledDialogContent } from '../expensesDialogs/spendingsDialog';
 
 interface DeleteIncomeDialogProps {
   deleteIncome: (income: Income) => void;
@@ -27,10 +27,10 @@ export const DeleteIncomeDialog = observer(
       aria-describedby='Do you want to delete income?'
     >
       <StyledDialogTitle>Deleting Income</StyledDialogTitle>
-      <DialogContent>
+      <StyledDialogContent>
         Are you sure want to delete an income: {income.category}{' '}
         {income.info ? income.info : ''} - {income.date} with value {income.count}zł
-      </DialogContent>
+      </StyledDialogContent>
       <DialogActions>
         <Button onClick={() => setVisibleDialog("IncomesDialog")} color='primary'>
           No
