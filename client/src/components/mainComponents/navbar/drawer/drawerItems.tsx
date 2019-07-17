@@ -10,7 +10,13 @@ const drawerItems = [
     action: 'AddShoppingItemDialog',
     icon: 'add_circle',
     iconColor: '#00bf02',
-    title: 'Add new Item'
+    title: 'Add new product'
+  },
+  {
+    action: 'AddNewIncomeDialog',
+    icon: 'save_alt',
+    iconColor: '#00bf02',
+    title: 'Add new income'
   },
   {
     action: 'AddNewExpenseDialog',
