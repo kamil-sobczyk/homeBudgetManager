@@ -1,23 +1,14 @@
 import * as React from 'react';
 
 import styled from 'styled-components';
-import { Income } from '../../../lib/interfaces';
+import { Income, IncomeCategoryType } from '../../../lib/interfaces';
 import { observer } from 'mobx-react';
 
-import {
-  DataTableRow,
-  DataTableBody,
-  DataTableContent,
-  DataTableHead
-} from '@rmwc/data-table';
 import '@rmwc/data-table/data-table.css';
 
-import {
-  StyledDataTable,
-  StyledDataTableHeadCell,
-  StyledDataTableRow,
-  StyledDataTableCell
-} from '../expensesDialogs/spendingsTable/tableContainer';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
+
 import { StyledDeleteButton } from '../../lists/items/moreMenu';
 
 interface IncomesTableProps {
@@ -34,11 +25,24 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
     this.props.getIncomes();
   };
 
-  handleDeleteIncome = (income: Income) => {
+  getClickedIncome = (event: any): Income => {
+    const cell = (event.target as HTMLElement).parentElement;
+    const row = (cell as HTMLElement).parentElement;
+    const categoryCell = (row as HTMLElement).firstElementChild;
+    const category = (categoryCell as HTMLElement).innerHTML;
+    const dateCell = (categoryCell as HTMLElement).nextElementSibling;
+    const date = (dateCell as HTMLElement).innerHTML;
+    const countCell = (dateCell as HTMLElement).nextElementSibling;
+    const count = parseInt((countCell as HTMLElement).innerHTML);
+
+    return { category: category as IncomeCategoryType, date, count };
+  };
+
+  handleClickDeleteIncome = (event: any) => {
     const { setVisibleDialog, setActiveIncome } = this.props;
 
     setVisibleDialog('DeleteIncomeDialog');
-    setActiveIncome(income);
+    setActiveIncome(this.getClickedIncome(event));
   };
 
   render() {
@@ -47,37 +51,49 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
       .sort((a: Income, b: Income): number => a.date.localeCompare(b.date))
       .reverse();
 
+    const columns = [
+      {
+        Header: 'Category',
+        accessor: 'category'
+      },
+      {
+        Header: 'Date',
+        accessor: 'date'
+      },
+      {
+        Header: 'Count',
+        minWidth: 45,
+        accessor: 'count'
+      },
+      {
+        Header: '',
+        Cell: (
+          <DeleteButton
+            icon='delete'
+            onClick={e => this.handleClickDeleteIncome(e)}
+          />
+        ),
+        minWidth: 25,
+        styles: 'background: red'
+      }
+    ];
+
     return (
-      <StyledDataTable stickyRows={1}>
-        <DataTableContent>
-          <DataTableHead>
-            <DataTableRow>
-              <StyledDataTableHeadCell>Income</StyledDataTableHeadCell>
-              <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
-              <StyledDataTableHeadCell>Value</StyledDataTableHeadCell>
-            </DataTableRow>
-          </DataTableHead>
-          <DataTableBody>
-            {sortedIncomes.map((income: Income, index: number) => (
-              <StyledDataTableRow key={index}>
-                <StyledIncomeCell>{income.category}</StyledIncomeCell>
-                <StyledIncomeCell>{income.date}</StyledIncomeCell>
-                <StyledIncomeCell alignEnd>{income.count}zł</StyledIncomeCell>
-                <td>
-                  <StyledDeleteButton
-                    icon='delete'
-                    onClick={() => this.handleDeleteIncome(income)}
-                  />
-                </td>
-              </StyledDataTableRow>
-            ))}
-          </DataTableBody>
-        </DataTableContent>
-      </StyledDataTable>
+      <>
+        <ReactTable
+          data={sortedIncomes}
+          loading={sortedIncomes.length > 0 ? false : true}
+          columns={columns}
+          defaultPageSize={10}
+          className='-striped -highlight'
+        />
+        <br />
+      </>
     );
   }
 }
 
-const StyledIncomeCell = styled(StyledDataTableCell)`
-  color: green;
-`;
+const DeleteButton = styled(StyledDeleteButton)`
+display: flex;
+
+`
