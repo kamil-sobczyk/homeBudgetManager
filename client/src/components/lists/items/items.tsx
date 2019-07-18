@@ -33,7 +33,6 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
   render() {
     const { items, setVisibleDialog, setActiveItem } = this.props;
-    console.log(this.props.showItems)
 
     return (
       <StyledContainer showItems={true}>

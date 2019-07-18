@@ -33,8 +33,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setVisibleDialog
     } = this.props;
 
-    console.log(this.props.showItems)
-
     return (
       <StyledContainer showItems>
         <StyledButtonsContainer>
