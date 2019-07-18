@@ -58,6 +58,7 @@ export class ProvidedItemsDraggable extends React.Component<
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
             </StyledTextContainer>
+            <div />
           </StyledItem>
           <ListDivider />
         </div>
@@ -68,6 +69,8 @@ export class ProvidedItemsDraggable extends React.Component<
 }
 
 export const StyledItem = styled(ListItem)`
+  display: flex;
+  justify-content: space-between;
   min-height: 75px;
   margin: 2px;
 `;
