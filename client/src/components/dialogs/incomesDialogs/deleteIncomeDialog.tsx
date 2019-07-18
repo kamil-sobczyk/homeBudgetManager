@@ -22,7 +22,7 @@ export const DeleteIncomeDialog = observer(
     deleteIncome
   }: DeleteIncomeDialogProps) => (
     <Dialog
-      open={visibleDialog === 'DeleteIncomeDialog'}
+      open={visibleDialog.includes('DeleteIncomeDialog')}
       aria-labelledby='Delete income dialog'
       aria-describedby='Do you want to delete income?'
     >

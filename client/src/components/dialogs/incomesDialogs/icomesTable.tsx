@@ -41,7 +41,7 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
   handleClickDeleteIncome = (event: any) => {
     const { setVisibleDialog, setActiveIncome } = this.props;
 
-    setVisibleDialog('DeleteIncomeDialog');
+    setVisibleDialog('IncomesDialogDeleteIncomeDialog');
     setActiveIncome(this.getClickedIncome(event));
   };
 

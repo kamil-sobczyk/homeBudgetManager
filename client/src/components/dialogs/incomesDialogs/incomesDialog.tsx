@@ -32,7 +32,7 @@ export const IncomesDialog = observer(
     setActiveIncome
   }: IncomesDialogProps) => (
     <StyledDialog
-      open={visibleDialog === 'IncomesDialog'}
+      open={visibleDialog.includes('IncomesDialog')}
       aria-label='shopping-you-made'
     >
       <StyledDialogTitle>Your incomes</StyledDialogTitle>
