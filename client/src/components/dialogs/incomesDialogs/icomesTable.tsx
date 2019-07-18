@@ -10,6 +10,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 import { StyledDeleteButton } from '../../lists/items/moreMenu';
+import { sortCostsOrIncomes } from '../../../lib/mobx/stores/apiClient';
 
 interface IncomesTableProps {
   deleteIncome: (income: Income) => void;
@@ -46,10 +47,8 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
   };
 
   render() {
-    const sortedIncomes = this.props.incomes
-      .slice()
-      .sort((a: Income, b: Income): number => a.date.localeCompare(b.date))
-      .reverse();
+
+    const sortedIncomes = sortCostsOrIncomes(this.props.incomes) as Income[];
 
     const columns = [
       {
