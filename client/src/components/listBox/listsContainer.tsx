@@ -53,6 +53,7 @@ export const ListsContainer = observer(
               deleteItem={deleteItem}
               items={items}
               getItems={getItems}
+              showItems={showItems}
             />
           )}
           <Selected
@@ -61,6 +62,7 @@ export const ListsContainer = observer(
             toggleCheckItems={toggleCheckItems}
             selected={selected}
             getSelected={getSelected}
+            showItems={showItems}
           />
         </DragDropContext>
       </StyledListContainer>

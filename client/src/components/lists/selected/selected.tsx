@@ -16,6 +16,7 @@ interface SelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
+  showItems: boolean;
   selected: Item[];
 }
 
@@ -32,8 +33,10 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setVisibleDialog
     } = this.props;
 
+    console.log(this.props.showItems)
+
     return (
-      <StyledContainer>
+      <StyledContainer showItems>
         <StyledButtonsContainer>
           <StyledFinishShoppingButton
             onClick={() => setVisibleDialog('FinishShoppingDialog')}

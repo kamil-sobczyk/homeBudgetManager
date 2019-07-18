@@ -18,7 +18,12 @@ interface ItemsProps {
   deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  showItems: boolean;
   items: Item[];
+}
+
+interface StyledContainerProps {
+  showItems: boolean
 }
 
 @observer
@@ -28,9 +33,10 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
   render() {
     const { items, setVisibleDialog, setActiveItem } = this.props;
+    console.log(this.props.showItems)
 
     return (
-      <StyledContainer>
+      <StyledContainer showItems={true}>
         <StyledButtonsContainer>
           <StyledAddShoppingItemIconButton
             onClick={() => setVisibleDialog('AddShoppingItemDialog')}
@@ -55,7 +61,7 @@ export class Items extends React.Component<ItemsProps, {}> {
 export const StyledContainer = styled.div`
   min-height: 200px;
   min-width: 150px;
-  max-width: 50vw;
+  width: ${(props: StyledContainerProps) => props.showItems ? "50vw" : "100vw"};
   margin: 5px;
 `;
 
