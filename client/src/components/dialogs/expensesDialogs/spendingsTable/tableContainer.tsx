@@ -1,21 +1,10 @@
 import * as React from 'react';
 
-import styled from 'styled-components';
-
 import { observer } from 'mobx-react';
 
 import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 
-import {
-  DataTable,
-  DataTableRow,
-  DataTableBody,
-  DataTableCell,
-  DataTableHeadCell,
-  DataTableContent,
-  DataTableHead
-} from '@rmwc/data-table';
-import '@rmwc/data-table/data-table.css';
+import ReactTable, { FinalState, RowInfo } from 'react-table';
 
 const getRowColor = (category: CostCategoryType) => {
   if (category === 'shopping') return 'black';
@@ -26,13 +15,21 @@ const getRowColor = (category: CostCategoryType) => {
   else return 'yellow';
 };
 
-export const generateRandomString = () =>
-  Math.random()
-    .toString(36)
-    .substring(2, 15) +
-  Math.random()
-    .toString(36)
-    .substring(2, 15);
+const columns = [
+  {
+    Header: 'Items',
+    accessor: 'chosenItems'
+  },
+  {
+    Header: 'Date',
+    accessor: 'date'
+  },
+  {
+    Header: 'Cost',
+    minWidth: 45,
+    accessor: 'count'
+  }
+];
 
 interface TableContainerProps {
   getCosts?: () => void;
@@ -83,54 +80,29 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
 
     return (
-      <StyledDataTable stickyRows={1}>
-        <StyledDataTableContent>
-          <DataTableHead>
-            <DataTableRow>
-              <StyledDataTableHeadCell>Item(s)</StyledDataTableHeadCell>
-              <StyledDataTableHeadCell>Date</StyledDataTableHeadCell>
-              <StyledDataTableHeadCell>Cost</StyledDataTableHeadCell>
-            </DataTableRow>
-          </DataTableHead>
-          <DataTableBody>
-            {displayedCosts.map((cost: Cost) => (
-              <StyledDataTableRow
-                key={generateRandomString()}
-                style={{ color: getRowColor(cost.category) }}
-                onClick={() => this.handleCostClick(cost)}
-              >
-                <StyledDataTableCell>
-                  {this.getCostItems(cost)}
-                </StyledDataTableCell>
-                <StyledDataTableCell>{cost.date}</StyledDataTableCell>
-                <StyledDataTableCell alignEnd>
-                  {`${cost.count}zł`}
-                </StyledDataTableCell>
-              </StyledDataTableRow>
-            ))}
-          </DataTableBody>
-        </StyledDataTableContent>
-      </StyledDataTable>
+      <ReactTable
+        data={displayedCosts}
+        loading={displayedCosts.length > 0 ? false : true}
+        columns={columns}
+        defaultPageSize={10}
+        className='-striped -highlight'
+        getTrProps={(state: FinalState, rowInfo?: RowInfo) => {
+          let category: CostCategoryType = 'bill';
+          if (rowInfo) {
+            category = rowInfo.original.category;
+          }
+          return {
+            onClick: (): void => {
+              if (rowInfo) {
+                this.handleCostClick(rowInfo.original);
+              }
+            },
+            style: {
+              color: getRowColor(category)
+            }
+          };
+        }}
+      />
     );
   }
 }
-
-export const StyledDataTableCell = styled(DataTableCell)`
-  text-align: center;
-`;
-
-export const StyledDataTableHeadCell = styled(DataTableHeadCell)`
-  text-align: center;
-`;
-
-export const StyledDataTableRow = styled(DataTableRow)`
-  cursor: pointer;
-  border-top: 1px solid lightgrey;
-`;
-
-export const StyledDataTable = styled(DataTable)`
-  overflow-x: hidden;
-`;
-
-export const StyledDataTableContent = styled(DataTableContent)`
-overflow-x: hidden;`
