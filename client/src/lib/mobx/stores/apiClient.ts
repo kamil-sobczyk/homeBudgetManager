@@ -9,8 +9,29 @@ import { observable } from 'mobx';
 
 // const server = 'http://localhost:8081/';
 
-const sortCosts = (costs: Cost[]): Cost[] => {
-  return costs.sort((a: Cost, b: Cost): number => a.date.localeCompare(b.date));
+export const sortCostsOrIncomes = (costs: Cost[] | Income[]): Cost[] | Income[] => {
+  console.log(new Date(costs[1].date));
+  return costs
+    .sort(
+      (a: Cost | Income, b: Cost | Income): any => {
+        const aDateParts = a.date.split('/');
+        const bDateParts = b.date.split('/');
+
+        const aDateObject = new Date(
+          `${aDateParts[1]}/${aDateParts[0]}/${aDateParts[2]}`
+        );
+        const bDateObject = new Date(
+          `${bDateParts[1]}/${bDateParts[0]}/${bDateParts[2]}`
+        );
+ 
+        return aDateObject > bDateObject
+          ? -1
+          : aDateObject < bDateObject
+          ? 1
+          : 0;
+      }
+    )
+    .reverse();
 };
 
 interface Headers {
@@ -62,7 +83,7 @@ export class ApiClient {
       url: server + 'store/costs',
       headers: this.headers
     }).then(
-      costs => (this.store.costs = sortCosts(costs.data).reverse() as Cost[])
+      costs => (this.store.costs = sortCostsOrIncomes(costs.data).reverse() as Cost[])
     );
 
   getIncomes = async (): Promise<Income[]> =>
@@ -167,5 +188,5 @@ export class ApiClient {
       headers: this.headers,
       data: { income }
     });
-  }
+  };
 }
