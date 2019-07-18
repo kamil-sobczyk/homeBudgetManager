@@ -79,21 +79,18 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
     ];
 
     return (
-      <>
-        <ReactTable
-          data={sortedIncomes}
-          loading={sortedIncomes.length > 0 ? false : true}
-          columns={columns}
-          defaultPageSize={10}
-          className='-striped -highlight'
-        />
-        <br />
-      </>
+      <ReactTable
+        data={sortedIncomes}
+        loading={sortedIncomes.length > 0 ? false : true}
+        columns={columns}
+        defaultPageSize={10}
+        className='-striped -highlight'
+      />
     );
   }
 }
 
 const DeleteButton = styled(StyledDeleteButton)`
-display: flex;
-
-`
+  position: relative;
+  left: -15px;
+`;
