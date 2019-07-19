@@ -15,6 +15,7 @@ import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
 import { observable } from 'mobx';
+import { getDateNow } from '../expensesDialogs/spendingsTable/costsCounter';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -39,6 +40,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
 
     getCosts();
     getCalendarViewDate(new Date());
+    // console.log(getCalendarViewDate(new Date()))
   };
 
   handleClickMore = () => {
@@ -53,13 +55,19 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   countTileStyle = (date: Date, view: string) => {
     const { calendarViewDate, getCalendarViewDate } = this.props;
 
+    // console.log("countDaysWithExp",this.countDaysWithExpenses());
+    // console.log("date.getDate",date.getDate());
+    // console.log('calendarViewDate',calendarViewDate[4])
+    // console.log('getCalendarViewDate(date)',getCalendarViewDate(date)[4])
+
     if (view === 'month') {
       if (
-        this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
-        calendarViewDate[4] === getCalendarViewDate(date)[4]
+        // this.countDaysWithExpenses().indexOf(date.getDate()) > -1 
+        // &&
+        calendarViewDate.slice(3, 4) === getCalendarViewDate(date).slice(3, 4)
       ) {
         return 'cost';
-      } else return null;
+      } else return 'income';
     } else return null;
   };
 
@@ -69,6 +77,8 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     let daysWithExpenses: number[] = costs
       .filter(cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5))
       .map(cost => parseInt(cost.date.slice(0, 2)));
+
+      // console.log(daysWithExpenses)
 
     return daysWithExpenses.filter(
       (day, index) => daysWithExpenses.indexOf(day) === index
@@ -98,11 +108,17 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <DialogContent>
             <StyledCalendar
               onClickDay={(value: Date) => setDatePicked(value)}
-              onActiveDateChange={({ activeStartDate }) =>
+              onActiveDateChange={({ activeStartDate }) =>{
+                console.log(activeStartDate)
                 getCalendarViewDate(activeStartDate)
               }
-              tileClassName={({ date, view }) =>
+            
+              }
+              tileClassName={({ date, view }): any =>{
+                // console.log(date)
                 this.countTileStyle(date, view)
+              }
+         
               }
             />
           </DialogContent>
@@ -137,11 +153,11 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
 
 export const StyledCalendar = styled(Calendar)`
   ${'.cost'} {
-    background-color: rgba(220, 220, 220, .5);
+    background-color: rgba(220, 220, 220, 0.5);
     border-radius: 20%;
   }
   ${'.income'} {
-    background-color: rgba(124, 252, 0, .5);
+    background-color: rgba(124, 252, 0, 0.5);
     border-radius: 20%;
   }
 `;

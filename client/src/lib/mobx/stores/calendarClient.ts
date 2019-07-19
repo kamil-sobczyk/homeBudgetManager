@@ -30,6 +30,8 @@ export class CalendarClient {
     );
 
     this.calendarViewDate = calendarViewDate;
+    // console.log(date)
+    // console.log(this.calendarViewDate)
     return this.calendarViewDate;
   };
 }

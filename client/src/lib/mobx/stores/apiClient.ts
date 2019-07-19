@@ -9,11 +9,12 @@ import { observable } from 'mobx';
 
 // const server = 'http://localhost:8081/';
 
-export const sortCostsOrIncomes = (costs: Cost[] | Income[]): Cost[] | Income[] => {
-  console.log(new Date(costs[1].date));
-  return costs
+export const sortCostsOrIncomes = (
+  costs: Cost[] | Income[]
+): Cost[] | Income[] =>
+  costs
     .sort(
-      (a: Cost | Income, b: Cost | Income): any => {
+      (a: Cost | Income, b: Cost | Income): number => {
         const aDateParts = a.date.split('/');
         const bDateParts = b.date.split('/');
 
@@ -23,7 +24,7 @@ export const sortCostsOrIncomes = (costs: Cost[] | Income[]): Cost[] | Income[] 
         const bDateObject = new Date(
           `${bDateParts[1]}/${bDateParts[0]}/${bDateParts[2]}`
         );
- 
+
         return aDateObject > bDateObject
           ? -1
           : aDateObject < bDateObject
@@ -32,7 +33,6 @@ export const sortCostsOrIncomes = (costs: Cost[] | Income[]): Cost[] | Income[] 
       }
     )
     .reverse();
-};
 
 interface Headers {
   token: string;
@@ -83,7 +83,8 @@ export class ApiClient {
       url: server + 'store/costs',
       headers: this.headers
     }).then(
-      costs => (this.store.costs = sortCostsOrIncomes(costs.data).reverse() as Cost[])
+      costs =>
+        (this.store.costs = sortCostsOrIncomes(costs.data).reverse() as Cost[])
     );
 
   getIncomes = async (): Promise<Income[]> =>
