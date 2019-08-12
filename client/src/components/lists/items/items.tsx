@@ -58,7 +58,7 @@ export class Items extends React.Component<ItemsProps, {}> {
 }
 
 export const StyledContainer = styled.div`
-  min-height: 200px;
+  min-height: 400px;
   min-width: 150px;
   width: ${(props: StyledContainerProps) => props.showItems ? "50vw" : "100vw"};
   margin: 5px;
