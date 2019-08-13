@@ -168,11 +168,11 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
 
 export const StyledCalendar = styled(Calendar)`
   ${'.cost'} {
-    background-color: rgba(110, 110, 110, 0.5);
+    background-color: rgba(110, 110, 110, 0.2);
     border-radius: 20%;
   }
   ${'.income'} {
-    background-color: rgba(124, 252, 0, 0.5);
+    background-color: rgba(124, 252, 0, 0.2);
     border-radius: 20%;
   }
 `;
