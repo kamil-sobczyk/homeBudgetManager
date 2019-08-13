@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { Cost } from '../../../lib/interfaces';
-
 import { observer } from 'mobx-react';
+
+import { Cost, Income } from '../../../lib/interfaces';
 
 import Calendar from 'react-calendar';
 
@@ -29,18 +29,22 @@ interface CalendarDialogProps {
   datePicked: string | Date;
   calendarViewDate: string;
   costs: Cost[];
+  getIncomes: () => void;
+  incomes: Income[];
 }
+
+type TileClass = 'cost' | 'income' | null;
 
 @observer
 export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   @observable daysVisible: string[] = [];
 
   componentDidMount = () => {
-    const { getCosts, getCalendarViewDate } = this.props;
+    const { getCosts, getIncomes, getCalendarViewDate } = this.props;
 
     getCosts();
+    getIncomes();
     getCalendarViewDate(new Date());
-    // console.log(getCalendarViewDate(new Date()))
   };
 
   handleClickMore = () => {
@@ -53,21 +57,23 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   };
 
   countTileStyle = (date: Date, view: string) => {
-    const { calendarViewDate, getCalendarViewDate } = this.props;
-
-    // console.log("countDaysWithExp",this.countDaysWithExpenses());
-    // console.log("date.getDate",date.getDate());
-    // console.log('calendarViewDate',calendarViewDate[4])
-    // console.log('getCalendarViewDate(date)',getCalendarViewDate(date)[4])
+    const { calendarViewDate } = this.props;
 
     if (view === 'month') {
       if (
-        // this.countDaysWithExpenses().indexOf(date.getDate()) > -1 
-        // &&
-        calendarViewDate.slice(3, 4) === getCalendarViewDate(date).slice(3, 4)
+        this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
+        String(date.toLocaleString('en-GB')).slice(3, 5) ===
+          calendarViewDate.slice(3, 5)
       ) {
         return 'cost';
-      } else return 'income';
+      }
+      if (
+        this.countDaysWithIncomes().indexOf(date.getDate()) > -1 &&
+        String(date.toLocaleString('en-GB')).slice(3, 5) ===
+          calendarViewDate.slice(3, 5)
+      ) {
+        return 'income';
+      } else return null;
     } else return null;
   };
 
@@ -75,13 +81,28 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     const { calendarViewDate, costs } = this.props;
 
     let daysWithExpenses: number[] = costs
-      .filter(cost => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5))
-      .map(cost => parseInt(cost.date.slice(0, 2)));
-
-      // console.log(daysWithExpenses)
+      .filter(
+        (cost: Cost) => cost.date.slice(3, 5) === calendarViewDate.slice(3, 5)
+      )
+      .map((cost: Cost) => parseInt(cost.date.slice(0, 2)));
 
     return daysWithExpenses.filter(
-      (day, index) => daysWithExpenses.indexOf(day) === index
+      (day: number, index: number) => daysWithExpenses.indexOf(day) === index
+    );
+  };
+
+  countDaysWithIncomes = () => {
+    const { calendarViewDate, incomes } = this.props;
+
+    let daysWithIncomes: number[] = incomes
+      .filter(
+        (income: Income) =>
+          income.date.slice(3, 5) === calendarViewDate.slice(3, 5)
+      )
+      .map((income: Income) => parseInt(income.date.slice(0, 2)));
+
+    return daysWithIncomes.filter(
+      (day: number, index: number) => daysWithIncomes.indexOf(day) === index
     );
   };
 
@@ -107,18 +128,12 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
           <StyledDialogTitle>Calendar</StyledDialogTitle>
           <DialogContent>
             <StyledCalendar
-              onClickDay={(value: Date) => setDatePicked(value)}
-              onActiveDateChange={({ activeStartDate }) =>{
-                console.log(activeStartDate)
+              onClickDay={(value: Date): string => setDatePicked(value)}
+              onActiveDateChange={({ activeStartDate }) =>
                 getCalendarViewDate(activeStartDate)
               }
-            
-              }
-              tileClassName={({ date, view }): any =>{
-                // console.log(date)
+              tileClassName={({ date, view }): TileClass =>
                 this.countTileStyle(date, view)
-              }
-         
               }
             />
           </DialogContent>
@@ -153,7 +168,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
 
 export const StyledCalendar = styled(Calendar)`
   ${'.cost'} {
-    background-color: rgba(220, 220, 220, 0.5);
+    background-color: rgba(110, 110, 110, 0.5);
     border-radius: 20%;
   }
   ${'.income'} {

@@ -12,7 +12,7 @@ export class CalendarClient {
   @observable daysWithExpenses: number[] = [];
 
   setDatePicked = (date?: Date): string => {
-    if(date){
+    if (date) {
       let dayString: string = String(date.toLocaleString('en-GB')).slice(0, 10);
 
       this.datePicked = dayString;
@@ -30,8 +30,7 @@ export class CalendarClient {
     );
 
     this.calendarViewDate = calendarViewDate;
-    // console.log(date)
-    // console.log(this.calendarViewDate)
+
     return this.calendarViewDate;
   };
 }

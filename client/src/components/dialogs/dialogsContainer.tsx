@@ -148,6 +148,8 @@ export const DialogsContainer = observer(
           setDatePicked={calendarClient.setDatePicked}
           calendarViewDate={calendarClient.calendarViewDate}
           setChosenCost={shoppingClient.setChosenCost}
+          getIncomes={apiClient.getIncomes}
+          incomes={incomes}
         />
       )}
       {visibleDialog.includes('CalendarAddDayCostDialog') && (
