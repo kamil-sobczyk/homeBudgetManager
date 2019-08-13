@@ -22,19 +22,25 @@ interface ProvidedItemsProps {
 @observer
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   @observable text = '';
-  
+
   setText = (e: any) => {
-    this.text = e.target.value
-  }
+    this.text = e.target.value;
+  };
 
   render() {
     const { provided, setVisibleDialog, items, setActiveItem } = this.props;
 
-    const displayedItems = items.filter((item: Item) => item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase()))
+    const displayedItems = items.filter((item: Item) =>
+      item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
+    );
 
     return (
       <List innerRef={provided.innerRef}>
-        <TextField fullwidth placeholder='Type item name' onChange={(e) => this.setText(e)}/>
+        <TextField
+          fullwidth
+          placeholder='Type item name'
+          onChange={e => this.setText(e)}
+        />
         {displayedItems.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable2 => (
