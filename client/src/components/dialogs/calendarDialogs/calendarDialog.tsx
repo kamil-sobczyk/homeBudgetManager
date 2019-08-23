@@ -58,15 +58,17 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   countTileStyle = (date: Date, view: string) => {
     const { calendarViewDate } = this.props;
 
-    const isCost =
-      this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
+    const checkDay = (type: string): boolean =>
+      (type === 'cost'
+        ? this.countDaysWithExpenses()
+        : this.countDaysWithIncomes()
+      ).indexOf(date.getDate()) > -1 &&
       String(date.toLocaleString('en-GB')).slice(3, 5) ===
         calendarViewDate.slice(3, 5);
 
-    const isIncome =
-      this.countDaysWithIncomes().indexOf(date.getDate()) > -1 &&
-      String(date.toLocaleString('en-GB')).slice(3, 5) ===
-        calendarViewDate.slice(3, 5);
+    const isCost = checkDay('cost');
+
+    const isIncome = checkDay('income');
 
     const isCostAndIncome = isCost && isIncome;
 
@@ -187,7 +189,6 @@ export const StyledCalendar = styled(Calendar)`
       rgba(169, 169, 169, 0.4) 35%,
       rgba(124, 252, 0, 0.4) 65%
     );
-
     border-radius: 20%;
   }
 `;
