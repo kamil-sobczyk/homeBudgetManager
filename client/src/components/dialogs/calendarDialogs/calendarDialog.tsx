@@ -15,7 +15,6 @@ import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { FailSnackbar } from './snackbar';
 import { CalendarDialogDay } from './calendarDialogDay';
 import { observable } from 'mobx';
-import { getDateNow } from '../expensesDialogs/spendingsTable/costsCounter';
 
 interface CalendarDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -33,7 +32,7 @@ interface CalendarDialogProps {
   incomes: Income[];
 }
 
-type TileClass = 'cost' | 'income' | null;
+type TileClass = 'cost' | 'income' | 'cost-income' | null;
 
 @observer
 export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
@@ -59,19 +58,26 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
   countTileStyle = (date: Date, view: string) => {
     const { calendarViewDate } = this.props;
 
+    const isCost =
+      this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
+      String(date.toLocaleString('en-GB')).slice(3, 5) ===
+        calendarViewDate.slice(3, 5);
+
+    const isIncome =
+      this.countDaysWithIncomes().indexOf(date.getDate()) > -1 &&
+      String(date.toLocaleString('en-GB')).slice(3, 5) ===
+        calendarViewDate.slice(3, 5);
+
+    const isCostAndIncome = isCost && isIncome;
+
     if (view === 'month') {
-      if (
-        this.countDaysWithExpenses().indexOf(date.getDate()) > -1 &&
-        String(date.toLocaleString('en-GB')).slice(3, 5) ===
-          calendarViewDate.slice(3, 5)
-      ) {
+      if (isCostAndIncome) {
+        return 'cost-income';
+      }
+      if (isCost) {
         return 'cost';
       }
-      if (
-        this.countDaysWithIncomes().indexOf(date.getDate()) > -1 &&
-        String(date.toLocaleString('en-GB')).slice(3, 5) ===
-          calendarViewDate.slice(3, 5)
-      ) {
+      if (isIncome) {
         return 'income';
       } else return null;
     } else return null;
@@ -173,6 +179,15 @@ export const StyledCalendar = styled(Calendar)`
   }
   ${'.income'} {
     background-color: rgba(124, 252, 0, 0.2);
+    border-radius: 20%;
+  }
+  ${'.cost-income'} {
+    background: linear-gradient(
+      153deg,
+      rgba(169, 169, 169, 0.4) 35%,
+      rgba(124, 252, 0, 0.4) 65%
+    );
+
     border-radius: 20%;
   }
 `;
