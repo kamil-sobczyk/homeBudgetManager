@@ -12,6 +12,22 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
+import { SortingMenu } from '../sortingMenu';
+
+export const getCategories = (items: Item[]): string[] => {
+  const itemsCategories: string[] = [
+    'Any',
+    ...items.map((item: Item) => {
+      if (item.category) {
+        return item.category;
+      } else return 'Others';
+    })
+  ];
+
+  return itemsCategories.filter(
+    (item: string, index: number) => itemsCategories.indexOf(item) === index
+  );
+};
 
 interface ItemsProps {
   getItems: () => void;
@@ -23,7 +39,7 @@ interface ItemsProps {
 }
 
 interface StyledContainerProps {
-  showItems: boolean
+  showItems: boolean;
 }
 
 @observer
@@ -31,16 +47,20 @@ export class Items extends React.Component<ItemsProps, {}> {
   componentDidMount = () => {
     this.props.getItems();
   };
+
   render() {
     const { items, setVisibleDialog, setActiveItem } = this.props;
 
     return (
       <StyledContainer showItems={true}>
         <StyledButtonsContainer>
-          <StyledAddShoppingItemIconButton
-            onClick={() => setVisibleDialog('AddShoppingItemDialog')}
-            icon={{ icon: 'add_circle', size: 'xlarge' }}
-          />
+          <StyledListButtonsContainer>
+            <StyledAddShoppingItemIconButton
+              onClick={() => setVisibleDialog('AddShoppingItemDialog')}
+              icon={{ icon: 'add_circle', size: 'xlarge' }}
+            />
+            <SortingMenu categories={getCategories(items)} />
+          </StyledListButtonsContainer>
         </StyledButtonsContainer>
         <Droppable droppableId='droppable2'>
           {providedDroppable2 => (
@@ -60,11 +80,20 @@ export class Items extends React.Component<ItemsProps, {}> {
 export const StyledContainer = styled.div`
   min-height: 400px;
   min-width: 150px;
-  width: ${(props: StyledContainerProps) => props.showItems ? "50vw" : "100vw"};
+  width: ${(props: StyledContainerProps) =>
+    props.showItems ? '50vw' : '100vw'};
   margin: 5px;
 `;
 
 const StyledAddShoppingItemIconButton = styled(IconButton)`
   color: #4cad4f;
-  padding: 0;
+  padding: 0 0 0 20px;
+`;
+
+export const StyledListButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;

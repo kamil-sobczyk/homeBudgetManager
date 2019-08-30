@@ -10,6 +10,7 @@ export type IncomeCategoryType =
   | 'social benefit';
 
 export interface Item {
+  category?: string;
   name: string;
   checked: boolean;
   id: string;

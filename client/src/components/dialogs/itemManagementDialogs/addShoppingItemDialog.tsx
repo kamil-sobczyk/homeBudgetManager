@@ -5,10 +5,13 @@ import { observer } from 'mobx-react';
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
+import { Select } from '@rmwc/select';
 
 import { Item } from '../../../lib/interfaces';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
+
+const selectValues = ['Vegetables', 'Fruits', 'dairy']
 
 interface AddShoppingItemDialogProps {
   AddShoppingItem: () => void;
@@ -33,6 +36,7 @@ export const AddShoppingItemDialog = observer(
         label='New item'
         name='name'
         onChange={e => changeNewItem(e)}
+        required
       />
       <TextField
         defaultValue={''}
@@ -40,6 +44,12 @@ export const AddShoppingItemDialog = observer(
         name='info'
         onChange={e => changeNewItem(e)}
       />
+      <Select
+      label='Category'
+      onChange={e => changeNewItem(e)}
+      options={selectValues}
+      required
+    />
       <DialogActions>
         <Button color='primary' onClick={() => setVisibleDialog()}>
           Cancel
