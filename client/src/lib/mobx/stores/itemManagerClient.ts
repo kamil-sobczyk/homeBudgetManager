@@ -14,8 +14,20 @@ export class ItemManagerClient {
   }
 
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
-  @observable newItem: Item = { name: '', info: '', id: '', checked: false };
-  @observable oldItem: Item = { name: '', info: '', id: '', checked: false };
+  @observable newItem: Item = {
+    name: '',
+    info: '',
+    id: '',
+    checked: false,
+    category: ''
+  };
+  @observable oldItem: Item = {
+    name: '',
+    info: '',
+    id: '',
+    checked: false,
+    category: ''
+  };
 
   @computed get currentList(): Item[] | undefined {
     switch (this.activeItem.list) {
@@ -44,6 +56,21 @@ export class ItemManagerClient {
     return undefined;
   }
 
+  getCategories = (): string[] => {
+    const itemsCategories: string[] = [
+      'Any',
+      ...this.store.items.map((item: Item) => {
+        if (item.category) {
+          return item.category;
+        } else return 'Others';
+      })
+    ];
+
+    return itemsCategories.filter(
+      (item: string, index: number) => itemsCategories.indexOf(item) === index
+    );
+  };
+
   setOldItem = (): void => {
     this.oldItem =
       this.activeItem.list === 'items'
@@ -59,15 +86,32 @@ export class ItemManagerClient {
         checked: false,
         id: String(Date.now()),
         info: target.value,
-        name: this.newItem.name
+        name: this.newItem.name,
+        category: this.newItem.category
       };
-      return;
     } else if (target.name === 'name') {
       this.newItem = {
         checked: false,
         id: String(Date.now()),
         info: this.newItem.info,
-        name: target.value
+        name: target.value,
+        category: this.newItem.category
+      };
+    } else if (target.name === 'category' && target.value !== 'New category') {
+      this.newItem = {
+        checked: false,
+        id: String(Date.now()),
+        info: this.newItem.info,
+        name: this.newItem.name,
+        category: target.value
+      };
+    } else if (target.name === 'newCat') {
+      this.newItem = {
+        checked: false,
+        id: String(Date.now()),
+        info: this.newItem.info,
+        name: this.newItem.name,
+        category: target.value
       };
     }
   };

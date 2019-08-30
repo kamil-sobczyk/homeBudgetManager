@@ -13,27 +13,14 @@ import { Droppable } from 'react-beautiful-dnd';
 import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { SortingMenu } from '../sortingMenu';
-
-export const getCategories = (items: Item[]): string[] => {
-  const itemsCategories: string[] = [
-    'Any',
-    ...items.map((item: Item) => {
-      if (item.category) {
-        return item.category;
-      } else return 'Others';
-    })
-  ];
-
-  return itemsCategories.filter(
-    (item: string, index: number) => itemsCategories.indexOf(item) === index
-  );
-};
+import { observable } from 'mobx';
 
 interface ItemsProps {
   getItems: () => void;
   deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  getCategories: () => string[];
   showItems: boolean;
   items: Item[];
 }
@@ -44,12 +31,28 @@ interface StyledContainerProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
+  @observable chosenCategory: string = '';
+
   componentDidMount = () => {
     this.props.getItems();
   };
 
+  categorizeItems = (category: string): void => {
+    this.chosenCategory = category;
+    this.forceUpdate();
+  };
+
+  getCategorizedItems = () => {
+    const { items } = this.props;
+    if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
+      return items.filter(
+        (item: Item) => item.category === this.chosenCategory
+      );
+    } else return items;
+  };
+
   render() {
-    const { items, setVisibleDialog, setActiveItem } = this.props;
+    const { setVisibleDialog, setActiveItem, getCategories } = this.props;
 
     return (
       <StyledContainer showItems={true}>
@@ -59,7 +62,10 @@ export class Items extends React.Component<ItemsProps, {}> {
               onClick={() => setVisibleDialog('AddShoppingItemDialog')}
               icon={{ icon: 'add_circle', size: 'xlarge' }}
             />
-            <SortingMenu categories={getCategories(items)} />
+            <SortingMenu
+              categories={getCategories()}
+              categorizeItems={this.categorizeItems}
+            />
           </StyledListButtonsContainer>
         </StyledButtonsContainer>
         <Droppable droppableId='droppable2'>
@@ -67,7 +73,7 @@ export class Items extends React.Component<ItemsProps, {}> {
             <ProvidedItems
               setActiveItem={setActiveItem}
               setVisibleDialog={setVisibleDialog}
-              items={items}
+              items={this.getCategorizedItems()}
               provided={providedDroppable2}
             />
           )}
@@ -87,13 +93,13 @@ export const StyledContainer = styled.div`
 
 const StyledAddShoppingItemIconButton = styled(IconButton)`
   color: #4cad4f;
-  padding: 0 0 0 20px;
+  padding: 0;
 `;
 
 export const StyledListButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
 `;

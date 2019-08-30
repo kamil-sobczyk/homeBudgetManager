@@ -63,6 +63,7 @@ export const DialogsContainer = observer(
           changeNewItem={itemManagerClient.changeNewItem}
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
+          getCategories={itemManagerClient.getCategories}
         />
       )}
       {visibleDialog === 'EditItemDialog' && (

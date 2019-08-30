@@ -20,6 +20,7 @@ interface ListsContainerProps {
   setActiveItem: (list: ListType, index: number) => void;
   deleteItem: (name: string) => Item[];
   setVisibleDialog: (dialog?: string) => void;
+  getCategories: () => string[];
   visibleDialog: string;
   selected: Item[];
   items: Item[];
@@ -38,6 +39,7 @@ export const ListsContainer = observer(
     toggleCheckItems,
     deleteItem,
     items,
+    getCategories,
     setVisibleDialog
   }: ListsContainerProps) => (
     <>
@@ -54,10 +56,12 @@ export const ListsContainer = observer(
               items={items}
               getItems={getItems}
               showItems={showItems}
+              getCategories={getCategories}
             />
           )}
           <Selected
             setVisibleDialog={setVisibleDialog}
+            getCategories={getCategories}
             setActiveItem={setActiveItem}
             toggleCheckItems={toggleCheckItems}
             selected={selected}

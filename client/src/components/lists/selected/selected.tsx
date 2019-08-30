@@ -6,40 +6,66 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
-import { StyledContainer } from '../items/items';
+import { StyledContainer, StyledListButtonsContainer } from '../items/items';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { IconButton } from '@rmwc/icon-button';
 import styled from 'styled-components';
+import { SortingMenu } from '../sortingMenu';
+import { observable } from 'mobx';
 
 interface SelectedProps {
   getSelected: () => void;
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
+  getCategories: () => string[];
   showItems: boolean;
   selected: Item[];
 }
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
+  @observable chosenCategory: string = '';
+
   componentDidMount = () => {
     this.props.getSelected();
   };
+
+  categorizeItems = (category: string): void => {
+    this.chosenCategory = category;
+    this.forceUpdate();
+  };
+
+  getCategorizedItems = () => {
+    const { selected } = this.props;
+    if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
+      return selected.filter(
+        (item: Item) => item.category === this.chosenCategory
+      );
+    } else return selected;
+  };
+
   render() {
     const {
       setActiveItem,
       toggleCheckItems,
-      selected,
-      setVisibleDialog
+      setVisibleDialog,
+      getCategories
     } = this.props;
 
     return (
       <StyledContainer showItems>
         <StyledButtonsContainer>
-          <StyledFinishShoppingButton
-            onClick={() => setVisibleDialog('FinishShoppingDialog')}
-            icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
-          />
+          <StyledListButtonsContainer>
+            <StyledFinishShoppingButton
+              onClick={() => setVisibleDialog('FinishShoppingDialog')}
+              icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
+            />
+            <SortingMenu
+              categories={getCategories()}
+              categorizeItems={this.categorizeItems}
+            />
+          </StyledListButtonsContainer>
         </StyledButtonsContainer>
         <Droppable droppableId='droppable'>
           {provided => (
@@ -47,7 +73,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               setActiveItem={setActiveItem}
               toggleCheckItems={toggleCheckItems}
               setVisibleDialog={setVisibleDialog}
-              selected={selected}
+              selected={this.getCategorizedItems()}
               provided={provided}
             />
           )}

@@ -8,13 +8,9 @@ import { Button } from '@rmwc/button';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-// import { ListType } from '../../../lib/interfaces';
-
 interface SortingMenuProps {
   categories: string[];
-  // setVisibleDialog: (dialog?: string) => void;
-  // setActiveItem: (list: ListType, index: number) => void;
-  // index: number;
+  categorizeItems: (category: string) => void;
 }
 
 @observer
@@ -23,6 +19,7 @@ export class SortingMenu extends React.Component<SortingMenuProps, {}> {
 
   handleOptionClick = (category: string): any => {
     this.buttonText = category;
+    this.props.categorizeItems(category);
   };
 
   render() {
