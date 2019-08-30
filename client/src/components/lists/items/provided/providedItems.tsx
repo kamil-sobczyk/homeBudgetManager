@@ -30,8 +30,16 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   render() {
     const { provided, setVisibleDialog, items, setActiveItem } = this.props;
 
-    const displayedItems = items.filter((item: Item) =>
+    const sortedByName = items.filter((item: Item) =>
       item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
+    );
+    const sortedByCategory = items.filter((item: Item) =>
+      item.category!.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
+    );
+    const mergedSortedItems = [...sortedByName, ...sortedByCategory];
+    
+    const displayedItems = mergedSortedItems.filter(
+      (item: Item, index: number) => mergedSortedItems.indexOf(item) === index
     );
 
     return (
