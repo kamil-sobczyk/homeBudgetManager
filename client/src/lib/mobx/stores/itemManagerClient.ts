@@ -7,6 +7,18 @@ import { Item } from '../../interfaces';
 
 import { observable, action, computed } from 'mobx';
 
+const extractCategories = (items: Item[]) =>
+  items.map((item: Item) => {
+    if (item.category) {
+      return item.category;
+    } else return 'Others';
+  });
+
+const removeCategoryDuplicates = (categories: string[]) =>
+  categories.filter(
+    (item: string, index: number) => categories.indexOf(item) === index
+  );
+
 export class ItemManagerClient {
   store: Store;
   constructor(store: Store) {
@@ -27,6 +39,10 @@ export class ItemManagerClient {
     id: '',
     checked: false,
     category: ''
+  };
+
+  setItems = (items: Item[]) => {
+    this.store.categorizedItems = items;
   };
 
   @computed get currentList(): Item[] | undefined {
@@ -59,16 +75,11 @@ export class ItemManagerClient {
   getCategories = (): string[] => {
     const itemsCategories: string[] = [
       'Any',
-      ...this.store.items.map((item: Item) => {
-        if (item.category) {
-          return item.category;
-        } else return 'Others';
-      })
+      ...extractCategories(this.store.items),
+      ...extractCategories(this.store.selected)
     ];
 
-    return itemsCategories.filter(
-      (item: string, index: number) => itemsCategories.indexOf(item) === index
-    );
+    return removeCategoryDuplicates(itemsCategories);
   };
 
   setOldItem = (): void => {

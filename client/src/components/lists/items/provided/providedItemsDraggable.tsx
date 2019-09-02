@@ -39,6 +39,8 @@ export class ProvidedItemsDraggable extends React.Component<
       setActiveItem
     } = this.props;
 
+    console.log(item.name)
+
     return (
       <>
         <div

@@ -12,6 +12,9 @@ import { TextField } from '@rmwc/textfield';
 import { ProvidedItemsDraggable } from './providedItemsDraggable';
 import { observable } from 'mobx';
 
+const removeItemsDuplicates = (items: Item[]) =>
+  items.filter((item: Item, index: number) => items.indexOf(item) === index);
+
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
@@ -23,12 +26,13 @@ interface ProvidedItemsProps {
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   @observable text = '';
 
-  setText = (e: any) => {
-    this.text = e.target.value;
+  setText = (event: React.FormEvent<EventTarget>) => {
+    const target = event.target as HTMLInputElement;
+    this.text = target.value;
   };
 
-  render() {
-    const { provided, setVisibleDialog, items, setActiveItem } = this.props;
+  getDisplayedItems = () => {
+    const { items } = this.props;
 
     const sortedByName = items.filter((item: Item) =>
       item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
@@ -37,10 +41,28 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       item.category!.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
     );
     const mergedSortedItems = [...sortedByName, ...sortedByCategory];
-    
-    const displayedItems = mergedSortedItems.filter(
-      (item: Item, index: number) => mergedSortedItems.indexOf(item) === index
-    );
+
+    console.log(JSON.stringify(removeItemsDuplicates(mergedSortedItems)))
+
+    return removeItemsDuplicates(mergedSortedItems);
+  };
+
+  render() {
+    const { provided, setVisibleDialog, setActiveItem } = this.props;
+
+    const providedItems = this.getDisplayedItems().map((item: Item, index: number) => (
+      <Draggable key={item.id} draggableId={item.id} index={index}>
+        {providedDraggable2 => (
+          <ProvidedItemsDraggable
+            providedDraggable2={providedDraggable2}
+            setActiveItem={setActiveItem}
+            setVisibleDialog={setVisibleDialog}
+            item={item}
+            index={index}
+          />
+        )}
+      </Draggable>
+    ));
 
     return (
       <List innerRef={provided.innerRef}>
@@ -49,19 +71,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
           placeholder='Type item name'
           onChange={e => this.setText(e)}
         />
-        {displayedItems.map((item, index) => (
-          <Draggable key={item.id} draggableId={item.id} index={index}>
-            {providedDraggable2 => (
-              <ProvidedItemsDraggable
-                providedDraggable2={providedDraggable2}
-                setActiveItem={setActiveItem}
-                setVisibleDialog={setVisibleDialog}
-                item={item}
-                index={index}
-              />
-            )}
-          </Draggable>
-        ))}
+        {providedItems}
         {provided.placeholder}
       </List>
     );
@@ -70,5 +80,5 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
 
 export const List = styled.div`
   height: 100%;
-  min-width: 200px;
+  min-width: 180px;
 `;

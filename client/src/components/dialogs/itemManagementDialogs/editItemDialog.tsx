@@ -16,6 +16,7 @@ interface EditItemDialogProps {
   onChangeInfo: (info: string) => void;
   setOldItem: () => void;
   editItem: (newItem: Item) => void;
+  category: string;
   visibleDialog: string;
   name?: string;
   info?: string;
@@ -25,6 +26,7 @@ interface EditItemDialogProps {
 export class EditItemDialog extends React.Component<EditItemDialogProps, {}> {
   @observable name?: string = this.props.name;
   @observable info?: string = this.props.info;
+  @observable category?: string;
   @observable isNameChangeInitialized: boolean = false;
   @observable isInfoChangeInitialized: boolean = false;
 
@@ -64,6 +66,7 @@ export class EditItemDialog extends React.Component<EditItemDialogProps, {}> {
       name: this.name ? this.name : '',
       info: this.info ? this.info : '',
       id: String(new Date()),
+      category: this.category ? this.category : '',
       checked: false
     });
   };

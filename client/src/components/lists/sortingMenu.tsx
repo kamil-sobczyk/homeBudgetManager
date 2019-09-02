@@ -17,7 +17,7 @@ interface SortingMenuProps {
 export class SortingMenu extends React.Component<SortingMenuProps, {}> {
   @observable buttonText = 'category';
 
-  handleOptionClick = (category: string): any => {
+  handleOptionClick = (category: string): void => {
     this.buttonText = category;
     this.props.categorizeItems(category);
   };

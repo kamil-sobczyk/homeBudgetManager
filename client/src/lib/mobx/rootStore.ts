@@ -33,6 +33,7 @@ export class Store {
   }
 
   @observable items: Item[] = [];
+  @observable categorizedItems: Item[] = [];
   @observable selected: Item[] = [];
   @observable costs: Cost[] = [];
   @observable incomes: Income[] = [];
