@@ -18,7 +18,7 @@ import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerCl
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
-    'Any',
+    'All',
     ...items.map((item: Item) => {
   
       if (item && item.category) {
@@ -58,7 +58,7 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   getCategorizedItems = () => {
     const { items, getChosenCategory } = this.props;
-    if (getChosenCategory('items') !== 'Any') {
+    if (getChosenCategory('items') !== 'All') {
       return items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );

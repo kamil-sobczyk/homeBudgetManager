@@ -31,7 +31,7 @@ export const move = (
     (item: Item) => item.category !== chosenCategory
   );
 
-  if (chosenCategory !== 'Any') {
+  if (chosenCategory !== 'All') {
     sourceClone = Array.from(source).filter(
       (item: Item) => item.category === chosenCategory
     );

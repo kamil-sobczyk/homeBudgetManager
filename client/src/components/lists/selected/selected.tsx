@@ -41,7 +41,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
 
   getCategorizedItems = () => {
     const { selected, getChosenCategory } = this.props;
-    if (getChosenCategory('selected') !== 'Any') {
+    if (getChosenCategory('selected') !== 'All') {
       return selected.filter(
         (item: Item) => item.category === getChosenCategory('selected')
       );

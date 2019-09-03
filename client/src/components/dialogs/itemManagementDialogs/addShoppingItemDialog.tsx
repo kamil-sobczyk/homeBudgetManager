@@ -69,7 +69,7 @@ export class AddShoppingItemDialog extends React.Component<
             options={[
               'New category',
               ...getCategories().filter(
-                (category: string) => category !== 'Any'
+                (category: string) => category !== 'All'
               )
             ]}
             required

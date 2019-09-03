@@ -46,8 +46,8 @@ export class ItemManagerClient {
     category: ''
   };
   @observable chosenCategories: ChosenCategories = {
-    items: 'Any',
-    selected: 'Any'
+    items: 'All',
+    selected: 'All'
   };
 
   getChosenCategory = (list: ListType): string => this.chosenCategories[list];
@@ -58,7 +58,7 @@ export class ItemManagerClient {
 
   getCategories = (): string[] => {
     const itemsCategories: string[] = [
-      'Any',
+      'All',
       ...extractCategories(this.store.items),
       ...extractCategories(this.store.selected)
     ];
