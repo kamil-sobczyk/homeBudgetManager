@@ -29,7 +29,6 @@ export const ListBox = observer(({ store }: StoreProps) => {
         getSelected={apiClient.getSelected}
         items={items}
         selected={selected}
-        getCategories={itemManagerClient.getCategories}
         toggleShowItems={visibilityClient.toggleShowItems}
         toggleCheckItems={itemManagerClient.toggleCheckItems}
         showItems={visibilityClient.showItems}

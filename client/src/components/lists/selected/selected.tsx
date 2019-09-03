@@ -6,7 +6,11 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
-import { StyledContainer, StyledListButtonsContainer } from '../items/items';
+import {
+  StyledContainer,
+  StyledListButtonsContainer,
+  getCategories
+} from '../items/items';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { IconButton } from '@rmwc/icon-button';
 import styled from 'styled-components';
@@ -18,7 +22,6 @@ interface SelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
-  getCategories: () => string[];
   showItems: boolean;
   selected: Item[];
 }
@@ -50,7 +53,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setActiveItem,
       toggleCheckItems,
       setVisibleDialog,
-      getCategories
+      selected
     } = this.props;
 
     return (
@@ -62,7 +65,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
             />
             <SortingMenu
-              categories={getCategories()}
+              categories={getCategories(selected)}
               categorizeItems={this.categorizeItems}
             />
           </StyledListButtonsContainer>
