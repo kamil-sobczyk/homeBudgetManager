@@ -14,20 +14,20 @@ import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { SortingMenu } from '../sortingMenu';
 import { observable } from 'mobx';
+import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
     'Any',
     ...items.map((item: Item) => {
-      if (item.category) {
+  
+      if (item && item.category) {
         return item.category;
       } else return 'Others';
     })
   ];
 
-  return itemsCategories.filter(
-    (item: string, index: number) => itemsCategories.indexOf(item) === index
-  );
+  return removeCategoryDuplicates(itemsCategories);
 };
 
 interface ItemsProps {
@@ -35,6 +35,8 @@ interface ItemsProps {
   deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  getChosenCategory: (list: ListType) => string;
+  setChosenCategory: (list: ListType, category: string) => void;
   showItems: boolean;
   items: Item[];
 }
@@ -52,15 +54,15 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
 
   categorizeItems = (category: string): void => {
-    this.chosenCategory = category;
+    this.props.setChosenCategory('items', category);
     this.forceUpdate();
   };
 
   getCategorizedItems = () => {
-    const { items } = this.props;
-    if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
+    const { items, getChosenCategory } = this.props;
+    if (getChosenCategory('items') !== 'Any') {
       return items.filter(
-        (item: Item) => item.category === this.chosenCategory
+        (item: Item) => item.category === getChosenCategory('items')
       );
     } else return items;
   };

@@ -22,6 +22,8 @@ interface SelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
+  getChosenCategory: (list: ListType) => string;
+  setChosenCategory: (list: ListType, category: string) => void;
   showItems: boolean;
   selected: Item[];
 }
@@ -35,15 +37,15 @@ export class Selected extends React.Component<SelectedProps, {}> {
   };
 
   categorizeItems = (category: string): void => {
-    this.chosenCategory = category;
+    this.props.setChosenCategory('selected', category);
     this.forceUpdate();
   };
 
   getCategorizedItems = () => {
-    const { selected } = this.props;
-    if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
+    const { selected, getChosenCategory } = this.props;
+    if (getChosenCategory('selected') !== 'Any') {
       return selected.filter(
-        (item: Item) => item.category === this.chosenCategory
+        (item: Item) => item.category === getChosenCategory('selected')
       );
     } else return selected;
   };
