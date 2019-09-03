@@ -34,7 +34,12 @@ export class Store {
 
   @observable items: Item[] = [];
   @observable categorizedItems: Item[] = [];
+  @observable itemsCategorized: boolean = false;
   @observable selected: Item[] = [];
+  @observable selectedCategorized: boolean = false;
   @observable costs: Cost[] = [];
   @observable incomes: Income[] = [];
+
+  setItemsCategorized = (value: boolean): boolean =>
+    (this.itemsCategorized = value);
 }

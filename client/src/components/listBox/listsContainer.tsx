@@ -22,6 +22,7 @@ interface ListsContainerProps {
   setVisibleDialog: (dialog?: string) => void;
   getCategories: () => string[];
   setItems: (items: Item[]) => void;
+  setItemsCategorized: (value: boolean) => boolean;
   visibleDialog: string;
   selected: Item[];
   items: Item[];
@@ -44,7 +45,8 @@ export const ListsContainer = observer(
     categorizedItems,
     getCategories,
     setVisibleDialog,
-    setItems
+    setItems,
+    setItemsCategorized
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
@@ -63,6 +65,7 @@ export const ListsContainer = observer(
               showItems={showItems}
               getCategories={getCategories}
               categorizedItems={categorizedItems}
+              setItemsCategorized={setItemsCategorized}
             />
           )}
           <Selected

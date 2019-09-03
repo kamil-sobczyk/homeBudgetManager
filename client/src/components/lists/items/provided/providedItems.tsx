@@ -42,7 +42,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
     );
     const mergedSortedItems = [...sortedByName, ...sortedByCategory];
 
-    console.log(JSON.stringify(removeItemsDuplicates(mergedSortedItems)))
+    // console.log(JSON.stringify(removeItemsDuplicates(mergedSortedItems)))
 
     return removeItemsDuplicates(mergedSortedItems);
   };
@@ -51,7 +51,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
     const { provided, setVisibleDialog, setActiveItem } = this.props;
 
     const providedItems = this.getDisplayedItems().map((item: Item, index: number) => (
-      <Draggable key={item.id} draggableId={item.id} index={index}>
+      <Draggable key={item.id} draggableId={item.name} index={index}>
         {providedDraggable2 => (
           <ProvidedItemsDraggable
             providedDraggable2={providedDraggable2}

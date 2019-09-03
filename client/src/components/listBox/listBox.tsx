@@ -20,7 +20,8 @@ export const ListBox = observer(({ store }: StoreProps) => {
     dndClient,
     calendarClient,
     costManagerClient,
-    incomesManagerClient
+    incomesManagerClient,
+    setItemsCategorized
   } = store;
   return (
     <>
@@ -40,6 +41,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         setVisibleDialog={visibilityClient.setVisibleDialog}
         visibleDialog={visibilityClient.visibleDialog}
         setItems={itemManagerClient.setItems}
+        setItemsCategorized={setItemsCategorized}
       />
       <DialogsContainer
         costs={costs}

@@ -22,6 +22,7 @@ interface ItemsProps {
   setActiveItem: (list: ListType, index: number) => void;
   getCategories: () => string[];
   setItems: (items: Item[]) => void;
+  setItemsCategorized: (value: boolean) => boolean;
   showItems: boolean;
   categorizedItems: Item[];
   items: Item[];
@@ -33,7 +34,6 @@ interface StyledContainerProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
-  @observable categorized: boolean = false;
   @observable chosenCategory: string = '';
   @observable categorizedItems: Item[] = this.props.items;
 
@@ -42,23 +42,25 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
 
   categorizeItems = (category: string): void => {
+    const {setItems, setItemsCategorized} = this.props;
     this.chosenCategory = category;
-    this.props.setItems(this.getCategorizedItems());
-    this.categorized = true;
+    setItems(this.getCategorizedItems());
+    setItemsCategorized(true);
     // this.forceUpdate();
   };
 
   getCategorizedItems = () => {
-    const { items, setItems } = this.props;
+    const { items, setItems, setItemsCategorized } = this.props;
     if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
-      // this.props.getItems();
-      return items.filter(
+      const categorizedItems = items.filter(
         (item: Item) => item.category === this.chosenCategory
       );
+      setItems(categorizedItems)
+      setItemsCategorized(true);
+      return categorizedItems;
     }
     if (this.chosenCategory === 'Any' || this.chosenCategory === '') {
-      this.categorized = false;
-      // this.props.getItems();
+      setItemsCategorized(false);
       return items;
     } else return items;
   };
@@ -91,7 +93,7 @@ export class Items extends React.Component<ItemsProps, {}> {
             <ProvidedItems
               setActiveItem={setActiveItem}
               setVisibleDialog={setVisibleDialog}
-              items={this.categorized ? categorizedItems : items}
+              items={this.getCategorizedItems()}
               provided={providedDroppable2}
             />
           )}

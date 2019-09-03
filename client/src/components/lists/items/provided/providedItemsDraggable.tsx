@@ -39,8 +39,6 @@ export class ProvidedItemsDraggable extends React.Component<
       setActiveItem
     } = this.props;
 
-    console.log(item.name)
-
     return (
       <>
         <div
@@ -48,7 +46,7 @@ export class ProvidedItemsDraggable extends React.Component<
           {...providedDraggable2.draggableProps}
           {...providedDraggable2.dragHandleProps}
         >
-          <StyledItem key={index}>
+          <StyledItem key={item.name}>
             <MoreMenu
               index={index}
               setVisibleDialog={setVisibleDialog}

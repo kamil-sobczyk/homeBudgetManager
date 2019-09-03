@@ -21,6 +21,9 @@ export const move = (
 ) => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
+
+  console.log(JSON.stringify(source));
+  console.log(JSON.stringify(destination));
   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
   destClone.splice(droppableDestination.index, 0, removed);

@@ -26,8 +26,9 @@ export class DnDClient {
       this.store.items = reorderedList;
     }
   };
-  
+
   onDragEnd = (result: DropResult): void => {
+    console.log(JSON.stringify(this.store.categorizedItems));
     const { source, destination } = result;
     const { reorderItemsOnServer } = this.store.apiClient;
 
@@ -48,8 +49,9 @@ export class DnDClient {
       }
     } else {
       const result = move(
-        
-        this.getDndList(source.droppableId),
+        this.store.itemsCategorized
+          ? this.store.categorizedItems
+          : this.getDndList(source.droppableId),
         this.getDndList(destination.droppableId),
         source,
         destination
