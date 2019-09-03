@@ -23,8 +23,9 @@ interface ProvidedItemsProps {
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   @observable text = '';
 
-  setText = (e: any) => {
-    this.text = e.target.value;
+  setText = (event: React.FormEvent<EventTarget>) => {
+    const target = event.target as HTMLInputElement;
+    this.text = target.value;
   };
 
   render() {
@@ -37,7 +38,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       item.category!.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
     );
     const mergedSortedItems = [...sortedByName, ...sortedByCategory];
-    
+
     const displayedItems = mergedSortedItems.filter(
       (item: Item, index: number) => mergedSortedItems.indexOf(item) === index
     );
