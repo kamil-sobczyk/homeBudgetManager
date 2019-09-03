@@ -53,6 +53,8 @@ export class DnDClient {
   onDragEnd = (result: DropResult): void => {
     const { source, destination } = result;
     const { reorderItemsOnServer } = this.store.apiClient;
+    const sourceListName =
+      source.droppableId === 'droppable2' ? 'items' : 'selected';
 
     if (!destination) {
       return;
@@ -70,9 +72,6 @@ export class DnDClient {
         reorderItemsOnServer(this.store.items, this.store.selected);
       }
     } else {
-      const sourceListName =
-        source.droppableId === 'droppable2' ? 'items' : 'selected';
-
       const result = move(
         this.getDndList(source.droppableId),
         this.getDndList(destination.droppableId),
@@ -81,11 +80,7 @@ export class DnDClient {
         this.store.itemManagerClient.chosenCategories[sourceListName]
       );
 
-      if (result.droppable) {
-        result.droppable.forEach(
-          (item: Item): boolean => (item.checked = false)
-        );
-      }
+      result.droppable.forEach((item: Item): boolean => (item.checked = false));
 
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);

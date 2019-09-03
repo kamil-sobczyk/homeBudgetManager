@@ -47,8 +47,6 @@ interface StyledContainerProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
-  @observable chosenCategory: string = '';
-
   componentDidMount = () => {
     this.props.getItems();
   };

@@ -30,8 +30,6 @@ interface SelectedProps {
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
-  @observable chosenCategory: string = '';
-
   componentDidMount = () => {
     this.props.getSelected();
   };
