@@ -120,7 +120,7 @@ export class ItemManagerClient {
   };
 
   updateCurrentItemInfo = (info: string): void => {
-    const { list, index } = this.activeItem;
+    const { index } = this.activeItem;
 
     if (this.currentList && this.currentList[index]) {
       this.currentList[this.activeItem.index].info = info;

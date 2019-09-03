@@ -30,6 +30,8 @@ interface SelectedProps {
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
+  @observable isCategorized: boolean = false;
+
   componentDidMount = () => {
     this.props.getSelected();
   };
@@ -42,10 +44,14 @@ export class Selected extends React.Component<SelectedProps, {}> {
   getCategorizedItems = () => {
     const { selected, getChosenCategory } = this.props;
     if (getChosenCategory('selected') !== 'All') {
+      this.isCategorized = true;
       return selected.filter(
         (item: Item) => item.category === getChosenCategory('selected')
       );
-    } else return selected;
+    } else {
+      this.isCategorized = false;
+      return selected;
+    }
   };
 
   render() {
@@ -78,6 +84,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               setVisibleDialog={setVisibleDialog}
               selected={this.getCategorizedItems()}
               provided={provided}
+              isCategorized={this.isCategorized}
             />
           )}
         </Droppable>

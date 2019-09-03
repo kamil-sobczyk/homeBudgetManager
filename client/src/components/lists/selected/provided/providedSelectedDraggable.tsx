@@ -23,6 +23,7 @@ interface ProvidedSelectedDraggableProps {
   toggleCheckItems: (list: ListType, index: number) => any;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
+  isCategorized: boolean;
   selected: Item[];
   providedDraggable: DraggableProvided;
   item: Item;
@@ -48,7 +49,8 @@ export class ProvidedSelectedDraggable extends React.Component<
       toggleCheckItems,
       providedDraggable,
       item,
-      index
+      index,
+      isCategorized
     } = this.props;
 
     return (
@@ -69,11 +71,13 @@ export class ProvidedSelectedDraggable extends React.Component<
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
             </StyledTextContainer>
-            <StyledEditButton
-              icon='edit'
-              aria-label='Edit item'
-              onClick={e => this.toggleEditItem(e)}
-            />
+            {!isCategorized && (
+              <StyledEditButton
+                icon='edit'
+                aria-label='Edit item'
+                onClick={e => this.toggleEditItem(e)}
+              />
+            )}
           </StyledItem>
           <ListDivider />
         </div>

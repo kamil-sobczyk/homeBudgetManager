@@ -47,6 +47,8 @@ interface StyledContainerProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
+  @observable isCategorized: boolean = false;
+
   componentDidMount = () => {
     this.props.getItems();
   };
@@ -59,10 +61,14 @@ export class Items extends React.Component<ItemsProps, {}> {
   getCategorizedItems = () => {
     const { items, getChosenCategory } = this.props;
     if (getChosenCategory('items') !== 'All') {
+      this.isCategorized = true;
       return items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
-    } else return items;
+    } else{
+      this.isCategorized = false;
+      return items;
+    } 
   };
 
   render() {
@@ -89,6 +95,7 @@ export class Items extends React.Component<ItemsProps, {}> {
               setVisibleDialog={setVisibleDialog}
               items={this.getCategorizedItems()}
               provided={providedDroppable2}
+              isCategorized={this.isCategorized}
             />
           )}
         </Droppable>

@@ -15,6 +15,7 @@ import { observable } from 'mobx';
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  isCategorized: boolean;
   items: Item[];
   provided: DroppableProvided;
 }
@@ -29,7 +30,13 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   };
 
   render() {
-    const { provided, setVisibleDialog, items, setActiveItem } = this.props;
+    const {
+      provided,
+      setVisibleDialog,
+      items,
+      setActiveItem,
+      isCategorized
+    } = this.props;
 
     const sortedByName = items.filter((item: Item) =>
       item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
@@ -57,6 +64,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
                 providedDraggable2={providedDraggable2}
                 setActiveItem={setActiveItem}
                 setVisibleDialog={setVisibleDialog}
+                isCategorized={isCategorized}
                 item={item}
                 index={index}
               />

@@ -12,6 +12,7 @@ interface ProvidedSelectedProps {
   toggleCheckItems: (list: ListType, index: number) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
+  isCategorized: boolean;
   selected: Item[];
   provided: DroppableProvided;
 }
@@ -27,7 +28,8 @@ export class ProvidedSelected extends React.Component<
       provided,
       toggleCheckItems,
       setActiveItem,
-      setVisibleDialog
+      setVisibleDialog,
+      isCategorized
     } = this.props;
 
     return (
@@ -44,6 +46,7 @@ export class ProvidedSelected extends React.Component<
                 setVisibleDialog={setVisibleDialog}
                 selected={selected}
                 providedDraggable={providedDraggable}
+                isCategorized={isCategorized}
                 item={item}
                 index={index}
               />
