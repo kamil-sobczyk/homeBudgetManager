@@ -15,12 +15,26 @@ import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { SortingMenu } from '../sortingMenu';
 import { observable } from 'mobx';
 
+export const getCategories = (items: Item[]): string[] => {
+  const itemsCategories: string[] = [
+    'Any',
+    ...items.map((item: Item) => {
+      if (item.category) {
+        return item.category;
+      } else return 'Others';
+    })
+  ];
+
+  return itemsCategories.filter(
+    (item: string, index: number) => itemsCategories.indexOf(item) === index
+  );
+};
+
 interface ItemsProps {
   getItems: () => void;
   deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
-  getCategories: () => string[];
   showItems: boolean;
   items: Item[];
 }
@@ -52,7 +66,7 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
 
   render() {
-    const { setVisibleDialog, setActiveItem, getCategories } = this.props;
+    const { setVisibleDialog, setActiveItem, items } = this.props;
 
     return (
       <StyledContainer showItems={true}>
@@ -63,7 +77,7 @@ export class Items extends React.Component<ItemsProps, {}> {
               icon={{ icon: 'add_circle', size: 'xlarge' }}
             />
             <SortingMenu
-              categories={getCategories()}
+              categories={getCategories(items)}
               categorizeItems={this.categorizeItems}
             />
           </StyledListButtonsContainer>

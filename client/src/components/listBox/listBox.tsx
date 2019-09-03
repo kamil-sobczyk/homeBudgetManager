@@ -5,7 +5,6 @@ import { StoreProps } from '../../lib/interfaces';
 
 import { ListsContainer } from './listsContainer';
 import { DialogsContainer } from '../dialogs/dialogsContainer';
-import { CostManagerClient } from '../../lib/mobx/stores/costManagerClient';
 
 export const ListBox = observer(({ store }: StoreProps) => {
   const {
@@ -37,6 +36,8 @@ export const ListBox = observer(({ store }: StoreProps) => {
         onDragEnd={dndClient.onDragEnd}
         setVisibleDialog={visibilityClient.setVisibleDialog}
         visibleDialog={visibilityClient.visibleDialog}
+        getChosenCategory={itemManagerClient.getChosenCategory}
+        setChosenCategory={itemManagerClient.setChosenCategory}
       />
       <DialogsContainer
         costs={costs}

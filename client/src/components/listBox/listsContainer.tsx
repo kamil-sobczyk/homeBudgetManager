@@ -20,6 +20,8 @@ interface ListsContainerProps {
   setActiveItem: (list: ListType, index: number) => void;
   deleteItem: (name: string) => Item[];
   setVisibleDialog: (dialog?: string) => void;
+  getChosenCategory: (list: ListType) => string;
+  setChosenCategory: (list: ListType, category: string) => void;
   visibleDialog: string;
   selected: Item[];
   items: Item[];
@@ -38,7 +40,9 @@ export const ListsContainer = observer(
     toggleCheckItems,
     deleteItem,
     items,
-    setVisibleDialog
+    setVisibleDialog,
+    getChosenCategory,
+    setChosenCategory
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
@@ -50,6 +54,8 @@ export const ListsContainer = observer(
             <Items
               setActiveItem={setActiveItem}
               setVisibleDialog={setVisibleDialog}
+              getChosenCategory={getChosenCategory}
+              setChosenCategory={setChosenCategory}
               deleteItem={deleteItem}
               items={items}
               getItems={getItems}
@@ -59,6 +65,8 @@ export const ListsContainer = observer(
           <Selected
             setVisibleDialog={setVisibleDialog}
             setActiveItem={setActiveItem}
+            getChosenCategory={getChosenCategory}
+            setChosenCategory={setChosenCategory}
             toggleCheckItems={toggleCheckItems}
             selected={selected}
             getSelected={getSelected}
