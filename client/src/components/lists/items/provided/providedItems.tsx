@@ -17,9 +17,9 @@ const removeItemsDuplicates = (items: Item[]) =>
 
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
-  setActiveItem: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, id: string) => void;
+  areItemsEditable: boolean;
   searchBarVisible: boolean;
-  isCategorized: boolean;
   items: Item[];
   provided: DroppableProvided;
 }
@@ -39,8 +39,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       setVisibleDialog,
       items,
       setActiveItem,
-      isCategorized,
-      searchBarVisible
+      searchBarVisible,
+      areItemsEditable
     } = this.props;
 
     const sortedByName = items.filter((item: Item) =>
@@ -70,7 +70,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
                 providedDraggable2={providedDraggable2}
                 setActiveItem={setActiveItem}
                 setVisibleDialog={setVisibleDialog}
-                isCategorized={isCategorized}
+                areItemsEditable={areItemsEditable}
                 item={item}
                 index={index}
               />

@@ -21,9 +21,9 @@ import { StyledEditButton } from '../../items/moreMenu';
 
 interface ProvidedSelectedDraggableProps {
   toggleCheckItems: (list: ListType, id: string) => any;
-  setActiveItem: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, id: string) => void;
   setVisibleDialog: (dialog?: string) => void;
-  isCategorized: boolean;
+  areItemsEditable: boolean;
   selected: Item[];
   providedDraggable: DraggableProvided;
   item: Item;
@@ -36,9 +36,9 @@ export class ProvidedSelectedDraggable extends React.Component<
   {}
 > {
   toggleEditItem = (event: React.MouseEvent<any, MouseEvent>): void => {
-    const { setActiveItem, setVisibleDialog, index } = this.props;
+    const { setActiveItem, setVisibleDialog, item } = this.props;
 
-    setActiveItem('selected', index);
+    setActiveItem('selected', item.id);
     setVisibleDialog('EditItemDialog');
     event.stopPropagation();
   };
@@ -50,7 +50,7 @@ export class ProvidedSelectedDraggable extends React.Component<
       providedDraggable,
       item,
       index,
-      isCategorized
+      areItemsEditable
     } = this.props;
 
     return (
@@ -71,7 +71,7 @@ export class ProvidedSelectedDraggable extends React.Component<
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
             </StyledTextContainer>
-            {!isCategorized && (
+            {areItemsEditable && (
               <StyledEditButton
                 icon='edit'
                 aria-label='Edit item'

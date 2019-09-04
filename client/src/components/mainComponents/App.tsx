@@ -31,11 +31,14 @@ export class App extends React.Component<{}, {}> {
     }
 
     const {
-      toggleShowDrawer,
-      showDrawer,
-      setVisibleDialog,
-      visibleDialog
-    } = this.store.visibilityClient;
+      visibilityClient: {
+        toggleShowDrawer,
+        showDrawer,
+        setVisibleDialog,
+        visibleDialog
+      },
+      itemManagerClient: { toggleEditItems }
+    } = this.store;
 
     if (localStorage.id) {
       return (
@@ -45,6 +48,7 @@ export class App extends React.Component<{}, {}> {
               toggleShowDrawer={toggleShowDrawer}
               showDrawer={showDrawer}
               setVisibleDialog={setVisibleDialog}
+              toggleEditItems={toggleEditItems}
             />
             <ListBox store={this.store} />
           </Container>

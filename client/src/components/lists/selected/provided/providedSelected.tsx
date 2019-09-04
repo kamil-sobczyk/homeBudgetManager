@@ -10,9 +10,9 @@ import { List } from '../../items/provided/providedItems';
 
 interface ProvidedSelectedProps {
   toggleCheckItems: (list: ListType, id: string) => void;
-  setActiveItem: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, id: string) => void;
   setVisibleDialog: (dialog?: string) => void;
-  isCategorized: boolean;
+  areItemsEditable: boolean;
   selected: Item[];
   provided: DroppableProvided;
 }
@@ -29,14 +29,11 @@ export class ProvidedSelected extends React.Component<
       toggleCheckItems,
       setActiveItem,
       setVisibleDialog,
-      isCategorized
+      areItemsEditable
     } = this.props;
 
     return (
-      <List
-        innerRef={provided.innerRef}
-        {...provided.droppableProps}
-      >
+      <List innerRef={provided.innerRef} {...provided.droppableProps}>
         {selected.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable => (
@@ -46,7 +43,7 @@ export class ProvidedSelected extends React.Component<
                 setVisibleDialog={setVisibleDialog}
                 selected={selected}
                 providedDraggable={providedDraggable}
-                isCategorized={isCategorized}
+                areItemsEditable={areItemsEditable}
                 item={item}
                 index={index}
               />

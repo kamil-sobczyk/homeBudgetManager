@@ -41,6 +41,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         visibleDialog={visibilityClient.visibleDialog}
         getChosenCategory={itemManagerClient.getChosenCategory}
         setChosenCategory={itemManagerClient.setChosenCategory}
+        areItemsEditable={itemManagerClient.areItemsEditable}
       />
       <DialogsContainer
         costs={costs}

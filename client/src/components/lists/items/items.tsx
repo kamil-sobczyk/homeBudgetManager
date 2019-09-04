@@ -34,11 +34,11 @@ interface ItemsProps {
   getItems: () => void;
   deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => void;
-  setActiveItem: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, id: string) => void;
   getChosenCategory: (list: ListType) => string;
   setChosenCategory: (list: ListType, category: string) => void;
+  areItemsEditable: boolean;
   showItems: boolean;
-  categorizedItems: Item[];
   items: Item[];
 }
 
@@ -48,7 +48,6 @@ interface StyledContainerProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
-  @observable isCategorized: boolean = false;
   @observable searchBarVisible: boolean = false;
 
   componentDidMount = () => {
@@ -69,18 +68,21 @@ export class Items extends React.Component<ItemsProps, {}> {
     const { items, getChosenCategory } = this.props;
 
     if (getChosenCategory('items') !== 'All') {
-      this.isCategorized = true;
       return items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
     } else {
-      this.isCategorized = false;
       return items;
     }
   };
 
   render() {
-    const { setVisibleDialog, setActiveItem, items } = this.props;
+    const {
+      setVisibleDialog,
+      setActiveItem,
+      items,
+      areItemsEditable
+    } = this.props;
 
     return (
       <StyledContainer showItems={true}>
@@ -107,8 +109,8 @@ export class Items extends React.Component<ItemsProps, {}> {
               setVisibleDialog={setVisibleDialog}
               items={this.getCategorizedItems()}
               provided={providedDroppable2}
-              isCategorized={this.isCategorized}
               searchBarVisible={this.searchBarVisible}
+              areItemsEditable={areItemsEditable}
             />
           )}
         </Droppable>

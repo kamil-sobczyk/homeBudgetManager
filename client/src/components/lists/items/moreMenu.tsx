@@ -6,19 +6,19 @@ import { SimpleMenu } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
-import { ListType } from '../../../lib/interfaces';
+import { ListType, Item } from '../../../lib/interfaces';
 
 interface MoreMenuProps {
   setVisibleDialog: (dialog?: string) => void;
-  setActiveItem: (list: ListType, index: number) => void;
-  index: number;
+  setActiveItem: (list: ListType, id: string) => void;
+  item: Item;
 }
 
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
   handleOptionClick = (action: string): void => {
-    const { setVisibleDialog, index, setActiveItem } = this.props;
+    const { setVisibleDialog, item, setActiveItem } = this.props;
 
-    setActiveItem('items', index);
+    setActiveItem('items', item.id);
 
     action === 'edit'
       ? setVisibleDialog('EditItemDialog')

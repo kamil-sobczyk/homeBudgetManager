@@ -20,18 +20,17 @@ import { observable } from 'mobx';
 interface SelectedProps {
   getSelected: () => void;
   toggleCheckItems: (list: ListType, id: string) => void;
-  setActiveItem: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, id: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   getChosenCategory: (list: ListType) => string;
   setChosenCategory: (list: ListType, category: string) => void;
+  areItemsEditable: boolean;
   showItems: boolean;
   selected: Item[];
 }
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
-  @observable isCategorized: boolean = false;
-
   componentDidMount = () => {
     this.props.getSelected();
   };
@@ -44,12 +43,10 @@ export class Selected extends React.Component<SelectedProps, {}> {
   getCategorizedItems = () => {
     const { selected, getChosenCategory } = this.props;
     if (getChosenCategory('selected') !== 'All') {
-      this.isCategorized = true;
       return selected.filter(
         (item: Item) => item.category === getChosenCategory('selected')
       );
     } else {
-      this.isCategorized = false;
       return selected;
     }
   };
@@ -59,7 +56,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setActiveItem,
       toggleCheckItems,
       setVisibleDialog,
-      selected
+      selected,
+      areItemsEditable
     } = this.props;
 
     return (
@@ -84,7 +82,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               setVisibleDialog={setVisibleDialog}
               selected={this.getCategorizedItems()}
               provided={provided}
-              isCategorized={this.isCategorized}
+              areItemsEditable={areItemsEditable}
             />
           )}
         </Droppable>

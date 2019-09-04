@@ -31,6 +31,7 @@ export class ItemManagerClient {
   }
 
   @observable activeItem: ActiveItem = { list: 'items', index: 0 };
+  @observable areItemsEditable = true;
   @observable newItem: Item = {
     name: '',
     info: '',
@@ -48,6 +49,10 @@ export class ItemManagerClient {
   @observable chosenCategories: ChosenCategories = {
     items: 'All',
     selected: 'All'
+  };
+
+  toggleEditItems = (): void => {
+    this.areItemsEditable = !this.areItemsEditable;
   };
 
   getChosenCategory = (list: ListType): string => this.chosenCategories[list];
@@ -127,7 +132,9 @@ export class ItemManagerClient {
     }
   };
 
-  @action setActiveItem = (list: ListType, index: number): void => {
+  @action setActiveItem = (list: ListType, id: string): void => {
+    const index = this.getIndexById(list, id);
+
     this.setOldItem();
     this.activeItem.index = index;
     this.activeItem.list = list;
@@ -186,7 +193,7 @@ export class ItemManagerClient {
   toggleCheckItems = (list: ListType, id: string): void => {
     const index = this.getIndexById(list, id);
 
-    this.setActiveItem(list, index);
+    this.setActiveItem(list, id);
     this.store.selected[index].checked = !this.store.selected[index].checked;
 
     this.store.apiClient.checkItemOnServer(this.store.selected[index]);

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { List, ListItem } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
-const drawerItems = [
+const drawerVisibleItems = [
   {
     action: 'AddShoppingItemDialog',
     icon: 'add_circle',
@@ -46,28 +46,41 @@ const drawerItems = [
 
 interface DrawerItemsProps {
   setVisibleDialog: (dialog?: string) => void;
+  toggleEditItems: () => void;
 }
 
 export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
   render() {
-    const { setVisibleDialog } = this.props;
-    return (
-      <List>
-        {drawerItems.map(item => (
-          <StyledDrawerItemContainer
-            key={item.action}
-            onClick={() => setVisibleDialog(item.action)}
-          >
-            <StyledDrawerIconButton
-              icon={item.icon}
-              style={{ color: item.iconColor }}
-            />
-            <ListItem>{item.title}</ListItem>
-            <StyledDrawerEmptyItem />
-          </StyledDrawerItemContainer>
-        ))}
-      </List>
+    const { setVisibleDialog, toggleEditItems } = this.props;
+
+    let drawerItems = drawerVisibleItems.map(item => (
+      <StyledDrawerItemContainer
+        key={item.action}
+        onClick={() => setVisibleDialog(item.action)}
+      >
+        <StyledDrawerIconButton
+          icon={item.icon}
+          style={{ color: item.iconColor }}
+        />
+        <ListItem>{item.title}</ListItem>
+        <StyledDrawerEmptyItem />
+      </StyledDrawerItemContainer>
+    ));
+
+    const toggleEditItem = (
+      <StyledDrawerItemContainer
+        key={'toggleItemKey'}
+        onClick={() => toggleEditItems()}
+      >
+        <StyledDrawerIconButton icon={'edit'} style={{ color: 'black' }} />
+        <ListItem>Toggle edit items</ListItem>
+        <StyledDrawerEmptyItem />
+      </StyledDrawerItemContainer>
     );
+
+    drawerItems.splice(4, 0, toggleEditItem);
+
+    return <List>{drawerItems}</List>;
   }
 }
 

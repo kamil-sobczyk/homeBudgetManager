@@ -17,11 +17,12 @@ interface ListsContainerProps {
   toggleCheckItems: (list: ListType, id: string) => void;
   toggleShowItems: () => void;
   onDragEnd: (result: DropResult) => void;
-  setActiveItem: (list: ListType, index: number) => void;
+  setActiveItem: (list: ListType, id: string) => void;
   deleteItem: (name: string) => Item[];
   setVisibleDialog: (dialog?: string) => void;
   getChosenCategory: (list: ListType) => string;
   setChosenCategory: (list: ListType, category: string) => void;
+  areItemsEditable: boolean;
   visibleDialog: string;
   selected: Item[];
   items: Item[];
@@ -43,7 +44,8 @@ export const ListsContainer = observer(
     items,
     setVisibleDialog,
     getChosenCategory,
-    setChosenCategory
+    setChosenCategory,
+    areItemsEditable
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
@@ -61,6 +63,7 @@ export const ListsContainer = observer(
               items={items}
               getItems={getItems}
               showItems={showItems}
+              areItemsEditable={areItemsEditable}
             />
           )}
           <Selected
@@ -72,6 +75,7 @@ export const ListsContainer = observer(
             selected={selected}
             getSelected={getSelected}
             showItems={showItems}
+            areItemsEditable={areItemsEditable}
           />
         </DragDropContext>
       </StyledListContainer>
