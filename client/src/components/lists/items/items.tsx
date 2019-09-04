@@ -54,10 +54,11 @@ export class Items extends React.Component<ItemsProps, {}> {
     this.props.getItems();
   };
 
-  toggleSearchBar = () => {this.searchBarVisible = !this.searchBarVisible;
+  toggleSearchBar = () => {
+    this.searchBarVisible = !this.searchBarVisible;
     this.forceUpdate();
-  console.log('items', this.searchBarVisible)
-  }
+  };
+
   categorizeItems = (category: string): void => {
     this.props.setChosenCategory('items', category);
     this.forceUpdate();
@@ -65,6 +66,7 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   getCategorizedItems = () => {
     const { items, getChosenCategory } = this.props;
+    
     if (getChosenCategory('items') !== 'All') {
       this.isCategorized = true;
       return items.filter(
