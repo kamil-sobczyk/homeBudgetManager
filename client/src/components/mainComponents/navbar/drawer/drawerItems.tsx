@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+
 import styled from 'styled-components';
 
 import { List, ListItem } from '@rmwc/list';
@@ -49,9 +52,22 @@ interface DrawerItemsProps {
   toggleEditItems: () => void;
 }
 
+@observer
 export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
+  @observable text: string = 'Turn editing off';
+
+  toggleEditing = () => {
+    this.props.toggleEditItems();
+
+    if (this.text === 'Turn editing off') {
+      this.text = 'Turn editing on';
+    } else if (this.text === 'Turn editing on') {
+      this.text = 'Turn editing off';
+    }
+  };
+
   render() {
-    const { setVisibleDialog, toggleEditItems } = this.props;
+    const { setVisibleDialog } = this.props;
 
     let drawerItems = drawerVisibleItems.map(item => (
       <StyledDrawerItemContainer
@@ -70,10 +86,10 @@ export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
     const toggleEditItem = (
       <StyledDrawerItemContainer
         key={'toggleItemKey'}
-        onClick={() => toggleEditItems()}
+        onClick={this.toggleEditing}
       >
         <StyledDrawerIconButton icon={'edit'} style={{ color: 'black' }} />
-        <ListItem>Toggle edit items</ListItem>
+        <ListItem>{this.text}</ListItem>
         <StyledDrawerEmptyItem />
       </StyledDrawerItemContainer>
     );

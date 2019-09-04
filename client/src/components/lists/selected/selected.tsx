@@ -6,16 +6,15 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
-import {
-  StyledContainer,
-  StyledListButtonsContainer,
-  getCategories
-} from '../items/items';
+import { StyledListButtonsContainer, getCategories } from '../items/items';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { IconButton } from '@rmwc/icon-button';
 import styled from 'styled-components';
 import { SortingMenu } from '../sortingMenu';
-import { observable } from 'mobx';
+
+interface StyledContainerProps {
+  showItems?: boolean;
+}
 
 interface SelectedProps {
   getSelected: () => void;
@@ -74,7 +73,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
             />
           </StyledListButtonsContainer>
         </StyledButtonsContainer>
-        <Droppable droppableId='droppable'>
+        <StyledDroppable droppableId='droppable'>
           {provided => (
             <ProvidedSelected
               setActiveItem={setActiveItem}
@@ -85,13 +84,25 @@ export class Selected extends React.Component<SelectedProps, {}> {
               areItemsEditable={areItemsEditable}
             />
           )}
-        </Droppable>
+        </StyledDroppable>
       </StyledContainer>
     );
   }
 }
 
+export const StyledContainer = styled.div`
+  min-height: 400px;
+  min-width: 150px;
+  width: ${(props: StyledContainerProps) =>
+    props.showItems ? '80vw' : '50vw'};
+  margin: 5px;
+`;
+
 const StyledFinishShoppingButton = styled(IconButton)`
   color: #0d49aa;
   padding: 0;
 `;
+
+const StyledDroppable = styled(Droppable)`
+width: 100%;
+`

@@ -16,6 +16,7 @@ import { SortingMenu } from '../sortingMenu';
 import { observable } from 'mobx';
 import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
 import { TextField } from '@rmwc/textfield';
+import { StyledContainer } from '../selected/selected';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
@@ -40,10 +41,6 @@ interface ItemsProps {
   areItemsEditable: boolean;
   showItems: boolean;
   items: Item[];
-}
-
-interface StyledContainerProps {
-  showItems: boolean;
 }
 
 @observer
@@ -81,11 +78,12 @@ export class Items extends React.Component<ItemsProps, {}> {
       setVisibleDialog,
       setActiveItem,
       items,
-      areItemsEditable
+      areItemsEditable,
+      showItems
     } = this.props;
 
     return (
-      <StyledContainer showItems={true}>
+      <StyledContainer showItems>
         <StyledButtonsContainer>
           <StyledListButtonsContainer>
             <StyledAddShoppingItemIconButton
@@ -118,14 +116,6 @@ export class Items extends React.Component<ItemsProps, {}> {
     );
   }
 }
-
-export const StyledContainer = styled.div`
-  min-height: 400px;
-  min-width: 150px;
-  width: ${(props: StyledContainerProps) =>
-    props.showItems ? '50vw' : '100vw'};
-  margin: 5px;
-`;
 
 const StyledAddShoppingItemIconButton = styled(IconButton)`
   color: #4cad4f;

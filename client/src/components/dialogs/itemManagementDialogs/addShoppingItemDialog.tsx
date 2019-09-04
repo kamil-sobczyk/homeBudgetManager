@@ -81,6 +81,7 @@ export class AddShoppingItemDialog extends React.Component<
             label='New category'
             name='newCat'
             onChange={e => changeNewItem(e)}
+            required
           />
         )}
         <DialogActions>
