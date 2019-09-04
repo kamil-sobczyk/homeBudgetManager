@@ -15,6 +15,7 @@ import { observable } from 'mobx';
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  searchBarVisible: boolean;
   isCategorized: boolean;
   items: Item[];
   provided: DroppableProvided;
@@ -35,7 +36,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       setVisibleDialog,
       items,
       setActiveItem,
-      isCategorized
+      isCategorized,
+      searchBarVisible
     } = this.props;
 
     const sortedByName = items.filter((item: Item) =>
@@ -52,11 +54,12 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
 
     return (
       <List innerRef={provided.innerRef}>
-        <TextField
-          fullwidth
-          placeholder='Type item name'
-          onChange={e => this.setText(e)}
-        />
+        {searchBarVisible && (
+          <StyledSearchBar
+            placeholder='Type item name'
+            onChange={e => this.setText(e)}
+          />
+        )}
         {displayedItems.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {providedDraggable2 => (
@@ -80,4 +83,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
 export const List = styled.div`
   height: 100%;
   min-width: 200px;
+`;
+
+const StyledSearchBar = styled(TextField)`
+  width: 100%;
 `;

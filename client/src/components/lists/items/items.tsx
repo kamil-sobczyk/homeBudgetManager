@@ -15,12 +15,12 @@ import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { SortingMenu } from '../sortingMenu';
 import { observable } from 'mobx';
 import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
+import { TextField } from '@rmwc/textfield';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
     'All',
     ...items.map((item: Item) => {
-  
       if (item && item.category) {
         return item.category;
       } else return 'Others';
@@ -48,11 +48,16 @@ interface StyledContainerProps {
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
   @observable isCategorized: boolean = false;
+  @observable searchBarVisible: boolean = false;
 
   componentDidMount = () => {
     this.props.getItems();
   };
 
+  toggleSearchBar = () => {this.searchBarVisible = !this.searchBarVisible;
+    this.forceUpdate();
+  console.log('items', this.searchBarVisible)
+  }
   categorizeItems = (category: string): void => {
     this.props.setChosenCategory('items', category);
     this.forceUpdate();
@@ -65,10 +70,10 @@ export class Items extends React.Component<ItemsProps, {}> {
       return items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
-    } else{
+    } else {
       this.isCategorized = false;
       return items;
-    } 
+    }
   };
 
   render() {
@@ -81,6 +86,10 @@ export class Items extends React.Component<ItemsProps, {}> {
             <StyledAddShoppingItemIconButton
               onClick={() => setVisibleDialog('AddShoppingItemDialog')}
               icon={{ icon: 'add_circle', size: 'xlarge' }}
+            />
+            <StyledSearchButton
+              icon={{ icon: 'search', size: 'xlarge' }}
+              onClick={() => this.toggleSearchBar()}
             />
             <SortingMenu
               categories={getCategories(items)}
@@ -96,6 +105,7 @@ export class Items extends React.Component<ItemsProps, {}> {
               items={this.getCategorizedItems()}
               provided={providedDroppable2}
               isCategorized={this.isCategorized}
+              searchBarVisible={this.searchBarVisible}
             />
           )}
         </Droppable>
@@ -117,10 +127,19 @@ const StyledAddShoppingItemIconButton = styled(IconButton)`
   padding: 0;
 `;
 
+const StyledSearchButton = styled(IconButton)`
+  padding: 0;
+  color: darkblue;
+`;
+
 export const StyledListButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+`;
+
+const StyledTextField = styled(TextField)`
+  max-width: 30%;
 `;
