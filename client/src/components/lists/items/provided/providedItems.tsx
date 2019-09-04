@@ -18,6 +18,8 @@ const removeItemsDuplicates = (items: Item[]) =>
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  searchBarVisible: boolean;
+  isCategorized: boolean;
   items: Item[];
   provided: DroppableProvided;
 }
@@ -31,8 +33,15 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
     this.text = target.value;
   };
 
-  getDisplayedItems = () => {
-    const { items } = this.props;
+  render() {
+    const {
+      provided,
+      setVisibleDialog,
+      items,
+      setActiveItem,
+      isCategorized,
+      searchBarVisible
+    } = this.props;
 
     const sortedByName = items.filter((item: Item) =>
       item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
@@ -42,36 +51,32 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
     );
     const mergedSortedItems = [...sortedByName, ...sortedByCategory];
 
-    // console.log(JSON.stringify(removeItemsDuplicates(mergedSortedItems)))
-
-    return removeItemsDuplicates(mergedSortedItems);
-  };
-
-  render() {
-    const { provided, setVisibleDialog, setActiveItem } = this.props;
-
-    const providedItems = this.getDisplayedItems().map((item: Item, index: number) => (
-      <Draggable key={item.id} draggableId={item.name} index={index}>
-        {providedDraggable2 => (
-          <ProvidedItemsDraggable
-            providedDraggable2={providedDraggable2}
-            setActiveItem={setActiveItem}
-            setVisibleDialog={setVisibleDialog}
-            item={item}
-            index={index}
-          />
-        )}
-      </Draggable>
-    ));
+    const displayedItems = mergedSortedItems.filter(
+      (item: Item, index: number) => mergedSortedItems.indexOf(item) === index
+    );
 
     return (
       <List innerRef={provided.innerRef}>
-        <TextField
-          fullwidth
-          placeholder='Type item name'
-          onChange={e => this.setText(e)}
-        />
-        {providedItems}
+        {searchBarVisible && (
+          <StyledSearchBar
+            placeholder='Type item name'
+            onChange={e => this.setText(e)}
+          />
+        )}
+        {displayedItems.map((item, index) => (
+          <Draggable key={item.id} draggableId={item.id} index={index}>
+            {providedDraggable2 => (
+              <ProvidedItemsDraggable
+                providedDraggable2={providedDraggable2}
+                setActiveItem={setActiveItem}
+                setVisibleDialog={setVisibleDialog}
+                isCategorized={isCategorized}
+                item={item}
+                index={index}
+              />
+            )}
+          </Draggable>
+        ))}
         {provided.placeholder}
       </List>
     );
@@ -81,4 +86,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
 export const List = styled.div`
   height: 100%;
   min-width: 180px;
+`;
+
+const StyledSearchBar = styled(TextField)`
+  width: 100%;
 `;

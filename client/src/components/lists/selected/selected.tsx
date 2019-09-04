@@ -6,7 +6,11 @@ import { Item, ListType, Cost } from '../../../lib/interfaces';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedSelected } from './provided/providedSelected';
-import { StyledContainer, StyledListButtonsContainer } from '../items/items';
+import {
+  StyledContainer,
+  StyledListButtonsContainer,
+  getCategories
+} from '../items/items';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { IconButton } from '@rmwc/icon-button';
 import styled from 'styled-components';
@@ -15,34 +19,39 @@ import { observable } from 'mobx';
 
 interface SelectedProps {
   getSelected: () => void;
-  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, id: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
-  getCategories: () => string[];
+  getChosenCategory: (list: ListType) => string;
+  setChosenCategory: (list: ListType, category: string) => void;
   showItems: boolean;
   selected: Item[];
 }
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
-  @observable chosenCategory: string = '';
+  @observable isCategorized: boolean = false;
 
   componentDidMount = () => {
     this.props.getSelected();
   };
 
   categorizeItems = (category: string): void => {
-    this.chosenCategory = category;
+    this.props.setChosenCategory('selected', category);
     this.forceUpdate();
   };
 
   getCategorizedItems = () => {
-    const { selected } = this.props;
-    if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
+    const { selected, getChosenCategory } = this.props;
+    if (getChosenCategory('selected') !== 'All') {
+      this.isCategorized = true;
       return selected.filter(
-        (item: Item) => item.category === this.chosenCategory
+        (item: Item) => item.category === getChosenCategory('selected')
       );
-    } else return selected;
+    } else {
+      this.isCategorized = false;
+      return selected;
+    }
   };
 
   render() {
@@ -50,7 +59,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setActiveItem,
       toggleCheckItems,
       setVisibleDialog,
-      getCategories
+      selected
     } = this.props;
 
     return (
@@ -62,7 +71,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
             />
             <SortingMenu
-              categories={getCategories()}
+              categories={getCategories(selected)}
               categorizeItems={this.categorizeItems}
             />
           </StyledListButtonsContainer>
@@ -75,6 +84,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               setVisibleDialog={setVisibleDialog}
               selected={this.getCategorizedItems()}
               provided={provided}
+              isCategorized={this.isCategorized}
             />
           )}
         </Droppable>

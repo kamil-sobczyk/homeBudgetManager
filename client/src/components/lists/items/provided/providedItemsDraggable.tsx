@@ -20,6 +20,7 @@ import { MoreMenu } from '../moreMenu';
 interface ProvidedItemsDraggableProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
+  isCategorized: boolean;
   providedDraggable2: DraggableProvided;
   item: Item;
   index: number;
@@ -36,7 +37,8 @@ export class ProvidedItemsDraggable extends React.Component<
       providedDraggable2,
       item,
       index,
-      setActiveItem
+      setActiveItem,
+      isCategorized
     } = this.props;
 
     return (
@@ -46,12 +48,14 @@ export class ProvidedItemsDraggable extends React.Component<
           {...providedDraggable2.draggableProps}
           {...providedDraggable2.dragHandleProps}
         >
-          <StyledItem key={item.name}>
-            <MoreMenu
-              index={index}
-              setVisibleDialog={setVisibleDialog}
-              setActiveItem={setActiveItem}
-            />
+          <StyledItem key={index}>
+            {!isCategorized && (
+              <MoreMenu
+                index={index}
+                setVisibleDialog={setVisibleDialog}
+                setActiveItem={setActiveItem}
+              />
+            )}
             <StyledTextContainer>
               <ListItemText>
                 <ListItemPrimaryText>{item.name}</ListItemPrimaryText>

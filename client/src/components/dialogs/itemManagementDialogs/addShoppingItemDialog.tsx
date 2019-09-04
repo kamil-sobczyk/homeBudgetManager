@@ -31,7 +31,7 @@ export class AddShoppingItemDialog extends React.Component<
 
   handleOptionClick = (event: React.FormEvent<EventTarget>) => {
     const target = event.target as HTMLInputElement;
-    
+
     this.chosenCategory = target.value;
     this.props.changeNewItem(event);
   };
@@ -61,13 +61,20 @@ export class AddShoppingItemDialog extends React.Component<
           name='info'
           onChange={e => changeNewItem(e)}
         />
-        <Select
-          label='Category'
-          onChange={e => this.handleOptionClick(e)}
-          name='category'
-          options={['New category', ...getCategories()]}
-          required
-        />
+        {this.chosenCategory !== 'New category' && (
+          <Select
+            label='Category'
+            onChange={e => this.handleOptionClick(e)}
+            name='category'
+            options={[
+              'New category',
+              ...getCategories().filter(
+                (category: string) => category !== 'All'
+              )
+            ]}
+            required
+          />
+        )}
         {this.chosenCategory === 'New category' && (
           <TextField
             defaultValue={''}

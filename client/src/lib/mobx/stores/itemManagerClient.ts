@@ -9,15 +9,20 @@ import { observable, action, computed } from 'mobx';
 
 const extractCategories = (items: Item[]) =>
   items.map((item: Item) => {
-    if (item.category) {
+    if (item && item.category) {
       return item.category;
     } else return 'Others';
   });
 
-const removeCategoryDuplicates = (categories: string[]) =>
+export const removeCategoryDuplicates = (categories: string[]) =>
   categories.filter(
     (item: string, index: number) => categories.indexOf(item) === index
   );
+
+interface ChosenCategories {
+  items: string;
+  selected: string;
+}
 
 export class ItemManagerClient {
   store: Store;
@@ -40,41 +45,20 @@ export class ItemManagerClient {
     checked: false,
     category: ''
   };
-
-  setItems = (items: Item[]) => {
-    this.store.categorizedItems = items;
+  @observable chosenCategories: ChosenCategories = {
+    items: 'All',
+    selected: 'All'
   };
 
-  @computed get currentList(): Item[] | undefined {
-    switch (this.activeItem.list) {
-      case 'items':
-        return this.store.items;
-      case 'selected':
-        return this.store.selected;
-      default:
-        return undefined;
-    }
-  }
+  getChosenCategory = (list: ListType): string => this.chosenCategories[list];
 
-  @computed get currentItemName(): string | undefined {
-    if (this.currentList && this.currentList[this.activeItem.index]) {
-      return this.currentList[this.activeItem.index].name;
-    }
-
-    return undefined;
-  }
-
-  @computed get currentItemInfo(): string | undefined {
-    if (this.currentList && this.currentList[this.activeItem.index]) {
-      return this.currentList[this.activeItem.index].info;
-    }
-
-    return undefined;
-  }
+  setChosenCategory = (list: ListType, category: string): void => {
+    this.chosenCategories[list] = category;
+  };
 
   getCategories = (): string[] => {
     const itemsCategories: string[] = [
-      'Any',
+      'All',
       ...extractCategories(this.store.items),
       ...extractCategories(this.store.selected)
     ];
@@ -128,7 +112,7 @@ export class ItemManagerClient {
   };
 
   updateCurrentItemName = (name: string): void => {
-    const { list, index } = this.activeItem;
+    const { index } = this.activeItem;
 
     if (this.currentList && this.currentList[index]) {
       this.currentList[index].name = name;
@@ -136,7 +120,7 @@ export class ItemManagerClient {
   };
 
   updateCurrentItemInfo = (info: string): void => {
-    const { list, index } = this.activeItem;
+    const { index } = this.activeItem;
 
     if (this.currentList && this.currentList[index]) {
       this.currentList[this.activeItem.index].info = info;
@@ -152,9 +136,12 @@ export class ItemManagerClient {
   AddShoppingItem = (): void => {
     const { setVisibleDialog } = this.store.visibilityClient;
 
-    const allNames = [...this.store.selected, ...this.store.items].map(
-      ({ name }) => name
-    );
+    let allNames: string[] = [];
+    const allItems: Item[] = [...this.store.selected, ...this.store.items];
+
+    if (allItems.length > 0) {
+      allNames = allItems.map(({ name }) => name);
+    }
 
     if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
@@ -183,7 +170,22 @@ export class ItemManagerClient {
     );
   };
 
-  toggleCheckItems = (list: ListType, index: number): void => {
+  getIndexById = (list: ListType, id: string) => {
+    const items = (this.store as any)[list];
+    let itemIndex: number = 0;
+
+    items.forEach((item: Item, index: number) => {
+      if (item.id === id) {
+        itemIndex = index;
+      }
+    });
+
+    return itemIndex;
+  };
+
+  toggleCheckItems = (list: ListType, id: string): void => {
+    const index = this.getIndexById(list, id);
+
     this.setActiveItem(list, index);
     this.store.selected[index].checked = !this.store.selected[index].checked;
 
@@ -195,4 +197,31 @@ export class ItemManagerClient {
     this.store.selected = selected;
     this.store.apiClient.reorderItemsOnServer(items, selected);
   };
+
+  @computed get currentList(): Item[] | undefined {
+    switch (this.activeItem.list) {
+      case 'items':
+        return this.store.items;
+      case 'selected':
+        return this.store.selected;
+      default:
+        return undefined;
+    }
+  }
+
+  @computed get currentItemName(): string | undefined {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      return this.currentList[this.activeItem.index].name;
+    }
+
+    return undefined;
+  }
+
+  @computed get currentItemInfo(): string | undefined {
+    if (this.currentList && this.currentList[this.activeItem.index]) {
+      return this.currentList[this.activeItem.index].info;
+    }
+
+    return undefined;
+  }
 }

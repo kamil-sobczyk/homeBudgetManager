@@ -66,8 +66,8 @@ export class EditItemDialog extends React.Component<EditItemDialogProps, {}> {
       name: this.name ? this.name : '',
       info: this.info ? this.info : '',
       id: String(new Date()),
-      category: this.category ? this.category : '',
-      checked: false
+      checked: false,
+      category: ''
     });
   };
 

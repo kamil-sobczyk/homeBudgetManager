@@ -31,7 +31,6 @@ export const ListBox = observer(({ store }: StoreProps) => {
         items={items}
         categorizedItems={categorizedItems}
         selected={selected}
-        getCategories={itemManagerClient.getCategories}
         toggleShowItems={visibilityClient.toggleShowItems}
         toggleCheckItems={itemManagerClient.toggleCheckItems}
         showItems={visibilityClient.showItems}
@@ -40,8 +39,8 @@ export const ListBox = observer(({ store }: StoreProps) => {
         onDragEnd={dndClient.onDragEnd}
         setVisibleDialog={visibilityClient.setVisibleDialog}
         visibleDialog={visibilityClient.visibleDialog}
-        setItems={itemManagerClient.setItems}
-        setItemsCategorized={setItemsCategorized}
+        getChosenCategory={itemManagerClient.getChosenCategory}
+        setChosenCategory={itemManagerClient.setChosenCategory}
       />
       <DialogsContainer
         costs={costs}

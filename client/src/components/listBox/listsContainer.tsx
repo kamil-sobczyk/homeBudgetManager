@@ -14,15 +14,14 @@ import { Selected } from '../lists/selected/selected';
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
   getSelected: () => Promise<Item[]>;
-  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, id: string) => void;
   toggleShowItems: () => void;
   onDragEnd: (result: DropResult) => void;
   setActiveItem: (list: ListType, index: number) => void;
   deleteItem: (name: string) => Item[];
   setVisibleDialog: (dialog?: string) => void;
-  getCategories: () => string[];
-  setItems: (items: Item[]) => void;
-  setItemsCategorized: (value: boolean) => boolean;
+  getChosenCategory: (list: ListType) => string;
+  setChosenCategory: (list: ListType, category: string) => void;
   visibleDialog: string;
   selected: Item[];
   items: Item[];
@@ -42,11 +41,9 @@ export const ListsContainer = observer(
     toggleCheckItems,
     deleteItem,
     items,
-    categorizedItems,
-    getCategories,
     setVisibleDialog,
-    setItems,
-    setItemsCategorized
+    getChosenCategory,
+    setChosenCategory
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
@@ -58,20 +55,19 @@ export const ListsContainer = observer(
             <Items
               setActiveItem={setActiveItem}
               setVisibleDialog={setVisibleDialog}
-              setItems={setItems}
+              getChosenCategory={getChosenCategory}
+              setChosenCategory={setChosenCategory}
               deleteItem={deleteItem}
               items={items}
               getItems={getItems}
               showItems={showItems}
-              getCategories={getCategories}
-              categorizedItems={categorizedItems}
-              setItemsCategorized={setItemsCategorized}
             />
           )}
           <Selected
             setVisibleDialog={setVisibleDialog}
-            getCategories={getCategories}
             setActiveItem={setActiveItem}
+            getChosenCategory={getChosenCategory}
+            setChosenCategory={setChosenCategory}
             toggleCheckItems={toggleCheckItems}
             selected={selected}
             getSelected={getSelected}

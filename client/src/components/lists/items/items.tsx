@@ -14,15 +14,29 @@ import { ProvidedItems } from './provided/providedItems';
 import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { SortingMenu } from '../sortingMenu';
 import { observable } from 'mobx';
+import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
+import { TextField } from '@rmwc/textfield';
+
+export const getCategories = (items: Item[]): string[] => {
+  const itemsCategories: string[] = [
+    'All',
+    ...items.map((item: Item) => {
+      if (item && item.category) {
+        return item.category;
+      } else return 'Others';
+    })
+  ];
+
+  return removeCategoryDuplicates(itemsCategories);
+};
 
 interface ItemsProps {
   getItems: () => void;
   deleteItem: (name: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
-  getCategories: () => string[];
-  setItems: (items: Item[]) => void;
-  setItemsCategorized: (value: boolean) => boolean;
+  getChosenCategory: (list: ListType) => string;
+  setChosenCategory: (list: ListType, category: string) => void;
   showItems: boolean;
   categorizedItems: Item[];
   items: Item[];
@@ -34,45 +48,39 @@ interface StyledContainerProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
-  @observable chosenCategory: string = '';
-  @observable categorizedItems: Item[] = this.props.items;
+  @observable isCategorized: boolean = false;
+  @observable searchBarVisible: boolean = false;
 
   componentDidMount = () => {
     this.props.getItems();
   };
 
+  toggleSearchBar = () => {
+    this.searchBarVisible = !this.searchBarVisible;
+    this.forceUpdate();
+  };
+
   categorizeItems = (category: string): void => {
-    const {setItems, setItemsCategorized} = this.props;
-    this.chosenCategory = category;
-    setItems(this.getCategorizedItems());
-    setItemsCategorized(true);
-    // this.forceUpdate();
+    this.props.setChosenCategory('items', category);
+    this.forceUpdate();
   };
 
   getCategorizedItems = () => {
-    const { items, setItems, setItemsCategorized } = this.props;
-    if (this.chosenCategory !== 'Any' && this.chosenCategory !== '') {
-      const categorizedItems = items.filter(
-        (item: Item) => item.category === this.chosenCategory
+    const { items, getChosenCategory } = this.props;
+
+    if (getChosenCategory('items') !== 'All') {
+      this.isCategorized = true;
+      return items.filter(
+        (item: Item) => item.category === getChosenCategory('items')
       );
-      setItems(categorizedItems)
-      setItemsCategorized(true);
-      return categorizedItems;
-    }
-    if (this.chosenCategory === 'Any' || this.chosenCategory === '') {
-      setItemsCategorized(false);
+    } else {
+      this.isCategorized = false;
       return items;
-    } else return items;
+    }
   };
 
   render() {
-    const {
-      setVisibleDialog,
-      categorizedItems,
-      setActiveItem,
-      getCategories,
-      items
-    } = this.props;
+    const { setVisibleDialog, setActiveItem, items } = this.props;
 
     return (
       <StyledContainer showItems={true}>
@@ -82,8 +90,12 @@ export class Items extends React.Component<ItemsProps, {}> {
               onClick={() => setVisibleDialog('AddShoppingItemDialog')}
               icon={{ icon: 'add_circle', size: 'xlarge' }}
             />
+            <StyledSearchButton
+              icon={{ icon: 'search', size: 'xlarge' }}
+              onClick={() => this.toggleSearchBar()}
+            />
             <SortingMenu
-              categories={getCategories()}
+              categories={getCategories(items)}
               categorizeItems={this.categorizeItems}
             />
           </StyledListButtonsContainer>
@@ -95,6 +107,8 @@ export class Items extends React.Component<ItemsProps, {}> {
               setVisibleDialog={setVisibleDialog}
               items={this.getCategorizedItems()}
               provided={providedDroppable2}
+              isCategorized={this.isCategorized}
+              searchBarVisible={this.searchBarVisible}
             />
           )}
         </Droppable>
@@ -116,10 +130,19 @@ const StyledAddShoppingItemIconButton = styled(IconButton)`
   padding: 0;
 `;
 
+const StyledSearchButton = styled(IconButton)`
+  padding: 0;
+  color: darkblue;
+`;
+
 export const StyledListButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   width: 100%;
+`;
+
+const StyledTextField = styled(TextField)`
+  max-width: 30%;
 `;
