@@ -14,7 +14,7 @@ import { Selected } from '../lists/selected/selected';
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
   getSelected: () => Promise<Item[]>;
-  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, id: string) => void;
   toggleShowItems: () => void;
   onDragEnd: (result: DropResult) => void;
   setActiveItem: (list: ListType, index: number) => void;

@@ -9,7 +9,7 @@ import { ProvidedSelectedDraggable } from './providedSelectedDraggable';
 import { List } from '../../items/provided/providedItems';
 
 interface ProvidedSelectedProps {
-  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, id: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
   isCategorized: boolean;

@@ -20,7 +20,7 @@ import { DraggableProvided } from 'react-beautiful-dnd';
 import { StyledEditButton } from '../../items/moreMenu';
 
 interface ProvidedSelectedDraggableProps {
-  toggleCheckItems: (list: ListType, index: number) => any;
+  toggleCheckItems: (list: ListType, id: string) => any;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
   isCategorized: boolean;
@@ -62,7 +62,7 @@ export class ProvidedSelectedDraggable extends React.Component<
         >
           <StyledItem key={item.id}>
             <Checkbox
-              onClick={() => toggleCheckItems('selected', index)}
+              onClick={() => toggleCheckItems('selected', item.id)}
               checked={selected[index] ? selected[index].checked : false}
             />
             <StyledTextContainer>

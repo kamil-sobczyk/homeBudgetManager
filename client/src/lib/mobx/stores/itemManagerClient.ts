@@ -140,11 +140,9 @@ export class ItemManagerClient {
     const allItems: Item[] = [...this.store.selected, ...this.store.items];
 
     if (allItems.length > 0) {
-      allNames = allItems.map(
-        ({ name }) => name
-      );
+      allNames = allItems.map(({ name }) => name);
     }
-    
+
     if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
       setVisibleDialog();
@@ -172,7 +170,22 @@ export class ItemManagerClient {
     );
   };
 
-  toggleCheckItems = (list: ListType, index: number): void => {
+  getIndexById = (list: ListType, id: string) => {
+    const items = (this.store as any)[list];
+    let itemIndex: number = 0;
+
+    items.forEach((item: Item, index: number) => {
+      if (item.id === id) {
+        itemIndex = index;
+      }
+    });
+
+    return itemIndex;
+  };
+
+  toggleCheckItems = (list: ListType, id: string): void => {
+    const index = this.getIndexById(list, id);
+
     this.setActiveItem(list, index);
     this.store.selected[index].checked = !this.store.selected[index].checked;
 

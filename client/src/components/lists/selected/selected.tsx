@@ -19,7 +19,7 @@ import { observable } from 'mobx';
 
 interface SelectedProps {
   getSelected: () => void;
-  toggleCheckItems: (list: ListType, index: number) => void;
+  toggleCheckItems: (list: ListType, id: string) => void;
   setActiveItem: (list: ListType, index: number) => void;
   setVisibleDialog: (dialog?: string) => void;
   getChosenCategory: (list: ListType) => string;

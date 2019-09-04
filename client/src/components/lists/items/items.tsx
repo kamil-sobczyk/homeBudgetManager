@@ -66,7 +66,7 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   getCategorizedItems = () => {
     const { items, getChosenCategory } = this.props;
-    
+
     if (getChosenCategory('items') !== 'All') {
       this.isCategorized = true;
       return items.filter(
