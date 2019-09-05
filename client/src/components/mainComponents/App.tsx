@@ -71,5 +71,4 @@ export class App extends React.Component<{}, {}> {
 const Container = styled.div`
   height: 100%;
   text-align: 'center';
-  background: #f1f1f1;
 `;
