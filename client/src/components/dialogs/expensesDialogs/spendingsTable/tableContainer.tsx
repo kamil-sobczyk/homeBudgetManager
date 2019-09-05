@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
+import { observable } from 'mobx';
 
 import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 
 import ReactTable, { FinalState, RowInfo } from 'react-table';
-import { observable } from 'mobx';
 
 const getRowColor = (category: CostCategoryType) => {
   if (category === 'shopping') return 'black';
@@ -68,16 +68,18 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         if (cost.category === 'shopping') {
           if (cost.chosenItems.length > 0) {
             if (cost.chosenItems.length > 1) {
-              console.log(JSON.stringify(cost.chosenItems));
               cost.chosenItems = [cost.chosenItems.join(', ')];
-              console.log(JSON.stringify(cost.chosenItems))
             }
           } else {
             cost.chosenItems = [' - - - '];
           }
         } else {
           if (cost.info && cost.chosenItems.length > 0) {
-            cost.chosenItems = [`${cost.chosenItems[0]} (${cost.info})`];
+            if (!cost.chosenItems[0].includes(cost.info)) {
+              cost.chosenItems = [`${cost.chosenItems[0]} (${cost.info})`];
+            } else {
+              cost.chosenItems = [`${cost.chosenItems[0]}`];
+            }
           }
         }
       });
@@ -86,8 +88,6 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
   };
 
-  @observable displayedCosts = this.parseCosts(this.props.costs);
-
   handleCostClick = (cost: Cost) => {
     const { setVisibleDialog, visibleDialog, setChosenCost } = this.props;
 
@@ -95,11 +95,12 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     setChosenCost(cost);
   };
 
+  @observable displayedCosts = this.parseCosts(this.props.costs);
+
   render() {
     return (
       <ReactTable
         data={this.displayedCosts as any}
-        // loading={displayedCosts.length > 0 ? false : true}
         columns={columns}
         defaultPageSize={10}
         className='-striped -highlight'

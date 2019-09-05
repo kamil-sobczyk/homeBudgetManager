@@ -73,5 +73,5 @@ export const sortItemsByName = (items: Item[]): Item[] =>
     .slice()
     .sort((a: Item, b: Item): number => a.name.localeCompare(b.name));
 
-const removeDuplicates = (items: Item[]) =>
+export const removeDuplicates = (items: Item[]) =>
   items.filter((item: Item, index: number) => items.indexOf(item) === index);
