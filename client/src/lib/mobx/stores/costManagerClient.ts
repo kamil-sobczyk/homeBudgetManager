@@ -1,13 +1,23 @@
 import { Store } from '../rootStore';
 import { Cost } from '../../interfaces';
 
+const fixChosenItems = (cost: Cost): Cost => {
+  let parsedCost = cost;
+
+  if (parsedCost.category !== 'shopping') {
+    parsedCost.chosenItems = [parsedCost.category];
+  }
+
+  return parsedCost;
+};
+
 export class CostManagerClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;
   }
   deleteCost = (cost: Cost): void => {
-    this.store.apiClient.deleteCostOnServer(cost);
+    this.store.apiClient.deleteCostOnServer(fixChosenItems(cost));
     this.store.visibilityClient.setVisibleDialog();
   };
 
@@ -30,6 +40,6 @@ export class CostManagerClient {
       info: info.length > 0 ? info : chosenCost.info
     };
 
-    this.store.apiClient.editCostOnServer(oldCost, newCost);
+    this.store.apiClient.editCostOnServer(fixChosenItems(oldCost), newCost);
   };
 }
