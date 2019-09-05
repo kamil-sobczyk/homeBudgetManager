@@ -61,7 +61,7 @@ export const AboutDialog = observer(
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>
-          OK!
+          OK
         </Button>
       </DialogActions>
     </Dialog>
