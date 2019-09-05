@@ -11,6 +11,8 @@ import { Navbar } from './navbar/navbar';
 import { ListBox } from '../listBox/listBox';
 import { ProgressBar } from './progressBar';
 
+import { themeOptions } from '../../lib/theme';
+
 @observer
 export class App extends React.Component<{}, {}> {
   @observable loading: boolean = true;
@@ -67,5 +69,7 @@ export class App extends React.Component<{}, {}> {
 }
 
 const Container = styled.div`
+  height: 100%;
   text-align: 'center';
+  background: #f1f1f1;
 `;
