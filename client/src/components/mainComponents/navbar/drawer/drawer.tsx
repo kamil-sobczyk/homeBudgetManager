@@ -14,14 +14,22 @@ interface DrawerBarProps {
 
 export class DrawerBar extends React.Component<DrawerBarProps, {}> {
   render() {
-    const { toggleShowDrawer, showDrawer, setVisibleDialog, toggleEditItems } = this.props;
+    const {
+      toggleShowDrawer,
+      showDrawer,
+      setVisibleDialog,
+      toggleEditItems
+    } = this.props;
     return (
-      <Drawer modal open={showDrawer} onClose={toggleShowDrawer}>
+      <Drawer modal open={showDrawer}>
         <DrawerHeader>
           <StyledDrawerTitle>Budget Manager</StyledDrawerTitle>
         </DrawerHeader>
-        <DrawerContent>
-          <DrawerItems setVisibleDialog={setVisibleDialog} toggleEditItems={toggleEditItems} />
+        <DrawerContent onClick={() => toggleShowDrawer()}>
+          <DrawerItems
+            setVisibleDialog={setVisibleDialog}
+            toggleEditItems={toggleEditItems}
+          />
         </DrawerContent>
       </Drawer>
     );
@@ -29,5 +37,5 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
 }
 
 const StyledDrawerTitle = styled(DrawerTitle)`
-text-align: center;
-`
+  text-align: center;
+`;
