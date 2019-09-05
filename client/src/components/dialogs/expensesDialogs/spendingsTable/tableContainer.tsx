@@ -49,12 +49,16 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
   };
 
-  componentDidUpdate = (props: TableContainerProps) => {
-    this.displayedCosts = this.parseCosts(props.costs);
+  componentDidUpdate = (prevProps: TableContainerProps) => {
+    if (prevProps !== this.props) {
+      this.displayedCosts = this.parseCosts(this.props.costs) as any;
+    }
   };
 
   parseCosts = (costs: Cost[]) => {
-    if (costs.length < 1) {
+    let parsedCosts = costs;
+
+    if (parsedCosts.length < 1) {
       return [
         {
           count: 0,
@@ -64,7 +68,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         }
       ];
     } else {
-      costs.forEach((cost: Cost) => {
+      parsedCosts.forEach((cost: Cost) => {
         if (cost.category === 'shopping') {
           if (cost.chosenItems.length > 0) {
             if (cost.chosenItems.length > 1) {
@@ -84,7 +88,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         }
       });
 
-      return costs;
+      return parsedCosts;
     }
   };
 
@@ -95,7 +99,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     setChosenCost(cost);
   };
 
-  @observable displayedCosts = this.parseCosts(this.props.costs);
+  @observable displayedCosts = this.props.costs;
 
   render() {
     return (
