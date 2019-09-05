@@ -79,7 +79,6 @@ export class Items extends React.Component<ItemsProps, {}> {
       setActiveItem,
       items,
       areItemsEditable,
-      showItems
     } = this.props;
 
     return (
