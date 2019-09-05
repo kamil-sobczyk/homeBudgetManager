@@ -15,19 +15,19 @@ Features:
 
 ## Technologies and libraries
 
-- Webpack,
-- NodeJS (express),
-- MongoDB,
-- TypeScript,
-- React,
-- Styled Components,
-- MobX,
-- Material Design (RMWC),
-- react-beautiful-dnd,
-- react-calendar,
-- react-google-login,
-- recharts,
-- react-table.
+- Webpack
+- NodeJS (express)
+- MongoDB
+- TypeScript
+- React
+- Styled Components
+- MobX
+- Material Design (RMWC)
+- react-beautiful-dnd
+- react-calendar
+- react-google-login
+- recharts
+- react-table
 
 ## Loacal installation
 
