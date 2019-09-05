@@ -80,7 +80,6 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
     return (
       <ReactTable
         data={sortedIncomes}
-        loading={sortedIncomes.length > 0 ? false : true}
         columns={columns}
         defaultPageSize={10}
         className='-striped -highlight'
