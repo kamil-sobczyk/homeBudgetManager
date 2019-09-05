@@ -44,6 +44,7 @@ export class CostManagerDialog extends React.Component<
             setVisibleDialog={setVisibleDialog}
             visibleDialog={visibleDialog}
             setChosenCost={setChosenCost}
+            notClickable
           />
         </StyledDialogContent>
         <DialogActions>

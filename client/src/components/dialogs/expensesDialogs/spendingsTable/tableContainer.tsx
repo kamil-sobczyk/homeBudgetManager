@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 
 import ReactTable, { FinalState, RowInfo } from 'react-table';
+import { observable } from 'mobx';
 
 const getRowColor = (category: CostCategoryType) => {
   if (category === 'shopping') return 'black';
@@ -37,6 +38,7 @@ interface TableContainerProps {
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
   setChosenCost: (cost: Cost) => Cost;
+  notClickable?: boolean;
 }
 
 @observer
@@ -47,16 +49,44 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
   };
 
-  getCostItems = (cost: Cost): string | false =>
-    cost.category === 'shopping'
-      ? cost.chosenItems.length > 0
-        ? cost.chosenItems.join(', ')
-        : ' - - - '
-      : cost.info
-      ? cost.chosenItems.length > 0 && `${cost.chosenItems[0]} (${cost.info})`
-      : cost.chosenItems.length > 0
-      ? cost.chosenItems[0]
-      : ' - - - ';
+  componentDidUpdate = (props: TableContainerProps) => {
+    this.displayedCosts = this.parseCosts(props.costs);
+  };
+
+  parseCosts = (costs: Cost[]) => {
+    if (costs.length < 1) {
+      return [
+        {
+          count: 0,
+          chosenItems: [' - - - - - - '],
+          date: ' - - - - - - ',
+          category: 'shopping'
+        }
+      ];
+    } else {
+      costs.forEach((cost: Cost) => {
+        if (cost.category === 'shopping') {
+          if (cost.chosenItems.length > 0) {
+            if (cost.chosenItems.length > 1) {
+              console.log(JSON.stringify(cost.chosenItems));
+              cost.chosenItems = [cost.chosenItems.join(', ')];
+              console.log(JSON.stringify(cost.chosenItems))
+            }
+          } else {
+            cost.chosenItems = [' - - - '];
+          }
+        } else {
+          if (cost.info && cost.chosenItems.length > 0) {
+            cost.chosenItems = [`${cost.chosenItems[0]} (${cost.info})`];
+          }
+        }
+      });
+
+      return costs;
+    }
+  };
+
+  @observable displayedCosts = this.parseCosts(this.props.costs);
 
   handleCostClick = (cost: Cost) => {
     const { setVisibleDialog, visibleDialog, setChosenCost } = this.props;
@@ -66,23 +96,10 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
   };
 
   render() {
-    let displayedCosts: Cost[] = this.props.costs;
-
-    if (displayedCosts.length < 1) {
-      displayedCosts = [
-        {
-          count: 0,
-          chosenItems: [' - - - - - - '],
-          date: ' - - - - - - ',
-          category: 'shopping'
-        }
-      ];
-    }
-
     return (
       <ReactTable
-        data={displayedCosts}
-        loading={displayedCosts.length > 0 ? false : true}
+        data={this.displayedCosts as any}
+        // loading={displayedCosts.length > 0 ? false : true}
         columns={columns}
         defaultPageSize={10}
         className='-striped -highlight'
@@ -93,7 +110,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
           }
           return {
             onClick: (): void => {
-              if (rowInfo) {
+              if (rowInfo && !this.props.notClickable) {
                 this.handleCostClick(rowInfo.original);
               }
             },
