@@ -20,7 +20,7 @@ const aboutDialogButtons = [
     href: 'https://www.linkedin.com/in/kamilsobczyk6/'
   },
   {
-    icon: 'https://freeiconshop.com/wp-content/uploads/edd/phone-flat.png',
+    icon: 'https://image.flaticon.com/icons/svg/17/17216.svg',
     href: 'tel:796224021'
   }
 ];
