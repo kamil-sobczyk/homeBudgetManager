@@ -33,7 +33,7 @@ export const getCategories = (items: Item[]): string[] => {
 
 interface ItemsProps {
   getItems: () => void;
-  deleteItem: (name: string) => void;
+  deleteItem: (name: string, info: string) => void;
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, id: string) => void;
   getChosenCategory: (list: ListType) => string;

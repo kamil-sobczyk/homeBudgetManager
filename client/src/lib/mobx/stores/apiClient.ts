@@ -94,12 +94,12 @@ export class ApiClient {
       headers: this.headers
     }).then(incomes => (this.store.incomes = incomes.data as Income[]));
 
-  deleteItemOnServer = async (name: string): Promise<void> => {
+  deleteItemOnServer = async (name: string, info: string): Promise<void> => {
     await axios({
       method: 'delete',
       url: server + 'store/items',
       headers: this.headers,
-      data: { name }
+      data: { name, info }
     });
   };
 

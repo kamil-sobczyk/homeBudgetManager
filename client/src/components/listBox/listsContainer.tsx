@@ -18,7 +18,7 @@ interface ListsContainerProps {
   toggleShowItems: () => void;
   onDragEnd: (result: DropResult) => void;
   setActiveItem: (list: ListType, id: string) => void;
-  deleteItem: (name: string) => Item[];
+  deleteItem: (name: string, info: string) => Item[];
   setVisibleDialog: (dialog?: string) => void;
   getChosenCategory: (list: ListType) => string;
   setChosenCategory: (list: ListType, category: string) => void;

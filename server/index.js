@@ -105,7 +105,7 @@ const appRouter = app => {
       users
         .updateOne(
           { usr: req.headers.id },
-          { $pull: { items: { name: req.body.name } } }
+          { $pull: { items: { name: req.body.name, info: req.body.info } } }
         )
         .exec((err, resp) => {
           if (err) {
