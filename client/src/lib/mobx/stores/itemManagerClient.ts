@@ -81,20 +81,20 @@ export class ItemManagerClient {
   changeNewItem = (event: React.FormEvent<EventTarget>): void => {
     const target = event.target as HTMLInputElement;
 
-    if (target.name === 'info') {
-      this.newItem = {
-        checked: false,
-        id: String(Date.now()),
-        info: target.value,
-        name: this.newItem.name,
-        category: this.newItem.category
-      };
-    } else if (target.name === 'name') {
+    if (target.name === 'name') {
       this.newItem = {
         checked: false,
         id: String(Date.now()),
         info: this.newItem.info,
         name: target.value,
+        category: this.newItem.category
+      };
+    } else if (target.name === 'info') {
+      this.newItem = {
+        checked: false,
+        id: String(Date.now()),
+        info: target.value,
+        name: this.newItem.name,
         category: this.newItem.category
       };
     } else if (target.name === 'category' && target.value !== 'New category') {
@@ -142,15 +142,35 @@ export class ItemManagerClient {
 
   AddShoppingItem = (): void => {
     const { setVisibleDialog } = this.store.visibilityClient;
-
     let allNames: string[] = [];
+    let allInfos: string[] = [];
     const allItems: Item[] = [...this.store.selected, ...this.store.items];
 
     if (allItems.length > 0) {
       allNames = allItems.map(({ name }) => name);
+      allInfos = allItems.map(({ info }) => info);
     }
 
-    if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
+    console.log(allNames);
+    console.log(allInfos);
+
+    const isItemRepeated = (): boolean => {
+      let ret = false;
+
+      allNames.forEach((name: string, index: number) => {
+        if (name === this.newItem.name) {
+          if (allInfos[index] === this.newItem.info) {
+            ret = true;
+          }
+        }
+      });
+
+      return ret;
+    };
+
+    // if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
+
+    if (!isItemRepeated() && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
       setVisibleDialog();
       this.store.apiClient.addShoppingItemOnServer(this.newItem);
@@ -159,11 +179,17 @@ export class ItemManagerClient {
     }
   };
 
-  deleteItem = (name: string): Item[] => {
-    this.store.items = this.store.items.filter(
-      (item: Item) => item.name !== name
-    );
-    this.store.apiClient.deleteItemOnServer(name);
+  deleteItem = (name: string, info: string): Item[] => {
+    const newItems = [...this.store.items];
+
+    newItems.forEach((item: Item, index: number) => {
+      if (item.name === name && item.info === info) {
+        newItems.splice(index, 1);
+      }
+    })
+
+    this.store.items = newItems;
+    this.store.apiClient.deleteItemOnServer(name, info);
     this.store.visibilityClient.setVisibleDialog();
 
     return this.store.items;

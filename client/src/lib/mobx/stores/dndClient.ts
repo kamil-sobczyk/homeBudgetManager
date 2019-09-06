@@ -51,7 +51,6 @@ export class DnDClient {
   };
 
   onDragEnd = (result: DropResult): void => {
-    console.log(JSON.stringify(this.store.categorizedItems));
     const { source, destination } = result;
     const { reorderItemsOnServer } = this.store.apiClient;
     const sourceListName =
