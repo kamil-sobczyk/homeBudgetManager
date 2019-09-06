@@ -158,7 +158,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             </Button>
           </DialogActions>
         </Dialog>
-        <FailSnackbar showSnackbar={showFailSnackbar} />
+        <FailSnackbar showSnackbar={showFailSnackbar} text='Pick a date first'/>
         {visibleDialog.includes('Day') && (
           <CalendarDialogDay
             setVisibleDialog={setVisibleDialog}

@@ -11,6 +11,8 @@ import { Item } from '../../../lib/interfaces';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { observable } from 'mobx';
+import { FailDialog } from '../infoDialogs/failDialog';
+import { FailSnackbar } from '../calendarDialogs/snackbar';
 
 interface AddShoppingItemDialogProps {
   AddShoppingItem: () => void;
@@ -28,71 +30,85 @@ export class AddShoppingItemDialog extends React.Component<
   {}
 > {
   @observable chosenCategory = '';
+  @observable showFailSnackbar = false;
 
   handleOptionClick = (event: React.FormEvent<EventTarget>) => {
     const target = event.target as HTMLInputElement;
 
-    this.chosenCategory = target.value;
     this.props.changeNewItem(event);
+    this.chosenCategory = target.value;
+  };
+
+  addNewItem = () => {
+    if (this.chosenCategory !== '') {
+      this.props.AddShoppingItem();
+    } else {
+      this.showFailSnackbar = true;
+    }
   };
 
   render() {
     const {
       changeNewItem,
-      AddShoppingItem,
       setVisibleDialog,
       visibleDialog,
       getCategories
     } = this.props;
 
     return (
-      <Dialog open={visibleDialog.includes('AddShoppingItemDialog')}>
-        <StyledDialogTitle>Add a new product</StyledDialogTitle>
-        <TextField
-          defaultValue={''}
-          label='New item'
-          name='name'
-          onChange={e => changeNewItem(e)}
-          required
-        />
-        <TextField
-          defaultValue={''}
-          label='Additional info'
-          name='info'
-          onChange={e => changeNewItem(e)}
-        />
-        {this.chosenCategory !== 'New category' && (
-          <Select
-            label='Category'
-            onChange={e => this.handleOptionClick(e)}
-            name='category'
-            options={[
-              'New category',
-              ...getCategories().filter(
-                (category: string) => category !== 'All'
-              )
-            ]}
-            required
-          />
-        )}
-        {this.chosenCategory === 'New category' && (
+      <>
+        <Dialog open={visibleDialog.includes('AddShoppingItemDialog')}>
+          <StyledDialogTitle>Add a new product</StyledDialogTitle>
           <TextField
             defaultValue={''}
-            label='New category'
-            name='newCat'
+            label='New item'
+            name='name'
             onChange={e => changeNewItem(e)}
             required
           />
-        )}
-        <DialogActions>
-          <Button color='primary' onClick={() => setVisibleDialog()}>
-            Cancel
-          </Button>
-          <Button color='primary' onClick={AddShoppingItem}>
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <TextField
+            defaultValue={''}
+            label='Additional info'
+            name='info'
+            onChange={e => changeNewItem(e)}
+          />
+          {this.chosenCategory !== 'New category' && (
+            <Select
+              label='Category'
+              onChange={e => this.handleOptionClick(e)}
+              required
+              name='category'
+              options={[
+                'New category',
+                ...getCategories().filter(
+                  (category: string) => category !== 'All'
+                )
+              ]}
+            />
+          )}
+          {this.chosenCategory === 'New category' && (
+            <TextField
+              defaultValue={''}
+              label='New category'
+              name='newCat'
+              onChange={e => changeNewItem(e)}
+              required
+            />
+          )}
+          <DialogActions>
+            <Button color='primary' onClick={() => setVisibleDialog()}>
+              Cancel
+            </Button>
+            <Button color='primary' onClick={this.addNewItem}>
+              Add
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <FailSnackbar
+          showSnackbar={this.showFailSnackbar}
+          text='Please provide category'
+        />
+      </>
     );
   }
 }

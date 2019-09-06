@@ -4,15 +4,17 @@ import { Snackbar, SnackbarAction } from '@rmwc/snackbar';
 
 interface FailSnackbarProps {
   showSnackbar: boolean;
+  text: string;
 }
 
 export class FailSnackbar extends React.Component<FailSnackbarProps, {}> {
   render() {
-    const { showSnackbar } = this.props;
+    const { showSnackbar, text } = this.props;
     return (
       <Snackbar
         open={showSnackbar}
-        message='Pick a date first'
+        message={text}
+        // message='Pick a date first'
         action={
           <SnackbarAction
             label='Close'

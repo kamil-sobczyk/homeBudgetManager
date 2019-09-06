@@ -9,10 +9,11 @@ import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 interface FailDialogProps {
   setVisibleDialog: (dialog?: string) => void;
   visibleDialog: string;
+  text?: string;
 }
 
 export const FailDialog = observer(
-  ({ setVisibleDialog, visibleDialog }: FailDialogProps) => (
+  ({ setVisibleDialog, visibleDialog, text }: FailDialogProps) => (
     <Dialog
       open={visibleDialog.includes('Fail')}
       aria-labelledby='FailDialog'
@@ -20,7 +21,9 @@ export const FailDialog = observer(
     >
       <StyledDialogTitle>Unable to perform this action!</StyledDialogTitle>
       <DialogContent>
-        This product is on your list already or it has no name.
+        {text
+          ? text
+          : '   This product is on your list already or it has no name.'}
       </DialogContent>
       <DialogActions>
         <Button

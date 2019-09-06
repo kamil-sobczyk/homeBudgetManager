@@ -87,7 +87,7 @@ export class IncomesCallendarDialog extends React.Component<
             </Button>
           </DialogActions>
         </Dialog>
-        <FailSnackbar showSnackbar={showFailSnackbar} />
+        <FailSnackbar showSnackbar={showFailSnackbar} text='Pick a date first' />
       </>
     );
   }
