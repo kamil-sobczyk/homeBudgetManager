@@ -171,6 +171,14 @@ export class ItemManagerClient {
     } else {
       setVisibleDialog('AddShoppingItemDialogFail');
     }
+
+    this.newItem = {
+      name: '',
+      info: '',
+      id: '',
+      checked: false,
+      category: ''
+    };
   };
 
   deleteItem = (name: string, info: string): Item[] => {
@@ -180,7 +188,7 @@ export class ItemManagerClient {
       if (item.name === name && item.info === info) {
         newItems.splice(index, 1);
       }
-    })
+    });
 
     this.store.items = newItems;
     this.store.apiClient.deleteItemOnServer(name, info);

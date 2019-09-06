@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 
 import { Button } from '@rmwc/button';
-import { Dialog, DialogActions, DialogTitle } from '@rmwc/dialog';
+import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
