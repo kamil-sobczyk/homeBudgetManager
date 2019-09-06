@@ -145,15 +145,6 @@ export class ItemManagerClient {
     let allNames: string[] = [];
     let allInfos: string[] = [];
     const allItems: Item[] = [...this.store.selected, ...this.store.items];
-
-    if (allItems.length > 0) {
-      allNames = allItems.map(({ name }) => name);
-      allInfos = allItems.map(({ info }) => info);
-    }
-
-    console.log(allNames);
-    console.log(allInfos);
-
     const isItemRepeated = (): boolean => {
       let ret = false;
 
@@ -168,7 +159,10 @@ export class ItemManagerClient {
       return ret;
     };
 
-    // if (allNames.indexOf(this.newItem.name) < 0 && this.newItem.name !== '') {
+    if (allItems.length > 0) {
+      allNames = allItems.map(({ name }) => name);
+      allInfos = allItems.map(({ info }) => info);
+    }
 
     if (!isItemRepeated() && this.newItem.name !== '') {
       this.store.items = sortItemsByName([...this.store.items, this.newItem]);
