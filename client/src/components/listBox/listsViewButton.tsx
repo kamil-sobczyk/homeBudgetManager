@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Button } from '@rmwc/button';
+import { IconButton } from 'rmwc';
 
 interface ViewButtonProps {
   toggleShowItems: () => void;
@@ -11,9 +11,9 @@ interface ViewButtonProps {
 
 export const ViewButton = observer(
   ({ showItems, toggleShowItems }: ViewButtonProps) => (
-    <Button onClick={toggleShowItems} theme='primary' outlined>
-      {showItems ? 'SHOW ITEMS TO BUY ONLY' : 'ADD NEW ITEMS TO SHOPPING LIST'}
-    </Button>
+    <IconButton
+      onClick={toggleShowItems}
+      icon={showItems ? 'filter_1' : 'filter_2'}
+    />
   )
 );
-
