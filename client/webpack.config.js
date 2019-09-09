@@ -54,7 +54,7 @@ module.exports = {
   },
   mode: env === 'production' ? 'production' : 'development',
   output: {
-    filename: `[name].[contenthash]${env === 'production' ? '.min' : ''}.js`,
+    filename: `[name]${env === 'production' ? '.min' : ''}.js`,
     path: path.resolve(path.join(__dirname, 'public')),
   },
   devtool: env !== 'production' && 'source-map',
