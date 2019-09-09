@@ -10,6 +10,7 @@ interface DrawerBarProps {
   setVisibleDialog: (dialog?: string) => void;
   toggleEditItems: () => void;
   showDrawer: boolean;
+  langData: {};
 }
 
 export class DrawerBar extends React.Component<DrawerBarProps, {}> {
@@ -18,7 +19,8 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
       toggleShowDrawer,
       showDrawer,
       setVisibleDialog,
-      toggleEditItems
+      toggleEditItems,
+      langData
     } = this.props;
     return (
       <Drawer modal open={showDrawer}>
@@ -29,6 +31,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
           <DrawerItems
             setVisibleDialog={setVisibleDialog}
             toggleEditItems={toggleEditItems}
+            langData={langData}
           />
         </DrawerContent>
       </Drawer>

@@ -16,6 +16,7 @@ import { observable } from 'mobx';
 interface NavbarSectionLeftProps {
   toggleShowDrawer: () => boolean;
   setVisibleDialog: (dialog?: string) => void;
+  toggleLanguage: () => void;
 }
 
 @observer
@@ -27,6 +28,7 @@ export class NavbarSectionLeft extends React.Component<
 
   handleChangeLang = () => {
     this.flag === usFlag ? (this.flag = plFlag) : (this.flag = usFlag);
+    this.props.toggleLanguage();
   };
 
   render() {

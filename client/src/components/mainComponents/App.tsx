@@ -11,7 +11,7 @@ import { Navbar } from './navbar/navbar';
 import { ListBox } from '../listBox/listBox';
 import { ProgressBar } from './progressBar';
 
-import { themeOptions } from '../../lib/theme';
+import { langBase } from '../../lib/langBase';
 
 @observer
 export class App extends React.Component<{}, {}> {
@@ -39,7 +39,8 @@ export class App extends React.Component<{}, {}> {
         setVisibleDialog,
         visibleDialog
       },
-      itemManagerClient: { toggleEditItems }
+      itemManagerClient: { toggleEditItems },
+      languagesClient: { toggleChosenLanguage }
     } = this.store;
 
     if (localStorage.id) {
@@ -51,6 +52,10 @@ export class App extends React.Component<{}, {}> {
               showDrawer={showDrawer}
               setVisibleDialog={setVisibleDialog}
               toggleEditItems={toggleEditItems}
+              langData={
+                (langBase as any)[this.store.languagesClient.lang].drawer
+              }
+              toggleLanguage={toggleChosenLanguage}
             />
             <ListBox store={this.store} />
           </Container>

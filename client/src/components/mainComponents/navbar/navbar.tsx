@@ -14,12 +14,21 @@ interface NavbarProps {
   toggleShowDrawer: () => boolean;
   setVisibleDialog: (dialog?: string) => void;
   toggleEditItems: () => void;
+  toggleLanguage: () => void;
   showDrawer: boolean;
+  langData: {};
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
-    const { toggleShowDrawer, showDrawer, setVisibleDialog, toggleEditItems } = this.props;
+    const {
+      toggleShowDrawer,
+      showDrawer,
+      setVisibleDialog,
+      toggleEditItems,
+      langData,
+      toggleLanguage
+    } = this.props;
     return (
       <>
         <TopAppBar>
@@ -27,6 +36,7 @@ export class Navbar extends React.Component<NavbarProps, {}> {
             <NavbarSectionLeft
               toggleShowDrawer={toggleShowDrawer}
               setVisibleDialog={setVisibleDialog}
+              toggleLanguage={toggleLanguage}
             />
             <NavbarSectionRight setVisibleDialog={setVisibleDialog} />
           </TopAppBarRow>
@@ -36,6 +46,7 @@ export class Navbar extends React.Component<NavbarProps, {}> {
           toggleShowDrawer={toggleShowDrawer}
           showDrawer={showDrawer}
           toggleEditItems={toggleEditItems}
+          langData={langData}
         />
         <TopAppBarFixedAdjust />
       </>
