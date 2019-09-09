@@ -80,7 +80,7 @@ export class DnDClient {
         this.store.itemManagerClient.chosenCategories[sourceListName]
       );
 
-      result.droppable.forEach((item: Item): boolean => (item.checked = false));
+      result.droppable2.forEach((item: Item): boolean => (item.checked = false));
 
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);
