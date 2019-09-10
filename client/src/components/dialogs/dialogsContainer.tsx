@@ -90,6 +90,7 @@ export const DialogsContainer = observer(
           items={items}
           deleteItem={itemManagerClient.deleteItem}
           index={itemManagerClient.activeItem.index}
+          langData={langData.deleteItemDialog}
         />
       )}
       {visibleDialog === 'SpendingsDialog' && (

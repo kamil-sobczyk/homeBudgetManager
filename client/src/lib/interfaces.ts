@@ -98,6 +98,16 @@ export interface EditItemDialogLangData {
   };
 }
 
+export interface DeleteItemDialogLangData {
+  title: string;
+  text1: string;
+  text2: string;
+  buttons: {
+    cancel: string;
+    ok: string;
+  };
+}
+
 export interface LangData {
   drawer: DrawerLangData;
   list: ListLangData;
@@ -105,4 +115,5 @@ export interface LangData {
   buttons: DialogButtonsLangData;
   snackbar: SnackbarLangData;
   editItemDialog: EditItemDialogLangData;
+  deleteItemDialog: DeleteItemDialogLangData;
 }

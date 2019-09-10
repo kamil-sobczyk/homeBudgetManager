@@ -43,6 +43,15 @@ export const langBase = {
         cancel: 'Cancel',
         ok: 'Confirm'
       }
+    },
+    deleteItemDialog: {
+      title: 'Deleteing product',
+      text1: 'Are you sure want to delete ',
+      text2: 'from your list?',
+      buttons: {
+        cancel: 'No',
+        ok: 'Yes'
+      }
     }
   },
   pl: {
@@ -88,6 +97,15 @@ export const langBase = {
       buttons: {
         cancel: 'Anuluj',
         ok: 'Zatwierdź'
+      }
+    },
+    deleteItemDialog: {
+      title: 'Usuwanie produktu',
+      text1: 'Wybrałeś - ',
+      text2: ' - czy jesteś pewny, że chcesz usunąć ten produkt?',
+      buttons: {
+        cancel: 'Nie',
+        ok: 'Tak'
       }
     }
   }

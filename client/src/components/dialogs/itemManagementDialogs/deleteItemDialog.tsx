@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { Item } from '../../../lib/interfaces';
+import { Item, DeleteItemDialogLangData } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
@@ -13,6 +13,7 @@ interface DeleteItemDialogProps {
   visibleDialog: string;
   items: Item[];
   index: number;
+  langData: DeleteItemDialogLangData;
 }
 
 export const DeleteItemDialog = observer(
@@ -21,28 +22,29 @@ export const DeleteItemDialog = observer(
     index,
     setVisibleDialog,
     visibleDialog,
-    deleteItem
+    deleteItem,
+    langData
   }: DeleteItemDialogProps) => (
     <Dialog
       open={visibleDialog === 'DeleteItemDialog'}
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
     >
-      <StyledDialogTitle>Deleting product</StyledDialogTitle>
+      <StyledDialogTitle>{langData.title}</StyledDialogTitle>
       <DialogContent>
-        Are you sure want to delete {items[index] ? items[index].name : ''} from
-        your list?
+        {langData.text1}
+        {items[index] ? items[index].name : ''} {langData.text2}
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setVisibleDialog()} color='primary'>
-          No
+          {langData.buttons.cancel}
         </Button>
         <Button
           onClick={() => deleteItem(items[index].name, items[index].info)}
           color='primary'
           autoFocus
         >
-          Yes
+          {langData.buttons.ok}
         </Button>
       </DialogActions>
     </Dialog>
