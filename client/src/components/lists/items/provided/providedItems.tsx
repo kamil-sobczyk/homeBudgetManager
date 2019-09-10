@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { ListType, Item } from '../../../../lib/interfaces';
+import { ListType, Item, ListLangData } from '../../../../lib/interfaces';
 
 import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 
@@ -19,6 +19,7 @@ interface ProvidedItemsProps {
   searchBarVisible: boolean;
   items: Item[];
   provided: DroppableProvided;
+  langData: ListLangData;
 }
 
 @observer
@@ -37,7 +38,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       items,
       setActiveItem,
       searchBarVisible,
-      areItemsEditable
+      areItemsEditable,
+      langData
     } = this.props;
 
     let displayedItems;
@@ -64,7 +66,7 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       <List innerRef={provided.innerRef}>
         {searchBarVisible && (
           <StyledSearchBar
-            placeholder='Type item name'
+            placeholder={langData.searchBarText}
             value={this.text}
             onChange={e => this.setText(e)}
           />

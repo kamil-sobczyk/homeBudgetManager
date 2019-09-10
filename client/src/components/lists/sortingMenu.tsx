@@ -11,11 +11,12 @@ import { observer } from 'mobx-react';
 interface SortingMenuProps {
   categories: string[];
   categorizeItems: (category: string) => void;
+  buttonText?: string; /////////////////////////
 }
 
 @observer
 export class SortingMenu extends React.Component<SortingMenuProps, {}> {
-  @observable buttonText = 'category';
+  @observable buttonText = this.props.buttonText;
 
   handleOptionClick = (category: string): void => {
     this.buttonText = category;

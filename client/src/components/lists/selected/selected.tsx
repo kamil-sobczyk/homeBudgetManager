@@ -68,7 +68,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
               icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
             />
             <SortingMenu
-              categories={getCategories(selected)}
+              categories={getCategories(selected, 'xxxxx')}
               categorizeItems={this.categorizeItems}
             />
           </StyledListButtonsContainer>

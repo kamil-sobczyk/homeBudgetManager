@@ -2,9 +2,7 @@ import { Store } from '../rootStore';
 
 import { observable } from 'mobx';
 
-import {langBase} from '../../langBase';
-
-console.log(langBase)
+import { langBase } from '../../langBase';
 
 export class LanguagesClient {
   store: Store;
@@ -13,9 +11,11 @@ export class LanguagesClient {
   }
   @observable lang = 'en';
 
-  getChosenLanguage = () => this.lang;
+  getChosenLanguage = (): string => this.lang;
 
-  toggleChosenLanguage = () => {
+  getLangBase = () => langBase;
+
+  toggleChosenLanguage = (): void => {
     if (this.getChosenLanguage() === 'en') {
       this.lang = 'pl';
     } else {

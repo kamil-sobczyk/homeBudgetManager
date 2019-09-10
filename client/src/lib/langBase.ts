@@ -2,7 +2,6 @@ export const langBase = {
   en: {
     drawer: {
       addNewProduct: 'Add new product',
-
       addNewIncome: 'Add new income',
       addNewBill: 'Add new bill',
       showSpendings: 'Show spendings',
@@ -12,6 +11,27 @@ export const langBase = {
       },
       about: 'About',
       log: 'Logout'
+    },
+    list: {
+      searchBarText: 'Type item name',
+      categoryMenu: {
+        category: 'category',
+        all: 'all'
+      }
+    },
+    addShoppingItemDialog: {
+      title: 'Add a new product',
+      fields: {
+        newItem: 'New item name',
+        info: 'Additional Info',
+        category: 'Category',
+        newCategory: 'New Category'
+      },
+      buttons: {
+        cancel: 'Cancel',
+        ok: 'Add'
+      },
+      snackbar: 'Please provide category'
     }
   },
   pl: {
@@ -26,6 +46,27 @@ export const langBase = {
       },
       about: 'O aplikacji',
       log: 'Wyloguj'
+    },
+    list: {
+      searchBarText: 'Wpisz nazwę',
+      categoryMenu: {
+        category: 'Kategorie',
+        all: 'Wszystkie'
+      }
+    },
+    addShoppingItemDialog: {
+      title: 'Dodaj nowy produkt',
+      fields: {
+        newItem: 'Nazwa',
+        info: 'Dodatkowe info',
+        category: 'Kategoria',
+        newCategory: 'Nowa kategoria'
+      },
+      buttons: {
+        cancel: 'Anuluj',
+        ok: 'Dodaj'
+      },
+      snackbar: 'Wpisz kategorię'
     }
   }
 };

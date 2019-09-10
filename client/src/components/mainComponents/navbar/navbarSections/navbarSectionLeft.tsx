@@ -1,8 +1,4 @@
 import * as React from 'react';
-
-const usFlag = 'https://lipis.github.io/flag-icon-css/flags/4x3/um.svg';
-const plFlag = 'https://lipis.github.io/flag-icon-css/flags/4x3/pl.svg';
-
 import {
   TopAppBarSection,
   TopAppBarTitle,
@@ -12,6 +8,10 @@ import styled from 'styled-components';
 import { IconButton } from 'rmwc';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+
+const usFlag = 'https://lipis.github.io/flag-icon-css/flags/4x3/um.svg';
+const plFlag = 'https://lipis.github.io/flag-icon-css/flags/4x3/pl.svg';
+
 
 interface NavbarSectionLeftProps {
   toggleShowDrawer: () => boolean;

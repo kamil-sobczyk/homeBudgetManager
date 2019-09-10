@@ -62,8 +62,13 @@ export class ItemManagerClient {
   };
 
   getCategories = (): string[] => {
+    const langClient = this.store.languagesClient;
+    const langData = (langClient.getLangBase() as any)[
+      langClient.getChosenLanguage()
+    ];
+    
     const itemsCategories: string[] = [
-      'All',
+      langData.list.categoryMenu.all,
       ...extractCategories(this.store.items),
       ...extractCategories(this.store.selected)
     ];
@@ -97,7 +102,11 @@ export class ItemManagerClient {
         name: this.newItem.name,
         category: this.newItem.category
       };
-    } else if (target.name === 'category' && target.value !== 'New category') {
+    } else if (
+      target.name === 'category' &&
+      target.value !== 'New category' &&
+      target.value !== 'Nowa kategoria'
+    ) {
       this.newItem = {
         checked: false,
         id: String(Date.now()),

@@ -21,8 +21,12 @@ export const ListBox = observer(({ store }: StoreProps) => {
     calendarClient,
     costManagerClient,
     incomesManagerClient,
-    setItemsCategorized
+    languagesClient: {
+      getLangBase, getChosenLanguage
+    }
   } = store;
+  const langData = (getLangBase() as any)[getChosenLanguage()];
+
   return (
     <>
       <ListsContainer
@@ -42,6 +46,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         getChosenCategory={itemManagerClient.getChosenCategory}
         setChosenCategory={itemManagerClient.setChosenCategory}
         areItemsEditable={itemManagerClient.areItemsEditable}
+        langData={langData.list}
       />
       <DialogsContainer
         costs={costs}
@@ -55,6 +60,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
         calendarClient={calendarClient}
         costManagerClient={costManagerClient}
         incomesManagerClient={incomesManagerClient}
+        langData={langData}
       />
     </>
   );

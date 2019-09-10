@@ -7,7 +7,7 @@ import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
-import { Item } from '../../../lib/interfaces';
+import { Item, AddShoppingItemDialogLangData } from '../../../lib/interfaces';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 import { observable } from 'mobx';
@@ -22,6 +22,7 @@ interface AddShoppingItemDialogProps {
   visibleDialog: string;
   items: Item[];
   selected: Item[];
+  langData: AddShoppingItemDialogLangData;
 }
 
 @observer
@@ -52,44 +53,49 @@ export class AddShoppingItemDialog extends React.Component<
       changeNewItem,
       setVisibleDialog,
       visibleDialog,
-      getCategories
+      getCategories,
+      langData
     } = this.props;
+
+    const isNewCategoryChosen =
+      this.chosenCategory === 'New category' ||
+      this.chosenCategory === 'Nowa kategoria';
 
     return (
       <>
         <Dialog open={visibleDialog.includes('AddShoppingItemDialog')}>
-          <StyledDialogTitle>Add a new product</StyledDialogTitle>
+          <StyledDialogTitle>{langData.title}</StyledDialogTitle>
           <TextField
             defaultValue={''}
-            label='New item'
+            label={langData.fields.newItem}
             name='name'
             onChange={e => changeNewItem(e)}
             required
           />
           <TextField
             defaultValue={''}
-            label='Additional info'
+            label={langData.fields.info}
             name='info'
             onChange={e => changeNewItem(e)}
           />
-          {this.chosenCategory !== 'New category' && (
+          {!isNewCategoryChosen && (
             <Select
-              label='Category'
+              label={langData.fields.category}
               onChange={e => this.handleOptionClick(e)}
               required
               name='category'
               options={[
-                'New category',
+                langData.fields.newCategory,
                 ...getCategories().filter(
-                  (category: string) => category !== 'All'
+                  (category: string) => category !== 'All' && category !== 'Wszystkie'
                 )
               ]}
             />
           )}
-          {this.chosenCategory === 'New category' && (
+          {isNewCategoryChosen && (
             <TextField
               defaultValue={''}
-              label='New category'
+              label={langData.fields.newCategory}
               name='newCat'
               onChange={e => changeNewItem(e)}
               required
@@ -97,16 +103,16 @@ export class AddShoppingItemDialog extends React.Component<
           )}
           <DialogActions>
             <Button color='primary' onClick={() => setVisibleDialog()}>
-              Cancel
+              {langData.buttons.cancel}
             </Button>
             <Button color='primary' onClick={this.addNewItem}>
-              Add
+              {langData.buttons.ok}
             </Button>
           </DialogActions>
         </Dialog>
         <FailSnackbar
           showSnackbar={this.showFailSnackbar}
-          text='Please provide category'
+          text={langData.snackbar.text}
         />
       </>
     );

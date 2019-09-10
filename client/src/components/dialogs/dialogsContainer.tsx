@@ -7,7 +7,7 @@ import { EditItemDialog } from './itemManagementDialogs/editItemDialog';
 import { DeleteItemDialog } from './itemManagementDialogs/deleteItemDialog';
 import { SpendingsDialog } from './expensesDialogs/spendingsDialog';
 import { FinishShoppingDialog } from './expensesDialogs/finishShoppingDialog';
-import { Cost, Item, Income } from '../../lib/interfaces';
+import { Cost, Item, Income, LangData } from '../../lib/interfaces';
 import { Store } from '../../lib/mobx/rootStore';
 import { FailDialog } from './infoDialogs/failDialog';
 import { AddNewExpenseDialog } from './expensesDialogs/addNewExpenseDialog';
@@ -36,6 +36,7 @@ interface DialogsContainerProps {
   calendarClient: Store['calendarClient'];
   costManagerClient: Store['costManagerClient'];
   incomesManagerClient: Store['incomesManagerClient'];
+  langData: LangData;
 }
 
 export const DialogsContainer = observer(
@@ -52,7 +53,8 @@ export const DialogsContainer = observer(
     shoppingClient,
     calendarClient,
     costManagerClient,
-    incomesManagerClient
+    incomesManagerClient,
+    langData
   }: DialogsContainerProps) => (
     <>
       {visibleDialog === 'AddShoppingItemDialog' && (
@@ -64,6 +66,7 @@ export const DialogsContainer = observer(
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           getCategories={itemManagerClient.getCategories}
+          langData={langData.addShoppingItemDialog}
         />
       )}
       {visibleDialog === 'EditItemDialog' && (

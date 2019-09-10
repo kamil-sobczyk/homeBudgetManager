@@ -4,13 +4,14 @@ import { Drawer, DrawerHeader, DrawerTitle, DrawerContent } from '@rmwc/drawer';
 
 import { DrawerItems } from './drawerItems';
 import styled from 'styled-components';
+import { DrawerLangData } from '../../../../lib/interfaces';
 
 interface DrawerBarProps {
   toggleShowDrawer: () => boolean;
   setVisibleDialog: (dialog?: string) => void;
   toggleEditItems: () => void;
   showDrawer: boolean;
-  langData: {};
+  langData: DrawerLangData;
 }
 
 export class DrawerBar extends React.Component<DrawerBarProps, {}> {
@@ -22,6 +23,7 @@ export class DrawerBar extends React.Component<DrawerBarProps, {}> {
       toggleEditItems,
       langData
     } = this.props;
+    
     return (
       <Drawer modal open={showDrawer}>
         <DrawerHeader>

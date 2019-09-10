@@ -42,3 +42,54 @@ export interface Income {
 export interface StoreProps {
   store: Store;
 }
+
+export interface DrawerLangData {
+  addNewProduct: string;
+  addNewIncome: string;
+  addNewBill: string;
+  showSpendings: string;
+  turnEditing: {
+    on: string;
+    off: string;
+  };
+  about: string;
+  log: string;
+}
+
+interface DialogButtonsLangData {
+  cancel: string;
+  ok: string;
+}
+
+interface SnackbarLangData {
+  text: string;
+  button?: string;
+}
+
+export interface ListLangData {
+  searchBarText: string;
+  categoryMenu: {
+    category: string;
+    all: string;
+  };
+}
+
+export interface AddShoppingItemDialogLangData {
+  title: string;
+  fields: {
+    newItem: string;
+    info: string;
+    category: string;
+    newCategory: string;
+  };
+  buttons: DialogButtonsLangData;
+  snackbar: SnackbarLangData;
+}
+
+export interface LangData {
+  drawer: DrawerLangData;
+  list: ListLangData;
+  addShoppingItemDialog: AddShoppingItemDialogLangData;
+  buttons: DialogButtonsLangData;
+  snackbar: SnackbarLangData;
+}

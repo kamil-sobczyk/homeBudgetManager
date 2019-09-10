@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Item, ListType, Cost } from '../../lib/interfaces';
+import { Item, ListType, Cost, ListLangData } from '../../lib/interfaces';
 
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
@@ -28,6 +28,7 @@ interface ListsContainerProps {
   items: Item[];
   categorizedItems: Item[];
   showItems: boolean;
+  langData: ListLangData;
 }
 
 export const ListsContainer = observer(
@@ -45,7 +46,8 @@ export const ListsContainer = observer(
     setVisibleDialog,
     getChosenCategory,
     setChosenCategory,
-    areItemsEditable
+    areItemsEditable,
+    langData
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
@@ -64,6 +66,7 @@ export const ListsContainer = observer(
               getItems={getItems}
               showItems={showItems}
               areItemsEditable={areItemsEditable}
+              langData={langData}
             />
           )}
           <Selected

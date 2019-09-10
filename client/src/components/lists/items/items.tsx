@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { ListType, Item } from '../../../lib/interfaces';
+import { ListType, Item, ListLangData } from '../../../lib/interfaces';
 
 import { IconButton } from '@rmwc/icon-button';
 import '@rmwc/icon/icon.css';
@@ -18,9 +18,9 @@ import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerCl
 import { TextField } from '@rmwc/textfield';
 import { StyledContainer } from '../selected/selected';
 
-export const getCategories = (items: Item[]): string[] => {
+export const getCategories = (items: Item[], allLang: string): string[] => {
   const itemsCategories: string[] = [
-    'All',
+    allLang,
     ...items.map((item: Item) => {
       if (item && item.category) {
         return item.category;
@@ -41,6 +41,7 @@ interface ItemsProps {
   areItemsEditable: boolean;
   showItems: boolean;
   items: Item[];
+  langData: ListLangData;
 }
 
 @observer
@@ -63,8 +64,11 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   getCategorizedItems = () => {
     const { items, getChosenCategory } = this.props;
+    const areAllItemsChosen =
+      getChosenCategory('items') === 'All' ||
+      getChosenCategory('items') === 'Wszystkie';
 
-    if (getChosenCategory('items') !== 'All') {
+    if (!areAllItemsChosen) {
       return items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
@@ -79,6 +83,7 @@ export class Items extends React.Component<ItemsProps, {}> {
       setActiveItem,
       items,
       areItemsEditable,
+      langData
     } = this.props;
 
     return (
@@ -94,8 +99,9 @@ export class Items extends React.Component<ItemsProps, {}> {
               onClick={() => this.toggleSearchBar()}
             />
             <SortingMenu
-              categories={getCategories(items)}
+              categories={getCategories(items, langData.categoryMenu.all)}
               categorizeItems={this.categorizeItems}
+              buttonText={langData.categoryMenu.category}
             />
           </StyledListButtonsContainer>
         </StyledButtonsContainer>
@@ -108,6 +114,7 @@ export class Items extends React.Component<ItemsProps, {}> {
               provided={providedDroppable2}
               searchBarVisible={this.searchBarVisible}
               areItemsEditable={areItemsEditable}
+              langData={langData}
             />
           )}
         </Droppable>

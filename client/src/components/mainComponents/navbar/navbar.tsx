@@ -9,6 +9,7 @@ import {
 import { DrawerBar } from './drawer/drawer';
 import { NavbarSectionLeft } from './navbarSections/navbarSectionLeft';
 import { NavbarSectionRight } from './navbarSections/navbarSectionRight';
+import { DrawerLangData } from '../../../lib/interfaces';
 
 interface NavbarProps {
   toggleShowDrawer: () => boolean;
@@ -16,7 +17,7 @@ interface NavbarProps {
   toggleEditItems: () => void;
   toggleLanguage: () => void;
   showDrawer: boolean;
-  langData: {};
+  langData: DrawerLangData;
 }
 
 export class Navbar extends React.Component<NavbarProps, {}> {
