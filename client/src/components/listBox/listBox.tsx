@@ -25,7 +25,7 @@ export const ListBox = observer(({ store }: StoreProps) => {
       getLangBase, getChosenLanguage
     }
   } = store;
-  const langData = (getLangBase() as any)[getChosenLanguage()];
+  const langData = (getLangBase() as any)[getChosenLanguage()!];
 
   return (
     <>

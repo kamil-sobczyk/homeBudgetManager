@@ -50,7 +50,7 @@ export class App extends React.Component<{}, {}> {
               showDrawer={showDrawer}
               setVisibleDialog={setVisibleDialog}
               toggleEditItems={toggleEditItems}
-              langData={(getLangBase() as any)[getChosenLanguage()].drawer}
+              langData={(getLangBase() as any)[getChosenLanguage()!].drawer}
               toggleLanguage={toggleChosenLanguage}
             />
             <ListBox store={this.store} />

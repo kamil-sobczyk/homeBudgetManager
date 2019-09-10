@@ -64,9 +64,9 @@ export class ItemManagerClient {
   getCategories = (): string[] => {
     const langClient = this.store.languagesClient;
     const langData = (langClient.getLangBase() as any)[
-      langClient.getChosenLanguage()
+      langClient.getChosenLanguage()!
     ];
-    
+
     const itemsCategories: string[] = [
       langData.list.categoryMenu.all,
       ...extractCategories(this.store.items),
