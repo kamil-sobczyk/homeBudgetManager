@@ -80,6 +80,7 @@ export const DialogsContainer = observer(
           setOldItem={itemManagerClient.setOldItem}
           editItem={itemManagerClient.editItem}
           category={itemManagerClient.oldItem.category}
+          langData={langData.editItemDialog}
         />
       )}
       {visibleDialog === 'DeleteItemDialog' && (

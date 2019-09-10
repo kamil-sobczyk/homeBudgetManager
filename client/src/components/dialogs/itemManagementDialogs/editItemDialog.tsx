@@ -8,7 +8,7 @@ import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
-import { Item } from '../../../lib/interfaces';
+import { Item, EditItemDialogLangData } from '../../../lib/interfaces';
 
 interface EditItemDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -20,6 +20,7 @@ interface EditItemDialogProps {
   visibleDialog: string;
   name?: string;
   info?: string;
+  langData: EditItemDialogLangData;
 }
 
 @observer
@@ -82,29 +83,29 @@ export class EditItemDialog extends React.Component<EditItemDialogProps, {}> {
   };
 
   render() {
-    const { setVisibleDialog, visibleDialog } = this.props;
+    const { setVisibleDialog, visibleDialog, langData } = this.props;
 
     return (
       <Dialog open={visibleDialog === 'EditItemDialog'}>
-        <StyledDialogTitle>Edit product</StyledDialogTitle>
+        <StyledDialogTitle>{langData.title}</StyledDialogTitle>
         <TextField
-          label='Type new name'
+          label={langData.fields.newName}
           defaultValue={this.name}
           name='name'
           onChange={this.updateName}
         />
         <TextField
-          label='Type new info'
+          label={langData.fields.newInfo}
           defaultValue={this.info}
           name='info'
           onChange={this.updateInfo}
         />
         <DialogActions>
           <Button color='primary' onClick={() => setVisibleDialog()}>
-            Cancel
+            {langData.buttons.cancel}
           </Button>
           <Button color='primary' onClick={this.confirm}>
-            Confirm
+            {langData.buttons.ok}
           </Button>
         </DialogActions>
       </Dialog>

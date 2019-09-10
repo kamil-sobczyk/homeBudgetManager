@@ -32,6 +32,17 @@ export const langBase = {
         ok: 'Add'
       },
       snackbar: 'Please provide category'
+    },
+    editItemDialog: {
+      title: 'Edit product',
+      fields: {
+        newName: 'Type new name',
+        newInfo: 'Type new info'
+      },
+      buttons: {
+        cancel: 'Cancel',
+        ok: 'Confirm'
+      }
     }
   },
   pl: {
@@ -67,6 +78,17 @@ export const langBase = {
         ok: 'Dodaj'
       },
       snackbar: 'Wpisz kategorię'
+    },
+    editItemDialog: {
+      title: 'Edycja produktu',
+      fields: {
+        newName: 'Wpisz nową nazwę',
+        newInfo: 'Wpisz nowe info'
+      },
+      buttons: {
+        cancel: 'Anuluj',
+        ok: 'Zatwierdź'
+      }
     }
   }
 };

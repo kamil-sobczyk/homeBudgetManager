@@ -86,10 +86,23 @@ export interface AddShoppingItemDialogLangData {
   snackbar: SnackbarLangData;
 }
 
+export interface EditItemDialogLangData {
+  title: string;
+  fields: {
+    newName: string;
+    newInfo: string;
+  };
+  buttons: {
+    cancel: string;
+    ok: string;
+  };
+}
+
 export interface LangData {
   drawer: DrawerLangData;
   list: ListLangData;
   addShoppingItemDialog: AddShoppingItemDialogLangData;
   buttons: DialogButtonsLangData;
   snackbar: SnackbarLangData;
+  editItemDialog: EditItemDialogLangData;
 }
