@@ -1,8 +1,8 @@
 const config = {
   server: {
     host: 'localhost',
-    port: 3330,
-  },
+    port: 3330
+  }
 };
 
 const webpack = require('webpack');
@@ -10,8 +10,7 @@ const path = require('path');
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const env = process.env.NODE_ENV;
 const plugins = [];
@@ -23,13 +22,13 @@ if (env !== 'preproduction') {
         favicon: './src/lib/assets/favicon.ico',
         inject: true,
         templateParameters: {
-          userlane: env === 'production',
+          userlane: env === 'production'
         },
         template: `${path.resolve(
-          path.join(__dirname, 'web'),
-        )}/index/index.html`,
-      }),
-    ],
+          path.join(__dirname, 'web')
+        )}/index/index.html`
+      })
+    ]
   );
 }
 
@@ -38,28 +37,62 @@ if (env === 'production') {
     ...[
       new UglifyjsWebpackPlugin(),
       new CompressionPlugin({
-        test: /\.js(\?.*)?$/i,
-      }),
-    ],
+        test: /\.js(\?.*)?$/i
+      })
+    ]
   );
 }
 
-plugins.push(...[
-  new webpack.DefinePlugin({
-    GLOBAL_ENV: JSON.stringify(env),
-  }),
-  new webpack.debug.ProfilingPlugin(),
-  new BundleAnalyzerPlugin(),
-]);
+plugins.push(
+  ...[
+    new webpack.DefinePlugin({
+      GLOBAL_ENV: JSON.stringify(env)
+    }),
+    new webpack.debug.ProfilingPlugin(),
+    new BundleAnalyzerPlugin()
+  ]
+);
 
 module.exports = {
   entry: {
-    app: './src/index',
+    app: './src/index'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          test: path.resolve(process.cwd(), 'node_modules'),
+          name: 'vendor',
+          enforce: true
+        }
+      }
+    },
+    minimizer: [
+      new UglifyjsWebpackPlugin({
+        uglifyOptions: {
+          sourceMap: true,
+          compress: {
+            drop_console: true,
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            dead_code: true,
+            if_return: true,
+            join_vars: true,
+            warnings: false
+          },
+          output: {
+            comments: false
+          }
+        }
+      })
+    ]
   },
   mode: env === 'production' ? 'production' : 'development',
   output: {
     filename: `[name]${env === 'production' ? '.min' : ''}.js`,
-    path: path.resolve(path.join(__dirname, 'public')),
+    path: path.resolve(path.join(__dirname, 'public'))
   },
   devtool: env !== 'production' && 'source-map',
   devServer: {
@@ -68,11 +101,11 @@ module.exports = {
     open: true,
     historyApiFallback: true,
     disableHostCheck: true,
-    contentBase: path.join(__dirname, 'public'),
+    contentBase: path.join(__dirname, 'public')
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
-    modules: [path.join(__dirname, 'node_modules')],
+    modules: [path.join(__dirname, 'node_modules')]
   },
   module: {
     rules: [
@@ -80,17 +113,17 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         options: {
-          allowTsInNodeModules: true,
-        },
+          allowTsInNodeModules: true
+        }
       },
       {
         test: /\.scss$/,
         enforce: 'pre',
-        loaders: ['import-glob-loader2'],
+        loaders: ['import-glob-loader2']
       },
       {
         test: /\.s?css$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(gif|png|jpe?g)$/i,
@@ -98,12 +131,12 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 128000,
-            },
-          },
-        ],
-      },
-    ],
+              limit: 128000
+            }
+          }
+        ]
+      }
+    ]
   },
-  plugins,
+  plugins
 };
