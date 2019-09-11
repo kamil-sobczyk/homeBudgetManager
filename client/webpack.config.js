@@ -10,6 +10,8 @@ const path = require('path');
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const env = process.env.NODE_ENV;
 const plugins = [];
@@ -46,6 +48,8 @@ plugins.push(...[
   new webpack.DefinePlugin({
     GLOBAL_ENV: JSON.stringify(env),
   }),
+  new webpack.debug.ProfilingPlugin(),
+  new BundleAnalyzerPlugin(),
 ]);
 
 module.exports = {
