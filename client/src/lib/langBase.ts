@@ -52,6 +52,13 @@ export const langBase = {
         cancel: 'No',
         ok: 'Yes'
       }
+    },
+    spendingsDialog: {
+      title: 'Expenses you made',
+      monthSpendingsTitle: ' - you spent: ',
+      buttons: {
+        ok: 'Close'
+      }
     }
   },
   pl: {
@@ -106,6 +113,13 @@ export const langBase = {
       buttons: {
         cancel: 'Nie',
         ok: 'Tak'
+      }
+    },
+    spendingsDialog: {
+      title: 'Twoje wydatki',
+      monthSpendingsTitle: ' wydałeś ',
+      buttons: {
+        ok: 'Zamknij'
       }
     }
   }

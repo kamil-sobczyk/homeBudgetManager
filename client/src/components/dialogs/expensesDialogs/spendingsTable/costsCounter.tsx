@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import { Cost, CostCategoryType } from '../../../../lib/interfaces';
+import {
+  Cost,
+  CostCategoryType,
+  SpendingsDialogLangData
+} from '../../../../lib/interfaces';
 
 import { Typography } from '@rmwc/typography';
 
@@ -78,16 +82,17 @@ type CostCounterTime = string | Date;
 interface CostsCounterProps {
   costs: Cost[];
   time: CostCounterTime;
+  langData?: SpendingsDialogLangData['monthSpendingsTitle'];
 }
 
 export class CostsCounter extends React.Component<CostsCounterProps, {}> {
   render() {
-    const { costs, time } = this.props;
+    const { costs, time, langData } = this.props;
 
     return (
       <>
         <StyledTypography use='subtitle1'>
-          {time === 'month' ? 'This month' : time} you spent:
+          {time === 'month' ? time : ''}
         </StyledTypography>
         <StyledLegendContainer>
           {costCounterItems.map((item: CostCounterItem) => (

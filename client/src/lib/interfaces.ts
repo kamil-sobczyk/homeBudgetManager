@@ -108,6 +108,14 @@ export interface DeleteItemDialogLangData {
   };
 }
 
+export interface SpendingsDialogLangData {
+  title: string;
+  monthSpendingsTitle: string;
+  buttons: {
+    ok: string;
+  };
+}
+
 export interface LangData {
   drawer: DrawerLangData;
   list: ListLangData;
@@ -116,4 +124,5 @@ export interface LangData {
   snackbar: SnackbarLangData;
   editItemDialog: EditItemDialogLangData;
   deleteItemDialog: DeleteItemDialogLangData;
+  spendingsDialog: SpendingsDialogLangData;
 }

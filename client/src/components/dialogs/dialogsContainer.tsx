@@ -100,6 +100,7 @@ export const DialogsContainer = observer(
           setVisibleDialog={setVisibleDialog}
           visibleDialog={visibleDialog}
           setChosenCost={shoppingClient.setChosenCost}
+          langData={langData.spendingsDialog}
         />
       )}
       {visibleDialog.includes('ChartDialog') && (

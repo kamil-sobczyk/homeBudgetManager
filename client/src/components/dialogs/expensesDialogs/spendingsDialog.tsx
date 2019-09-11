@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
-import { Cost } from '../../../lib/interfaces';
+import { Cost, SpendingsDialogLangData } from '../../../lib/interfaces';
 
 import {
   Dialog,
@@ -23,6 +23,7 @@ interface SpendingsDialogProps {
   getCosts: () => void;
   costs: Cost[];
   setChosenCost: (cost: Cost) => Cost;
+  langData: SpendingsDialogLangData;
 }
 
 export const SpendingsDialog = observer(
@@ -31,13 +32,14 @@ export const SpendingsDialog = observer(
     costs,
     setVisibleDialog,
     visibleDialog,
-    setChosenCost
+    setChosenCost,
+    langData
   }: SpendingsDialogProps) => (
     <StyledDialog
       open={visibleDialog === 'SpendingsDialog'}
       aria-label='shopping-you-made'
     >
-      <StyledDialogTitle>Spendings you made</StyledDialogTitle>
+      <StyledDialogTitle>{langData.title}</StyledDialogTitle>
       <Legend />
       <StyledDialogContent>
         <TableContainer
@@ -48,7 +50,7 @@ export const SpendingsDialog = observer(
           setChosenCost={setChosenCost}
         />
       </StyledDialogContent>
-      <CostsCounter costs={costs} time='month' />
+      <CostsCounter costs={costs} time='month' langData={langData.monthSpendingsTitle}/>
       <DialogActions>
         <Button
           color='primary'
@@ -56,7 +58,7 @@ export const SpendingsDialog = observer(
           onClick={() => setVisibleDialog('ChartDialog')}
         />
         <Button onClick={() => setVisibleDialog()} color='primary'>
-          Close
+          {langData.buttons.ok}
         </Button>
       </DialogActions>
     </StyledDialog>
