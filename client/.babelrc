@@ -1,0 +1,13 @@
+{
+  "presets": ["@babel/env", "@babel/typescript", "@babel/react"],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
+    ["@babel/proposal-class-properties", { "loose": true, "modules": false }]
+  ]
+}
