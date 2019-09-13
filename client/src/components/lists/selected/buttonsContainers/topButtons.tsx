@@ -12,16 +12,22 @@ import { SortingMenu } from '../../sortingMenu';
 import { ListType, Item } from '../../../../lib/interfaces';
 
 interface SelectedTopButtonsProps {
-    setVisibleDialog: (dialog?: string) => void;
-    setChosenCategory: (list: ListType, category: string) => void;
-    selected: Item[];
+  setVisibleDialog: (dialog?: string) => void;
+  setChosenCategory: (list: ListType, category: string) => void;
+  selected: Item[];
+  updateList: () => void;
 }
 
 @observer
-export class SelectedTopButtons extends React.Component<any, {}> {
+export class SelectedTopButtons extends React.Component<
+  SelectedTopButtonsProps,
+  {}
+> {
   categorizeItems = (category: string): void => {
-    this.props.setChosenCategory('selected', category);
-    this.forceUpdate();
+    const { updateList, setChosenCategory } = this.props;
+
+    setChosenCategory('selected', category);
+    updateList();
   };
 
   render() {

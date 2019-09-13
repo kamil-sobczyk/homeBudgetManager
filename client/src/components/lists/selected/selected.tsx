@@ -33,6 +33,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
     this.props.getSelected();
   };
 
+  updateList = () => this.forceUpdate();
+
   getCategorizedItems = () => {
     const { selected, getChosenCategory } = this.props;
     if (getChosenCategory('selected') !== 'All') {
@@ -60,6 +62,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
           setVisibleDialog={setVisibleDialog}
           selected={selected}
           setChosenCategory={setChosenCategory}
+          updateList={this.updateList}
         />
         <StyledDroppable droppableId='droppable'>
           {provided => (
