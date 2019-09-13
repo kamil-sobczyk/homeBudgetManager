@@ -22,6 +22,9 @@ export class ProvidedSelected extends React.Component<
   ProvidedSelectedProps,
   {}
 > {
+  shouldComponentUpdate = (oldProps: ProvidedSelectedProps) =>
+  this.props.selected !== oldProps.selected;
+
   render() {
     const {
       selected,

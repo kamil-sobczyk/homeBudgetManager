@@ -3,6 +3,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+
 import { ListType, Item } from '../../../../lib/interfaces';
 
 import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
@@ -10,7 +12,6 @@ import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
 import { TextField } from '@rmwc/textfield';
 
 import { ProvidedItemsDraggable } from './providedItemsDraggable';
-import { observable } from 'mobx';
 
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -24,6 +25,9 @@ interface ProvidedItemsProps {
 @observer
 export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   @observable text = '';
+
+  shouldComponentUpdate = (oldProps: ProvidedItemsProps) =>
+  this.props.items !== oldProps.items;
 
   setText = (event: React.FormEvent<EventTarget>) => {
     const target = event.target as HTMLInputElement;

@@ -7,15 +7,12 @@ import styled from 'styled-components';
 
 import {
   ListItem,
-  ListItemText,
-  ListItemPrimaryText,
-  ListItemSecondaryText,
   ListDivider
 } from '@rmwc/list';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
 
-import { MoreMenu } from '../moreMenu';
+import { ListSingleItem } from '../../item';
 
 interface ProvidedItemsDraggableProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -48,22 +45,13 @@ export class ProvidedItemsDraggable extends React.Component<
           {...providedDraggable2.draggableProps}
           {...providedDraggable2.dragHandleProps}
         >
-          <StyledItem key={index}>
-            {areItemsEditable && (
-              <MoreMenu
-                item={item}
-                setVisibleDialog={setVisibleDialog}
-                setActiveItem={setActiveItem}
-              />
-            )}
-            <StyledTextContainer>
-              <ListItemText>
-                <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
-                <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
-              </ListItemText>
-            </StyledTextContainer>
-            <div />
-          </StyledItem>
+          <ListSingleItem
+            setActiveItem={setActiveItem}
+            setVisibleDialog={setVisibleDialog}
+            areItemsEditable={areItemsEditable}
+            item={item}
+            index={index}
+          />
           <ListDivider />
         </div>
         {providedDraggable2.placeholder}
@@ -82,7 +70,6 @@ export const StyledItem = styled(ListItem)`
 export const StyledTextContainer = styled.div`
   min-width: 250px;
   width: 100%;
-  /* max-width: 50vw; */
   display: flex;
   justify-content: space-between;
 `;
