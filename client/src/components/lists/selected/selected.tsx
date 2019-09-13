@@ -1,16 +1,15 @@
 import * as React from 'react';
 
-import { observer } from 'mobx-react';
-import { Item, ListType, Cost } from '../../../lib/interfaces';
+import styled from 'styled-components';
 
+import { observer } from 'mobx-react';
+
+import { IconButton } from '@rmwc/icon-button';
 import { Droppable } from 'react-beautiful-dnd';
 
+import { Item, ListType } from '../../../lib/interfaces';
 import { ProvidedSelected } from './provided/providedSelected';
-import { StyledListButtonsContainer, getCategories } from '../items/items';
-import { StyledButtonsContainer } from '../../listBox/listsContainer';
-import { IconButton } from '@rmwc/icon-button';
-import styled from 'styled-components';
-import { SortingMenu } from '../sortingMenu';
+import { SelectedTopButtons } from './buttonsContainers/topButtons';
 
 interface StyledContainerProps {
   showItems?: boolean;
@@ -34,11 +33,6 @@ export class Selected extends React.Component<SelectedProps, {}> {
     this.props.getSelected();
   };
 
-  categorizeItems = (category: string): void => {
-    this.props.setChosenCategory('selected', category);
-    this.forceUpdate();
-  };
-
   getCategorizedItems = () => {
     const { selected, getChosenCategory } = this.props;
     if (getChosenCategory('selected') !== 'All') {
@@ -56,23 +50,17 @@ export class Selected extends React.Component<SelectedProps, {}> {
       toggleCheckItems,
       setVisibleDialog,
       selected,
-      areItemsEditable
+      areItemsEditable,
+      setChosenCategory
     } = this.props;
 
     return (
       <StyledContainer showItems>
-        <StyledButtonsContainer>
-          <StyledListButtonsContainer>
-            <StyledFinishShoppingButton
-              onClick={() => setVisibleDialog('FinishShoppingDialog')}
-              icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
-            />
-            <SortingMenu
-              categories={getCategories(selected)}
-              categorizeItems={this.categorizeItems}
-            />
-          </StyledListButtonsContainer>
-        </StyledButtonsContainer>
+        <SelectedTopButtons
+          setVisibleDialog={setVisibleDialog}
+          selected={selected}
+          setChosenCategory={setChosenCategory}
+        />
         <StyledDroppable droppableId='droppable'>
           {provided => (
             <ProvidedSelected
@@ -104,5 +92,5 @@ const StyledFinishShoppingButton = styled(IconButton)`
 `;
 
 const StyledDroppable = styled(Droppable)`
-width: 100%;
-`
+  width: 100%;
+`;
