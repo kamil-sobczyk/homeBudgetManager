@@ -6,7 +6,7 @@ const sortByCheckedValue = items => {
   items.forEach(item =>
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
-  return [...checkedItems, ...uncheckedItems];
+  return [...uncheckedItems, ...checkedItems];
 };
 
 const newUserProfile = id => {
