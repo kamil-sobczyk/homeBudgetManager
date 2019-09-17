@@ -8,12 +8,20 @@ import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 import ReactTable, { FinalState, RowInfo } from 'react-table';
 
 const getRowColor = (category: CostCategoryType) => {
-  if (category === 'shopping') return 'black';
-  else if (category === 'bill') return 'blue';
-  else if (category === 'health') return 'green';
-  else if (category === 'car') return 'red';
-  else if (category === 'other') return 'grey';
-  else return 'yellow';
+  switch (category) {
+    case 'shopping':
+      return 'black';
+    case 'bill':
+      return 'blue';
+    case 'health':
+      return 'green';
+    case 'car':
+      return 'red';
+    case 'other':
+      return 'grey';
+    default:
+      return 'yellow';
+  }
 };
 
 const columns = [
