@@ -27,7 +27,8 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
   @observable text = '';
 
   shouldComponentUpdate = (oldProps: ProvidedItemsProps) =>
-  this.props.items !== oldProps.items;
+    this.props.items !== oldProps.items ||
+    this.props.searchBarVisible !== oldProps.searchBarVisible;
 
   setText = (event: React.FormEvent<EventTarget>) => {
     const target = event.target as HTMLInputElement;

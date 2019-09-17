@@ -89,11 +89,6 @@ export const StyledContainer = styled.div`
   margin: 5px;
 `;
 
-const StyledFinishShoppingButton = styled(IconButton)`
-  color: #0d49aa;
-  padding: 0;
-`;
-
 const StyledDroppable = styled(Droppable)`
   width: 100%;
 `;

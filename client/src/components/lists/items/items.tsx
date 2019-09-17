@@ -1,22 +1,21 @@
 import * as React from 'react';
 
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+
 import styled from 'styled-components';
 
-import { observer } from 'mobx-react';
 import { ListType, Item } from '../../../lib/interfaces';
 
-import { IconButton } from '@rmwc/icon-button';
 import '@rmwc/icon/icon.css';
+import { TextField } from '@rmwc/textfield';
 
 import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
-import { StyledButtonsContainer } from '../../listBox/listsContainer';
-import { SortingMenu } from '../sortingMenu';
-import { observable } from 'mobx';
-import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
-import { TextField } from '@rmwc/textfield';
 import { StyledContainer } from '../selected/selected';
+import { ItemsTopButtons } from './buttonsContainers/topButtons';
+import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
@@ -51,6 +50,8 @@ export class Items extends React.Component<ItemsProps, {}> {
     this.props.getItems();
   };
 
+  updateList = () => this.forceUpdate();
+
   toggleSearchBar = () => {
     this.searchBarVisible = !this.searchBarVisible;
     this.forceUpdate();
@@ -79,26 +80,18 @@ export class Items extends React.Component<ItemsProps, {}> {
       setActiveItem,
       items,
       areItemsEditable,
+      setChosenCategory
     } = this.props;
 
     return (
       <StyledContainer showItems>
-        <StyledButtonsContainer>
-          <StyledListButtonsContainer>
-            <StyledAddShoppingItemIconButton
-              onClick={() => setVisibleDialog('AddShoppingItemDialog')}
-              icon={{ icon: 'add_circle', size: 'xlarge' }}
-            />
-            <StyledSearchButton
-              icon={{ icon: 'search', size: 'xlarge' }}
-              onClick={() => this.toggleSearchBar()}
-            />
-            <SortingMenu
-              categories={getCategories(items)}
-              categorizeItems={this.categorizeItems}
-            />
-          </StyledListButtonsContainer>
-        </StyledButtonsContainer>
+        <ItemsTopButtons
+          items={items}
+          toggleSearchBar={this.toggleSearchBar}
+          setVisibleDialog={setVisibleDialog}
+          setChosenCategory={setChosenCategory}
+          updateList={this.updateList}
+        />
         <Droppable droppableId='droppable2'>
           {providedDroppable2 => (
             <ProvidedItems
@@ -115,16 +108,6 @@ export class Items extends React.Component<ItemsProps, {}> {
     );
   }
 }
-
-const StyledAddShoppingItemIconButton = styled(IconButton)`
-  color: #4cad4f;
-  padding: 0;
-`;
-
-const StyledSearchButton = styled(IconButton)`
-  padding: 0;
-  color: darkblue;
-`;
 
 export const StyledListButtonsContainer = styled.div`
   display: flex;
