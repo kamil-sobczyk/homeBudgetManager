@@ -46,7 +46,6 @@ interface ItemsProps {
 export class Items extends React.Component<ItemsProps, {}> {
   @observable searchBarVisible: boolean = false;
   @observable page: number = 1;
-  @observable maxPage: number = this.props.items.length / 10;
 
   componentDidMount = () => {
     this.props.getItems();
@@ -56,26 +55,37 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   setNextPage = () => {
     this.page <= this.maxPage ? this.page++ : null;
-    console.log(this.maxPage);
-    this.forceUpdate();
+    this.updateList();
   };
 
   setPrevPage = () => {
     this.page > 1 ? this.page-- : null;
-    this.forceUpdate();
+    this.updateList();
   };
+
+  setMaxPage = (items: Item[]): void => {
+
+    console.log((items.length % 10));
+    if (items.length % 10 !== 0) {
+      this.maxPage = items.length / 10;
+    } else {
+      this.maxPage = items.length / 10 - 10;
+    }
+  };
+
+  @observable maxPage: number = this.props.items.length / 10;
 
   paginateItems = (items: Item[], startIndex: number) =>
     items.slice(startIndex, startIndex + 10);
 
   toggleSearchBar = () => {
     this.searchBarVisible = !this.searchBarVisible;
-    this.forceUpdate();
+    this.updateList();
   };
 
   categorizeItems = (category: string): void => {
     this.props.setChosenCategory('items', category);
-    this.forceUpdate();
+    this.updateList();
   };
 
   getCategorizedItems = () => {
@@ -86,6 +96,8 @@ export class Items extends React.Component<ItemsProps, {}> {
       const filteredItems = items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
+      this.setMaxPage(filteredItems)
+     
       return this.paginateItems(filteredItems, startIndex);
     } else {
       return this.paginateItems(items, startIndex);
@@ -101,7 +113,7 @@ export class Items extends React.Component<ItemsProps, {}> {
       setChosenCategory
     } = this.props;
 
-    this.maxPage = this.props.items.length / 10;
+    this.setMaxPage(this.props.items);
 
     return (
       <StyledContainer showItems>
