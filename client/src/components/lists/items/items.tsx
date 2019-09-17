@@ -64,8 +64,6 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
 
   setMaxPage = (items: Item[]): void => {
-
-    console.log((items.length % 10));
     if (items.length % 10 !== 0) {
       this.maxPage = items.length / 10;
     } else {
@@ -96,8 +94,8 @@ export class Items extends React.Component<ItemsProps, {}> {
       const filteredItems = items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
-      this.setMaxPage(filteredItems)
-     
+      this.setMaxPage(filteredItems);
+
       return this.paginateItems(filteredItems, startIndex);
     } else {
       return this.paginateItems(items, startIndex);
