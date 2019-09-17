@@ -51,7 +51,7 @@ export class AddNewIncomeDialog extends React.Component<
           required
         />
         <TextField
-          label='Cost'
+          label='Amount'
           defaultValue={''}
           onChange={e => changeNewIncomeCounter(e)}
           type='number'
