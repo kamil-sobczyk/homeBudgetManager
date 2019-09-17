@@ -45,12 +45,25 @@ interface ItemsProps {
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
   @observable searchBarVisible: boolean = false;
+  @observable page: number = 1;
+  @observable maxPage: number = this.props.items.length / 10;
 
   componentDidMount = () => {
     this.props.getItems();
   };
 
   updateList = () => this.forceUpdate();
+
+  setNextPage = () => {
+    this.page <= this.maxPage ? this.page++ : null;
+    console.log(this.maxPage);
+    this.forceUpdate();
+  };
+
+  setPrevPage = () => {
+    this.page > 1 ? this.page-- : null;
+    this.forceUpdate();
+  };
 
   toggleSearchBar = () => {
     this.searchBarVisible = !this.searchBarVisible;
@@ -64,13 +77,14 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   getCategorizedItems = () => {
     const { items, getChosenCategory } = this.props;
+    const startIndex = (this.page - 1) * 10;
 
     if (getChosenCategory('items') !== 'All') {
       return items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
     } else {
-      return items;
+      return items.slice(startIndex, startIndex + 10);
     }
   };
 
@@ -82,6 +96,8 @@ export class Items extends React.Component<ItemsProps, {}> {
       areItemsEditable,
       setChosenCategory
     } = this.props;
+
+    this.maxPage = this.props.items.length / 10;
 
     return (
       <StyledContainer showItems>
@@ -104,7 +120,11 @@ export class Items extends React.Component<ItemsProps, {}> {
             />
           )}
         </Droppable>
-        <ItemsBottomButtons/>
+        <ItemsBottomButtons
+          setNextPage={this.setNextPage}
+          setPrevPage={this.setPrevPage}
+          currentPage={this.page}
+        />
       </StyledContainer>
     );
   }

@@ -11,7 +11,11 @@ import { IconButton } from '@rmwc/icon-button';
 import { StyledListButtonsContainer, getCategories } from '../../items/items';
 import { StyledButtonsContainer } from '../../../listBox/listsContainer';
 
-interface ItemsBottomButtonsProps {}
+interface ItemsBottomButtonsProps {
+  setNextPage: () => void;
+  setPrevPage: () => void;
+  currentPage: number;
+}
 
 @observer
 export class ItemsBottomButtons extends React.Component<
@@ -19,10 +23,12 @@ export class ItemsBottomButtons extends React.Component<
   {}
 > {
   render() {
+    const { setNextPage, setPrevPage, currentPage } = this.props;
     return (
       <StyledPaginationContainer>
-        <IconButton icon='navigate_before' />
-        <IconButton icon='navigate_next' />
+        <IconButton icon='navigate_before' onClick={setPrevPage} />
+        <span>{currentPage}</span>
+        <IconButton icon='navigate_next' onClick={setNextPage} />
       </StyledPaginationContainer>
     );
   }
@@ -34,4 +40,5 @@ export const StyledPaginationContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: -45px;
 `;
