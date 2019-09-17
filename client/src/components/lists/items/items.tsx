@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { ListType, Item } from '../../../lib/interfaces';
 
 import '@rmwc/icon/icon.css';
-import { TextField } from '@rmwc/textfield';
 
 import { Droppable } from 'react-beautiful-dnd';
 
@@ -16,6 +15,7 @@ import { ProvidedItems } from './provided/providedItems';
 import { StyledContainer } from '../selected/selected';
 import { ItemsTopButtons } from './buttonsContainers/topButtons';
 import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
+import { ItemsBottomButtons } from './buttonsContainers/bottomButtons';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
@@ -104,6 +104,7 @@ export class Items extends React.Component<ItemsProps, {}> {
             />
           )}
         </Droppable>
+        <ItemsBottomButtons/>
       </StyledContainer>
     );
   }
@@ -115,8 +116,4 @@ export const StyledListButtonsContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-`;
-
-const StyledTextField = styled(TextField)`
-  max-width: 30%;
 `;

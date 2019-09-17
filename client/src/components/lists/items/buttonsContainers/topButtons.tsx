@@ -32,7 +32,6 @@ export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
   render() {
     const { setVisibleDialog, items, toggleSearchBar } = this.props;
     return (
-      <StyledButtonsContainer>
         <StyledListButtonsContainer>
           <StyledAddShoppingItemIconButton
             onClick={() => setVisibleDialog('AddShoppingItemDialog')}
@@ -47,7 +46,6 @@ export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
             categorizeItems={this.categorizeItems}
           />
         </StyledListButtonsContainer>
-      </StyledButtonsContainer>
     );
   }
 }
