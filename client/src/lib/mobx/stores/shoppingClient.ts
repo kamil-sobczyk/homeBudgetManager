@@ -45,10 +45,12 @@ export class ShoppingClient {
       info: this.info.length > 0 ? this.info : undefined
     };
 
-    this.store.costs.unshift(billCost);
-    this.store.calendarClient.datePicked = '';
-    this.store.apiClient.addCostOnServer(billCost);
-    this.store.visibilityClient.setVisibleDialog();
+    if (billCost.chosenItems.length && billCost.count > 0) {
+      this.store.costs.unshift(billCost);
+      this.store.calendarClient.datePicked = '';
+      this.store.apiClient.addCostOnServer(billCost);
+      this.store.visibilityClient.setVisibleDialog();
+    }
   };
 
   changeShoppingItems = (event: React.FormEvent<EventTarget>): void => {
