@@ -65,6 +65,9 @@ export class Items extends React.Component<ItemsProps, {}> {
     this.forceUpdate();
   };
 
+  paginateItems = (items: Item[], startIndex: number) =>
+    items.slice(startIndex, startIndex + 10);
+
   toggleSearchBar = () => {
     this.searchBarVisible = !this.searchBarVisible;
     this.forceUpdate();
@@ -80,11 +83,12 @@ export class Items extends React.Component<ItemsProps, {}> {
     const startIndex = (this.page - 1) * 10;
 
     if (getChosenCategory('items') !== 'All') {
-      return items.filter(
+      const filteredItems = items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
+      return this.paginateItems(filteredItems, startIndex);
     } else {
-      return items.slice(startIndex, startIndex + 10);
+      return this.paginateItems(items, startIndex);
     }
   };
 
