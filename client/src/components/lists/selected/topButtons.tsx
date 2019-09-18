@@ -6,10 +6,10 @@ import { observer } from 'mobx-react';
 
 import { IconButton } from '@rmwc/icon-button';
 
-import { StyledListButtonsContainer, getCategories } from '../../items/items';
-import { StyledButtonsContainer } from '../../../listBox/listsContainer';
-import { SortingMenu } from '../../sortingMenu';
-import { ListType, Item } from '../../../../lib/interfaces';
+import { StyledListButtonsContainer, getCategories } from '../items/items';
+import { StyledButtonsContainer } from '../../listBox/listsContainer';
+import { SortingMenu } from '../sortingMenu';
+import { ListType, Item } from '../../../lib/interfaces';
 
 interface SelectedTopButtonsProps {
   setVisibleDialog: (dialog?: string) => void;

@@ -80,6 +80,7 @@ export const ListsContainer = observer(
             getSelected={getSelected}
             showItems={showItems}
             areItemsEditable={areItemsEditable}
+            pagesManager={pagesManager}
           />
         </DragDropContext>
       </StyledListContainer>

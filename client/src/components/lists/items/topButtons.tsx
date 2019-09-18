@@ -4,13 +4,12 @@ import { observer } from 'mobx-react';
 
 import styled from 'styled-components';
 
-import { ListType, Item } from '../../../../lib/interfaces';
+import { ListType, Item } from '../../../lib/interfaces';
 
 import { IconButton } from '@rmwc/icon-button';
 
-import { StyledListButtonsContainer, getCategories } from '../../items/items';
-import { StyledButtonsContainer } from '../../../listBox/listsContainer';
-import { SortingMenu } from '../../sortingMenu';
+import { StyledListButtonsContainer, getCategories } from './items';
+import { SortingMenu } from '../sortingMenu';
 
 interface ItemsTopButtonsProps {
   setVisibleDialog: (dialog?: string) => void;

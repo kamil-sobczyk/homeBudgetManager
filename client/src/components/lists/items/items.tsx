@@ -13,9 +13,9 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import { ProvidedItems } from './provided/providedItems';
 import { StyledContainer } from '../selected/selected';
-import { ItemsTopButtons } from './buttonsContainers/topButtons';
+import { ItemsTopButtons } from './topButtons';
 import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
-import { ItemsBottomButtons } from './buttonsContainers/bottomButtons';
+import { BottomButtons } from '../bottomButtons';
 import { PagesManagerClient } from '../../../lib/mobx/stores/pagesManagerClient';
 
 export const getCategories = (items: Item[]): string[] => {
@@ -55,6 +55,39 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   updateList = (): void => this.forceUpdate();
 
+  getCategorizedItems = (): Item[] => {
+    const { items, getChosenCategory, pagesManager } = this.props;
+    const startIndex = (pagesManager.getChosenPage(this.list) - 1) * 10;
+
+    if (getChosenCategory(this.list) !== 'All') {
+      const filteredItems = items.filter(
+        (item: Item) => item.category === getChosenCategory(this.list)
+      );
+      pagesManager.setMaxPage(this.list, filteredItems);
+
+      return this.paginateItems(filteredItems, startIndex);
+    } else {
+      return this.paginateItems(items, startIndex);
+    }
+  };
+
+  setChosenCategory = (list: ListType, category: string): void => {
+    const { setChosenCategory, pagesManager } = this.props;
+
+    setChosenCategory(list, category);
+    pagesManager.setChosenPage(this.list, 1);
+  };
+
+  toggleSearchBar = (): void => {
+    this.searchBarVisible = !this.searchBarVisible;
+    this.updateList();
+  };
+
+  categorizeItems = (category: string): void => {
+    this.props.setChosenCategory('items', category);
+    this.updateList();
+  };
+
   setNextPage = (): void => {
     const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
 
@@ -72,39 +105,6 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   paginateItems = (items: Item[], startIndex: number): Item[] =>
     items.slice(startIndex, startIndex + 10);
-
-  toggleSearchBar = (): void => {
-    this.searchBarVisible = !this.searchBarVisible;
-    this.updateList();
-  };
-
-  categorizeItems = (category: string): void => {
-    this.props.setChosenCategory('items', category);
-    this.updateList();
-  };
-
-  getCategorizedItems = (): Item[] => {
-    const { items, getChosenCategory, pagesManager } = this.props;
-    const startIndex = (pagesManager.getChosenPage(this.list) - 1) * 10;
-
-    if (getChosenCategory('items') !== 'All') {
-      const filteredItems = items.filter(
-        (item: Item) => item.category === getChosenCategory('items')
-      );
-      pagesManager.setMaxPage(this.list, filteredItems);
-
-      return this.paginateItems(filteredItems, startIndex);
-    } else {
-      return this.paginateItems(items, startIndex);
-    }
-  };
-
-  setChosenCategory = (list: ListType, category: string): void => {
-    const { setChosenCategory, pagesManager } = this.props;
-
-    setChosenCategory(list, category);
-    pagesManager.setChosenPage(this.list, 1);
-  };
 
   render() {
     const {
@@ -138,7 +138,7 @@ export class Items extends React.Component<ItemsProps, {}> {
             />
           )}
         </Droppable>
-        <ItemsBottomButtons
+        <BottomButtons
           setNextPage={this.setNextPage}
           setPrevPage={this.setPrevPage}
           currentPage={pagesManager.getChosenPage(this.list)}

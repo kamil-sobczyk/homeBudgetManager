@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 import { observer } from 'mobx-react';
 
-import { IconButton } from '@rmwc/icon-button';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { Item, ListType } from '../../../lib/interfaces';
 import { ProvidedSelected } from './provided/providedSelected';
-import { SelectedTopButtons } from './buttonsContainers/topButtons';
+import { SelectedTopButtons } from './topButtons';
+import { PagesManagerClient } from '../../../lib/mobx/stores/pagesManagerClient';
+import { BottomButtons } from '../bottomButtons';
 
 interface StyledContainerProps {
   showItems?: boolean;
@@ -25,26 +26,55 @@ interface SelectedProps {
   areItemsEditable: boolean;
   showItems: boolean;
   selected: Item[];
+  pagesManager: PagesManagerClient;
 }
 
 @observer
 export class Selected extends React.Component<SelectedProps, {}> {
+  list: ListType = 'selected';
+
   componentDidMount = () => {
+    this.props.pagesManager.setMaxPage(this.list, this.props.selected)
     this.props.getSelected();
   };
 
   updateList = () => this.forceUpdate();
 
   getCategorizedItems = () => {
-    const { selected, getChosenCategory } = this.props;
-    if (getChosenCategory('selected') !== 'All') {
-      return selected.filter(
-        (item: Item) => item.category === getChosenCategory('selected')
+    const { selected, getChosenCategory, pagesManager } = this.props;
+    const startIndex = (pagesManager.getChosenPage(this.list) - 1) * 10;
+
+    if (getChosenCategory(this.list) !== 'All') {
+      const filteredItems = selected.filter(
+        (item: Item) => item.category === getChosenCategory(this.list)
       );
+      pagesManager.setMaxPage(this.list, filteredItems);
+      return this.paginateItems(filteredItems, startIndex);
     } else {
-      return selected;
+      console.log('getcat',JSON.stringify(selected));
+      return this.paginateItems(selected, startIndex);
     }
   };
+
+  setNextPage = (): void => {
+    const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
+
+    console.log('set next selected', getChosenPage(this.list), getMaxPage(this.list));
+
+    getChosenPage(this.list) <= getMaxPage(this.list)
+      ? setNextPage(this.list)
+      : null;
+
+    this.updateList();
+  };
+
+  setPrevPage = (): void => {
+    this.props.pagesManager.setPrevPage(this.list);
+    this.updateList();
+  };
+
+  paginateItems = (items: Item[], startIndex: number): Item[] =>
+    items.slice(startIndex, startIndex + 10);
 
   render() {
     const {
@@ -53,7 +83,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
       setVisibleDialog,
       selected,
       areItemsEditable,
-      setChosenCategory
+      setChosenCategory,
+      pagesManager
     } = this.props;
 
     return (
@@ -76,6 +107,11 @@ export class Selected extends React.Component<SelectedProps, {}> {
             />
           )}
         </StyledDroppable>
+        <BottomButtons
+          setNextPage={this.setNextPage}
+          setPrevPage={this.setPrevPage}
+          currentPage={pagesManager.getChosenPage(this.list)}
+        />
       </StyledContainer>
     );
   }

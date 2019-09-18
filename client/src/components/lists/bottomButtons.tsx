@@ -4,12 +4,7 @@ import { observer } from 'mobx-react';
 
 import styled from 'styled-components';
 
-import { ListType, Item } from '../../../../lib/interfaces';
-
 import { IconButton } from '@rmwc/icon-button';
-
-import { StyledListButtonsContainer, getCategories } from '../../items/items';
-import { StyledButtonsContainer } from '../../../listBox/listsContainer';
 
 interface ItemsBottomButtonsProps {
   setNextPage: () => void;
@@ -18,7 +13,7 @@ interface ItemsBottomButtonsProps {
 }
 
 @observer
-export class ItemsBottomButtons extends React.Component<
+export class BottomButtons extends React.Component<
   ItemsBottomButtonsProps,
   {}
 > {
