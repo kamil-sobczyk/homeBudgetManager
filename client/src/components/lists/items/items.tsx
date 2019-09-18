@@ -132,6 +132,7 @@ export class Items extends React.Component<ItemsProps, {}> {
               setActiveItem={setActiveItem}
               setVisibleDialog={setVisibleDialog}
               items={this.getCategorizedItems()}
+              allItems={items}
               provided={providedDroppable2}
               searchBarVisible={this.searchBarVisible}
               areItemsEditable={areItemsEditable}

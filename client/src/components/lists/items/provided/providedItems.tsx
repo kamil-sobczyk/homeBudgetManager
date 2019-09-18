@@ -20,6 +20,7 @@ interface ProvidedItemsProps {
   searchBarVisible: boolean;
   items: Item[];
   provided: DroppableProvided;
+  allItems: Item[];
 }
 
 @observer
@@ -42,16 +43,17 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
       items,
       setActiveItem,
       searchBarVisible,
-      areItemsEditable
+      areItemsEditable,
+      allItems
     } = this.props;
 
     let displayedItems;
 
-    if (searchBarVisible) {
-      const sortedByName = items.filter((item: Item) =>
+    if (searchBarVisible && this.text.length > 0) {
+      const sortedByName = allItems.filter((item: Item) =>
         item.name.toLocaleLowerCase().includes(this.text.toLocaleLowerCase())
       );
-      const sortedByCategory = items.filter((item: Item) =>
+      const sortedByCategory = allItems.filter((item: Item) =>
         item
           .category!.toLocaleLowerCase()
           .includes(this.text.toLocaleLowerCase())
