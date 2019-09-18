@@ -77,10 +77,13 @@ export class DnDClient {
         this.getDndList(destination.droppableId),
         source,
         destination,
-        this.store.itemManagerClient.chosenCategories[sourceListName]
+        this.store.itemManagerClient.chosenCategories[sourceListName],
+        this.store.pagesManagerClient.getChosenPage(sourceListName)
       );
 
-      result.droppable2.forEach((item: Item): boolean => (item.checked = false));
+      result.droppable2.forEach(
+        (item: Item): boolean => (item.checked = false)
+      );
 
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);

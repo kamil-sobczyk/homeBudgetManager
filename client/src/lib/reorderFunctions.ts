@@ -22,7 +22,8 @@ export const move = (
   destination: Item[],
   droppableSource: DroppablePlace,
   droppableDestination: DroppablePlace,
-  chosenCategory: string
+  chosenCategory: string,
+  page: number
 ) => {
   const result: { [key: string]: Item[] } = {};
   let sourceClone: Item[] = [];
@@ -40,7 +41,10 @@ export const move = (
   }
 
   const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(droppableSource.index, 1);
+  const [removed] = sourceClone.splice(
+    droppableSource.index + 10 * page - 10,
+    1
+  );
 
   destClone.splice(droppableDestination.index, 0, removed);
 
