@@ -10,6 +10,7 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items/items';
 import { Selected } from '../lists/selected/selected';
+import { PagesManagerClient } from '../../lib/mobx/stores/pagesManagerClient';
 
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
@@ -28,6 +29,7 @@ interface ListsContainerProps {
   items: Item[];
   categorizedItems: Item[];
   showItems: boolean;
+  pagesManager: PagesManagerClient;
 }
 
 export const ListsContainer = observer(
@@ -45,7 +47,8 @@ export const ListsContainer = observer(
     setVisibleDialog,
     getChosenCategory,
     setChosenCategory,
-    areItemsEditable
+    areItemsEditable,
+    pagesManager
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
@@ -64,6 +67,7 @@ export const ListsContainer = observer(
               getItems={getItems}
               showItems={showItems}
               areItemsEditable={areItemsEditable}
+              pagesManager={pagesManager}
             />
           )}
           <Selected

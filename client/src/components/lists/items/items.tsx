@@ -16,6 +16,7 @@ import { StyledContainer } from '../selected/selected';
 import { ItemsTopButtons } from './buttonsContainers/topButtons';
 import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
 import { ItemsBottomButtons } from './buttonsContainers/bottomButtons';
+import { PagesManagerClient } from '../../../lib/mobx/stores/pagesManagerClient';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
@@ -40,12 +41,13 @@ interface ItemsProps {
   areItemsEditable: boolean;
   showItems: boolean;
   items: Item[];
+  pagesManager: PagesManagerClient;
 }
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
   @observable searchBarVisible: boolean = false;
-  @observable page: number = 1;
+  list: ListType = 'items';
 
   componentDidMount = (): void => {
     this.props.getItems();
@@ -54,24 +56,19 @@ export class Items extends React.Component<ItemsProps, {}> {
   updateList = (): void => this.forceUpdate();
 
   setNextPage = (): void => {
-    this.page <= this.maxPage ? this.page++ : null;
+    const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
+
+    getChosenPage(this.list) <= getMaxPage(this.list)
+      ? setNextPage(this.list)
+      : null;
+
     this.updateList();
   };
 
   setPrevPage = (): void => {
-    this.page > 1 ? this.page-- : null;
+    this.props.pagesManager.setPrevPage(this.list);
     this.updateList();
   };
-
-  setMaxPage = (items: Item[]): void => {
-    if (items.length % 10 !== 0) {
-      this.maxPage = items.length / 10;
-    } else {
-      this.maxPage = items.length / 10 - 10;
-    }
-  };
-
-  @observable maxPage: number = this.props.items.length / 10;
 
   paginateItems = (items: Item[], startIndex: number): Item[] =>
     items.slice(startIndex, startIndex + 10);
@@ -87,14 +84,14 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
 
   getCategorizedItems = (): Item[] => {
-    const { items, getChosenCategory } = this.props;
-    const startIndex = (this.page - 1) * 10;
+    const { items, getChosenCategory, pagesManager } = this.props;
+    const startIndex = (pagesManager.getChosenPage(this.list) - 1) * 10;
 
     if (getChosenCategory('items') !== 'All') {
       const filteredItems = items.filter(
         (item: Item) => item.category === getChosenCategory('items')
       );
-      this.setMaxPage(filteredItems);
+      pagesManager.setMaxPage(this.list, filteredItems);
 
       return this.paginateItems(filteredItems, startIndex);
     } else {
@@ -103,8 +100,10 @@ export class Items extends React.Component<ItemsProps, {}> {
   };
 
   setChosenCategory = (list: ListType, category: string): void => {
-    this.props.setChosenCategory(list, category);
-    this.page = 1;
+    const { setChosenCategory, pagesManager } = this.props;
+
+    setChosenCategory(list, category);
+    pagesManager.setChosenPage(this.list, 1);
   };
 
   render() {
@@ -112,10 +111,11 @@ export class Items extends React.Component<ItemsProps, {}> {
       setVisibleDialog,
       setActiveItem,
       items,
-      areItemsEditable
+      areItemsEditable,
+      pagesManager
     } = this.props;
 
-    this.setMaxPage(this.props.items);
+    pagesManager.setMaxPage(this.list, this.props.items);
 
     return (
       <StyledContainer showItems>
@@ -141,7 +141,7 @@ export class Items extends React.Component<ItemsProps, {}> {
         <ItemsBottomButtons
           setNextPage={this.setNextPage}
           setPrevPage={this.setPrevPage}
-          currentPage={this.page}
+          currentPage={pagesManager.getChosenPage(this.list)}
         />
       </StyledContainer>
     );
