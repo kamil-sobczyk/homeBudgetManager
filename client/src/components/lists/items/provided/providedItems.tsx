@@ -16,6 +16,8 @@ import { ProvidedItemsDraggable } from './providedItemsDraggable';
 interface ProvidedItemsProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, id: string) => void;
+  resetPagination: () => void;
+  setPaginationVisible: (value: boolean) => void;
   areItemsEditable: boolean;
   searchBarVisible: boolean;
   items: Item[];
@@ -33,6 +35,12 @@ export class ProvidedItems extends React.Component<ProvidedItemsProps, {}> {
 
   setText = (event: React.FormEvent<EventTarget>) => {
     const target = event.target as HTMLInputElement;
+    const { resetPagination, setPaginationVisible } = this.props;
+
+    resetPagination();
+    target.value.length > 0
+      ? setPaginationVisible(false)
+      : setPaginationVisible(true);
     this.text = target.value;
   };
 

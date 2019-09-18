@@ -47,6 +47,7 @@ interface ItemsProps {
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
   @observable searchBarVisible: boolean = false;
+  @observable paginationVisible: boolean = true;
   list: ListType = 'items';
 
   componentDidMount = (): void => {
@@ -76,6 +77,14 @@ export class Items extends React.Component<ItemsProps, {}> {
 
     setChosenCategory(list, category);
     pagesManager.setChosenPage(this.list, 1);
+  };
+
+  setPaginationVisible = (value: boolean) => {
+    this.paginationVisible = value;
+  };
+
+  resetPagination = (): void => {
+    this.props.pagesManager.setChosenPage(this.list, 1);
   };
 
   toggleSearchBar = (): void => {
@@ -136,14 +145,18 @@ export class Items extends React.Component<ItemsProps, {}> {
               provided={providedDroppable2}
               searchBarVisible={this.searchBarVisible}
               areItemsEditable={areItemsEditable}
+              resetPagination={this.resetPagination}
+              setPaginationVisible={this.setPaginationVisible}
             />
           )}
         </Droppable>
-        <BottomButtons
-          setNextPage={this.setNextPage}
-          setPrevPage={this.setPrevPage}
-          currentPage={pagesManager.getChosenPage(this.list)}
-        />
+        {this.paginationVisible && (
+          <BottomButtons
+            setNextPage={this.setNextPage}
+            setPrevPage={this.setPrevPage}
+            currentPage={pagesManager.getChosenPage(this.list)}
+          />
+        )}
       </StyledContainer>
     );
   }
