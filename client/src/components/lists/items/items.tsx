@@ -102,13 +102,17 @@ export class Items extends React.Component<ItemsProps, {}> {
     }
   };
 
+  setChosenCategory = (list: ListType, category: string) => {
+    this.props.setChosenCategory(list, category);
+    this.page = 1;
+  };
+
   render() {
     const {
       setVisibleDialog,
       setActiveItem,
       items,
-      areItemsEditable,
-      setChosenCategory
+      areItemsEditable
     } = this.props;
 
     this.setMaxPage(this.props.items);
@@ -119,7 +123,7 @@ export class Items extends React.Component<ItemsProps, {}> {
           items={items}
           toggleSearchBar={this.toggleSearchBar}
           setVisibleDialog={setVisibleDialog}
-          setChosenCategory={setChosenCategory}
+          setChosenCategory={this.setChosenCategory}
           updateList={this.updateList}
         />
         <Droppable droppableId='droppable2'>
