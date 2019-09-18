@@ -47,18 +47,18 @@ export class Items extends React.Component<ItemsProps, {}> {
   @observable searchBarVisible: boolean = false;
   @observable page: number = 1;
 
-  componentDidMount = () => {
+  componentDidMount = (): void => {
     this.props.getItems();
   };
 
-  updateList = () => this.forceUpdate();
+  updateList = (): void => this.forceUpdate();
 
-  setNextPage = () => {
+  setNextPage = (): void => {
     this.page <= this.maxPage ? this.page++ : null;
     this.updateList();
   };
 
-  setPrevPage = () => {
+  setPrevPage = (): void => {
     this.page > 1 ? this.page-- : null;
     this.updateList();
   };
@@ -73,10 +73,10 @@ export class Items extends React.Component<ItemsProps, {}> {
 
   @observable maxPage: number = this.props.items.length / 10;
 
-  paginateItems = (items: Item[], startIndex: number) =>
+  paginateItems = (items: Item[], startIndex: number): Item[] =>
     items.slice(startIndex, startIndex + 10);
 
-  toggleSearchBar = () => {
+  toggleSearchBar = (): void => {
     this.searchBarVisible = !this.searchBarVisible;
     this.updateList();
   };
@@ -86,7 +86,7 @@ export class Items extends React.Component<ItemsProps, {}> {
     this.updateList();
   };
 
-  getCategorizedItems = () => {
+  getCategorizedItems = (): Item[] => {
     const { items, getChosenCategory } = this.props;
     const startIndex = (this.page - 1) * 10;
 
@@ -102,7 +102,7 @@ export class Items extends React.Component<ItemsProps, {}> {
     }
   };
 
-  setChosenCategory = (list: ListType, category: string) => {
+  setChosenCategory = (list: ListType, category: string): void => {
     this.props.setChosenCategory(list, category);
     this.page = 1;
   };

@@ -50,6 +50,10 @@ export class ItemManagerClient {
     items: 'All',
     selected: 'All'
   };
+  @observable chosenPages = {
+    items: 1,
+    selected: 1
+  };
 
   toggleEditItems = (): void => {
     this.areItemsEditable = !this.areItemsEditable;
