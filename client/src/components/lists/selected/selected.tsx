@@ -34,7 +34,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
   list: ListType = 'selected';
 
   componentDidMount = () => {
-    this.props.pagesManager.setMaxPage(this.list, this.props.selected)
+    this.props.pagesManager.setMaxPage(this.list, this.props.selected);
     this.props.getSelected();
   };
 
@@ -51,15 +51,12 @@ export class Selected extends React.Component<SelectedProps, {}> {
       pagesManager.setMaxPage(this.list, filteredItems);
       return this.paginateItems(filteredItems, startIndex);
     } else {
-      console.log('getcat',JSON.stringify(selected));
       return this.paginateItems(selected, startIndex);
     }
   };
 
   setNextPage = (): void => {
     const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
-
-    console.log('set next selected', getChosenPage(this.list), getMaxPage(this.list));
 
     getChosenPage(this.list) <= getMaxPage(this.list)
       ? setNextPage(this.list)
@@ -73,8 +70,11 @@ export class Selected extends React.Component<SelectedProps, {}> {
     this.updateList();
   };
 
-  paginateItems = (items: Item[], startIndex: number): Item[] =>
-    items.slice(startIndex, startIndex + 10);
+  paginateItems = (items: Item[], startIndex: number): Item[] => {
+    this.props.pagesManager.setMaxPage(this.list, items);
+
+    return items.slice(startIndex, startIndex + 10);
+  };
 
   render() {
     const {

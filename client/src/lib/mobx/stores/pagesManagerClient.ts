@@ -24,7 +24,6 @@ export class PagesManagerClient {
   };
 
   setNextPage = (list: ListType): void => {
-    console.log('set next list: ', list)
     this.chosenPages[list]++;
   };
 
@@ -39,7 +38,6 @@ export class PagesManagerClient {
   getMaxPage = (list: ListType): number => this.maxPages[list];
 
   setMaxPage = (list: ListType, items: Item[]): void => {
-    console.log('maxpage list',JSON.stringify(list), JSON.stringify(items));
     if (items.length % 10 !== 0) {
       this.maxPages[list] = items.length / 10;
     } else {
