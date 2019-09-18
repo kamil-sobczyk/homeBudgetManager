@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { Item, ListType, Cost } from '../../lib/interfaces';
 
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import {
+  DragDropContext,
+  DropResult,
+  DragStart,
+  ResponderProvided
+} from 'react-beautiful-dnd';
 
 import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items/items';
@@ -18,6 +23,7 @@ interface ListsContainerProps {
   toggleCheckItems: (list: ListType, id: string) => void;
   toggleShowItems: () => void;
   onDragEnd: (result: DropResult) => void;
+  onDragStart: (start: DragStart) => void;
   setActiveItem: (list: ListType, id: string) => void;
   deleteItem: (name: string, info: string) => Item[];
   setVisibleDialog: (dialog?: string) => void;
@@ -48,14 +54,15 @@ export const ListsContainer = observer(
     getChosenCategory,
     setChosenCategory,
     areItemsEditable,
-    pagesManager
+    pagesManager,
+    onDragStart
   }: ListsContainerProps) => (
     <>
       <StyledButtonsContainer>
         <ViewButton toggleShowItems={toggleShowItems} showItems={showItems} />
       </StyledButtonsContainer>
       <StyledListContainer>
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
           {showItems && (
             <Items
               setActiveItem={setActiveItem}

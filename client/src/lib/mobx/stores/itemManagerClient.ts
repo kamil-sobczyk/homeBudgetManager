@@ -139,6 +139,8 @@ export class ItemManagerClient {
   @action setActiveItem = (list: ListType, id: string): void => {
     const index = this.getIndexById(list, id);
 
+    console.log(list, id)
+
     this.setOldItem();
     this.activeItem.index = index;
     this.activeItem.list = list;

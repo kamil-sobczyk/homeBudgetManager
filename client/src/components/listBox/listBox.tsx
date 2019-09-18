@@ -43,6 +43,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
           setActiveItem={itemManagerClient.setActiveItem}
           deleteItem={itemManagerClient.deleteItem}
           onDragEnd={dndClient.onDragEnd}
+          onDragStart={dndClient.onDragStart}
           setVisibleDialog={visibilityClient.setVisibleDialog}
           visibleDialog={visibilityClient.visibleDialog}
           getChosenCategory={itemManagerClient.getChosenCategory}

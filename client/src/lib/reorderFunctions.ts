@@ -22,39 +22,20 @@ export const move = (
   destination: Item[],
   droppableSource: DroppablePlace,
   droppableDestination: DroppablePlace,
-  chosenCategory: string,
-  page: number
+  draggedItemIndex: number
 ) => {
+
   const result: { [key: string]: Item[] } = {};
-  let sourceClone: Item[] = [];
-
-  const restItems = Array.from(source).filter(
-    (item: Item) => item.category !== chosenCategory
-  );
-
-  if (chosenCategory !== 'All') {
-    sourceClone = Array.from(source).filter(
-      (item: Item) => item.category === chosenCategory
-    );
-  } else {
-    sourceClone = Array.from(source);
-  }
-
+    let sourceClone = Array.from(source);
   const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(
-    droppableSource.index + 10 * page - 10,
-    1
-  );
+  let removed = sourceClone[draggedItemIndex];
 
   destClone.splice(droppableDestination.index, 0, removed);
 
-  let newSource = removeDuplicates([...sourceClone, ...restItems]);
-  let newDestination = destClone;
-
-  newSource = newSource.filter((item: Item) => {
+  sourceClone = sourceClone.filter((item: Item) => {
     let ret: boolean = true;
 
-    newDestination.forEach((element: Item) => {
+    destClone.forEach((element: Item) => {
       if (element === item) {
         ret = false;
       }
@@ -63,8 +44,8 @@ export const move = (
     return ret;
   });
 
-  result[droppableSource.droppableId] = newSource;
-  result[droppableDestination.droppableId] = newDestination;
+  result[droppableSource.droppableId] = sourceClone;
+  result[droppableDestination.droppableId] = destClone;
 
   return result;
 };

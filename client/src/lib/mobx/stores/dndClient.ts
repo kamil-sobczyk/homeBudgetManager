@@ -3,13 +3,16 @@ import { Item, ListType } from '../../interfaces';
 
 import { reorder, move, sortItemsByName } from '../../reorderFunctions';
 
-import { DropResult } from 'react-beautiful-dnd';
+import { DropResult, DragStart } from 'react-beautiful-dnd';
+import { observable } from 'mobx';
 
 export class DnDClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;
   }
+
+  @observable draggedItemId: string = '';
 
   filterByCategory = (list: ListType) => {
     const { chosenCategories } = this.store.itemManagerClient;
@@ -50,6 +53,11 @@ export class DnDClient {
     }
   };
 
+  onDragStart = (start: DragStart) => {
+    console.log(start);
+    this.draggedItemId = start.draggableId;
+  };
+
   onDragEnd = (result: DropResult): void => {
     const { source, destination } = result;
     const { reorderItemsOnServer } = this.store.apiClient;
@@ -77,8 +85,10 @@ export class DnDClient {
         this.getDndList(destination.droppableId),
         source,
         destination,
-        this.store.itemManagerClient.chosenCategories[sourceListName],
-        this.store.pagesManagerClient.getChosenPage(sourceListName)
+        this.store.itemManagerClient.getIndexById(
+          sourceListName,
+          this.draggedItemId
+        )
       );
 
       result.droppable2.forEach(
