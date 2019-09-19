@@ -5,17 +5,16 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { Item, ListType, Cost } from '../../lib/interfaces';
 
-import {
-  DragDropContext,
-  DropResult,
-  DragStart,
-  ResponderProvided
-} from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, DragStart } from 'react-beautiful-dnd';
 
 import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items/items';
 import { Selected } from '../lists/selected/selected';
 import { PagesManagerClient } from '../../lib/mobx/stores/pagesManagerClient';
+
+interface StyledButtonContainerProps {
+  showItems: boolean;
+}
 
 interface ListsContainerProps {
   getItems: () => Promise<Item[]>;
@@ -58,7 +57,7 @@ export const ListsContainer = observer(
     onDragStart
   }: ListsContainerProps) => (
     <>
-      <StyledButtonContainer>
+      <StyledButtonContainer showItems={showItems}>
         <ViewButton toggleShowItems={toggleShowItems} showItems={showItems} />
       </StyledButtonContainer>
       <StyledListContainer>
@@ -104,6 +103,9 @@ const StyledListContainer = styled.div`
 
 export const StyledButtonContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: ${(props: StyledButtonContainerProps) =>
+    props.showItems ? 'center' : 'flex-start'};
+  margin-left: ${(props: StyledButtonContainerProps) =>
+    props.showItems ? '0' : '7.5%'};
   margin-bottom: -47px;
 `;

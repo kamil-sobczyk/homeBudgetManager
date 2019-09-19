@@ -11,11 +11,16 @@ import { ListType, Item } from '../../../lib/interfaces';
 import { StyledListButtonsContainer } from '../items/topButtons';
 import { getCategories } from '../items/items';
 
+interface StyledButtonsContainerProps {
+  showItems: boolean;
+}
+
 interface SelectedTopButtonsProps {
   setVisibleDialog: (dialog?: string) => void;
   setChosenCategory: (list: ListType, category: string) => void;
-  selected: Item[];
   updateList: () => void;
+  showItems: boolean;
+  selected: Item[];
 }
 
 @observer
@@ -31,10 +36,10 @@ export class SelectedTopButtons extends React.Component<
   };
 
   render() {
-    const { setVisibleDialog, selected } = this.props;
+    const { setVisibleDialog, selected, showItems } = this.props;
     return (
-      <StyledButtonsContainer>
-        <StyledListButtonsContainer>
+      <StyledButtonsContainer showItems={showItems}>
+        <SelectedStyledListButtonsContainer>
           <StyledFinishShoppingButton
             onClick={() => setVisibleDialog('FinishShoppingDialog')}
             icon={{ icon: 'add_shopping_cart', size: 'large' }}
@@ -43,18 +48,24 @@ export class SelectedTopButtons extends React.Component<
             categories={getCategories(selected)}
             categorizeItems={this.categorizeItems}
           />
-        </StyledListButtonsContainer>
+        </SelectedStyledListButtonsContainer>
       </StyledButtonsContainer>
     );
   }
 }
+
+export const StyledButtonsContainer = styled.div`
+  display: flex;
+  justify-content: ${(props: StyledButtonsContainerProps) =>
+    props.showItems ? 'center' : 'flex-start'};
+`;
 
 const StyledFinishShoppingButton = styled(IconButton)`
   color: #0d49aa;
   padding: 0;
 `;
 
-export const StyledButtonsContainer = styled.div`
+const SelectedStyledListButtonsContainer = styled(StyledListButtonsContainer)`
   display: flex;
   justify-content: center;
 `;

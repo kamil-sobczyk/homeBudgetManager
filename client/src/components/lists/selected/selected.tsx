@@ -84,7 +84,8 @@ export class Selected extends React.Component<SelectedProps, {}> {
       selected,
       areItemsEditable,
       setChosenCategory,
-      pagesManager
+      pagesManager,
+      showItems
     } = this.props;
 
     return (
@@ -94,6 +95,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
           selected={selected}
           setChosenCategory={setChosenCategory}
           updateList={this.updateList}
+          showItems={showItems}
         />
         <StyledDroppable droppableId='droppable'>
           {provided => (
