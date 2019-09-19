@@ -3,15 +3,9 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { ListType, Item } from '../../../../lib/interfaces';
 
-import {
-  StyledTextContainer
-} from '../../items/provided/providedItemsDraggable';
+import { StyledTextContainer } from '../../items/provided/providedItemsDraggable';
 
-import {
-  ListItemText,
-  ListItemSecondaryText,
-  ListDivider
-} from '@rmwc/list';
+import { ListItemText, ListItemSecondaryText, ListDivider } from '@rmwc/list';
 import { Checkbox } from '@rmwc/checkbox';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
@@ -66,7 +60,11 @@ export class ProvidedSelectedDraggable extends React.Component<
             />
             <StyledTextContainer>
               <ListItemText>
-                <StyledListItemPrimaryText info={item.info.length > 0 ? 1 : undefined}>{item.name}</StyledListItemPrimaryText>
+                <StyledListItemPrimaryText
+                  info={item.info.length > 0 ? 1 : undefined}
+                >
+                  {item.name}
+                </StyledListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
             </StyledTextContainer>

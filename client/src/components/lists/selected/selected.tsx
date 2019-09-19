@@ -111,6 +111,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
           setNextPage={this.setNextPage}
           setPrevPage={this.setPrevPage}
           currentPage={pagesManager.getChosenPage(this.list)}
+          areItems={false}
         />
       </StyledContainer>
     );

@@ -155,10 +155,10 @@ export class Items extends React.Component<ItemsProps, {}> {
             setNextPage={this.setNextPage}
             setPrevPage={this.setPrevPage}
             currentPage={pagesManager.getChosenPage(this.list)}
+            areItems={true}
           />
         )}
       </StyledContainer>
     );
   }
 }
-

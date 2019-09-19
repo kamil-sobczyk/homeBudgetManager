@@ -5,10 +5,7 @@ import { ListType, Item } from '../../../../lib/interfaces';
 
 import styled from 'styled-components';
 
-import {
-  ListItem,
-  ListDivider
-} from '@rmwc/list';
+import { ListItem, ListDivider } from '@rmwc/list';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
 
