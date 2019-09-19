@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import {
   TopAppBar,
   TopAppBarFixedAdjust,
@@ -19,10 +21,15 @@ interface NavbarProps {
 
 export class Navbar extends React.Component<NavbarProps, {}> {
   render() {
-    const { toggleShowDrawer, showDrawer, setVisibleDialog, toggleEditItems } = this.props;
+    const {
+      toggleShowDrawer,
+      showDrawer,
+      setVisibleDialog,
+      toggleEditItems
+    } = this.props;
     return (
       <>
-        <TopAppBar>
+        <StyledTopAppBar>
           <TopAppBarRow>
             <NavbarSectionLeft
               toggleShowDrawer={toggleShowDrawer}
@@ -30,7 +37,7 @@ export class Navbar extends React.Component<NavbarProps, {}> {
             />
             <NavbarSectionRight setVisibleDialog={setVisibleDialog} />
           </TopAppBarRow>
-        </TopAppBar>
+        </StyledTopAppBar>
         <DrawerBar
           setVisibleDialog={setVisibleDialog}
           toggleShowDrawer={toggleShowDrawer}
@@ -42,3 +49,8 @@ export class Navbar extends React.Component<NavbarProps, {}> {
     );
   }
 }
+
+const StyledTopAppBar = styled(TopAppBar)`
+  height: 45px;
+  margin-top: -13px;
+`;
