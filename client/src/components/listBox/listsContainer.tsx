@@ -58,9 +58,9 @@ export const ListsContainer = observer(
     onDragStart
   }: ListsContainerProps) => (
     <>
-      <StyledButtonsContainer>
+      <StyledButtonContainer>
         <ViewButton toggleShowItems={toggleShowItems} showItems={showItems} />
-      </StyledButtonsContainer>
+      </StyledButtonContainer>
       <StyledListContainer>
         <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
           {showItems && (
@@ -102,8 +102,8 @@ const StyledListContainer = styled.div`
   max-width: 100vw;
 `;
 
-export const StyledButtonsContainer = styled.div`
+export const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-bottom: -47px;
 `;

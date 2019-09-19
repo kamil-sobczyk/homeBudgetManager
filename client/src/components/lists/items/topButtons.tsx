@@ -35,7 +35,7 @@ export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
   render() {
     const { setVisibleDialog, items, toggleSearchBar } = this.props;
     return (
-        <StyledListButtonsContainer areItems={true}>
+        <StyledListButtonsContainer>
           <StyledAddShoppingItemIconButton
             onClick={() => setVisibleDialog('AddShoppingItemDialog')}
             icon={{ icon: 'add_circle', size: 'large' }}
@@ -69,5 +69,4 @@ export const StyledListButtonsContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  margin-top: ${(props: StyledListButtonsContainerProps) => (props.areItems ? '-5px' : '-15px')};
 `;

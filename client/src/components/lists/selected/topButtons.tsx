@@ -6,7 +6,6 @@ import { observer } from 'mobx-react';
 
 import { IconButton } from '@rmwc/icon-button';
 
-import { StyledButtonsContainer } from '../../listBox/listsContainer';
 import { SortingMenu } from '../sortingMenu';
 import { ListType, Item } from '../../../lib/interfaces';
 import { StyledListButtonsContainer } from '../items/topButtons';
@@ -53,4 +52,9 @@ export class SelectedTopButtons extends React.Component<
 const StyledFinishShoppingButton = styled(IconButton)`
   color: #0d49aa;
   padding: 0;
+`;
+
+export const StyledButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;
