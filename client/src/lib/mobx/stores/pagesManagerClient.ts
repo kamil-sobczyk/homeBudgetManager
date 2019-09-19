@@ -4,6 +4,11 @@ import { observable } from 'mobx';
 
 import { ListType, Item } from '../../interfaces';
 
+const scrollToTop = (): void => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+};
+
 export class PagesManagerClient {
   store: Store;
   constructor(store: Store) {
@@ -24,10 +29,12 @@ export class PagesManagerClient {
   };
 
   setNextPage = (list: ListType): void => {
+    scrollToTop();
     this.chosenPages[list]++;
   };
 
   setPrevPage = (list: ListType): void => {
+    scrollToTop();
     if (this.chosenPages[list] > 1) {
       this.chosenPages[list]--;
     }
