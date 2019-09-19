@@ -13,10 +13,6 @@ interface ItemsBottomButtonsProps {
   areItems: boolean;
 }
 
-interface StyledPaginationContainerProps {
-  areItems: boolean;
-}
-
 @observer
 export class BottomButtons extends React.Component<
   ItemsBottomButtonsProps,
@@ -25,7 +21,7 @@ export class BottomButtons extends React.Component<
   render() {
     const { setNextPage, setPrevPage, currentPage, areItems } = this.props;
     return (
-      <StyledPaginationContainer areItems={areItems}>
+      <StyledPaginationContainer>
         <IconButton icon='navigate_before' onClick={setPrevPage} />
         <span>{currentPage}</span>
         <IconButton icon='navigate_next' onClick={setNextPage} />
@@ -40,6 +36,5 @@ export const StyledPaginationContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: ${(props: StyledPaginationContainerProps) =>
-    props.areItems ? '-45px' : '-55px'};
+  margin-top: '-45px';
 `;
