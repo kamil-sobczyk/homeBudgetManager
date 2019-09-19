@@ -35,20 +35,20 @@ export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
   render() {
     const { setVisibleDialog, items, toggleSearchBar } = this.props;
     return (
-        <StyledListButtonsContainer>
-          <StyledAddShoppingItemIconButton
-            onClick={() => setVisibleDialog('AddShoppingItemDialog')}
-            icon={{ icon: 'add_circle', size: 'large' }}
-          />
-          <StyledSearchButton
-            icon={{ icon: 'search', size: 'large' }}
-            onClick={() => toggleSearchBar()}
-          />
-          <SortingMenu
-            categories={getCategories(items)}
-            categorizeItems={this.categorizeItems}
-          />
-        </StyledListButtonsContainer>
+      <StyledListButtonsContainer areItems>
+        <StyledAddShoppingItemIconButton
+          onClick={() => setVisibleDialog('AddShoppingItemDialog')}
+          icon={{ icon: 'add_circle', size: 'large' }}
+        />
+        <StyledSearchButton
+          icon={{ icon: 'search', size: 'large' }}
+          onClick={() => toggleSearchBar()}
+        />
+        <SortingMenu
+          categories={getCategories(items)}
+          categorizeItems={this.categorizeItems}
+        />
+      </StyledListButtonsContainer>
     );
   }
 }
@@ -66,7 +66,8 @@ const StyledSearchButton = styled(IconButton)`
 export const StyledListButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: ${(props: StyledListButtonsContainerProps) =>
+    props.areItems ? 'flex-start' : 'flex-end'};
   align-items: center;
   width: 100%;
 `;

@@ -36,15 +36,6 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
       areItemsEditable
     } = this.props;
 
-    // console.log(item.info);
-    // console.log(typeof item.info);
-
-    // console.log(item.info.length > 0);
-
-    // const isInfoPresent = item.info.toString().length > 0;
-    // console.log(item.info);
-    // console.log(typeof isInfoPresent);
-
     return (
       <StyledItem key={index}>
         {areItemsEditable && (
@@ -72,8 +63,9 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
 
 export const StyledItem = styled(ListItem)`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 45px;
+  margin-left: -25px;
 `;
 
 export const StyledTextContainer = styled.div`
