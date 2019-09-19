@@ -4,13 +4,11 @@ import { observer } from 'mobx-react';
 import { ListType, Item } from '../../../../lib/interfaces';
 
 import {
-  StyledItem,
   StyledTextContainer
 } from '../../items/provided/providedItemsDraggable';
 
 import {
   ListItemText,
-  ListItemPrimaryText,
   ListItemSecondaryText,
   ListDivider
 } from '@rmwc/list';
@@ -18,6 +16,7 @@ import { Checkbox } from '@rmwc/checkbox';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { StyledEditButton } from '../../items/moreMenu';
+import { StyledItem, StyledListItemPrimaryText } from '../../item';
 
 interface ProvidedSelectedDraggableProps {
   toggleCheckItems: (list: ListType, id: string) => any;
@@ -67,7 +66,7 @@ export class ProvidedSelectedDraggable extends React.Component<
             />
             <StyledTextContainer>
               <ListItemText>
-                <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
+                <StyledListItemPrimaryText info={item.info.length > 0 ? 1 : undefined}>{item.name}</StyledListItemPrimaryText>
                 <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
               </ListItemText>
             </StyledTextContainer>

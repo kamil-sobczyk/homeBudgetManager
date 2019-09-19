@@ -19,6 +19,10 @@ interface ListSingleItemProps {
   index: number;
 }
 
+interface ListItemPrimaryTextProps {
+  info: any;
+}
+
 export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
   shouldComponentUpdate = (oldProps: ListSingleItemProps) =>
     this.props.item !== oldProps.item;
@@ -32,6 +36,15 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
       areItemsEditable
     } = this.props;
 
+    // console.log(item.info);
+    // console.log(typeof item.info);
+
+    // console.log(item.info.length > 0);
+
+    // const isInfoPresent = item.info.toString().length > 0;
+    // console.log(item.info);
+    // console.log(typeof isInfoPresent);
+
     return (
       <StyledItem key={index}>
         {areItemsEditable && (
@@ -43,7 +56,11 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
         )}
         <StyledTextContainer>
           <ListItemText>
-            <ListItemPrimaryText>{item.name}</ListItemPrimaryText>
+            <StyledListItemPrimaryText
+              info={item.info.length > 0 ? 1 : undefined}
+            >
+              {item.name}
+            </StyledListItemPrimaryText>
             <ListItemSecondaryText>{item.info}</ListItemSecondaryText>
           </ListItemText>
         </StyledTextContainer>
@@ -56,8 +73,7 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
 export const StyledItem = styled(ListItem)`
   display: flex;
   justify-content: space-between;
-  min-height: 75px;
-  margin: 2px;
+  min-height: 45px;
 `;
 
 export const StyledTextContainer = styled.div`
@@ -65,4 +81,11 @@ export const StyledTextContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+`;
+
+export const StyledListItemPrimaryText = styled(ListItemPrimaryText)`
+  position: relative;
+  top: ${(props: ListItemPrimaryTextProps) => (props.info ? '-17px' : '-7px')};
+  height: 35px;
 `;

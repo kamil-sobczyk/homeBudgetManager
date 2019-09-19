@@ -34,7 +34,7 @@ export class PagesManagerClient {
   };
 
   setPrevPage = (list: ListType): void => {
-    scrollToTop();
+      scrollToTop();
     if (this.chosenPages[list] > 1) {
       this.chosenPages[list]--;
     }

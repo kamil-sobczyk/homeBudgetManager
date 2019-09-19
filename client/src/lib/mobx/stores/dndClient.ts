@@ -54,7 +54,6 @@ export class DnDClient {
   };
 
   onDragStart = (start: DragStart) => {
-    console.log(start);
     this.draggedItemId = start.draggableId;
   };
 

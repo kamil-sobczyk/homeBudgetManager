@@ -8,8 +8,8 @@ import { ListType, Item } from '../../../lib/interfaces';
 
 import { IconButton } from '@rmwc/icon-button';
 
-import { StyledListButtonsContainer, getCategories } from './items';
 import { SortingMenu } from '../sortingMenu';
+import { getCategories } from './items';
 
 interface ItemsTopButtonsProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -57,4 +57,12 @@ const StyledAddShoppingItemIconButton = styled(IconButton)`
 const StyledSearchButton = styled(IconButton)`
   padding: 0;
   color: darkblue;
+`;
+
+export const StyledListButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 `;

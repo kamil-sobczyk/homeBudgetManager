@@ -162,10 +162,3 @@ export class Items extends React.Component<ItemsProps, {}> {
   }
 }
 
-export const StyledListButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-`;
