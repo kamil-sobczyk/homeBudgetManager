@@ -19,6 +19,10 @@ interface ItemsTopButtonsProps {
   updateList: () => void;
 }
 
+interface StyledListButtonsContainerProps {
+  areItems?: boolean;
+}
+
 @observer
 export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
   categorizeItems = (category: string): void => {
@@ -31,13 +35,13 @@ export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
   render() {
     const { setVisibleDialog, items, toggleSearchBar } = this.props;
     return (
-        <StyledListButtonsContainer>
+        <StyledListButtonsContainer areItems={true}>
           <StyledAddShoppingItemIconButton
             onClick={() => setVisibleDialog('AddShoppingItemDialog')}
-            icon={{ icon: 'add_circle', size: 'xlarge' }}
+            icon={{ icon: 'add_circle', size: 'large' }}
           />
           <StyledSearchButton
-            icon={{ icon: 'search', size: 'xlarge' }}
+            icon={{ icon: 'search', size: 'large' }}
             onClick={() => toggleSearchBar()}
           />
           <SortingMenu
@@ -65,4 +69,5 @@ export const StyledListButtonsContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  margin-top: ${(props: StyledListButtonsContainerProps) => (props.areItems ? '-5px' : '-15px')};
 `;

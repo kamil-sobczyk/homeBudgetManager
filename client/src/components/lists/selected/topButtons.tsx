@@ -38,7 +38,7 @@ export class SelectedTopButtons extends React.Component<
         <StyledListButtonsContainer>
           <StyledFinishShoppingButton
             onClick={() => setVisibleDialog('FinishShoppingDialog')}
-            icon={{ icon: 'add_shopping_cart', size: 'xlarge' }}
+            icon={{ icon: 'add_shopping_cart', size: 'large' }}
           />
           <SortingMenu
             categories={getCategories(selected)}
