@@ -7,12 +7,12 @@ import { Button } from '@rmwc/button';
 import { IconButton } from '@rmwc/icon-button';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
-import { StyledButtonsContainer } from '../../listBox/listsContainer';
+import { StyledButtonContainer } from '../../listBox/listsContainer';
 
 const aboutDialogButtons = [
   {
     icon: 'https://image.flaticon.com/icons/svg/25/25231.svg',
-    href: 'https://github.com/Ogar616/homeBudgetCombine'
+    href: 'https://github.com/Ogar616'
   },
   {
     icon:
@@ -41,7 +41,7 @@ export const AboutDialog = observer(
       <DialogContent>
         Coded by Kamil Sobczyk 2019
         <br />
-        <StyledButtonsContainer>
+        <StyledButtonContainer>
           {aboutDialogButtons.map(button => (
             <IconButton
               key={button.icon}
@@ -57,7 +57,7 @@ export const AboutDialog = observer(
               href={button.href}
             />
           ))}
-        </StyledButtonsContainer>
+        </StyledButtonContainer>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setVisibleDialog()} color='primary' autoFocus>

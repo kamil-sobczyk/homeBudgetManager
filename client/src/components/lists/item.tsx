@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { observer } from 'mobx-react';
+
 import styled from 'styled-components';
 
 import {
@@ -10,9 +12,7 @@ import {
 } from '@rmwc/list';
 import { MoreMenu } from './items/moreMenu';
 import { ListType, Item } from '../../lib/interfaces';
-import { observer } from 'mobx-react';
-import { reaction } from 'mobx';
-import { SimpleDataTable } from 'rmwc';
+
 
 interface ListSingleItemProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -44,13 +44,8 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
       areItemsEditable
     } = this.props;
 
-    console.log(areItemsEditable);
-
     return (
-      <StyledItem
-        key={index}
-        editable={areItemsEditable ? 1 : undefined}
-      >
+      <StyledItem key={index} editable={areItemsEditable ? 1 : undefined}>
         {areItemsEditable && (
           <MoreMenu
             item={item}
@@ -78,8 +73,7 @@ export const StyledItem = styled(ListItem)`
   display: flex;
   justify-content: flex-start;
   min-height: 45px;
-  width: ${(props: StyledItemProps) =>
-    props.editable ? '-25px' : '-15px'};
+  width: ${(props: StyledItemProps) => (props.editable ? '-25px' : '-15px')};
   margin-left: ${(props: StyledItemProps) =>
     props.editable ? '-25px' : '-5px'};
 `;

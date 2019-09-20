@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-import {
-  TopAppBarSection,
-  TopAppBarTitle,
-  TopAppBarNavigationIcon
-} from '@rmwc/top-app-bar';
-import styled from 'styled-components';
+import { TopAppBarSection, TopAppBarNavigationIcon } from '@rmwc/top-app-bar';
 
 interface NavbarSectionLeftProps {
   toggleShowDrawer: () => boolean;
@@ -21,14 +16,7 @@ export class NavbarSectionLeft extends React.Component<
     return (
       <TopAppBarSection alignStart>
         <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-        <StyledTopAppBarTitle onClick={() => setVisibleDialog('AboutDialog')}>
-          HBM
-        </StyledTopAppBarTitle>
       </TopAppBarSection>
     );
   }
 }
-
-const StyledTopAppBarTitle = styled(TopAppBarTitle)`
-  cursor: pointer;
-`;

@@ -13,7 +13,7 @@ import { Selected } from '../lists/selected/selected';
 import { PagesManagerClient } from '../../lib/mobx/stores/pagesManagerClient';
 
 interface StyledButtonContainerProps {
-  showItems: boolean;
+  showItems?: boolean;
 }
 
 interface ListsContainerProps {
