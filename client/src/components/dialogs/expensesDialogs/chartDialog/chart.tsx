@@ -15,7 +15,6 @@ import {
 } from 'recharts';
 
 import { splitCosts } from './dataFunctions';
-import styled from 'styled-components';
 
 const chartLegendBars = [
   {
@@ -49,11 +48,7 @@ export class Chart extends React.Component<ChartProps, {}> {
   };
   render() {
     return (
-      <StyledBarChart
-        width={335}
-        height={250}
-        data={splitCosts(this.props.costs)}
-      >
+      <BarChart width={335} height={250} data={splitCosts(this.props.costs)}>
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='name' />
         <YAxis />
@@ -62,11 +57,7 @@ export class Chart extends React.Component<ChartProps, {}> {
         {chartLegendBars.map(item => (
           <Bar dataKey={item.key} fill={item.color} key={item.key} />
         ))}
-      </StyledBarChart>
+      </BarChart>
     );
   }
 }
-
-const StyledBarChart = styled(BarChart)`
-  margin-left: -40px;
-`;
