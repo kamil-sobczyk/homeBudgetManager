@@ -10,6 +10,9 @@ import {
 } from '@rmwc/list';
 import { MoreMenu } from './items/moreMenu';
 import { ListType, Item } from '../../lib/interfaces';
+import { observer } from 'mobx-react';
+import { reaction } from 'mobx';
+import { SimpleDataTable } from 'rmwc';
 
 interface ListSingleItemProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -19,13 +22,18 @@ interface ListSingleItemProps {
   index: number;
 }
 
+interface StyledItemProps {
+  editable?: number;
+}
 interface ListItemPrimaryTextProps {
-  info: any;
+  info?: number;
 }
 
+@observer
 export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
   shouldComponentUpdate = (oldProps: ListSingleItemProps) =>
-    this.props.item !== oldProps.item;
+    this.props.item !== oldProps.item ||
+    this.props.areItemsEditable !== oldProps.areItemsEditable;
 
   render() {
     const {
@@ -36,8 +44,13 @@ export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
       areItemsEditable
     } = this.props;
 
+    console.log(areItemsEditable);
+
     return (
-      <StyledItem key={index}>
+      <StyledItem
+        key={index}
+        editable={areItemsEditable ? 1 : undefined}
+      >
         {areItemsEditable && (
           <MoreMenu
             item={item}
@@ -65,7 +78,10 @@ export const StyledItem = styled(ListItem)`
   display: flex;
   justify-content: flex-start;
   min-height: 45px;
-  margin-left: -25px;
+  width: ${(props: StyledItemProps) =>
+    props.editable ? '-25px' : '-15px'};
+  margin-left: ${(props: StyledItemProps) =>
+    props.editable ? '-25px' : '-5px'};
 `;
 
 export const StyledTextContainer = styled.div`
