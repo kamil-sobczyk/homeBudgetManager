@@ -15,8 +15,8 @@ interface ItemsTopButtonsProps {
   setVisibleDialog: (dialog?: string) => void;
   setChosenCategory: (list: ListType, category: string) => void;
   toggleSearchBar: () => void;
-  items: Item[];
   updateList: () => void;
+  items: Item[];
 }
 
 interface StyledListButtonsContainerProps {
@@ -34,6 +34,7 @@ export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
 
   render() {
     const { setVisibleDialog, items, toggleSearchBar } = this.props;
+
     return (
       <StyledListButtonsContainer areItems>
         <StyledAddShoppingItemIconButton

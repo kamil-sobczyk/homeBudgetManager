@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import styled from 'styled-components';
-
 import { SimpleMenu, MenuItem } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { Button } from '@rmwc/button';

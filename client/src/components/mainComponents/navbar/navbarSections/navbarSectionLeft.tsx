@@ -7,16 +7,8 @@ interface NavbarSectionLeftProps {
   setVisibleDialog: (dialog?: string) => void;
 }
 
-export class NavbarSectionLeft extends React.Component<
-  NavbarSectionLeftProps,
-  {}
-> {
-  render() {
-    const { toggleShowDrawer, setVisibleDialog } = this.props;
-    return (
-      <TopAppBarSection alignStart>
-        <TopAppBarNavigationIcon icon='menu' onClick={toggleShowDrawer} />
-      </TopAppBarSection>
-    );
-  }
-}
+export const NavbarSectionLeft = (props: NavbarSectionLeftProps) => (
+  <TopAppBarSection alignStart>
+    <TopAppBarNavigationIcon icon='menu' onClick={props.toggleShowDrawer} />
+  </TopAppBarSection>
+);
