@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { TopAppBarSection, TopAppBarActionItem } from '@rmwc/top-app-bar';
-import styled from 'styled-components';
 
 interface NavbarSectionRightProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -33,7 +32,7 @@ const navbarSectionRightItems = [
 export const NavbarSectionRight = (props: NavbarSectionRightProps) => (
   <TopAppBarSection alignEnd>
     {navbarSectionRightItems.map(item => (
-      <StyledTopBarItem
+      <TopAppBarActionItem
         icon={item.icon}
         onClick={() => props.setVisibleDialog(item.action)}
         key={item.action}
@@ -41,8 +40,3 @@ export const NavbarSectionRight = (props: NavbarSectionRightProps) => (
     ))}
   </TopAppBarSection>
 );
-
-const StyledTopBarItem = styled(TopAppBarActionItem)`
-  margin-right: 10px;
-  cursor: pointer;
-`;
