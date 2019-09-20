@@ -23,9 +23,7 @@ export class SortingMenu extends React.Component<SortingMenuProps, {}> {
   };
 
   render() {
-    const { categories } = this.props;
-
-    const menuItems = categories.map((category: string) => (
+    const menuItems = this.props.categories.sort().map((category: string) => (
       <React.Fragment key={category}>
         <MenuItem onClick={() => this.handleOptionClick(category)}>
           {category}
