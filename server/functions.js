@@ -3,7 +3,7 @@ const sortByName = items => items.sort((a, b) => a.name.localeCompare(b.name));
 const sortByCheckedValue = items => {
   let checkedItems = [];
   let uncheckedItems = [];
-  items.forEach(item =>
+  items.map(item =>
     item.checked ? checkedItems.push(item) : uncheckedItems.push(item)
   );
   return [...uncheckedItems, ...checkedItems];

@@ -76,7 +76,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         }
       ];
     } else {
-      parsedCosts.forEach((cost: Cost) => {
+      parsedCosts.map((cost: Cost) => {
         if (cost.category === 'shopping') {
           if (cost.chosenItems.length > 0) {
             if (cost.chosenItems.length > 1) {

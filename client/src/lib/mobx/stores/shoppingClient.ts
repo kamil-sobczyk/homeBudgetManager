@@ -106,7 +106,7 @@ export class ShoppingClient {
     const chosenItems: string[] = [];
     newItems = this.store.items;
 
-    this.store.selected.forEach((item: Item) => {
+    this.store.selected.map((item: Item) => {
       if (item.checked) {
         newItems.push(item);
         chosenItems.push(item.name);

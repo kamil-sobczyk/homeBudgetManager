@@ -139,8 +139,6 @@ export class ItemManagerClient {
   @action setActiveItem = (list: ListType, id: string): void => {
     const index = this.getIndexById(list, id);
 
-    console.log(list, id)
-
     this.setOldItem();
     this.activeItem.index = index;
     this.activeItem.list = list;
@@ -154,7 +152,7 @@ export class ItemManagerClient {
     const isItemRepeated = (): boolean => {
       let ret = false;
 
-      allNames.forEach((name: string, index: number) => {
+      allNames.map((name: string, index: number) => {
         if (name === this.newItem.name) {
           if (allInfos[index] === this.newItem.info) {
             ret = true;
@@ -190,7 +188,7 @@ export class ItemManagerClient {
   deleteItem = (name: string, info: string): Item[] => {
     const newItems = [...this.store.items];
 
-    newItems.forEach((item: Item, index: number) => {
+    newItems.map((item: Item, index: number) => {
       if (item.name === name && item.info === info) {
         newItems.splice(index, 1);
       }
@@ -215,7 +213,7 @@ export class ItemManagerClient {
     const items = (this.store as any)[list];
     let itemIndex: number = 0;
 
-    items.forEach((item: Item, index: number) => {
+    items.map((item: Item, index: number) => {
       if (item.id === id) {
         itemIndex = index;
       }

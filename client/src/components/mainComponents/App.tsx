@@ -11,8 +11,6 @@ import { Navbar } from './navbar/navbar';
 import { ListBox } from '../listBox/listBox';
 import { ProgressBar } from './progressBar';
 
-import { themeOptions } from '../../lib/theme';
-
 @observer
 export class App extends React.Component<{}, {}> {
   @observable loading: boolean = true;

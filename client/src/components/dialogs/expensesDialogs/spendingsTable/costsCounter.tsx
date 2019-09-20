@@ -28,7 +28,7 @@ const countCosts = (
     }
   }
 
-  chosenCosts.forEach((cost: Cost) => {
+  chosenCosts.map((cost: Cost) => {
     if (category === 'shopping' && cost.category === 'shopping') {
       sumOfCosts += cost.count;
     } else if (category === 'bill' && cost.category === 'bill') {

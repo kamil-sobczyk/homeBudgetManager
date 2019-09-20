@@ -50,7 +50,7 @@ const getMonthCostCount = (
 ): number => {
   let sumOfCosts: number = 0;
 
-  costs.forEach((cost: Cost) => {
+  costs.map((cost: Cost) => {
     if (cost.category === 'bill' && category === 'bill') {
       if (('0' + cost.date.slice(4, 5)).slice(-2) === month) {
         sumOfCosts += cost.count;
@@ -79,7 +79,7 @@ const getMonthCostCount = (
 
 export const splitCosts = (costs: Cost[]): [] => {
   let monthSpendings: MonthSpendings[] = [];
-  months.forEach((month, index) =>
+  months.map((month, index) =>
     monthSpendings.push({
       name: month,
       bills: getMonthCostCount(costs, monthNumbers[index], 'bill'),
@@ -90,7 +90,7 @@ export const splitCosts = (costs: Cost[]): [] => {
     })
   );
 
-  monthSpendings.forEach(
+  monthSpendings.map(
     (month: MonthSpendings): number =>
       (month.total =
         month.bills + month.shopping + month.car + month.health + month.other)

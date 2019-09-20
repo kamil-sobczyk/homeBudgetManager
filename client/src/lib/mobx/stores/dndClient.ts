@@ -90,7 +90,7 @@ export class DnDClient {
         )
       );
 
-      result.droppable2.forEach(
+      result.droppable2.map(
         (item: Item): boolean => (item.checked = false)
       );
 

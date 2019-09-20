@@ -35,7 +35,7 @@ export const move = (
   sourceClone = sourceClone.filter((item: Item) => {
     let ret: boolean = true;
 
-    destClone.forEach((element: Item) => {
+    destClone.map((element: Item) => {
       if (element === item) {
         ret = false;
       }
