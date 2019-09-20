@@ -30,25 +30,17 @@ const navbarSectionRightItems = [
   }
 ];
 
-export class NavbarSectionRight extends React.Component<
-  NavbarSectionRightProps,
-  {}
-> {
-  render() {
-    const { setVisibleDialog } = this.props;
-    return (
-      <TopAppBarSection alignEnd>
-        {navbarSectionRightItems.map(item => (
-          <StyledTopBarItem
-            icon={item.icon}
-            onClick={() => setVisibleDialog(item.action)}
-            key={item.action}
-          />
-        ))}
-      </TopAppBarSection>
-    );
-  }
-}
+export const NavbarSectionRight = (props: NavbarSectionRightProps) => (
+  <TopAppBarSection alignEnd>
+    {navbarSectionRightItems.map(item => (
+      <StyledTopBarItem
+        icon={item.icon}
+        onClick={() => props.setVisibleDialog(item.action)}
+        key={item.action}
+      />
+    ))}
+  </TopAppBarSection>
+);
 
 const StyledTopBarItem = styled(TopAppBarActionItem)`
   margin-right: 10px;
