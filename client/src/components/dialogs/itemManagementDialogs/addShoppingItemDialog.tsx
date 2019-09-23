@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
 import { Button } from '@rmwc/button';
@@ -10,8 +11,7 @@ import { Select } from '@rmwc/select';
 import { Item } from '../../../lib/interfaces';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
-import { observable } from 'mobx';
-import { FailDialog } from '../infoDialogs/failDialog';
+
 import { FailSnackbar } from '../calendarDialogs/snackbar';
 
 interface AddShoppingItemDialogProps {
@@ -80,9 +80,9 @@ export class AddShoppingItemDialog extends React.Component<
               name='category'
               options={[
                 'New category',
-                ...getCategories().filter(
-                  (category: string) => category !== 'All'
-                )
+                ...getCategories()
+                  .filter((category: string) => category !== 'All')
+                  .sort()
               ]}
             />
           )}

@@ -10,6 +10,7 @@ import {
   ListItemPrimaryText,
   ListItemSecondaryText
 } from '@rmwc/list';
+
 import { MoreMenu } from './items/moreMenu';
 import { ListType, Item } from '../../lib/interfaces';
 
