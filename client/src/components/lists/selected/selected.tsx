@@ -9,7 +9,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import { Item, ListType } from '../../../lib/interfaces';
 import { ProvidedSelected } from './provided/providedSelected';
 import { SelectedTopButtons } from './topButtons';
-import { PagesManagerClient } from '../../../lib/mobx/stores/pagesManagerClient';
+import { PaginationManagerClient } from '../../../lib/mobx/stores/paginationManagerClient';
 import { BottomButtons } from '../bottomButtons';
 
 interface StyledContainerProps {
@@ -26,7 +26,7 @@ interface SelectedProps {
   areItemsEditable: boolean;
   showItems: boolean;
   selected: Item[];
-  pagesManager: PagesManagerClient;
+  pagesManager: PaginationManagerClient;
 }
 
 @observer

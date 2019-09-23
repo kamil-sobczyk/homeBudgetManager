@@ -16,7 +16,7 @@ import { StyledContainer } from '../selected/selected';
 import { ItemsTopButtons } from './topButtons';
 import { removeCategoryDuplicates } from '../../../lib/mobx/stores/itemManagerClient';
 import { BottomButtons } from '../bottomButtons';
-import { PagesManagerClient } from '../../../lib/mobx/stores/pagesManagerClient';
+import { PaginationManagerClient } from '../../../lib/mobx/stores/paginationManagerClient';
 
 export const getCategories = (items: Item[]): string[] => {
   const itemsCategories: string[] = [
@@ -41,7 +41,7 @@ interface ItemsProps {
   areItemsEditable: boolean;
   showItems: boolean;
   items: Item[];
-  pagesManager: PagesManagerClient;
+  pagesManager: PaginationManagerClient;
 }
 
 @observer

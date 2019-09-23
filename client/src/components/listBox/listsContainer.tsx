@@ -10,7 +10,7 @@ import { DragDropContext, DropResult, DragStart } from 'react-beautiful-dnd';
 import { ViewButton } from './listsViewButton';
 import { Items } from '../lists/items/items';
 import { Selected } from '../lists/selected/selected';
-import { PagesManagerClient } from '../../lib/mobx/stores/pagesManagerClient';
+import { PaginationManagerClient } from '../../lib/mobx/stores/paginationManagerClient';
 
 interface StyledButtonContainerProps {
   showItems?: boolean;
@@ -34,7 +34,7 @@ interface ListsContainerProps {
   items: Item[];
   categorizedItems: Item[];
   showItems: boolean;
-  pagesManager: PagesManagerClient;
+  pagesManager: PaginationManagerClient;
 }
 
 export const ListsContainer = observer(

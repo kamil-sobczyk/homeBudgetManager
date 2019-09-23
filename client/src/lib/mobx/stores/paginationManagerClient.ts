@@ -9,7 +9,7 @@ const scrollToTop = (): void => {
   document.documentElement.scrollTop = 0;
 };
 
-export class PagesManagerClient {
+export class PaginationManagerClient {
   store: Store;
   constructor(store: Store) {
     this.store = store;

@@ -26,7 +26,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
       calendarClient,
       costManagerClient,
       incomesManagerClient,
-      pagesManagerClient
+      PaginationManagerClient
     } = this.props.store;
 
     return (
@@ -49,7 +49,7 @@ export class ListBox extends React.Component<StoreProps, {}> {
           getChosenCategory={itemManagerClient.getChosenCategory}
           setChosenCategory={itemManagerClient.setChosenCategory}
           areItemsEditable={itemManagerClient.areItemsEditable}
-          pagesManager={pagesManagerClient}
+          pagesManager={PaginationManagerClient}
         />
         <DialogsContainer
           costs={costs}
