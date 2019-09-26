@@ -42,7 +42,10 @@ export class PaginationManagerClient {
 
   getChosenPage = (list: ListType): number => this.chosenPages[list];
 
-  getMaxPage = (list: ListType): number => this.maxPages[list];
+  getMaxPage = (list: ListType): number =>
+    this.maxPages[list] > 0
+      ? this.maxPages[list]
+      : this.store.items.length / 10 - 1;
 
   setMaxPage = (list: ListType, items: Item[]): void => {
     if (items.length % 10 !== 0) {
