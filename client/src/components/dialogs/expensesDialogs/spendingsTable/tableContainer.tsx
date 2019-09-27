@@ -47,6 +47,7 @@ interface TableContainerProps {
   visibleDialog: string;
   setChosenCost: (cost: Cost) => Cost;
   notClickable?: boolean;
+  wrapWords?: boolean;
 }
 
 @observer
@@ -116,6 +117,11 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         columns={columns}
         defaultPageSize={10}
         className='-striped -highlight'
+        getTdProps={() => ({
+          style: {
+            whiteSpace: this.props.wrapWords ? 'pre-wrap' : 'nowrap'
+          }
+        })}
         getTrProps={(state: FinalState, rowInfo?: RowInfo) => {
           let category: CostCategoryType = 'bill';
           if (rowInfo) {
