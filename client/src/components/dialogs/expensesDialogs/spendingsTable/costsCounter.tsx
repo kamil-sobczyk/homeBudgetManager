@@ -14,8 +14,8 @@ export const getDateNow = () =>
 
 const countCosts = (
   costs: Cost[],
-  category: CostCategoryType,
-  time: CostCounterTime
+  time: CostCounterTime,
+  category?: CostCategoryType
 ) => {
   let sumOfCosts: number = 0;
   let chosenCosts: Cost[] = costs;
@@ -28,19 +28,24 @@ const countCosts = (
     }
   }
 
-  chosenCosts.map((cost: Cost) => {
-    if (category === 'shopping' && cost.category === 'shopping') {
+  if (category) {
+    chosenCosts.map((cost: Cost) => {
+      if (category === 'shopping' && cost.category === 'shopping') {
+        sumOfCosts += cost.count;
+      } else if (category === 'bill' && cost.category === 'bill') {
+        sumOfCosts += cost.count;
+      } else if (category === 'car' && cost.category === 'car') {
+        sumOfCosts += cost.count;
+      } else if (category === 'health' && cost.category === 'health') {
+        sumOfCosts += cost.count;
+      } else if (category === 'other' && cost.category === 'other') {
+        sumOfCosts += cost.count;
+      }
+    });
+  } else
+    chosenCosts.map((cost: Cost) => {
       sumOfCosts += cost.count;
-    } else if (category === 'bill' && cost.category === 'bill') {
-      sumOfCosts += cost.count;
-    } else if (category === 'car' && cost.category === 'car') {
-      sumOfCosts += cost.count;
-    } else if (category === 'health' && cost.category === 'health') {
-      sumOfCosts += cost.count;
-    } else if (category === 'other' && cost.category === 'other') {
-      sumOfCosts += cost.count;
-    }
-  });
+    });
 
   return sumOfCosts;
 };
@@ -87,14 +92,15 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
     return (
       <>
         <StyledTypography use='subtitle1'>
-          {time === 'month' ? 'This month' : time} you spent:
+          {time === 'month' ? 'This month' : time} you spent{' '}
+          {countCosts(costs, time)}zł:
         </StyledTypography>
         <StyledLegendContainer>
           {costCounterItems.map((item: CostCounterItem) => (
             <div key={item.color}>
               <ColoredIcon color={item.color} />
               <StyledCountContainer>
-                {countCosts(costs, item.category, time) + ' zł'}
+                {countCosts(costs, time, item.category) + ' zł'}
               </StyledCountContainer>
             </div>
           ))}
