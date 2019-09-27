@@ -1,11 +1,13 @@
 import { Store } from '../rootStore';
-import { Cost } from '../../interfaces';
+import { Cost, Item } from '../../interfaces';
 
 const fixChosenItems = (cost: Cost): Cost => {
   let parsedCost = cost;
 
   if (parsedCost.category !== 'shopping') {
     parsedCost.chosenItems = [parsedCost.category];
+  } else {
+    parsedCost.chosenItems = parsedCost.chosenItems[0].split(', ');
   }
 
   return parsedCost;
@@ -17,6 +19,8 @@ export class CostManagerClient {
     this.store = store;
   }
   deleteCost = (cost: Cost): void => {
+    console.log(JSON.stringify(cost));
+    console.log(JSON.stringify(fixChosenItems(cost)));
     this.store.apiClient.deleteCostOnServer(fixChosenItems(cost));
     this.store.visibilityClient.setVisibleDialog();
   };
