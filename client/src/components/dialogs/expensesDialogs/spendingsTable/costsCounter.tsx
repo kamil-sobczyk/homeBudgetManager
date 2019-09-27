@@ -12,73 +12,12 @@ import { LegendColor, StyledLegendContainer } from './legend/legend';
 export const getDateNow = () =>
   String(new Date().toLocaleString('en-GB')).slice(0, 17);
 
-const countCosts = (
-  costs: Cost[],
-  time: CostCounterTime,
-  category?: CostCategoryType
-) => {
-  let sumOfCosts: number = 0;
-  let chosenCosts: Cost[] = costs;
-
-  if (time === 'month') {
-    if (costs.length > 0) {
-      chosenCosts = costs.filter(
-        cost => cost.date.slice(3, 5) === getDateNow().slice(3, 5)
-      );
-    }
-  }
-
-  if (category) {
-    chosenCosts.map((cost: Cost) => {
-      if (category === 'shopping' && cost.category === 'shopping') {
-        sumOfCosts += cost.count;
-      } else if (category === 'bill' && cost.category === 'bill') {
-        sumOfCosts += cost.count;
-      } else if (category === 'car' && cost.category === 'car') {
-        sumOfCosts += cost.count;
-      } else if (category === 'health' && cost.category === 'health') {
-        sumOfCosts += cost.count;
-      } else if (category === 'other' && cost.category === 'other') {
-        sumOfCosts += cost.count;
-      }
-    });
-  } else
-    chosenCosts.map((cost: Cost) => {
-      sumOfCosts += cost.count;
-    });
-
-  return sumOfCosts;
-};
-
-const costCounterItems: CostCounterItem[] = [
-  {
-    color: 'black',
-    category: 'shopping'
-  },
-  {
-    color: 'blue',
-    category: 'bill'
-  },
-  {
-    color: 'green',
-    category: 'health'
-  },
-  {
-    color: 'red',
-    category: 'car'
-  },
-  {
-    color: 'grey',
-    category: 'other'
-  }
-];
+type CostCounterTime = string | Date;
 
 interface CostCounterItem {
   color: LegendColor;
   category: CostCategoryType;
 }
-
-type CostCounterTime = string | Date;
 
 interface CostsCounterProps {
   costs: Cost[];
@@ -86,6 +25,66 @@ interface CostsCounterProps {
 }
 
 export class CostsCounter extends React.Component<CostsCounterProps, {}> {
+  private readonly costCounterItems: CostCounterItem[] = [
+    {
+      color: 'black',
+      category: 'shopping'
+    },
+    {
+      color: 'blue',
+      category: 'bill'
+    },
+    {
+      color: 'green',
+      category: 'health'
+    },
+    {
+      color: 'red',
+      category: 'car'
+    },
+    {
+      color: 'grey',
+      category: 'other'
+    }
+  ];
+
+  private countCosts = (
+    costs: Cost[],
+    time: CostCounterTime,
+    category?: CostCategoryType
+  ) => {
+    let sumOfCosts: number = 0;
+    let chosenCosts: Cost[] = costs;
+
+    if (time === 'month') {
+      if (costs.length > 0) {
+        chosenCosts = costs.filter(
+          cost => cost.date.slice(3, 5) === getDateNow().slice(3, 5)
+        );
+      }
+    }
+
+    if (category) {
+      chosenCosts.map((cost: Cost) => {
+        if (category === 'shopping' && cost.category === 'shopping') {
+          sumOfCosts += cost.count;
+        } else if (category === 'bill' && cost.category === 'bill') {
+          sumOfCosts += cost.count;
+        } else if (category === 'car' && cost.category === 'car') {
+          sumOfCosts += cost.count;
+        } else if (category === 'health' && cost.category === 'health') {
+          sumOfCosts += cost.count;
+        } else if (category === 'other' && cost.category === 'other') {
+          sumOfCosts += cost.count;
+        }
+      });
+    } else
+      chosenCosts.map((cost: Cost) => {
+        sumOfCosts += cost.count;
+      });
+
+    return sumOfCosts;
+  };
   render() {
     const { costs, time } = this.props;
 
@@ -93,14 +92,14 @@ export class CostsCounter extends React.Component<CostsCounterProps, {}> {
       <>
         <StyledTypography use='subtitle1'>
           {time === 'month' ? 'This month' : time} you spent{' '}
-          {countCosts(costs, time)}zł:
+          {this.countCosts(costs, time)}zł:
         </StyledTypography>
         <StyledLegendContainer>
-          {costCounterItems.map((item: CostCounterItem) => (
+          {this.costCounterItems.map((item: CostCounterItem) => (
             <div key={item.color}>
               <ColoredIcon color={item.color} />
               <StyledCountContainer>
-                {countCosts(costs, time, item.category) + ' zł'}
+                {this.countCosts(costs, time, item.category) + ' zł'}
               </StyledCountContainer>
             </div>
           ))}

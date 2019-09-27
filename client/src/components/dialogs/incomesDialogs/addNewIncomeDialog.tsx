@@ -28,8 +28,7 @@ interface AddNewIncomeDialogProps {
 
 @observer
 export class AddNewIncomeDialog extends React.Component<
-  AddNewIncomeDialogProps,
-  {}
+  AddNewIncomeDialogProps
 > {
   render() {
     const {

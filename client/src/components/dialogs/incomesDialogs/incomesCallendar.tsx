@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Cost, Income } from '../../../lib/interfaces';
-
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+
+import { Cost, Income } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
@@ -28,10 +28,9 @@ interface IncomesCallendarDialogProps {
 
 @observer
 export class IncomesCallendarDialog extends React.Component<
-  IncomesCallendarDialogProps,
-  {}
+  IncomesCallendarDialogProps
 > {
-  @observable daysVisible: string[] = [];
+  @observable private daysVisible: string[] = [];
 
   componentDidMount = () => {
     const { getCalendarViewDate, setDatePicked } = this.props;
@@ -40,7 +39,7 @@ export class IncomesCallendarDialog extends React.Component<
     getCalendarViewDate(new Date());
   };
 
-  handleClickPickDate = () => {
+  private handleClickPickDate = () => {
     const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
     if (datePicked === '') {
       toggleShowFailSnackbar();
@@ -87,7 +86,10 @@ export class IncomesCallendarDialog extends React.Component<
             </Button>
           </DialogActions>
         </Dialog>
-        <FailSnackbar showSnackbar={showFailSnackbar} text='Pick a date first' />
+        <FailSnackbar
+          showSnackbar={showFailSnackbar}
+          text='Pick a date first'
+        />
       </>
     );
   }

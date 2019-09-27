@@ -35,9 +35,7 @@ interface CalendarDialogProps {
 type TileClass = 'cost' | 'income' | 'cost-income' | null;
 
 @observer
-export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
-  @observable daysVisible: string[] = [];
-
+export class CalendarDialog extends React.Component<CalendarDialogProps> {
   componentDidMount = () => {
     const { getCosts, getIncomes, getCalendarViewDate } = this.props;
 
@@ -46,7 +44,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     getCalendarViewDate(new Date());
   };
 
-  handleClickMore = () => {
+  private handleClickMore = () => {
     const { datePicked, toggleShowFailSnackbar, setVisibleDialog } = this.props;
     if (datePicked === '') {
       toggleShowFailSnackbar();
@@ -55,7 +53,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     }
   };
 
-  countTileStyle = (date: Date, view: string) => {
+  private countTileStyle = (date: Date, view: string) => {
     const { calendarViewDate } = this.props;
 
     const checkDay = (type: string): boolean =>
@@ -66,11 +64,9 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
       String(date.toLocaleString('en-GB')).slice(3, 5) ===
         calendarViewDate.slice(3, 5);
 
-    const isCost = checkDay('cost');
-
-    const isIncome = checkDay('income');
-
-    const isCostAndIncome = isCost && isIncome;
+    const isCost: boolean = checkDay('cost');
+    const isIncome: boolean = checkDay('income');
+    const isCostAndIncome: boolean = isCost && isIncome;
 
     if (view === 'month') {
       if (isCostAndIncome) {
@@ -85,7 +81,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     } else return null;
   };
 
-  countDaysWithExpenses = () => {
+  private countDaysWithExpenses = () => {
     const { calendarViewDate, costs } = this.props;
 
     let daysWithExpenses: number[] = costs
@@ -99,7 +95,7 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
     );
   };
 
-  countDaysWithIncomes = () => {
+  private countDaysWithIncomes = () => {
     const { calendarViewDate, incomes } = this.props;
 
     let daysWithIncomes: number[] = incomes
@@ -158,7 +154,10 @@ export class CalendarDialog extends React.Component<CalendarDialogProps, {}> {
             </Button>
           </DialogActions>
         </Dialog>
-        <FailSnackbar showSnackbar={showFailSnackbar} text='Pick a date first'/>
+        <FailSnackbar
+          showSnackbar={showFailSnackbar}
+          text='Pick a date first'
+        />
         {visibleDialog.includes('Day') && (
           <CalendarDialogDay
             setVisibleDialog={setVisibleDialog}

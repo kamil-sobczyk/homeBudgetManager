@@ -26,20 +26,19 @@ interface AddShoppingItemDialogProps {
 
 @observer
 export class AddShoppingItemDialog extends React.Component<
-  AddShoppingItemDialogProps,
-  {}
+  AddShoppingItemDialogProps
 > {
-  @observable chosenCategory = '';
-  @observable showFailSnackbar = false;
+  @observable private chosenCategory = '';
+  @observable private showFailSnackbar = false;
 
-  handleOptionClick = (event: React.FormEvent<EventTarget>) => {
+  private handleOptionClick = (event: React.FormEvent<EventTarget>) => {
     const target = event.target as HTMLInputElement;
 
     this.props.changeNewItem(event);
     this.chosenCategory = target.value;
   };
 
-  addNewItem = () => {
+  private addNewItem = () => {
     if (this.chosenCategory !== '') {
       this.props.AddShoppingItem();
     } else {

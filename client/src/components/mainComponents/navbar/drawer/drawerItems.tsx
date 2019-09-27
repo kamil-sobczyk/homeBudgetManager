@@ -8,44 +8,7 @@ import styled from 'styled-components';
 import { List, ListItem } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
-const drawerVisibleItems = [
-  {
-    action: 'AddShoppingItemDialog',
-    icon: 'add_circle',
-    iconColor: '#00bf02',
-    title: 'Add new product'
-  },
-  {
-    action: 'AddNewIncomeDialog',
-    icon: 'save_alt',
-    iconColor: '#00bf02',
-    title: 'Add new income'
-  },
-  {
-    action: 'AddNewExpenseDialog',
-    icon: 'note_add',
-    iconColor: '#0400ff',
-    title: 'Add new bill'
-  },
-  {
-    action: 'SpendingsDialog',
-    icon: 'shopping_cart',
-    iconColor: '#0d49aa',
-    title: 'Show spendings'
-  },
-  {
-    action: 'AboutDialog',
-    icon: 'info',
-    iconColor: '#adad00',
-    title: 'About'
-  },
-  {
-    action: 'LogoutDialog',
-    icon: 'exit_to_app',
-    iconColor: 'red',
-    title: 'Logout'
-  }
-];
+const d
 
 interface DrawerItemsProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -53,10 +16,48 @@ interface DrawerItemsProps {
 }
 
 @observer
-export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
-  @observable text: string = 'Turn editing off';
+export class DrawerItems extends React.Component<DrawerItemsProps> {
+  @observable private text: string = 'Turn editing off';
+  private readonly drawerVisibleItems = [
+    {
+      action: 'AddShoppingItemDialog',
+      icon: 'add_circle',
+      iconColor: '#00bf02',
+      title: 'Add new product'
+    },
+    {
+      action: 'AddNewIncomeDialog',
+      icon: 'save_alt',
+      iconColor: '#00bf02',
+      title: 'Add new income'
+    },
+    {
+      action: 'AddNewExpenseDialog',
+      icon: 'note_add',
+      iconColor: '#0400ff',
+      title: 'Add new bill'
+    },
+    {
+      action: 'SpendingsDialog',
+      icon: 'shopping_cart',
+      iconColor: '#0d49aa',
+      title: 'Show spendings'
+    },
+    {
+      action: 'AboutDialog',
+      icon: 'info',
+      iconColor: '#adad00',
+      title: 'About'
+    },
+    {
+      action: 'LogoutDialog',
+      icon: 'exit_to_app',
+      iconColor: 'red',
+      title: 'Logout'
+    }
+  ];
 
-  toggleEditing = () => {
+  private toggleEditing = () => {
     this.props.toggleEditItems();
 
     if (this.text === 'Turn editing off') {
@@ -69,7 +70,7 @@ export class DrawerItems extends React.Component<DrawerItemsProps, {}> {
   render() {
     const { setVisibleDialog } = this.props;
 
-    let drawerItems = drawerVisibleItems.map(item => (
+    let drawerItems = this.drawerVisibleItems.map(item => (
       <StyledDrawerItemContainer
         key={item.action}
         onClick={() => setVisibleDialog(item.action)}

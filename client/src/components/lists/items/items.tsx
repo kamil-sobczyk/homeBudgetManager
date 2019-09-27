@@ -46,17 +46,17 @@ interface ItemsProps {
 
 @observer
 export class Items extends React.Component<ItemsProps, {}> {
-  @observable searchBarVisible: boolean = false;
-  @observable paginationVisible: boolean = true;
-  list: ListType = 'items';
+  @observable private searchBarVisible: boolean = false;
+  @observable private paginationVisible: boolean = true;
+  private readonly list: ListType = 'items';
 
   componentDidMount = (): void => {
     this.props.getItems();
   };
 
-  updateList = (): void => this.forceUpdate();
+  private updateList = (): void => this.forceUpdate();
 
-  getCategorizedItems = (): Item[] => {
+  private getCategorizedItems = (): Item[] => {
     const { items, getChosenCategory, pagesManager } = this.props;
     const startIndex = (pagesManager.getChosenPage(this.list) - 1) * 10;
 
@@ -72,32 +72,32 @@ export class Items extends React.Component<ItemsProps, {}> {
     }
   };
 
-  setChosenCategory = (list: ListType, category: string): void => {
+  private setChosenCategory = (list: ListType, category: string): void => {
     const { setChosenCategory, pagesManager } = this.props;
 
     setChosenCategory(list, category);
     pagesManager.setChosenPage(this.list, 1);
   };
 
-  setPaginationVisible = (value: boolean) => {
+  private setPaginationVisible = (value: boolean) => {
     this.paginationVisible = value;
   };
 
-  resetPagination = (): void => {
+  private resetPagination = (): void => {
     this.props.pagesManager.setChosenPage(this.list, 1);
   };
 
-  toggleSearchBar = (): void => {
+  private toggleSearchBar = (): void => {
     this.searchBarVisible = !this.searchBarVisible;
     this.updateList();
   };
 
-  categorizeItems = (category: string): void => {
+  private categorizeItems = (category: string): void => {
     this.props.setChosenCategory('items', category);
     this.updateList();
   };
 
-  setNextPage = (): void => {
+  private setNextPage = (): void => {
     const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
 
     getChosenPage(this.list) <= getMaxPage(this.list)
@@ -107,12 +107,12 @@ export class Items extends React.Component<ItemsProps, {}> {
     this.updateList();
   };
 
-  setPrevPage = (): void => {
+  private setPrevPage = (): void => {
     this.props.pagesManager.setPrevPage(this.list);
     this.updateList();
   };
 
-  paginateItems = (items: Item[], startIndex: number): Item[] =>
+  private paginateItems = (items: Item[], startIndex: number): Item[] =>
     items.slice(startIndex, startIndex + 10);
 
   render() {

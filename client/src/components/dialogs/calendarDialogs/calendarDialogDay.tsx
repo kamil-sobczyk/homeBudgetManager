@@ -23,10 +23,7 @@ interface CalendarDialogDayProps {
   costs: Cost[];
 }
 
-export class CalendarDialogDay extends React.Component<
-  CalendarDialogDayProps,
-  {}
-> {
+export class CalendarDialogDay extends React.Component<CalendarDialogDayProps> {
   render() {
     const {
       costs,

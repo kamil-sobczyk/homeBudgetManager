@@ -25,10 +25,9 @@ interface SelectedTopButtonsProps {
 
 @observer
 export class SelectedTopButtons extends React.Component<
-  SelectedTopButtonsProps,
-  {}
+  SelectedTopButtonsProps
 > {
-  categorizeItems = (category: string): void => {
+  private categorizeItems = (category: string): void => {
     const { updateList, setChosenCategory } = this.props;
 
     setChosenCategory('selected', category);

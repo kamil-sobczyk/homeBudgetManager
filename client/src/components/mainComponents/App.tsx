@@ -1,10 +1,11 @@
 import * as React from 'react';
 
+import { observable } from 'mobx';
+import { observer, Provider } from 'mobx-react';
+
 import styled from 'styled-components';
 
 import { Store } from '../../lib/mobx/rootStore';
-import { observable } from 'mobx';
-import { observer, Provider } from 'mobx-react';
 
 import { LoginDialog } from '../dialogs/loggingDialogs/loginDialog';
 import { Navbar } from './navbar/navbar';
@@ -12,9 +13,9 @@ import { ListBox } from '../listBox/listBox';
 import { ProgressBar } from './progressBar';
 
 @observer
-export class App extends React.Component<{}, {}> {
-  @observable loading: boolean = true;
-  store?: Store;
+export class App extends React.Component {
+  @observable private loading: boolean = true;
+  private store?: Store;
 
   componentDidMount() {
     this.loading = false;

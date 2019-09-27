@@ -31,12 +31,12 @@ interface EditCostDialogProps {
 }
 
 @observer
-export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
-  @observable showCalendar: boolean = false;
-  @observable date: string = '';
-  @observable modifyingCost: boolean = false;
+export class EditCostDialog extends React.Component<EditCostDialogProps> {
+  @observable private showCalendar: boolean = false;
+  @observable private date: string = '';
+  @observable private modifyingCost: boolean = false;
 
-  getDate = () => {
+  private getDate = () => {
     let dayString: string = String(this.props.datePicked).replace(/\./g, '/');
 
     if (dayString[1] === '/') {
@@ -49,14 +49,14 @@ export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
     return dayString.slice(0, 10);
   };
 
-  getDefaultItems = (items: string[]): [] | string[] => {
+  private getDefaultItems = (items: string[]): [] | string[] => {
     const categories: string[] = ['shopping', 'bill', 'health', 'car'];
     if (categories.indexOf(items[0]) < 0) {
       return items;
     } else return [];
   };
 
-  handleCalendarDayClick = (value: Date): void => {
+  private handleCalendarDayClick = (value: Date): void => {
     const { setDatePicked, datePicked } = this.props;
 
     this.modifyingCost = true;
@@ -66,7 +66,7 @@ export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
     this.showCalendar = false;
   };
 
-  handleActionClick = (action: string): void => {
+  private handleActionClick = (action: string): void => {
     const { setVisibleDialog, prevVisibleDialog, editCost, cost } = this.props;
 
     if (action === 'cancel') {
@@ -78,12 +78,12 @@ export class EditCostDialog extends React.Component<EditCostDialogProps, {}> {
     setVisibleDialog();
   };
 
-  onChangeCost = (event: React.FormEvent<EventTarget>): void => {
+  private onChangeCost = (event: React.FormEvent<EventTarget>): void => {
     this.modifyingCost = true;
     this.props.changeNewSpendingCounter(event);
   };
 
-  onChangeCategory = (event: React.FormEvent<Element>): void => {
+  private onChangeCategory = (event: React.FormEvent<Element>): void => {
     this.modifyingCost = true;
     this.props.changeNewSpendingCategory(event);
   };

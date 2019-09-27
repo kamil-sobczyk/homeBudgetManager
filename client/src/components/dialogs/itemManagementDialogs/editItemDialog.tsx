@@ -3,12 +3,13 @@ import * as React from 'react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
+import { Item } from '../../../lib/interfaces';
+
 import { Button } from '@rmwc/button';
 import { Dialog, DialogActions } from '@rmwc/dialog';
 import { TextField } from '@rmwc/textfield';
 
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
-import { Item } from '../../../lib/interfaces';
 
 interface EditItemDialogProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -24,13 +25,13 @@ interface EditItemDialogProps {
 
 @observer
 export class EditItemDialog extends React.Component<EditItemDialogProps, {}> {
-  @observable name?: string = this.props.name;
-  @observable info?: string = this.props.info;
-  @observable category?: string;
-  @observable isNameChangeInitialized: boolean = false;
-  @observable isInfoChangeInitialized: boolean = false;
+  @observable private name?: string = this.props.name;
+  @observable private info?: string = this.props.info;
+  @observable private category?: string;
+  @observable private isNameChangeInitialized: boolean = false;
+  @observable private isInfoChangeInitialized: boolean = false;
 
-  confirm = (): void => {
+  private confirm = (): void => {
     const {
       onChangeName,
       onChangeInfo,

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
+
 import { ListType, Item } from '../../../../lib/interfaces';
 
 import { Draggable, DroppableProvided } from 'react-beautiful-dnd';
@@ -19,8 +20,7 @@ interface ProvidedSelectedProps {
 
 @observer
 export class ProvidedSelected extends React.Component<
-  ProvidedSelectedProps,
-  {}
+  ProvidedSelectedProps
 > {
   shouldComponentUpdate = (oldProps: ProvidedSelectedProps) =>
     this.props.selected !== oldProps.selected;

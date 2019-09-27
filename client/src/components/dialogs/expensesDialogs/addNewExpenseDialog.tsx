@@ -10,14 +10,6 @@ import { Select } from '@rmwc/select';
 import { StyledDialogTitle } from './spendingsDialog';
 import { CostCategoryType } from '../../../lib/interfaces';
 
-const selectValues = [
-  'Shopping',
-  'Bill',
-  'Car exploitation',
-  'Health care',
-  'Other'
-];
-
 interface AddNewExpenseDialogProps {
   addNewSpending: () => void;
   changeNewSpendingCategory: (event: React.FormEvent) => void;
@@ -30,24 +22,35 @@ interface AddNewExpenseDialogProps {
   category: CostCategoryType;
 }
 
-export const AddNewExpenseDialog = observer(
-  ({
-    addNewSpending,
-    changeNewSpendingCategory,
-    changeNewSpendingCounter,
-    changeNewSpendingInfo,
-    setVisibleDialog,
-    visibleDialog,
-    category,
-    changeShoppingItems
-  }: AddNewExpenseDialogProps) => {
+export class AddNewExpenseDialog extends React.Component<
+  AddNewExpenseDialogProps
+> {
+  private readonly selectValues = [
+    'Shopping',
+    'Bill',
+    'Car exploitation',
+    'Health care',
+    'Other'
+  ];
+
+  render() {
+    const {
+      addNewSpending,
+      changeNewSpendingCategory,
+      changeNewSpendingCounter,
+      changeNewSpendingInfo,
+      setVisibleDialog,
+      visibleDialog,
+      category,
+      changeShoppingItems
+    } = this.props;
     return (
       <Dialog open={visibleDialog === 'AddNewExpenseDialog'}>
         <StyledDialogTitle>Add other</StyledDialogTitle>
         <Select
           label='Category'
           onChange={e => changeNewSpendingCategory(e)}
-          options={selectValues}
+          options={this.selectValues}
           required
         />
         <TextField
@@ -83,4 +86,4 @@ export const AddNewExpenseDialog = observer(
       </Dialog>
     );
   }
-);
+}

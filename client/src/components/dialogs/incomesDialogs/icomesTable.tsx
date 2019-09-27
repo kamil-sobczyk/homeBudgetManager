@@ -21,12 +21,39 @@ interface IncomesTableProps {
 }
 
 @observer
-export class IncomesTable extends React.Component<IncomesTableProps, {}> {
+export class IncomesTable extends React.Component<IncomesTableProps> {
+  private sortedIncomes = sortCostsOrIncomes(this.props.incomes) as Income[];
+  private columns = [
+    {
+      Header: 'Category',
+      accessor: 'category'
+    },
+    {
+      Header: 'Date',
+      accessor: 'date'
+    },
+    {
+      Header: 'Count',
+      minWidth: 45,
+      accessor: 'count'
+    },
+    {
+      Header: '',
+      Cell: (
+        <DeleteButton
+          icon='delete'
+          onClick={e => this.handleClickDeleteIncome(e)}
+        />
+      ),
+      minWidth: 25,
+      styles: 'background: red'
+    }
+  ];
   componentDidMount = () => {
     this.props.getIncomes();
   };
 
-  getClickedIncome = (event: any): Income => {
+  private getClickedIncome = (event: any): Income => {
     const cell = (event.target as HTMLElement).parentElement;
     const row = (cell as HTMLElement).parentElement;
     const categoryCell = (row as HTMLElement).firstElementChild;
@@ -39,7 +66,7 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
     return { category: category as IncomeCategoryType, date, count };
   };
 
-  handleClickDeleteIncome = (event: any) => {
+  private handleClickDeleteIncome = (event: any) => {
     const { setVisibleDialog, setActiveIncome } = this.props;
 
     setVisibleDialog('IncomesDialogDeleteIncomeDialog');
@@ -47,40 +74,10 @@ export class IncomesTable extends React.Component<IncomesTableProps, {}> {
   };
 
   render() {
-
-    const sortedIncomes = sortCostsOrIncomes(this.props.incomes) as Income[];
-
-    const columns = [
-      {
-        Header: 'Category',
-        accessor: 'category'
-      },
-      {
-        Header: 'Date',
-        accessor: 'date'
-      },
-      {
-        Header: 'Count',
-        minWidth: 45,
-        accessor: 'count'
-      },
-      {
-        Header: '',
-        Cell: (
-          <DeleteButton
-            icon='delete'
-            onClick={e => this.handleClickDeleteIncome(e)}
-          />
-        ),
-        minWidth: 25,
-        styles: 'background: red'
-      }
-    ];
-
     return (
       <ReactTable
-        data={sortedIncomes}
-        columns={columns}
+        data={this.sortedIncomes}
+        columns={this.columns}
         defaultPageSize={10}
         className='-striped -highlight'
       />

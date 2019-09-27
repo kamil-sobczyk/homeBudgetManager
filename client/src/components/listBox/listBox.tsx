@@ -7,7 +7,7 @@ import { ListsContainer } from './listsContainer';
 import { DialogsContainer } from '../dialogs/dialogsContainer';
 
 @observer
-export class ListBox extends React.Component<StoreProps, {}> {
+export class ListBox extends React.Component<StoreProps> {
   shouldComponentUpdate = (oldProps: StoreProps) =>
     this.props.store !== oldProps.store;
 

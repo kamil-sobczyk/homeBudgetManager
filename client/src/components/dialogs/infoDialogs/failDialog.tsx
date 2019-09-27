@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
+
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 
 interface FailDialogProps {

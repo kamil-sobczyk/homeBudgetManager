@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { Income } from '../../../lib/interfaces';
 
-import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
+import { Dialog, DialogActions } from '@rmwc/dialog';
 import { Button } from '@rmwc/button';
 import { StyledDialogTitle, StyledDialogContent } from '../expensesDialogs/spendingsDialog';
 

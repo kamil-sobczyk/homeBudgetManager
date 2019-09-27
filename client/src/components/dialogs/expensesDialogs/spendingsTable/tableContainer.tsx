@@ -7,39 +7,6 @@ import { Cost, CostCategoryType } from '../../../../lib/interfaces';
 
 import ReactTable, { FinalState, RowInfo } from 'react-table';
 
-const getRowColor = (category: CostCategoryType) => {
-  switch (category) {
-    case 'shopping':
-      return 'black';
-    case 'bill':
-      return 'blue';
-    case 'health':
-      return 'green';
-    case 'car':
-      return 'red';
-    case 'other':
-      return 'grey';
-    default:
-      return 'yellow';
-  }
-};
-
-const columns = [
-  {
-    Header: 'Items',
-    accessor: 'chosenItems'
-  },
-  {
-    Header: 'Date',
-    accessor: 'date'
-  },
-  {
-    Header: 'Cost',
-    minWidth: 45,
-    accessor: 'count'
-  }
-];
-
 interface TableContainerProps {
   getCosts?: () => void;
   costs: Cost[];
@@ -52,12 +19,28 @@ interface TableContainerProps {
 
 @observer
 export class TableContainer extends React.Component<TableContainerProps, {}> {
-  wrapStyles = {
+  @observable private displayedCosts = this.props.costs;
+  private readonly wrapStyles = {
     whiteSpace: 'pre-wrap',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   };
+  private readonly columns = [
+    {
+      Header: 'Items',
+      accessor: 'chosenItems'
+    },
+    {
+      Header: 'Date',
+      accessor: 'date'
+    },
+    {
+      Header: 'Cost',
+      minWidth: 45,
+      accessor: 'count'
+    }
+  ];
 
   componentDidMount = () => {
     if (this.props.getCosts) {
@@ -71,7 +54,24 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
   };
 
-  parseCosts = (costs: Cost[]) => {
+  private getRowColor = (category: CostCategoryType) => {
+    switch (category) {
+      case 'shopping':
+        return 'black';
+      case 'bill':
+        return 'blue';
+      case 'health':
+        return 'green';
+      case 'car':
+        return 'red';
+      case 'other':
+        return 'grey';
+      default:
+        return 'yellow';
+    }
+  };
+
+  private parseCosts = (costs: Cost[]) => {
     let parsedCosts = costs;
 
     if (parsedCosts.length < 1) {
@@ -108,20 +108,18 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
     }
   };
 
-  handleCostClick = (cost: Cost) => {
+  private handleCostClick = (cost: Cost) => {
     const { setVisibleDialog, visibleDialog, setChosenCost } = this.props;
 
     setVisibleDialog(`${visibleDialog}CostManager`);
     setChosenCost(cost);
   };
 
-  @observable displayedCosts = this.props.costs;
-
   render() {
     return (
       <ReactTable
         data={this.displayedCosts as any}
-        columns={columns}
+        columns={this.columns}
         defaultPageSize={10}
         className='-striped -highlight'
         getTdProps={() => ({
@@ -139,7 +137,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
               }
             },
             style: {
-              color: getRowColor(category)
+              color: this.getRowColor(category)
             }
           };
         }}

@@ -19,7 +19,7 @@ interface NavbarProps {
   showDrawer: boolean;
 }
 
-export class Navbar extends React.Component<NavbarProps, {}> {
+export class Navbar extends React.Component<NavbarProps> {
   render() {
     const {
       toggleShowDrawer,

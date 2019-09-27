@@ -25,7 +25,7 @@ interface StyledListButtonsContainerProps {
 
 @observer
 export class ItemsTopButtons extends React.Component<ItemsTopButtonsProps, {}> {
-  categorizeItems = (category: string): void => {
+  private categorizeItems = (category: string): void => {
     const { updateList, setChosenCategory } = this.props;
 
     setChosenCategory('items', category);

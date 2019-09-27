@@ -31,7 +31,7 @@ interface ListItemPrimaryTextProps {
 }
 
 @observer
-export class ListSingleItem extends React.Component<ListSingleItemProps, {}> {
+export class ListSingleItem extends React.Component<ListSingleItemProps> {
   shouldComponentUpdate = (oldProps: ListSingleItemProps) =>
     this.props.item !== oldProps.item ||
     this.props.areItemsEditable !== oldProps.areItemsEditable;

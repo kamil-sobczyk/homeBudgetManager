@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
+
 import { ListType, Item } from '../../../../lib/interfaces';
 
 import { StyledTextContainer } from '../../items/provided/providedItemsDraggable';
@@ -9,6 +10,7 @@ import { ListItemText, ListItemSecondaryText, ListDivider } from '@rmwc/list';
 import { Checkbox } from '@rmwc/checkbox';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
+
 import { StyledEditButton } from '../../items/moreMenu';
 import { StyledItem, StyledListItemPrimaryText } from '../../item';
 
@@ -25,10 +27,9 @@ interface ProvidedSelectedDraggableProps {
 
 @observer
 export class ProvidedSelectedDraggable extends React.Component<
-  ProvidedSelectedDraggableProps,
-  {}
+  ProvidedSelectedDraggableProps
 > {
-  toggleEditItem = (event: React.MouseEvent<any, MouseEvent>): void => {
+  private toggleEditItem = (event: React.MouseEvent<any, MouseEvent>): void => {
     const { setActiveItem, setVisibleDialog, item } = this.props;
 
     setActiveItem('selected', item.id);

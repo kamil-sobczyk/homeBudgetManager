@@ -13,41 +13,45 @@ interface LegendItem {
   text: LegendText;
 }
 
-const legendItems: LegendItem[] = [
-  {
-    color: 'black',
-    text: 'Shopping'
-  },
-  {
-    color: 'blue',
-    text: 'Bills'
-  },
-  {
-    color: 'green',
-    text: 'Health'
-  },
-  {
-    color: 'red',
-    text: 'Car'
-  },
-  {
-    color: 'grey',
-    text: 'Other'
-  }
-];
+export class Legend extends React.Component<{}, {}> {
+  private readonly legendItems: LegendItem[] = [
+    {
+      color: 'black',
+      text: 'Shopping'
+    },
+    {
+      color: 'blue',
+      text: 'Bills'
+    },
+    {
+      color: 'green',
+      text: 'Health'
+    },
+    {
+      color: 'red',
+      text: 'Car'
+    },
+    {
+      color: 'grey',
+      text: 'Other'
+    }
+  ];
 
-export const Legend = () => (
-  <StyledLegendContainer>
-    {legendItems.map((item: LegendItem) => (
-      <div key={item.color}>
-        <StyledIconContainer key={item.color}>
-          <ColoredIcon color={item.color} key={item.color} />
-        </StyledIconContainer>
-        <StyledDescriptionContainer>{item.text}</StyledDescriptionContainer>
-      </div>
-    ))}
-  </StyledLegendContainer>
-);
+  render() {
+    return (
+      <StyledLegendContainer>
+        {this.legendItems.map((item: LegendItem) => (
+          <div key={item.color}>
+            <StyledIconContainer key={item.color}>
+              <ColoredIcon color={item.color} key={item.color} />
+            </StyledIconContainer>
+            <StyledDescriptionContainer>{item.text}</StyledDescriptionContainer>
+          </div>
+        ))}
+      </StyledLegendContainer>
+    );
+  }
+}
 
 export const StyledLegendContainer = styled.div`
   display: flex;

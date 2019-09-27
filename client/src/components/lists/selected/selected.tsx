@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 
 import { Item, ListType } from '../../../lib/interfaces';
+
 import { ProvidedSelected } from './provided/providedSelected';
 import { SelectedTopButtons } from './topButtons';
 import { PaginationManagerClient } from '../../../lib/mobx/stores/paginationManagerClient';
@@ -30,17 +31,17 @@ interface SelectedProps {
 }
 
 @observer
-export class Selected extends React.Component<SelectedProps, {}> {
-  list: ListType = 'selected';
+export class Selected extends React.Component<SelectedProps> {
+  private readonly list: ListType = 'selected';
 
   componentDidMount = () => {
     this.props.pagesManager.setMaxPage(this.list, this.props.selected);
     this.props.getSelected();
   };
 
-  updateList = () => this.forceUpdate();
+  private updateList = () => this.forceUpdate();
 
-  getCategorizedItems = () => {
+  private getCategorizedItems = () => {
     const { selected, getChosenCategory, pagesManager } = this.props;
     const startIndex = (pagesManager.getChosenPage(this.list) - 1) * 10;
 
@@ -55,7 +56,7 @@ export class Selected extends React.Component<SelectedProps, {}> {
     }
   };
 
-  setNextPage = (): void => {
+  private setNextPage = (): void => {
     const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
 
     getChosenPage(this.list) <= getMaxPage(this.list)
@@ -65,12 +66,12 @@ export class Selected extends React.Component<SelectedProps, {}> {
     this.updateList();
   };
 
-  setPrevPage = (): void => {
+  private setPrevPage = (): void => {
     this.props.pagesManager.setPrevPage(this.list);
     this.updateList();
   };
 
-  paginateItems = (items: Item[], startIndex: number): Item[] => {
+  private paginateItems = (items: Item[], startIndex: number): Item[] => {
     this.props.pagesManager.setMaxPage(this.list, items);
 
     return items.slice(startIndex, startIndex + 10);

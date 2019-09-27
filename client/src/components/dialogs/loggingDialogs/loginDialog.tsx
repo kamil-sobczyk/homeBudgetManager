@@ -14,7 +14,8 @@ interface LoginDialogProps {
 }
 
 @observer
-export class LoginDialog extends React.Component<LoginDialogProps, {}> {
+export class LoginDialog extends React.Component<LoginDialogProps> {
+  
   render() {
     const { visibleDialog, setVisibleDialog, setUser } = this.props;
 

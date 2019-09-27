@@ -1,8 +1,10 @@
 import * as React from 'react';
 
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+
 import styled from 'styled-components';
 
-import { observer } from 'mobx-react';
 import { Cost } from '../../../lib/interfaces';
 
 import { Dialog, DialogActions, DialogContent } from '@rmwc/dialog';
@@ -10,7 +12,6 @@ import { TextField } from '@rmwc/textfield';
 import { Button } from '@rmwc/button';
 
 import { StyledDialogTitle } from './spendingsDialog';
-import { observable } from 'mobx';
 
 interface FinishShoppingDialogProps {
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
@@ -25,7 +26,7 @@ export class FinishShoppingDialog extends React.Component<
   FinishShoppingDialogProps,
   Cost
 > {
-  @observable count: number = this.props.count;
+  @observable private count: number = this.props.count;
 
   render() {
     const {
@@ -41,9 +42,7 @@ export class FinishShoppingDialog extends React.Component<
         aria-labelledby='alert-dialog-title'
         open={visibleDialog === 'FinishShoppingDialog'}
       >
-        <StyledDialogTitle>
-          Finishing shopping
-        </StyledDialogTitle>
+        <StyledDialogTitle>Finishing shopping</StyledDialogTitle>
         <StyledDialogContent>
           Checked items will be moved to items list. <br /> Type how much you
           spent for shopping.
@@ -56,10 +55,7 @@ export class FinishShoppingDialog extends React.Component<
           />
         </StyledDialogContent>
         <DialogActions>
-          <Button
-            color='primary'
-            onClick={() => setVisibleDialog()}
-          >
+          <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
           </Button>
           <Button autoFocus color='primary' onClick={finishShopping}>

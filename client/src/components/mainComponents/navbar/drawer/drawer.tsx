@@ -1,9 +1,10 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { Drawer, DrawerHeader, DrawerTitle, DrawerContent } from '@rmwc/drawer';
 
 import { DrawerItems } from './drawerItems';
-import styled from 'styled-components';
 
 interface DrawerBarProps {
   toggleShowDrawer: () => boolean;
@@ -12,7 +13,7 @@ interface DrawerBarProps {
   showDrawer: boolean;
 }
 
-export class DrawerBar extends React.Component<DrawerBarProps, {}> {
+export class DrawerBar extends React.Component<DrawerBarProps> {
   render() {
     const {
       toggleShowDrawer,

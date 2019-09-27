@@ -15,11 +15,10 @@ interface ItemsBottomButtonsProps {
 
 @observer
 export class BottomButtons extends React.Component<
-  ItemsBottomButtonsProps,
-  {}
+  ItemsBottomButtonsProps
 > {
   render() {
-    const { setNextPage, setPrevPage, currentPage, areItems } = this.props;
+    const { setNextPage, setPrevPage, currentPage } = this.props;
     return (
       <StyledPaginationContainer>
         <IconButton icon='navigate_before' onClick={setPrevPage} />

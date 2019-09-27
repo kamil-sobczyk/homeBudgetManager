@@ -32,11 +32,8 @@ interface AddDayCostDialogProps {
 }
 
 @observer
-export class AddDayCostDialog extends React.Component<
-  AddDayCostDialogProps,
-  {}
-> {
-  confirm = () => {
+export class AddDayCostDialog extends React.Component<AddDayCostDialogProps> {
+  private confirm = () => {
     const { addNewSpending, setVisibleDialog } = this.props;
 
     addNewSpending();

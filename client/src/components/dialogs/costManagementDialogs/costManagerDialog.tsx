@@ -22,10 +22,7 @@ interface CostManagerDialogProps {
 }
 
 @observer
-export class CostManagerDialog extends React.Component<
-  CostManagerDialogProps,
-  {}
-> {
+export class CostManagerDialog extends React.Component<CostManagerDialogProps> {
   render() {
     const {
       cost,

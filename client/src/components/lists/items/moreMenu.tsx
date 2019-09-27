@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
+import { ListType, Item } from '../../../lib/interfaces';
+
 import { SimpleMenu } from '@rmwc/menu';
 import { ListDivider } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
-
-import { ListType, Item } from '../../../lib/interfaces';
 
 interface MoreMenuProps {
   setVisibleDialog: (dialog?: string) => void;
@@ -15,7 +15,7 @@ interface MoreMenuProps {
 }
 
 export class MoreMenu extends React.Component<MoreMenuProps, {}> {
-  handleOptionClick = (action: string): void => {
+  private handleOptionClick = (action: string): void => {
     const { setVisibleDialog, item, setActiveItem } = this.props;
 
     setActiveItem('items', item.id);

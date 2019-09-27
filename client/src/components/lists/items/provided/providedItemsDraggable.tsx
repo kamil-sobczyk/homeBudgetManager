@@ -5,7 +5,7 @@ import { ListType, Item } from '../../../../lib/interfaces';
 
 import styled from 'styled-components';
 
-import { ListItem, ListDivider } from '@rmwc/list';
+import { ListDivider } from '@rmwc/list';
 
 import { DraggableProvided } from 'react-beautiful-dnd';
 
@@ -22,8 +22,7 @@ interface ProvidedItemsDraggableProps {
 
 @observer
 export class ProvidedItemsDraggable extends React.Component<
-  ProvidedItemsDraggableProps,
-  {}
+  ProvidedItemsDraggableProps
 > {
   render() {
     const {

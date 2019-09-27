@@ -18,7 +18,7 @@ interface ChartDialogProps {
 }
 
 @observer
-export class ChartDialog extends React.Component<ChartDialogProps, {}> {
+export class ChartDialog extends React.Component<ChartDialogProps> {
   render() {
     const { setVisibleDialog, visibleDialog, costs, getCosts } = this.props;
 
