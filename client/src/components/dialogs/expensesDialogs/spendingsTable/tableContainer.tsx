@@ -52,6 +52,13 @@ interface TableContainerProps {
 
 @observer
 export class TableContainer extends React.Component<TableContainerProps, {}> {
+  wrapStyles = {
+    whiteSpace: 'pre-wrap',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+
   componentDidMount = () => {
     if (this.props.getCosts) {
       this.props.getCosts();
@@ -118,9 +125,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         defaultPageSize={10}
         className='-striped -highlight'
         getTdProps={() => ({
-          style: {
-            whiteSpace: this.props.wrapWords ? 'pre-wrap' : 'nowrap'
-          }
+          style: this.props.wrapWords ? this.wrapStyles : null
         })}
         getTrProps={(state: FinalState, rowInfo?: RowInfo) => {
           let category: CostCategoryType = 'bill';
