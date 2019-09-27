@@ -12,11 +12,11 @@ import { Select } from '@rmwc/select';
 import { StyledDialogTitle } from '../expensesDialogs/spendingsDialog';
 
 export const selectValues = [
-  'Shopping',
   'Bill',
   'Car exploitation',
   'Health care',
-  'Other'
+  'Other',
+  'Shopping'
 ];
 
 interface AddDayCostDialogProps {

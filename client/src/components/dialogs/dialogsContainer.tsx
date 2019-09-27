@@ -123,6 +123,8 @@ export const DialogsContainer = observer(
           changeNewSpendingCounter={shoppingClient.changeNewSpendingCounter}
           count={shoppingClient.count}
           changeNewSpendingInfo={shoppingClient.changeNewSpendingInfo}
+          category={shoppingClient.category}
+          changeShoppingItems={shoppingClient.changeShoppingItems}
         />
       )}
       {visibleDialog.includes('Fail') && (
@@ -246,10 +248,10 @@ export const DialogsContainer = observer(
       )}
       {visibleDialog.includes('DeleteIncomeDialog') && (
         <DeleteIncomeDialog
-        income={incomesManagerClient.activeIncome}
-        setVisibleDialog={visibilityClient.setVisibleDialog}
-        visibleDialog ={visibilityClient.visibleDialog}
-        deleteIncome={incomesManagerClient.deleteIncome}
+          income={incomesManagerClient.activeIncome}
+          setVisibleDialog={visibilityClient.setVisibleDialog}
+          visibleDialog={visibilityClient.visibleDialog}
+          deleteIncome={incomesManagerClient.deleteIncome}
         />
       )}
     </>

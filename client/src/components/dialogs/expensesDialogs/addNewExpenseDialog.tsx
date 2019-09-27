@@ -8,17 +8,26 @@ import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 
 import { StyledDialogTitle } from './spendingsDialog';
+import { CostCategoryType } from '../../../lib/interfaces';
 
-const selectValues = ['Bill', 'Car exploitation', 'Health care', 'Other'];
+const selectValues = [
+  'Shopping',
+  'Bill',
+  'Car exploitation',
+  'Health care',
+  'Other'
+];
 
 interface AddNewExpenseDialogProps {
   addNewSpending: () => void;
-  changeNewSpendingCategory: (e: React.FormEvent) => void;
+  changeNewSpendingCategory: (event: React.FormEvent) => void;
   changeNewSpendingCounter: (event: React.FormEvent<EventTarget>) => void;
   changeNewSpendingInfo: (a: any) => any;
   setVisibleDialog: (dialog?: string) => void;
+  changeShoppingItems: (event: React.FormEvent<EventTarget>) => void;
   visibleDialog: string;
   count: number;
+  category: CostCategoryType;
 }
 
 export const AddNewExpenseDialog = observer(
@@ -28,13 +37,15 @@ export const AddNewExpenseDialog = observer(
     changeNewSpendingCounter,
     changeNewSpendingInfo,
     setVisibleDialog,
-    visibleDialog
+    visibleDialog,
+    category,
+    changeShoppingItems
   }: AddNewExpenseDialogProps) => {
     return (
       <Dialog open={visibleDialog === 'AddNewExpenseDialog'}>
         <StyledDialogTitle>Add other</StyledDialogTitle>
         <Select
-          label='Spending type'
+          label='Category'
           onChange={e => changeNewSpendingCategory(e)}
           options={selectValues}
           required
@@ -46,11 +57,21 @@ export const AddNewExpenseDialog = observer(
           type='number'
           required
         />
-        <TextField
-          label='Short info'
-          onChange={e => changeNewSpendingInfo(e)}
-          type='text'
-        />
+        {category === 'shopping' && (
+          <TextField
+            label={`You bought (use commas)`}
+            onChange={e => changeShoppingItems(e)}
+            type='text'
+            required
+          />
+        )}
+        {category !== 'shopping' && (
+          <TextField
+            label='Short info'
+            onChange={e => changeNewSpendingInfo(e)}
+            type='text'
+          />
+        )}
         <DialogActions>
           <Button color='primary' onClick={() => setVisibleDialog()}>
             Cancel
