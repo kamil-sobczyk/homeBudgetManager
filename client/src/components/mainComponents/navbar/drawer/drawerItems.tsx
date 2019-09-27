@@ -8,8 +8,6 @@ import styled from 'styled-components';
 import { List, ListItem } from '@rmwc/list';
 import { IconButton } from '@rmwc/icon-button';
 
-const d
-
 interface DrawerItemsProps {
   setVisibleDialog: (dialog?: string) => void;
   toggleEditItems: () => void;
