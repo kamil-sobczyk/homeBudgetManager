@@ -230,7 +230,6 @@ const appRouter = app => {
                 count: cost.count,
                 date: cost.date,
                 category: cost.category,
-                chosenItems: cost.chosenItems
               }
             }
           }
