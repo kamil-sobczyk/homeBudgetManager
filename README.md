@@ -29,7 +29,7 @@ Features:
 - recharts
 - react-table
 
-## Loacal installation
+## Local installation
 
 Terminal: 
 1. git clone https://github.com/Ogar616/homeBudgetManager
