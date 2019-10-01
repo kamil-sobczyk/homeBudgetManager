@@ -145,7 +145,7 @@ export const DialogsContainer = observer(
           visibleDialog={visibleDialog}
           showFailSnackbar={visibilityClient.showFailSnackbar}
           toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
-          datePicked={calendarClient.datePicked}
+          datePicked={calendarClient.getDatePicked()}
           getCosts={apiClient.getCosts}
           costs={costs}
           getCalendarViewDate={calendarClient.getCalendarViewDate}
@@ -201,7 +201,7 @@ export const DialogsContainer = observer(
           prevVisibleDialog={visibilityClient.prevVisibleDialog}
           getCalendarViewDate={calendarClient.getCalendarViewDate}
           setDatePicked={calendarClient.setDatePicked}
-          datePicked={calendarClient.datePicked}
+          datePicked={calendarClient.getDatePicked()}
           count={shoppingClient.count}
         />
       )}
@@ -227,7 +227,7 @@ export const DialogsContainer = observer(
           visibleDialog={visibleDialog}
           showFailSnackbar={visibilityClient.showFailSnackbar}
           toggleShowFailSnackbar={visibilityClient.toggleShowFailSnackbar}
-          datePicked={calendarClient.datePicked}
+          datePicked={calendarClient.getDatePicked()}
           incomes={incomes}
           costs={costs}
           getCalendarViewDate={calendarClient.getCalendarViewDate}

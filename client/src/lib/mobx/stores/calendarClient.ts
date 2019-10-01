@@ -9,11 +9,15 @@ export class CalendarClient {
 
   @observable datePicked: string = '';
   @observable calendarViewDate: string = '';
-  @observable daysWithExpenses: number[] = [];
+
+  private convertToDayString = (date: Date) =>
+    String(date.toLocaleString('en-GB')).slice(0, 10);
+
+  getDatePicked = () => this.datePicked;
 
   setDatePicked = (date?: Date): string => {
     if (date) {
-      let dayString: string = String(date.toLocaleString('en-GB')).slice(0, 10);
+      let dayString: string = this.convertToDayString(date);
 
       this.datePicked = dayString;
       return dayString;

@@ -34,7 +34,7 @@ export class IncomesManagerClient {
 
   addNewIncome = (): void => {
     this.store.visibilityClient.setVisibleDialog('IncomesDialog');
-    this.newIncome.date = this.store.calendarClient.datePicked;
+    this.newIncome.date = this.store.calendarClient.getDatePicked();
     this.store.incomes.push(this.newIncome);
     this.store.apiClient.addNewIncome(this.newIncome);
     this.newIncome = this.initialIncome;

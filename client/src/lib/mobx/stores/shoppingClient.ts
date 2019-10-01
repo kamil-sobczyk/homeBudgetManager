@@ -34,8 +34,10 @@ export class ShoppingClient {
   addNewSpending = () => {
     let date: string = String(new Date().toLocaleString('en-GB')).slice(0, 10);
 
-    if (this.store.calendarClient.datePicked.length > 0) {
-      date = String(this.store.calendarClient.datePicked);
+    const datePicked = this.store.calendarClient.getDatePicked();
+
+    if (datePicked.length > 0) {
+      date = String(datePicked);
     }
     const billCost: Cost = {
       chosenItems: this.chosenItems,

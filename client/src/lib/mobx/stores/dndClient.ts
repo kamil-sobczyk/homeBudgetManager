@@ -37,7 +37,7 @@ export class DnDClient {
     }
   };
 
-  getDndList = (id: string): Item[] => {
+  private getDndList = (id: string): Item[] => {
     if (id === 'droppable2') {
       return this.store.items;
     } else {
@@ -45,7 +45,7 @@ export class DnDClient {
     }
   };
 
-  reorderList = (list: string, reorderedList: Item[]): void => {
+  private reorderList = (list: string, reorderedList: Item[]): void => {
     if (list === 'droppable') {
       this.store.selected = reorderedList;
     } else {
@@ -90,9 +90,7 @@ export class DnDClient {
         )
       );
 
-      result.droppable2.map(
-        (item: Item): boolean => (item.checked = false)
-      );
+      result.droppable2.map((item: Item): boolean => (item.checked = false));
 
       this.store.selected = result.droppable;
       this.store.items = sortItemsByName(result.droppable2);

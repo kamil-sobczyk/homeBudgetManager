@@ -13,25 +13,19 @@ export const sortCostsOrIncomes = (
   costs: Cost[] | Income[]
 ): Cost[] | Income[] =>
   costs
-    .sort(
-      (a: Cost | Income, b: Cost | Income): number => {
-        const aDateParts = a.date.split('/');
-        const bDateParts = b.date.split('/');
+    .sort((a: Cost | Income, b: Cost | Income): number => {
+      const aDateParts = a.date.split('/');
+      const bDateParts = b.date.split('/');
 
-        const aDateObject = new Date(
-          `${aDateParts[1]}/${aDateParts[0]}/${aDateParts[2]}`
-        );
-        const bDateObject = new Date(
-          `${bDateParts[1]}/${bDateParts[0]}/${bDateParts[2]}`
-        );
+      const aDateObject = new Date(
+        `${aDateParts[1]}/${aDateParts[0]}/${aDateParts[2]}`
+      );
+      const bDateObject = new Date(
+        `${bDateParts[1]}/${bDateParts[0]}/${bDateParts[2]}`
+      );
 
-        return aDateObject > bDateObject
-          ? -1
-          : aDateObject < bDateObject
-          ? 1
-          : 0;
-      }
-    )
+      return aDateObject > bDateObject ? -1 : aDateObject < bDateObject ? 1 : 0;
+    })
     .reverse();
 
 interface Headers {
@@ -45,7 +39,7 @@ export class ApiClient {
     this.store = store;
   }
 
-  @observable headers: Headers = {
+  @observable private headers: Headers = {
     token: localStorage.googleToken || '',
     id: localStorage.id || ''
   };

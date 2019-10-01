@@ -23,12 +23,13 @@ interface CalendarDialogProps {
   getCalendarViewDate: (activeStartDate: Date) => string;
   setChosenCost: (cost: Cost) => Cost;
   getCosts: () => void;
+  datePicked: string | Date;
+  getIncomes: () => void;
   visibleDialog: string;
   showFailSnackbar: boolean;
-  datePicked: string | Date;
   calendarViewDate: string;
   costs: Cost[];
-  getIncomes: () => void;
+
   incomes: Income[];
 }
 
