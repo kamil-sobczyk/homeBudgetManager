@@ -123,7 +123,7 @@ export class TableContainer extends React.Component<TableContainerProps, {}> {
         defaultPageSize={10}
         className='-striped -highlight'
         getTdProps={() => ({
-          style: this.props.wrapWords ? this.wrapStyles : null
+          style: this.props.wrapWords ? this.wrapStyles : undefined
         })}
         getTrProps={(state: FinalState, rowInfo?: RowInfo) => {
           let category: CostCategoryType = 'bill';

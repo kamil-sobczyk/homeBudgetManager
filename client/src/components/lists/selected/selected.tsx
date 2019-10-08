@@ -59,9 +59,7 @@ export class Selected extends React.Component<SelectedProps> {
   private setNextPage = (): void => {
     const { setNextPage, getChosenPage, getMaxPage } = this.props.pagesManager;
 
-    getChosenPage(this.list) <= getMaxPage(this.list)
-      ? setNextPage(this.list)
-      : null;
+    getChosenPage(this.list) <= getMaxPage(this.list) && setNextPage(this.list);
 
     this.updateList();
   };

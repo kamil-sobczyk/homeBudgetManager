@@ -14,7 +14,6 @@ import {
 import { MoreMenu } from './items/moreMenu';
 import { ListType, Item } from '../../lib/interfaces';
 
-
 interface ListSingleItemProps {
   setVisibleDialog: (dialog?: string) => void;
   setActiveItem: (list: ListType, id: string) => void;

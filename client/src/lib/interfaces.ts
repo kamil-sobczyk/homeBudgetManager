@@ -29,7 +29,7 @@ export interface Cost {
   chosenItems: string[];
   date: string;
   category: CostCategoryType;
-  info?: string;
+  info?: string | boolean;
 }
 
 export interface Income {

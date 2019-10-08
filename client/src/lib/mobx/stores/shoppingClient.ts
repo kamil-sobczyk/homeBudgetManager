@@ -44,7 +44,7 @@ export class ShoppingClient {
       count: this.count,
       date: date,
       category: this.category,
-      info: this.info.length > 0 ? this.info : undefined
+      info: this.info.length > 0 && this.info
     };
 
     if (billCost.chosenItems.length && billCost.count > 0) {
