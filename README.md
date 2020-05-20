@@ -50,9 +50,6 @@ Terminal:
 3. Choose "Add to homescreen".
 4. You can find this app on your homescreen. 
 
-## Working app: 
-
-### https://ogar616.usermd.net/
 
 
 
